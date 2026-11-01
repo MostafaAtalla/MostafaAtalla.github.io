@@ -64,7 +64,7 @@
     const withSound = (fromStart) => {
       if (!video || !video.isConnected) return Promise.reject();
       video.muted = false;
-      if (fromStart) video.currentTime = 0;
+      if (fromStart) { video.currentTime = 0; last = 0; }
       return video.play().then(label);
     };
     video.addEventListener("timeupdate", () => {
@@ -74,7 +74,8 @@
     });
     const unlock = (e) => {
       if (e && e.target && e.target.closest && e.target.closest("#hear-btn")) return;
-      ["pointerdown", "keydown", "touchstart"].forEach((t) => document.removeEventListener(t, unlock, true));
+      if (e && e.type === "touchend" && e.target.closest && e.target.closest("a")) return; // let links navigate
+      ["click", "touchend", "keydown"].forEach((t) => document.removeEventListener(t, unlock, true));
       document.querySelector(".sound-nudge")?.remove();
       if (!heardOnce && video.muted) withSound(true).catch(() => {});
     };
@@ -83,12 +84,13 @@
       withSound(false).catch(() => {
         if (!video || !video.isConnected) return; // clip failed to load
         video.muted = true; video.play().catch(() => {}); label();
-        ["pointerdown", "keydown", "touchstart"].forEach((t) => document.addEventListener(t, unlock, true));
-        hero.querySelector(".hero-cta")?.insertAdjacentHTML("afterend", '<p class="sound-nudge">Click anywhere to hear the quote with sound</p>');
+        ["click", "touchend", "keydown"].forEach((t) => document.addEventListener(t, unlock, true));
+        hero.querySelector(".hero-cta")?.insertAdjacentHTML("afterend", `<button type="button" class="sound-nudge">${matchMedia("(hover: none)").matches ? "Tap" : "Click"} to hear the quote with sound</button>`);
+        document.querySelector(".sound-nudge")?.addEventListener("click", (ev) => { ev.stopPropagation(); unlock(); });
       });
     } else { video.muted = true; label(); }
     if (hearBtn) hearBtn.addEventListener("click", () => {
-      ["pointerdown", "keydown", "touchstart"].forEach((t) => document.removeEventListener(t, unlock, true));
+      ["click", "touchend", "keydown"].forEach((t) => document.removeEventListener(t, unlock, true));
       document.querySelector(".sound-nudge")?.remove();
       if (video.muted || video.paused) { heardOnce = false; withSound(true).catch(() => {}); }
       else { video.muted = true; label(); }

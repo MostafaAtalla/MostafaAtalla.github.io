@@ -132,6 +132,7 @@
     const menuBtn = document.getElementById("menu-btn"), nav = document.getElementById("nav");
     menuBtn.addEventListener("click", () => {
       const open = nav.classList.toggle("open");
+      header.classList.toggle("menu-open", open);
       menuBtn.setAttribute("aria-expanded", open); menuBtn.innerHTML = open ? ICON.close : ICON.menu;
       document.body.style.overflow = open ? "hidden" : "";
     });

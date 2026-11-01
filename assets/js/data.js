@@ -55,7 +55,7 @@ window.SITE = {
     "I design medical instruments that treat friction as a design variable rather than a loss to be minimised. Endoluminal instruments move through biological lumens by contact, so the friction at that contact decides whether an instrument advances, holds position or injures tissue.",
     "My PhD at TU Delft showed that ultrasonic vibration can lower the friction of a catheter on demand through a squeeze film, and that coordinating friction across several contacts is enough to make a capsule robot for colonoscopy propel itself. At the University of Twente I now work on mechanically intelligent soft robots for safe interaction in colonoscopy."
   ],
-  now: "Currently: postdoc at the University of Twente, lead organiser of the ICRA 2026 workshop “Soft ≠ Safe? Rethinking Softness in Medical Robotics”, and founder of Mijzan Mechanical.",
+  now: "Currently: postdoc at TU Delft, lead organiser of the ICRA 2026 workshop “Soft ≠ Safe? Rethinking Softness in Medical Robotics”, and founder of Mijzan Mechanical.",
 
   /* ---------------- RESEARCH ---------------- */
   themes: [

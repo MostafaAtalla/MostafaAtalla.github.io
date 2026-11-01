@@ -296,7 +296,7 @@
     // step buttons
     const steps = $("#jr-steps");
     steps.innerHTML = C.map((c, i) => `${i ? `<button class="jr-hop" data-move="${i - 1}" aria-label="Fly: ${esc(MV[i - 1].label)}"><span class="hop-yr">${MV[i - 1].year}</span><span class="hop-l">${esc(MV[i - 1].label)}</span><span class="hop-ico">✈</span></button>` : ""}
-      <button class="jr-step" role="tab" data-i="${i}" aria-selected="false"><span class="st-logos">${c.logos.slice(0, 3).map(([f, a]) => logo(f, a)).join("")}</span><span class="st-city">${esc(c.city.split(",")[0])}</span><span class="st-yrs">${esc(c.years)}</span></button>`).join("");
+      <button class="jr-step" role="tab" data-i="${i}" aria-selected="false"><span class="st-now">Now viewing</span><span class="st-logos">${c.logos.slice(0, 3).map(([f, a]) => `<span class="st-chip">${logo(f, a)}</span>`).join("")}${c.logos.length > 3 ? `<span class="st-chip st-more" title="${esc(c.logos.slice(3).map((l) => l[1]).join(", "))}">+${c.logos.length - 3}</span>` : ""}</span><span class="st-city">${esc(c.city.split(",")[0])}</span><span class="st-yrs">${esc(c.years)}</span></button>`).join("");
     let cur = -1, timer = null, flying = false;
     const plane = $("#plane");
     const fly = (mi, then) => {

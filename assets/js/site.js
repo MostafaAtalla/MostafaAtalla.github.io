@@ -115,6 +115,7 @@
         </a>
         <nav class="nav" id="nav" aria-label="Main">
           ${NAV.map((n) => `<a href="${n.href}" ${n.id === page || (page === "post" && n.id === "perspectives") ? 'aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}
+          <div class="nav-tools"><button type="button" id="m-search">${ICON.search}<span>Search</span></button><button type="button" id="m-theme"><span class="mt-ico"></span><span>Light / dark</span></button></div>
         </nav>
         <div class="tools">
           <a class="contact-btn" href="contact.html" ${page === "contact" ? 'aria-current="page"' : ""}>${ICON.mail}<span>Contact</span></a>
@@ -137,6 +138,9 @@
       document.body.style.overflow = open ? "hidden" : "";
     });
     document.getElementById("palette-btn").addEventListener("click", openPalette);
+    const closeMenu = () => { nav.classList.remove("open"); header.classList.remove("menu-open"); menuBtn.setAttribute("aria-expanded", false); menuBtn.innerHTML = ICON.menu; document.body.style.overflow = ""; };
+    document.getElementById("m-search").addEventListener("click", () => { closeMenu(); openPalette(); });
+    document.getElementById("m-theme").addEventListener("click", () => themeBtn.click());
     // Collapse to the menu button whenever the links do not fit next to the name and tools.
     const brand = header.querySelector(".brand"), tools = header.querySelector(".tools");
     const fit = () => {

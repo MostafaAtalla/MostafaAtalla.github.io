@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Journey · Mostafa A. Atalla</title>
+<title>Journey · Mostafa A. Atalla, PhD</title>
 <meta name="description" content="Academic and professional journey of Mostafa A. Atalla: Cairo University, Fulbright at WPI, Philips Research and TU Delft.">
-<meta name="author" content="Mostafa A. Atalla">
+<meta name="author" content="Mostafa A. Atalla, PhD">
 <meta property="og:title" content="Journey · Mostafa A. Atalla">
 <meta property="og:description" content="Academic and professional journey of Mostafa A. Atalla: Cairo University, Fulbright at WPI, Philips Research and TU Delft.">
 <meta property="og:type" content="website">
@@ -35,8 +35,15 @@
   </div>
   <span class="baton-hint">Sweep your cursor across the strings below, or tap one</span>
 </section>
-<section class="block " data-nav="Timeline"><div class="wrap">
-<header class="sec-head"><span class="kicker">Route</span><h2 class="sec-name">The <em>route</em></h2><a class="btn ghost" id="cv-link" href="#" target="_blank" rel="noopener">Download full CV (PDF)</a></header><div class="route" id="route"></div><div class="legend" style="margin:6px 0 18px"><span>Academic</span><span class="ind">Industry</span><span class="edu">Education</span></div><div class="timeline" id="timeline"></div>
+<section class="block jr-map-sec" data-nav="The route"><div class="wrap">
+<header class="sec-head"><span class="kicker">Three countries, two big moves</span><h2 class="sec-name">The <em>route</em></h2><a class="btn ghost" id="cv-link" href="#" target="_blank" rel="noopener">Download full CV (PDF)</a></header>
+<div class="jr">
+  <div class="jr-map" id="jr-map"></div>
+  <div class="jr-steps" id="jr-steps" role="tablist" aria-label="Chapters"></div>
+</div>
+</div></section>
+<section class="block tint" data-nav="Chapter"><div class="wrap">
+<div class="jr-chapter" id="jr-chapter" aria-live="polite"></div>
 </div></section>
 <section class="block tint" data-nav="Talks"><div class="wrap">
 <header class="sec-head"><span class="kicker">On stage</span><h2 class="sec-name"><em>Talks</em></h2></header><ul class="list-plain" id="talks"></ul>
@@ -47,6 +54,7 @@
 </main>
 <footer id="site-footer"></footer>
 <script src="assets/js/data.js"></script>
+<script src="assets/js/journey-map.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pages.js"></script>
 <script src="assets/js/hero.js"></script>

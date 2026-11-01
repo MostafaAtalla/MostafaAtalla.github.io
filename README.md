@@ -10,17 +10,20 @@ All content lives in **one file: `assets/js/data.js`**.
 | Home | `index.html` | Defense quote over the video with playable strings, PhD defense, research statement with a live friction lab, teaching philosophy, vision & mission, highlights (dials, latest papers/awards/perspectives/news, affiliations) |
 | Research | `research.html` | Statement, Glide/Grip/Propel themes, full friction lab |
 | Teaching & Mentoring | `teaching.html` | Philosophy, courses and course videos, supervised students ("the orchestra") |
-| Vision & Mission | `mission.html` | Vision and mission, initiatives for junior researchers, opportunity compass |
-| Journey | `journey.html` | Clickable route and timeline, talks, service, CV |
+| Vision & Mission | `mission.html` | Vision and mission, what I do for junior researchers, workshops organised, grants that opened doors |
+| Journey | `journey.html` | Animated map of the two big moves (Cairo → Massachusetts → Delft), chapters with logos and a rotating photo reel, talks, service |
 | Publications | `publications.html` | Each entry with a figure or video, a one-line highlight, related presentations and awards |
 | Perspectives | `perspectives.html`, `post.html` | Opinion pieces (open the LinkedIn post in place) and Markdown essays |
-| Studio | `studio.html` | Science talks, Courses, Gallery |
+| Studio | `studio.html` | Science talks, Courses, Gallery (academic trips, science heroes) |
 | Awards | `awards.html` | Filter by type and year; awards with photos open their story |
 | News | `news.html` | Papers, awards, talks, workshops, press; filter by kind |
+| Contact | `contact.html` | Email, LinkedIn, YouTube, CV (also reachable from the Contact button in the header and the footer) |
 
 `writing.html` and `gallery.html` redirect to their new homes, so old links keep working.
 
-Photos from LinkedIn are stored in `assets/photos/li/`, preprint figures in `assets/img/pubs/`.
+Photos from LinkedIn are stored in `assets/photos/li/`, preprint figures in `assets/img/pubs/`, journey photos in `assets/journey/`, institution logos in `assets/img/logos/`.
+
+**Science heroes:** put photos in `assets/photos/heroes/` and add `{ src, name, note }` entries to `heroes` in `data.js`.
 
 ## Publish on GitHub Pages
 

@@ -273,6 +273,10 @@
     const M = window.JOURNEY_MAP, C = S.chapters, MV = S.moves, reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     $("#cv-link").href = S.person.cv;
     const pin = (k) => M.pts[k];
+    // on arrival, every place of that chapter fans out around the pin
+    const fan = (logos) => { const n = logos.length, R = 84, step = n > 1 ? Math.min(42, 150 / (n - 1)) : 0;
+      return `<g class="pin-fan">${logos.map(([f, a], j) => { const ang = (-90 + (j - (n - 1) / 2) * step) * Math.PI / 180, x = (R * Math.cos(ang)).toFixed(1), y = (R * Math.sin(ang)).toFixed(1);
+        return `<line x2="${x}" y2="${y}" style="--d:${j * 90}ms"/><g transform="translate(${x} ${y})"><g class="fan-in" style="--d:${j * 90}ms"><title>${esc(a)}</title><circle r="26"/><image href="assets/img/logos/${f}.png" x="-19" y="-19" width="38" height="38" preserveAspectRatio="xMidYMid meet"/></g></g>`; }).join("")}</g>`; };
     const logo = (f, alt) => `<img src="assets/img/logos/${f}.png" alt="${esc(alt)}" loading="lazy">`;
     // map
     $("#jr-map").innerHTML = `<svg viewBox="0 0 ${M.W} ${M.H}" role="img" aria-label="Map: Cairo to Worcester, Massachusetts in 2018, then to Delft in 2020">
@@ -284,6 +288,7 @@
       ${C.map((c, i) => { const [x, y] = pin(c.pin); return `<g class="city" data-i="${i}" transform="translate(${x} ${y})" tabindex="0" role="button" aria-label="${esc(c.city)}">
           <circle r="22" class="pulse"/><circle r="7" class="dot"/>
           <g class="pin-logo" transform="translate(0 -46)"><circle r="24"/><image href="assets/img/logos/${c.logos[0][0]}.png" x="-17" y="-17" width="34" height="34" preserveAspectRatio="xMidYMid meet"/></g>
+          ${fan(c.logos)}
           <text y="30" class="city-name">${esc(c.city.split(",")[0])}</text><text y="46" class="city-yrs">${esc(c.years)}</text></g>`; }).join("")}
       <g id="plane" class="plane" opacity="0"><circle r="16" class="plane-halo"/><path d="M-11 0 L9 -2 L13 0 L9 2 Z M-2 -1 L-6 -9 L-3 -9 L4 -1 Z M-2 1 L-6 9 L-3 9 L4 1 Z M-10 -1 L-13 -5 L-11 -5 L-7 -1 Z M-10 1 L-13 5 L-11 5 L-7 1 Z"/></g>
     </svg>
@@ -317,7 +322,7 @@
       const go = () => {
         cur = i;
         steps.querySelectorAll(".jr-step").forEach((b) => b.setAttribute("aria-selected", +b.dataset.i === i));
-        document.querySelectorAll(".city").forEach((g) => g.classList.toggle("active", +g.dataset.i === i));
+        document.querySelectorAll(".city").forEach((g) => { const on = +g.dataset.i === i; g.classList.toggle("active", on); if (on) g.parentNode.insertBefore(g, plane); });
         MV.forEach((m, mi) => document.getElementById("arc-" + mi).classList.toggle("on", mi < i));
         MV.forEach((m, mi) => { if (mi < i) document.getElementById("arc-" + mi).style.strokeDashoffset = 0; });
         renderChapter(i);
@@ -348,7 +353,9 @@
           </div></div>`;
       const slides = [...document.querySelectorAll(".reel-slide")], ths = [...document.querySelectorAll(".reel-th")];
       let k = 0;
-      const set = (n) => { k = (n + slides.length) % slides.length; slides.forEach((s, j) => s.classList.toggle("on", j === k)); ths.forEach((t, j) => t.classList.toggle("on", j === k)); ths[k].scrollIntoView({ block: "nearest", inline: "nearest" }); };
+      const set = (n) => { k = (n + slides.length) % slides.length; slides.forEach((s, j) => s.classList.toggle("on", j === k)); ths.forEach((t, j) => t.classList.toggle("on", j === k)); const strip = ths[k].parentNode, t = ths[k];
+        // move the thumbnail strip sideways only; never scroll the page
+        if (t.offsetLeft < strip.scrollLeft || t.offsetLeft + t.offsetWidth > strip.scrollLeft + strip.clientWidth) strip.scrollTo({ left: t.offsetLeft - strip.clientWidth / 2 + t.offsetWidth / 2, behavior: "smooth" }); };
       const start = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => set(k + 1), 3800); };
       $(".reel-strip").addEventListener("click", (e) => { const b = e.target.closest(".reel-th"); if (b) { set(+b.dataset.k); start(); } });
       $(".reel .prev").addEventListener("click", () => { set(k - 1); start(); }); $(".reel .next").addEventListener("click", () => { set(k + 1); start(); });

@@ -117,7 +117,6 @@
           ${NAV.map((n) => `<a href="${n.href}" ${n.id === page || (page === "post" && n.id === "perspectives") ? 'aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}
         </nav>
         <div class="tools">
-          <a class="contact-btn" href="contact.html" ${page === "contact" ? 'aria-current="page"' : ""}>${ICON.mail}<span>Contact</span></a>
           <button class="icon-btn" id="palette-btn" aria-label="Search the site (Ctrl+K)" title="Search (Ctrl+K)">${ICON.search}</button>
           <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode"></button>
           <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">${ICON.menu}</button>

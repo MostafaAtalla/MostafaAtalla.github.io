@@ -10,8 +10,8 @@ window.SITE = {
     name: "Mostafa A. Atalla",
     shortName: "Mostafa Atalla",
     role: "Postdoctoral Researcher",
-    affiliation: "Robotics and Mechatronics (RaM), University of Twente",
-    location: "The Hague, The Netherlands",
+    affiliation: "Bio-Inspired Technology (BITE) group, TU Delft",
+    location: "Delft, The Netherlands",
     email: "mostafa.a.atalla@gmail.com",
     cv: "assets/docs/Atalla_CV.pdf",
     portrait: "", // e.g. "assets/photos/portrait.jpg"
@@ -44,7 +44,7 @@ window.SITE = {
     heroEnd: 0,              // seconds where it ends (0 = end of video)
 
     // The full defense clip in the section below the hero (with sound and controls).
-    youtubeId: "",
+    youtubeId: "pBPTiyE4l84",
     mp4: "assets/video/defense-clip.mp4",
     poster: "",
     caption: "Closing words of my PhD defense: science as an art, scientists as its maestros.",

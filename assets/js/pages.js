@@ -10,7 +10,7 @@
 
   function ytThumb(v, label) {
     return v.id
-      ? `<img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="" loading="lazy">`
+      ? `<img src="https://i.ytimg.com/vi/${esc(v.id)}/maxresdefault.jpg" alt="" loading="lazy">`
       : coverSVG(v.title, { cls: "bg", label: "", alt: "" });
   }
   function bindYT(root) {
@@ -174,7 +174,7 @@
 
     /* --- latest: one tab per kind, so papers, awards, perspectives and news stay apart --- */
     const byDate = (a, b) => String(b.date || b.year).localeCompare(String(a.date || a.year));
-    const pubImg = (p) => p.img || (p.video ? `https://i.ytimg.com/vi/${p.video}/hqdefault.jpg` : "");
+    const pubImg = (p) => p.img || (p.video ? `https://i.ytimg.com/vi/${p.video}/maxresdefault.jpg` : "");
     const groups = {
       papers: { label: "Papers", icon: "paper", href: "publications.html", items: P.filter((p) => p.type !== "patent").slice(0, 3).map((p) => ({ t: p.title, m: `${p.year} · ${TYPE_LABEL[p.type]}`, d: p.hl, img: pubImg(p), href: `publications.html#${p.id}` })) },
       awards: { label: "Awards", icon: "award", href: "awards.html", items: S.awards.filter((a) => a.photos).slice(0, 3).map((a) => ({ t: a.title, m: `${a.year} · ${a.org}`, d: a.work || "", img: a.photos[0], href: `awards.html#${encodeURIComponent(a.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"))}` })) },
@@ -381,7 +381,7 @@
     $("#pub-q").addEventListener("input", (e) => { state.q = e.target.value.toLowerCase(); render(); });
     const cite = (p) => `${p.authors}, "${p.title}," ${p.venue}, ${p.year}.${p.doi ? " doi:" + p.doi : ""}`;
     const media = (p) => p.img ? `<img src="${esc(p.img)}" alt="Figure from ${esc(p.title)}" loading="lazy">`
-      : p.video ? `<img src="https://i.ytimg.com/vi/${esc(p.video)}/hqdefault.jpg" alt="" loading="lazy">`
+      : p.video ? `<img src="https://i.ytimg.com/vi/${esc(p.video)}/maxresdefault.jpg" alt="" loading="lazy">`
       : `<span class="pub-ph">${esc(TYPE_LABEL[p.type])}<b>${p.year}</b></span>`;
     function render() {
       const list = S.publications.filter((p) => (state.type === "all" || p.type === state.type) && (!state.q || (p.title + p.authors + p.venue + p.year + (p.hl || "")).toLowerCase().includes(state.q)));
@@ -492,7 +492,7 @@
       { id: "courses", label: "Courses", sub: "Lectures and sessions", icon: "paper", n: S.series.filter((s) => s.group === "courses").reduce((a, s) => a + s.videos.length, 0), unit: "videos" },
       { id: "gallery", label: "Gallery", sub: "Academic trips and science heroes", icon: "award", n: S.albums.reduce((a, x) => a + x.photos.length, 0), unit: "photos" }
     ];
-    const covers = { talks: "https://i.ytimg.com/vi/VXnhmwvI3oM/hqdefault.jpg", courses: "https://i.ytimg.com/vi/yYFy0NK4XKE/hqdefault.jpg", gallery: (S.albums[0]?.photos[0] || {}).src };
+    const covers = { talks: "https://i.ytimg.com/vi/VXnhmwvI3oM/maxresdefault.jpg", courses: "https://i.ytimg.com/vi/yYFy0NK4XKE/maxresdefault.jpg", gallery: (S.albums[0]?.photos[0] || {}).src };
     $("#switch-cards").innerHTML = groups.map((g) => `<a class="sw-card" href="#${g.id}" data-g="${g.id}"><span class="sw-img">${covers[g.id] ? `<img src="${esc(covers[g.id])}" alt="" loading="lazy">` : ""}</span><span class="sw-txt"><span class="sw-n">${g.n} ${g.unit}</span><span class="sw-l">${g.label}</span><span class="sw-s">${g.sub}</span></span></a>`).join("");
     const seriesHTML = (grp) => S.series.filter((s) => s.group === grp).map((s) => `<div class="series"><div><h3>${esc(s.name)}</h3><p>${esc(s.text)}</p></div><div class="grid c2" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))">${s.videos.map(videoCard).join("")}</div></div>`).join("");
     $("#talks-series").innerHTML = seriesHTML("talks"); $("#courses-series").innerHTML = seriesHTML("courses");

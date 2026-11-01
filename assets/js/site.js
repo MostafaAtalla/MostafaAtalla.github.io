@@ -30,6 +30,14 @@
     });
   }
 
+  /* ---------- YouTube previews: use the 1280×720 frame, fall back when a video has none ---------- */
+  const ytFallback = (img) => {
+    const steps = ["maxresdefault", "sddefault", "hqdefault"], m = img.src.match(/\/(maxresdefault|sddefault|hqdefault)\.jpg/);
+    if (!m) return; const i = steps.indexOf(m[1]); if (i < steps.length - 1) img.src = img.src.replace(m[1], steps[i + 1]);
+  };
+  const ytCheck = (e) => { const t = e.target; if (t.tagName === "IMG" && /i\.ytimg\.com/.test(t.src) && (e.type === "error" || t.naturalWidth <= 120)) ytFallback(t); };
+  document.addEventListener("load", ytCheck, true); document.addEventListener("error", ytCheck, true);
+
   const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
 
   /* ---------- helpers ---------- */

@@ -16,7 +16,7 @@
   const TRACE_T = 10;
 
   function readColors() {
-    const cs = getComputedStyle(document.body);
+    const cs = getComputedStyle(canvas);
     const v = (n) => cs.getPropertyValue(n).trim();
     colors = { ink: v("--ink"), ink2: v("--ink-2"), ink3: v("--ink-3"), rule: v("--rule"), brass: v("--m"), tide: v("--tide"), card: v("--card"), paper2: v("--paper-2") };
   }
@@ -118,14 +118,14 @@
   }
   function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
 
-  let lastT = performance.now();
+  let lastT = performance.now(), visible = true, running = true;
   function loop(now) {
     const dt = Math.min((now - lastT) / 1000, 0.05); lastT = now;
     const sub = 24; let F = 0;
     for (let i = 0; i < sub; i++) { F = physics(dt / sub); t += dt / sub; }
     trace.push({ t, F }); while (trace.length && t - trace[0].t > TRACE_T) trace.shift();
     draw(); readout(F);
-    requestAnimationFrame(loop);
+    if (visible) requestAnimationFrame(loop); else running = false;
   }
   function readout(F) {
     const { ms, mk } = eff();
@@ -145,13 +145,15 @@
   const us = $("us-switch");
   us.addEventListener("click", () => { ultrasonic = !ultrasonic; us.setAttribute("aria-checked", ultrasonic); $("us-label").textContent = ultrasonic ? "Ultrasonic lubrication on" : "Ultrasonic lubrication off"; });
   const pull = $("pull-btn");
-  pull.addEventListener("click", () => { pulling = !pulling; pull.textContent = pulling ? "Pause pull" : "Resume pull"; });
-  $("reset-btn").addEventListener("click", () => { xb = 0; vb = 0; xh = 0.02; stuck = true; trace = []; t = 0; slips = 0; });
+  pull?.addEventListener("click", () => { pulling = !pulling; pull.textContent = pulling ? "Pause pull" : "Resume pull"; });
+  $("reset-btn")?.addEventListener("click", () => { xb = 0; vb = 0; xh = 0.02; stuck = true; trace = []; t = 0; slips = 0; });
   const ampIn = $("amp"), muIn = $("mus");
-  ampIn.addEventListener("input", () => { amp = ampIn.value / 100; $("amp-out").textContent = ampIn.value + "%"; });
-  muIn.addEventListener("input", () => { muS = muIn.value / 100; muK = Math.min(0.38, muS); $("mus-out").textContent = muS.toFixed(2); });
+  ampIn?.addEventListener("input", () => { amp = ampIn.value / 100; $("amp-out").textContent = ampIn.value + "%"; });
+  muIn?.addEventListener("input", () => { muS = muIn.value / 100; muK = Math.min(0.38, muS); $("mus-out").textContent = muS.toFixed(2); });
 
   readColors(); resize();
   document.addEventListener("themechange", readColors);
+  const start = () => { if (!running) { running = true; lastT = performance.now(); requestAnimationFrame(loop); } };
+  if ("IntersectionObserver" in window) new IntersectionObserver((en) => { visible = en[0].isIntersecting; if (visible) start(); }).observe(canvas);
   requestAnimationFrame(loop);
 })();

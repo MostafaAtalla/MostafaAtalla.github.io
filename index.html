@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mostafa A. Atalla · The Art of Science</title>
-<meta name="description" content="Mostafa A. Atalla designs medical instruments that use friction to glide, grip and propel through biological lumens. Research, publications, writing, videos and photos.">
+<meta name="description" content="Mostafa A. Atalla designs medical instruments that use friction to glide, grip and propel through biological lumens.">
 <meta name="author" content="Mostafa A. Atalla">
 <meta property="og:title" content="Mostafa A. Atalla · The Art of Science">
-<meta property="og:description" content="Mostafa A. Atalla designs medical instruments that use friction to glide, grip and propel through biological lumens. Research, publications, writing, videos and photos.">
+<meta property="og:description" content="Mostafa A. Atalla designs medical instruments that use friction to glide, grip and propel through biological lumens.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/img/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -40,14 +40,13 @@
   <span class="baton-hint">Sweep your cursor across the strings below, or tap one</span>
 </section>
 
-<section class="home-defense" id="overture"><div class="wrap defense-grid">
+<section class="home-defense" id="overture" data-nav="PhD defense"><div class="wrap defense-grid">
   <div class="defense-video">
     <div class="video-frame" id="defense"></div>
     <div class="video-caption" id="defense-cap"></div>
   </div>
   <div class="defense-text">
-    <span class="eyebrow">TU Delft · 2026</span>
-    <h2 class="sec-name">PhD defense</h2>
+    <header class="sec-head"><span class="kicker">TU Delft · 2026</span><h2 class="sec-name">PhD <em>defense</em></h2></header>
     <h3 class="thesis" id="thesis-title"></h3>
     <p class="promotors" id="promotors"></p>
     <div class="prose bio" id="bio"></div>
@@ -58,44 +57,38 @@
   </div>
 </div></section>
 
-<section class="home-research" id="statement"><div class="wrap">
-  <h2 class="sec-name">Research statement and philosophy</h2>
+<section class="home-research" id="statement" data-nav="Research statement &amp; philosophy"><div class="wrap">
+  <header class="sec-head"><span class="kicker">What I study, and how</span><h2 class="sec-name">Research <em>statement</em> &amp; philosophy</h2></header>
   <div class="research-grid">
     <div>
-      <h3 class="sec-title" id="rs-title"></h3>
+      <p class="sec-title" id="rs-title"></p>
       <p class="sec-lead" id="rs-lead"></p>
       <p class="sec-body" id="rs-body"></p>
-      <a class="text-link" href="research.html">Research themes and the friction lab</a>
+      <a class="text-link" href="research.html">Research themes</a>
     </div>
-    <figure class="rs-figure" aria-label="Diagram: an instrument on a lumen wall; ultrasonic vibration lowers friction while it is on">
-      <svg viewBox="0 0 420 300" fill="none">
-        <g stroke="currentColor" stroke-opacity=".35" stroke-width="1"><path d="M20 150c30-8 50 8 80 0s50-8 80 0 50 8 80 0 50-8 80 0 50 8 60 0"/></g>
-        <rect x="120" y="96" width="170" height="40" rx="20" stroke="currentColor" stroke-width="1.6"/>
-        <text x="205" y="121" text-anchor="middle" class="fig-t">instrument</text>
-        <path d="M128 142c6-4 12 4 18 0s12-4 18 0 12 4 18 0 12-4 18 0 12 4 18 0 12-4 18 0 12 4 18 0 12-4 18 0 12 4 14 0" stroke="var(--acc-teal)" stroke-width="1.6"/>
-        <text x="296" y="150" class="fig-t" fill="var(--acc-teal)">squeeze film</text>
-        <path d="M205 60v30m-6-8 6 8 6-8" stroke="var(--acc-gold)" stroke-width="1.6"/><text x="214" y="70" class="fig-t" fill="var(--acc-gold)">N</text>
-        <path d="M300 116h56m-8-6 8 6-8 6" stroke="var(--acc-coral)" stroke-width="1.6"/><text x="320" y="106" class="fig-t" fill="var(--acc-coral)">motion</text>
-        <path d="M110 128H64m8-6-8 6 8 6" stroke="currentColor" stroke-opacity=".7" stroke-width="1.6"/><text x="56" y="116" class="fig-t">friction</text>
-        <g transform="translate(40 200)">
-          <path d="M0 0v76h340" stroke="currentColor" stroke-opacity=".5"/>
-          <text x="-8" y="10" class="fig-t" text-anchor="end">μ</text><text x="340" y="92" class="fig-t" text-anchor="end">time</text>
-          <path d="M0 18h110v42h120v-42h110" stroke="var(--acc-gold)" stroke-width="2"/>
-          <rect x="110" y="0" width="120" height="76" fill="var(--acc-teal)" fill-opacity=".12"/>
-          <text x="170" y="92" class="fig-t" text-anchor="middle" fill="var(--acc-teal)">vibration on</text>
-        </g>
-      </svg>
-      <figcaption>Ultrasonic lubrication: friction drops while the vibration is on and returns when it stops. Schematic.</figcaption>
-    </figure>
+    <div class="lab-home">
+      <div class="lab-stage">
+        <div class="lab-top"><span class="lab-title">Friction lab</span><span class="lab-tip">Drag the handle · switch on the vibration</span></div>
+        <canvas id="lab-canvas" width="880" height="440" aria-label="Simulation of stick-slip friction with switchable ultrasonic lubrication"></canvas>
+        <div class="lab-controls">
+          <div class="lab-row">
+            <button class="switch" id="us-switch" role="switch" aria-checked="false"><span class="knob"></span><span id="us-label">Ultrasonic lubrication off</span></button>
+            <button class="btn ghost small-btn" id="reset-btn" type="button">Reset</button>
+          </div>
+          <div class="lab-mini" aria-live="polite"><span>Force <b id="ro-force">0.00 N</b></span><span>Contact <b id="ro-state">Sticking</b></span><span>μk / μs <b id="ro-mu">–</b></span><span>Distance <b id="ro-dist">0.0 cm</b></span></div>
+        </div>
+      </div>
+      <p class="lab-cap">Stick-slip turns into glide when the squeeze film forms. Illustrative model. <a href="research.html#lab">Open the full lab</a></p>
+    </div>
   </div>
   <ol class="principles" id="rs-principles"></ol>
 </div></section>
 
-<section class="home-teaching" id="teaching"><div class="wrap">
-  <h2 class="sec-name">Teaching and mentorship philosophy</h2>
+<section class="home-teaching" id="teaching" data-nav="Teaching &amp; mentoring philosophy"><div class="wrap">
+  <header class="sec-head"><span class="kicker">How I teach and supervise</span><h2 class="sec-name">Teaching &amp; <em>mentoring</em> philosophy</h2></header>
   <div class="teaching-grid">
     <div>
-      <h3 class="sec-title" id="ts-title"></h3>
+      <p class="sec-title" id="ts-title"></p>
       <p class="sec-lead" id="ts-lead"></p>
       <div class="practices" id="ts-practices"></div>
     </div>
@@ -103,25 +96,28 @@
       <div class="big-stat"><span class="n" id="ts-stat-n"></span><span class="l" id="ts-stat-l"></span></div>
       <h3>Courses</h3>
       <ul id="ts-courses"></ul>
-      <a class="text-link" href="mission.html#orchestra">Meet the students</a>
+      <a class="text-link" href="teaching.html">Teaching &amp; mentoring</a>
     </aside>
   </div>
 </div></section>
 
-<section class="home-vision" id="vision"><div class="wrap">
-  <h2 class="sec-name">Vision and mission</h2>
-  <div class="vision-grid">
-    <div class="vision-item"><span class="k">Research vision</span><p id="vision-research"></p></div>
-    <div class="vision-item"><span class="k">Community mission</span><p id="vision-community"></p></div>
-  </div>
+<section class="home-vision" id="vision" data-nav="Vision &amp; mission"><div class="wrap">
+  <header class="sec-head"><span class="kicker">Where this is going</span><h2 class="sec-name">Vision &amp; <em>mission</em></h2></header>
+  <div class="vm-grid" id="vm"></div>
   <a class="text-link" href="mission.html">Initiatives for junior researchers</a>
 </div></section>
 
-<section class="home-highlights" id="highlights"><div class="wrap">
-  <h2 class="sec-name">Highlights</h2>
-  <div class="counters" id="counters"></div>
-  <div class="snippets" id="snippets"></div>
-  <nav class="explore" id="explore" aria-label="Explore the site"></nav>
+<section class="home-highlights" id="highlights" data-nav="Highlights"><div class="wrap">
+  <header class="sec-head"><span class="kicker">At a glance</span><h2 class="sec-name">High<em>lights</em></h2></header>
+  <div class="dials" id="dials"></div>
+  <div class="latest">
+    <div class="latest-tabs" role="tablist" id="latest-tabs"></div>
+    <div class="latest-body" id="latest-body"></div>
+  </div>
+  <div class="affil">
+    <p class="affil-title">Where the work happened</p>
+    <div class="badges" id="badges"></div>
+  </div>
 </div></section>
 </main>
 <footer id="site-footer"></footer>
@@ -129,5 +125,6 @@
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pages.js"></script>
 <script src="assets/js/hero.js"></script>
+<script src="assets/js/lab.js"></script>
 </body>
 </html>

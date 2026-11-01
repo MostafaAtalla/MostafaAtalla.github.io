@@ -4,14 +4,15 @@
   const page = document.body.dataset.page || "home";
 
   const NAV = [
-    { id: "home", href: "index.html", label: "Overture", desc: "Home" },
-    { id: "research", href: "research.html", label: "Research", desc: "Glide, grip, propel + friction lab" },
-    { id: "publications", href: "publications.html", label: "Publications", desc: "Papers, abstracts, patents" },
-    { id: "journey", href: "journey.html", label: "Journey", desc: "CV, awards, talks, teaching" },
-    { id: "mission", href: "mission.html", label: "Mission", desc: "Supporting junior researchers" },
-    { id: "writing", href: "writing.html", label: "Writing", desc: "Essays, LinkedIn, press" },
-    { id: "studio", href: "studio.html", label: "Studio", desc: "YouTube: figures that speak science" },
-    { id: "gallery", href: "gallery.html", label: "Gallery", desc: "Academic trips, science heroes" }
+    { id: "research", href: "research.html", label: "Research", desc: "Statement, themes, friction lab" },
+    { id: "teaching", href: "teaching.html", label: "Teaching & Mentoring", desc: "Philosophy, courses, supervision" },
+    { id: "mission", href: "mission.html", label: "Vision & Mission", desc: "Vision, mission, initiatives for junior researchers" },
+    { id: "journey", href: "journey.html", label: "Journey", desc: "Timeline, talks, service, CV" },
+    { id: "publications", href: "publications.html", label: "Publications", desc: "Papers, patents, dissertation" },
+    { id: "perspectives", href: "perspectives.html", label: "Perspectives", desc: "Opinion pieces and essays" },
+    { id: "studio", href: "studio.html", label: "Studio", desc: "Science talks, courses, gallery" },
+    { id: "awards", href: "awards.html", label: "Awards", desc: "Awards, grants, scholarships" },
+    { id: "news", href: "news.html", label: "News", desc: "Papers, talks, workshops, press" }
   ];
   const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
 
@@ -103,7 +104,7 @@
           <span class="brand-text"><span class="brand-name">${esc(S.person.name)}</span><span class="brand-tag">The Art of Science</span></span>
         </a>
         <nav class="nav" id="nav" aria-label="Main">
-          ${NAV.map((n, i) => `<a href="${n.href}" ${n.id === page ? 'aria-current="page"' : ""}><span class="num">${ROMAN[i]}</span>${n.label}</a>`).join("")}
+          ${NAV.map((n) => `<a href="${n.href}" ${n.id === page || (page === "post" && n.id === "perspectives") ? 'aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}
         </nav>
         <div class="tools">
           <button class="icon-btn" id="palette-btn" aria-label="Search the site (Ctrl+K)" title="Search (Ctrl+K)">${ICON.search}</button>
@@ -140,7 +141,7 @@
             <p class="footer-quote">“${esc(S.quote.text)}.”</p>
             <p class="small muted" style="margin-top:12px">${esc(S.person.name)} · ${esc(S.person.role)}, ${esc(S.person.affiliation)}</p>
           </div>
-          <div><h4>Movements</h4><ul>${NAV.map((n) => `<li><a href="${n.href}">${n.label}</a></li>`).join("")}</ul></div>
+          <div><h4>Explore</h4><ul>${NAV.map((n) => `<li><a href="${n.href}">${n.label}</a></li>`).join("")}</ul></div>
           <div><h4>Contact</h4><ul>
             <li class="copy-line"><span>${esc(S.person.email)}</span><button type="button" data-copy="${esc(S.person.email)}">Copy</button></li>
             <li>${esc(S.person.location)}</li>
@@ -155,16 +156,18 @@
 
   /* ---------- command palette ---------- */
   function paletteItems() {
-    const items = NAV.map((n) => ({ t: n.label, k: "Page", href: n.href, s: n.desc }));
-    S.publications.forEach((p) => items.push({ t: p.title, k: p.type, href: `publications.html#${p.id}`, s: p.authors + " " + p.venue }));
-    S.posts.forEach((p) => items.push({ t: p.title, k: p.type, href: p.type === "essay" ? `post.html?p=${p.slug}` : (p.url || "writing.html"), s: p.summary }));
-    S.albums.forEach((a) => items.push({ t: a.title, k: "album", href: `gallery.html#${a.id}`, s: a.place }));
-    S.series.forEach((sr) => items.push({ t: sr.name, k: "video series", href: "studio.html", s: sr.text }));
+    const items = [{ t: "Home", k: "Page", href: "index.html", s: "overture quote defense" }, ...NAV.map((n) => ({ t: n.label, k: "Page", href: n.href, s: n.desc }))];
+    S.publications.forEach((p) => items.push({ t: p.title, k: p.type, href: `publications.html#${p.id}`, s: p.authors + " " + p.venue + " " + (p.hl || "") }));
+    S.posts.forEach((p) => items.push({ t: p.title, k: p.cat === "perspective" || p.type === "essay" ? "perspective" : "news", href: p.type === "essay" ? `post.html?p=${p.slug}` : (p.cat === "perspective" ? "perspectives.html" : "news.html"), s: p.summary }));
+    S.awards.forEach((a) => items.push({ t: a.title, k: "award", href: "awards.html", s: a.org + " " + a.year }));
+    S.albums.forEach((a) => items.push({ t: a.title, k: "album", href: `studio.html#${a.id}`, s: a.place }));
+    S.series.forEach((sr) => sr.videos.forEach((v) => items.push({ t: v.title, k: "video", href: sr.group === "courses" ? "studio.html#courses" : "studio.html#talks", s: sr.name })));
     items.push({ t: "Friction lab", k: "interactive", href: "research.html#lab", s: "stick slip ultrasonic lubrication toy" });
     items.push({ t: "Opportunity compass", k: "interactive", href: "mission.html#compass", s: "fellowships grants junior researchers" });
     items.push({ t: "Download CV", k: "file", href: S.person.cv, s: "pdf resume" });
     return items;
   }
+
   let paletteEl = null;
   function openPalette() {
     if (paletteEl) return;

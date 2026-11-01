@@ -24,7 +24,6 @@
 <a class="skip" href="#main">Skip to content</a>
 <header id="site-header"></header>
 <main id="main">
-
 <section class="hero hero-sub" data-nav="Top">
   <div class="hero-media" id="hero-media" aria-hidden="true"></div>
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
@@ -32,28 +31,25 @@
     <span class="eyebrow">Research</span>
     <h1 class="hero-title">Glide, grip, propel.</h1>
     <p class="hero-lede">Instruments move through biological lumens by contact. I engineer the friction at that contact so an instrument slides when it should, holds when it must, and propels itself when it can.</p>
-    <div class="hero-cta">
-      <button class="btn ghost try-me" id="sound-btn" type="button" aria-pressed="false">♪ Try me: play the strings</button>
-    </div>
+    <div class="hero-cta"><button class="btn ghost try-me" id="sound-btn" type="button" aria-pressed="false">♪ Try me: play the strings</button></div>
   </div>
   <span class="baton-hint">Sweep your cursor across the strings below, or tap one</span>
 </section>
-
-<section class="block" data-nav="Research themes"><div class="wrap">
-  <div class="block-head"><div><span class="eyebrow">Three themes</span><h2>One variable, three functions</h2></div><a class="link-arrow" href="publications.html">All publications</a></div>
-  <div class="themes" id="themes"></div>
+<section class="block " data-nav="Statement"><div class="wrap">
+<header class="sec-head"><span class="kicker">What I study, and how</span><h2 class="sec-name">Research <em>statement</em></h2></header><div class="prose"><p class="sec-title" id="rs-title"></p><p class="sec-lead" id="rs-lead"></p><p class="sec-body" id="rs-body"></p></div><ol class="principles light" id="rs-principles"></ol>
 </div></section>
-
-<section class="block tint" id="lab" data-nav="Friction lab"><div class="wrap">
-  <div class="block-head"><div><span class="eyebrow">Interactive</span><h2>The friction lab</h2></div></div>
-  <div class="lab">
+<section class="block tint" data-nav="Research themes"><div class="wrap">
+<header class="sec-head"><span class="kicker">One variable, three functions</span><h2 class="sec-name">Research <em>themes</em></h2><a class="link-arrow" href="publications.html">All publications</a></header><div class="themes" id="themes"></div>
+</div></section>
+<section class="block " id="lab" data-nav="Friction lab"><div class="wrap">
+<header class="sec-head"><span class="kicker">Interactive</span><h2 class="sec-name">The friction <em>lab</em></h2></header><div class="lab">
     <div class="lab-stage">
       <canvas id="lab-canvas" width="880" height="440" aria-label="Simulation of a block pulled by a spring over a surface, with a live force trace"></canvas>
       <div class="lab-controls">
         <div class="lab-row">
           <button class="switch" id="us-switch" role="switch" aria-checked="false"><span class="knob"></span><span id="us-label">Ultrasonic lubrication off</span></button>
-          <button class="btn ghost" id="pull-btn" type="button" style="padding:7px 14px">Pause pull</button>
-          <button class="btn ghost" id="reset-btn" type="button" style="padding:7px 14px">Reset</button>
+          <button class="btn ghost small-btn" id="pull-btn" type="button">Pause pull</button>
+          <button class="btn ghost small-btn" id="reset-btn" type="button">Reset</button>
         </div>
         <div class="lab-row"><label for="amp">Vibration amplitude</label><input type="range" id="amp" min="0" max="100" value="70"><output id="amp-out" for="amp">70%</output></div>
         <div class="lab-row"><label for="mus">Static friction μs</label><input type="range" id="mus" min="20" max="90" value="60"><output id="mus-out" for="mus">0.60</output></div>

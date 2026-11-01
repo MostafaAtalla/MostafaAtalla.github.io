@@ -19,6 +19,7 @@
     media.innerHTML = "";
     media.classList.add("fallback");
     if (hearBtn) hearBtn.hidden = true;
+    document.querySelector(".sound-nudge")?.remove();
     hero.insertAdjacentHTML("beforeend", '<span class="sample hero-sample">Add your defense clip: assets/video/hero-loop.mp4 or a YouTube ID</span>');
   }
   function youtube() {
@@ -33,33 +34,62 @@
   const fail = () => (D.heroYoutubeId ? youtube() : noVideo());
   if (D.heroVideo) {
     video = document.createElement("video");
-    video.muted = true; video.loop = true; video.playsInline = true;
-    video.setAttribute("playsinline", ""); video.setAttribute("muted", "");
+    video.loop = true; video.playsInline = true; video.setAttribute("playsinline", "");
     video.preload = "auto";
     if (D.heroPoster) video.poster = D.heroPoster;
-    if (!reduce) video.autoplay = true;
     const src = document.createElement("source");
     src.src = D.heroVideo; src.type = "video/mp4";
     src.addEventListener("error", fail);
     video.appendChild(src);
     media.appendChild(video);
-    if (!reduce) video.play().catch(() => {});
   } else if (D.heroYoutubeId) {
     youtube();
   } else {
     noVideo();
   }
 
-  if (video && hearBtn) {
-    hearBtn.addEventListener("click", () => {
-      if (!video) return;
-      if (video.muted || video.paused) {
-        video.muted = false; video.currentTime = 0; video.play().catch(() => {});
-        hearBtn.textContent = "Mute"; hearBtn.setAttribute("aria-pressed", "true");
-      } else {
-        video.muted = true;
-        hearBtn.textContent = "Hear the quote"; hearBtn.setAttribute("aria-pressed", "false");
-      }
+  /* Sound on by default. Browsers only allow audio after the visitor interacts
+     with the page, so: try to play with sound; if the browser refuses, play
+     muted and switch the sound on at the visitor's first click, tap or key.
+     The quote is heard once with sound, then keeps looping silently. */
+  if (video) {
+    let heardOnce = false, last = 0;
+    const label = () => {
+      if (!hearBtn) return;
+      const on = !video.muted && !video.paused;
+      hearBtn.textContent = on ? "Mute the quote" : "Hear the quote";
+      hearBtn.setAttribute("aria-pressed", String(on));
+    };
+    const withSound = (fromStart) => {
+      if (!video || !video.isConnected) return Promise.reject();
+      video.muted = false;
+      if (fromStart) video.currentTime = 0;
+      return video.play().then(label);
+    };
+    video.addEventListener("timeupdate", () => {
+      // first loop with sound finished: continue silently
+      if (!video.muted && video.currentTime < last - 1) { heardOnce = true; video.muted = true; label(); }
+      last = video.currentTime;
+    });
+    const unlock = (e) => {
+      if (e && e.target && e.target.closest && e.target.closest("#hear-btn")) return;
+      ["pointerdown", "keydown", "touchstart"].forEach((t) => document.removeEventListener(t, unlock, true));
+      document.querySelector(".sound-nudge")?.remove();
+      if (!heardOnce && video.muted) withSound(true).catch(() => {});
+    };
+    if (!reduce) {
+      withSound(false).catch(() => {
+        if (!video || !video.isConnected) return; // clip failed to load
+        video.muted = true; video.play().catch(() => {}); label();
+        ["pointerdown", "keydown", "touchstart"].forEach((t) => document.addEventListener(t, unlock, true));
+        hero.querySelector(".hero-cta")?.insertAdjacentHTML("afterend", '<p class="sound-nudge">Click anywhere to hear the quote with sound</p>');
+      });
+    } else { video.muted = true; label(); }
+    if (hearBtn) hearBtn.addEventListener("click", () => {
+      ["pointerdown", "keydown", "touchstart"].forEach((t) => document.removeEventListener(t, unlock, true));
+      document.querySelector(".sound-nudge")?.remove();
+      if (video.muted || video.paused) { heardOnce = false; withSound(true).catch(() => {}); }
+      else { video.muted = true; label(); }
     });
   }
 
@@ -237,8 +267,9 @@
   const sbtn = document.getElementById("sound-btn");
   if (sbtn) sbtn.addEventListener("click", () => {
     sound = !sound; sbtn.setAttribute("aria-pressed", sound);
-    sbtn.textContent = sound ? "Strings: sound on" : "Strings: sound off";
-    if (sound) play(2, W / 2);
+    sbtn.classList.remove("try-me");
+    sbtn.innerHTML = sound ? "♪ Strings on: sweep across them" : "♪ Try me: play the strings";
+    if (sound) STR.forEach((_, i) => setTimeout(() => pluckAt(i, W * (0.3 + i * 0.08), 1, 8), i * 160));
   });
 
   resize();

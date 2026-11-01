@@ -732,3 +732,11 @@ section.block.tint::before, section.block.band-dark::before {
 .explore a { text-decoration: none; padding: 9px 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--rule); font: 500 .88rem var(--body); display: inline-flex; gap: 8px; align-items: center; }
 .explore a::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 .explore a:hover { border-color: var(--c); color: var(--ink); }
+
+/* strings invitation */
+.hero .btn.try-me { position: relative; border-color: #FFC94D; color: #FFC94D; }
+.hero .btn.try-me::after { content: ""; position: absolute; inset: -5px; border-radius: 10px; border: 2px solid #FFC94D; opacity: 0; animation: tryme 2.2s ease-out infinite; pointer-events: none; }
+@keyframes tryme { 0% { opacity: .8; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.12); } }
+.sound-nudge { margin-top: 14px; font: 500 .8rem var(--mono); letter-spacing: .04em; color: rgba(238,242,247,.75); }
+.sound-nudge::before { content: "🔊 "; }
+.baton-hint { color: rgba(255, 201, 77, .8); font-size: .76rem; }

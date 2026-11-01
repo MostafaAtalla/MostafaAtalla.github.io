@@ -90,7 +90,8 @@
     const snips = [
       { k: "Latest recognition", t: award.title, p: `${award.org}, ${award.year}`, href: "journey.html#awards-section", c: "var(--acc-coral)" },
       { k: `New paper · ${paper.year}`, t: paper.title, p: paper.venue, href: `publications.html#${paper.id}`, c: "var(--acc-blue)" },
-      { k: `${talk.kind} talk · ${talk.year}`, t: talk.title, p: talk.venue, href: "journey.html", c: "var(--acc-teal)" }
+      { k: `${talk.kind} talk · ${talk.year}`, t: talk.title, p: talk.venue, href: "journey.html", c: "var(--acc-teal)" },
+      { k: "Watch", t: "The Maestro: a short film about my PhD defense day", p: "10 min · Studio", href: "studio.html", c: "var(--c-studio)" }
     ];
     $("#snippets").innerHTML = snips.map((x) => `<a class="snippet" href="${x.href}" style="--c:${x.c}"><span class="k">${esc(x.k)}</span><h3>${esc(x.t)}</h3><p>${esc(x.p)}</p></a>`).join("");
     $("#explore").innerHTML = U.NAV.slice(1).map((n) => `<a href="${n.href}" style="--c: var(--c-${n.id})">${n.label}</a>`).join("");

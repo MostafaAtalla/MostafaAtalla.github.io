@@ -17,11 +17,11 @@ window.SITE = {
     portrait: "", // e.g. "assets/photos/portrait.jpg"
     links: {
       // Paste your full profile URLs. Empty links are hidden automatically.
-      linkedin: "",
+      linkedin: "https://www.linkedin.com/in/mostafa-atalla193/",
       scholar: "",
       orcid: "",
       github: "",
-      youtube: "",
+      youtube: "https://www.youtube.com/@mostafaaatalla",
       researchgate: ""
     }
   },
@@ -43,11 +43,11 @@ window.SITE = {
     heroStart: 0,            // seconds where the quote starts
     heroEnd: 0,              // seconds where it ends (0 = end of video)
 
-    // The full defense clip in the section below the hero (with sound and controls).
-    youtubeId: "",
+    // The full defense in the section below the hero (with sound and controls).
+    youtubeId: "pBPTiyE4l84",
     mp4: "assets/video/defense-clip.mp4",
     poster: "",
-    caption: "Closing words of my PhD defense: science as an art, scientists as its maestros.",
+    caption: "The full defense, Delft University of Technology. 58 min.",
     thesis: "When Friction Meets Function: Engineering Medical Instruments with Friction to Glide, Grip and Propel"
   },
 
@@ -316,21 +316,31 @@ window.SITE = {
   /* ---------------- STUDIO (YouTube) ----------------
      id = the YouTube video ID (the part after watch?v=). Leave empty until ready. */
   series: [
-    { name: "Figures that speak science", text: "Sessions on designing scientific figures that carry one message each: layout, colour, typography and the story a figure should tell.",
+    { name: "PhD defense", text: "The defense of “When Friction Meets Function” at TU Delft, the ceremony, and a short film about the day.",
       videos: [
-        { id: "", title: "Episode 1", length: "", placeholder: true },
-        { id: "", title: "Episode 2", length: "", placeholder: true },
-        { id: "", title: "Episode 3", length: "", placeholder: true }
+        { id: "pBPTiyE4l84", title: "When Friction Meets Function: PhD Dissertation Defense, TU Delft", length: "58:29" },
+        { id: "VXnhmwvI3oM", title: "The Maestro: PhD Defense Day Short Movie", length: "10:50" },
+        { id: "Jq_5KxhyKdg", title: "PhD Defense: Ceremony and Laudatio", length: "9:00" },
+        { id: "XcpHcohscoA", title: "The art of science", length: "0:23", short: true }
       ] },
-    { name: "Talks", text: "Recorded conference talks and invited lectures.",
+    { name: "Figures that speak science", text: "Sessions on designing scientific figures that carry one clear message: layout, colour, typography and the story a figure should tell.",
       videos: [
-        { id: "", title: "The Body Thinks Too: Physical Intelligence for Medical Robotics", length: "", placeholder: true },
-        { id: "", title: "OSCAR: an Ovipositor-Inspired Capsule Robot for Colonoscopy", length: "", placeholder: true }
+        { id: "yYFy0NK4XKE", title: "Crafting Figures that Speak Science: Session 1", length: "59:20" }
       ] },
-    { name: "Research in motion", text: "Short clips of the robots and experiments behind the papers.",
+    { name: "Lectures", text: "Teaching material from the medical robotics course.",
       videos: [
-        { id: "", title: "Ultrasonic lubrication, on and off", length: "", placeholder: true },
-        { id: "", title: "OSCAR in a colon model", length: "", placeholder: true }
+        { id: "OrSAisNkdGM", title: "Robot Forward & Inverse Kinematics Essentials: Medical Robotics Course", length: "39:38" }
+      ] },
+    { name: "Research in motion", text: "Conference videos of the robots and experiments behind the papers.",
+      videos: [
+        { id: "kEHPD8XW58o", title: "Grip as Needed, Glide on Demand: Ultrasonic Lubrication for Robotic Locomotion (ICRA 2026)", length: "3:01" },
+        { id: "2bmjkfAqmaQ", title: "Ultrasonically-Lubricated Catheters (Hamlyn Symposium 2024)", length: "7:53" },
+        { id: "8atIPbxrQCs", title: "Ultrasonic skiing", length: "Short", short: true }
+      ] },
+    { name: "Earlier engineering", text: "Earlier engineering projects.",
+      videos: [
+        { id: "HJShMnPIl8s", title: "PD Controller in Joint Space vs Task Space for a 2R Robot Manipulator", length: "0:16" },
+        { id: "gcPTal6Eqeo", title: "SSP fertilizer granulation machine", length: "Short", short: true }
       ] }
   ],
 

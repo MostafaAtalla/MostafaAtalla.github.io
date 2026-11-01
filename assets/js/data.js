@@ -7,11 +7,11 @@
 window.SITE = {
 
   person: {
-    name: "Mostafa A. Atalla",
+    name: "Mostafa A. Atalla, PhD",
     shortName: "Mostafa Atalla",
     role: "Postdoctoral Researcher",
     affiliation: "Bio-Inspired Technology (BITE) group, TU Delft",
-    location: "The Hague, The Netherlands",
+    location: "Delft, The Netherlands",
     email: "mostafa.a.atalla@gmail.com",
     cv: "assets/docs/Atalla_CV.pdf",
     portrait: "", // e.g. "assets/photos/portrait.jpg"
@@ -55,7 +55,7 @@ window.SITE = {
     "I design medical instruments that treat friction as a design variable rather than a loss to be minimised. Endoluminal instruments move through biological lumens by contact, so the friction at that contact decides whether an instrument advances, holds position or injures tissue.",
     "My PhD at TU Delft showed that ultrasonic vibration can lower the friction of a catheter on demand through a squeeze film, and that coordinating friction across several contacts is enough to make a capsule robot for colonoscopy propel itself. As a postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft, I continue this work toward endoluminal instruments that are safe by design."
   ],
-  now: "Currently: postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft, and founder of Mijzan Mechanical.",
+  now: "Currently: postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft.",
 
   /* ---------------- HOME PAGE STATEMENTS ----------------
      Drafts written from your CV. Rewrite them in your own words.  */
@@ -213,20 +213,33 @@ window.SITE = {
 
   /* ---------------- JOURNEY ----------------
      kind: academic | industry | education ; city must match a station id */
-  stations: [
-    { id: "cairo", city: "Cairo", years: "2009–2018" },
-    { id: "boston", city: "Massachusetts", years: "2018–2020" },
-    { id: "delft", city: "Delft", years: "2020–" },
-    { id: "hague", city: "The Hague", years: "2025–" }
+  // Journey: chapters on the map, and the big moves between them.
+  // logos are files in assets/img/logos/ ; photos rotate in each chapter.
+  chapters: [
+    { id: "cairo", pin: "cairo", city: "Cairo, Egypt", years: "2009–2018", title: "Engineering foundations",
+      text: "Mechanical design and production engineering at Cairo University, then industry: hydraulics maintenance, and research and innovation at Advansys, where I led a soft robotic hand exoskeleton project with Ain Shams University.",
+      logos: [["cairo-university", "Cairo University"], ["advansys", "Advansys ESC"], ["dematic", "Dematic (Advansys partner)"]],
+      photos: [{ src: "assets/journey/advansys-exohand-demo.jpg", caption: 'ExoHand project: final presentation and demo, Cairo' }, { src: "assets/journey/advansys-team.jpg", caption: 'The Advansys ESC team, Cairo' }, { src: "assets/journey/exohand-glove.jpg", caption: 'Soft robotic hand exoskeleton, proof of concept' }, { src: "assets/journey/exohand-actuators.jpg", caption: 'Soft pneumatic actuators for the ExoHand' }, { src: "assets/journey/ar-science-kit.jpg", caption: 'AR science kit for primary schools, a project I managed' }, { src: "assets/journey/dematic-frankfurt.jpg", caption: 'Supporting the Dematic R&D team on site, Frankfurt' }, { src: "assets/journey/advansys-certificate.jpg", caption: 'Certificate of appreciation, Advansys innovation team, 2018' }] },
+    { id: "massachusetts", pin: "worcester", city: "Worcester & Cambridge, MA, USA", years: "2018–2020", title: "Robotics in Massachusetts",
+      text: "An MSc in Robotics Engineering at WPI as a Fulbright Scholar in the COMET Lab, product development at UbiRos, and two internships at Philips Research North America on ultrasound elastography and image-guided therapy robotics.",
+      logos: [["wpi", "Worcester Polytechnic Institute"], ["comet-lab", "COMET Lab, WPI"], ["fulbright", "Fulbright"], ["ubiros", "UbiRos"], ["philips", "Philips Research"]],
+      photos: [{ src: "assets/journey/comet-lab-team.jpg", caption: 'The COMET Lab team, Worcester' }, { src: "assets/journey/wpi-continuum-robot.jpg", caption: 'A low-cost continuum robot platform for the lab' }, { src: "assets/journey/wpi-exoskeleton.jpg", caption: 'Position sensing for a hand exoskeleton' }, { src: "assets/journey/ubiros-gripper.jpg", caption: 'UbiRos soft gripper: quick-release mechanism prototype' }, { src: "assets/journey/ubiros-teleop.jpg", caption: 'Keyboard tele-operation of the gripper through ROS' }, { src: "assets/journey/philips-elastography-team.jpg", caption: 'Philips Research, 2019: portable elastography' }, { src: "assets/journey/elastography-prototype.jpg", caption: 'Mechanical-vibration elastography prototype' }, { src: "assets/journey/philips-robotics-team.jpg", caption: 'Philips Research robotics team, 2020' }, { src: "assets/journey/endovascular-robot.jpg", caption: 'Endovascular robot platform built at Philips' }, { src: "assets/journey/fulbright-dc.jpg", caption: 'Fulbright scholars workshop, Washington DC' }, { src: "assets/photos/li/wpi-lab-1.jpg", caption: 'The robotics lab at WPI' }] },
+    { id: "delft", pin: "delft", city: "Delft, The Netherlands", years: "2020–", title: "Friction meets function",
+      text: "A PhD at TU Delft on engineering friction in medical instruments, in collaboration with the tribology group at the University of Sheffield, followed by a postdoc in the Bio-Inspired Technology (BITE) group.",
+      logos: [["tudelft", "TU Delft"], ["bite", "Bio-Inspired Technology group"]],
+      photos: [{ src: "assets/journey/catheter-module.jpg", caption: 'Ultrasonic friction-control module next to a 2-euro coin' }, { src: "assets/journey/oscar-parts.jpg", caption: 'Parts of the OSCAR capsule robot' }, { src: "assets/journey/pipeline-robot.jpg", caption: 'Wasp-inspired pipeline locomotion' }, { src: "assets/journey/squeeze-film-setup.jpg", caption: 'Squeeze-film levitation setup' }, { src: "assets/journey/tactile-gripper.jpg", caption: 'A tactile robotic gripper for haptics research' }, { src: "assets/journey/sheffield-tribology.jpg", caption: 'With the tribology group, University of Sheffield' }, { src: "assets/photos/li/godet-2.jpg", caption: 'Maurice Godet Award, Lyon, 2024' }, { src: "assets/photos/li/robosoft24-2.jpg", caption: 'RoboSoft 2024, San Diego' }, { src: "assets/journey/phd-committee.jpg", caption: 'The PhD committee' }, { src: "assets/photos/defense-day.jpg", caption: "PhD defense, TU Delft" }] }
+  ],
+  moves: [
+    { from: "cairo", to: "worcester", arc: "cairo_worcester", year: 2018, label: "Fulbright Scholar", text: "A Fulbright grant takes me from Cairo to Worcester, Massachusetts, for an MSc in Robotics Engineering.", photo: "assets/journey/leaving-for-massachusetts.jpg" },
+    { from: "worcester", to: "delft", arc: "worcester_delft", year: 2020, label: "PhD at TU Delft", text: "From Massachusetts across the Atlantic to Delft, to start a PhD on friction in medical instruments.", photo: "assets/journey/phd-committee.jpg" }
   ],
   timeline: [
-    { when: "2025–", kind: "industry", city: "hague", title: "Founder", org: "Mijzan Mechanical, The Hague", text: "Engineering consultancy and product design for mechatronic solutions." },
     { when: "2026–", kind: "academic", city: "delft", title: "Postdoctoral Researcher", org: "Bio-Inspired Technology (BITE) group, TU Delft", text: "Bio-inspired, safe-by-design instruments for interventions in biological lumens." },
     { when: "2020–2026", kind: "academic", city: "delft", title: "PhD Researcher", org: "Faculty of Mechanical Engineering, TU Delft", text: "Thesis: When Friction Meets Function. Promotors: Dr. ir. M. Wiertlewski, Dr. ir. A. Sakes and Prof. dr. ir. P. Breedveld." },
-    { when: "2020", kind: "industry", city: "boston", title: "Intern, Mechanical Design for Robotics and Navigation", org: "Philips Research North America, Cambridge MA", text: "Image Guided Therapy department. Built functional robotic hardware for a surgical application within three months." },
-    { when: "2019", kind: "industry", city: "boston", title: "Research Intern, Mechanical Design", org: "Philips Research North America, Cambridge MA", text: "Ultrasound Imaging and Intervention department." },
-    { when: "2018–2020", kind: "education", city: "boston", title: "MSc Robotics Engineering", org: "Worcester Polytechnic Institute", text: "Fulbright Scholar, medical robotics, advised by Dr. Loris Fichera. GPA 4.0/4.0." },
-    { when: "2018–2019", kind: "industry", city: "boston", title: "Product Development Engineer Intern", org: "UbiRos, Natick MA", text: "" },
+    { when: "2020", kind: "industry", city: "massachusetts", title: "Intern, Mechanical Design for Robotics and Navigation", org: "Philips Research North America, Cambridge MA", text: "Image Guided Therapy department. Built functional robotic hardware for a surgical application within three months." },
+    { when: "2019", kind: "industry", city: "massachusetts", title: "Research Intern, Mechanical Design", org: "Philips Research North America, Cambridge MA", text: "Ultrasound Imaging and Intervention department." },
+    { when: "2018–2020", kind: "education", city: "massachusetts", title: "MSc Robotics Engineering", org: "Worcester Polytechnic Institute", text: "Fulbright Scholar, medical robotics, advised by Dr. Loris Fichera. GPA 4.0/4.0." },
+    { when: "2018–2019", kind: "industry", city: "massachusetts", title: "Product Development Engineer Intern", org: "UbiRos, Natick MA", text: "" },
     { when: "2016–2018", kind: "industry", city: "cairo", title: "Mechanical Engineer → Research & Innovation Engineer", org: "Advansys ESC, Cairo", text: "Mechanical and innovation departments; STDF-funded collaboration with Ain Shams University on robotic assistive rehabilitation." },
     { when: "2015–2016", kind: "industry", city: "cairo", title: "Mechanical Engineer", org: "Technical Office of Hydraulics, Cairo", text: "Maintenance department." },
     { when: "2009–2014", kind: "education", city: "cairo", title: "BSc Mechanical Design and Production Engineering", org: "Cairo University", text: "Ranked 3rd of 37. Advised by Prof. Yasser H. Anis and Prof. Sayed M. Metwalli." }
@@ -296,6 +309,33 @@ window.SITE = {
       { when: "2022–2023", title: "Dutch Soft Robotics Summer School and World Haptics", text: "Organising committee member for the 2022 summer school and symposium and the 2023 World Haptics conference.", tags: ["Community"] },
       { when: "2020", title: "Fulbright Association, Massachusetts Chapter", text: "Board member supporting incoming international scholars.", tags: ["Mentoring"] },
       { when: "", title: "Your next initiative for junior researchers", text: "Describe another mentoring programme, opportunity newsletter, application clinic or similar initiative, and what it changed for participants.", tags: ["Add yours"], placeholder: true }
+    ],
+    // Acting on the mission: things done specifically for junior researchers
+    juniors: [
+      { title: "“Approachable! Ask me anything!” badges", when: "ICRA 2026", img: "assets/photos/li/badges-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7467154829153517568/",
+        text: "Large conferences are intimidating for first-time attendees. I 3D-printed badges for senior researchers who are happy to be approached, so newcomers can see whom they can talk to." },
+      { title: "Supervising MSc students as researchers", when: "2022–2025", img: "assets/journey/catheter-module.jpg", url: "teaching.html#orchestra",
+        text: "Eight MSc students worked on open questions inside active projects; six of their theses became co-authored papers, abstracts or a patent." },
+      { title: "Notes on intercultural PhD supervision", when: "2026", img: "assets/photos/li/silence-1.jpg", url: "perspectives.html",
+        text: "A series of posts from my reading on how silence, independence and feedback are read differently across academic cultures, written for students and supervisors." },
+      { title: "Fulbright Association, Massachusetts Chapter", when: "2020", img: "assets/journey/fulbright-dc.jpg",
+        text: "As a board member I supported incoming international scholars settling into academic life in the United States." }
+    ],
+    // Building the research community: workshops and events organised (service, not mentoring)
+    community: [
+      { title: "Soft ≠ Safe? Rethinking Softness in Medical Robotics", when: "2026", where: "ICRA, Vienna", role: "Lead organiser", img: "assets/photos/li/softsafe-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7465102661198069760/" },
+      { title: "Robotic colonoscopy: clinical needs and translation", when: "2025", where: "Hamlyn Symposium, London", role: "Co-organiser", img: "assets/photos/li/hamlyn25-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7344712541798903808/" },
+      { title: "Soft Robotics Mimicking the Human Body for Medical Applications", when: "2025", where: "RoboSoft, Lausanne", role: "Lead co-organiser", img: "assets/photos/li/robosoft25-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7307418294355976193/" },
+      { title: "Bio-Inspired Medical Robotics: From Evolution to Revolution", when: "2024", where: "Hamlyn Symposium, London", role: "Lead organiser", img: "assets/photos/li/bioinsp24-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7167859584093650944/" },
+      { title: "“Make your own soft robot” public workshop", when: "2024", where: "RoboCup Science Festival, Eindhoven", role: "Organiser" },
+      { title: "Dutch Soft Robotics Summer School and World Haptics", when: "2022–2023", where: "Delft", role: "Organising committee" }
+    ],
+    // Doors that opened for me: grants I received, what they made possible, and where to apply
+    doors: [
+      { name: "Fulbright Foreign Student Program", year: 2018, enabled: "Funded my MSc in Robotics Engineering at WPI, and with it the move from Cairo to Massachusetts.", url: "https://foreign.fulbrightonline.org/", logo: "fulbright" },
+      { name: "IEEE RAS conference travel grants", year: 2024, enabled: "Paid my travel to present at RoboSoft 2024 in San Diego, where the pipeline robot later led to a best-poster award.", url: "https://www.ieee-ras.org/" },
+      { name: "WPI graduate scholarship", year: 2018, enabled: "Covered part of my graduate study alongside Fulbright.", url: "https://www.wpi.edu/admissions/graduate", logo: "wpi" },
+      { name: "STDF Research Support Grant, Egypt", year: 2016, enabled: "Funded the soft robotic hand exoskeleton I developed with undergraduate students from Ain Shams University.", url: "https://stdf.eg/" }
     ],
     // Supervised students. "paper" lists the publication ids they co-authored.
     supervision: [
@@ -379,8 +419,7 @@ window.SITE = {
     { name: "Conference and paper talks", group: "talks", text: "Videos accompanying papers, and the robots and experiments behind them.",
       videos: [
         { id: "kEHPD8XW58o", title: "Grip as Needed, Glide on Demand: Ultrasonic Lubrication for Robotic Locomotion (ICRA 2026)", length: "3:01", pub: "C2" },
-        { id: "2bmjkfAqmaQ", title: "Ultrasonically-Lubricated Catheters (Hamlyn Symposium 2024)", length: "7:53", pub: "C3" },
-        { id: "8atIPbxrQCs", title: "Ultrasonic skiing", length: "Short", short: true }
+        { id: "2bmjkfAqmaQ", title: "Ultrasonically-Lubricated Catheters (Hamlyn Symposium 2024)", length: "7:53", pub: "C3" }
       ] },
     { name: "Crafting figures that speak science", group: "courses", text: "A course on designing scientific figures that carry one clear message: layout, colour, typography and the story a figure should tell.",
       videos: [
@@ -395,6 +434,10 @@ window.SITE = {
   /* ---------------- GALLERY ----------------
      kind: trips | heroes.  Put photos in assets/photos/<album-id>/ and list them.
      A photo is { src: "assets/photos/hsmr-2024/01.jpg", caption: "..." }   */
+  // Science heroes: photos with scientists who shaped how you think.
+  // Add one object per photo: { src: "assets/photos/heroes/name.jpg", name: "Prof. Full Name", note: "Where and when you met" }
+  heroes: [],
+
   albums: [
     { id: "sensors-2026", kind: "trips", title: "IEEE SENSORS 2026", place: "Rotterdam", year: 2026, photos: [
       { src: "assets/photos/li/sensors26-2.jpg", caption: 'Carol Derla presenting our 3D-printed electroadhesion paper' },
@@ -448,8 +491,8 @@ window.SITE = {
     { id: "wpi-2019", kind: "trips", title: "WPI robotics lab", place: "Worcester, MA", year: 2019, photos: [
       { src: "assets/photos/li/wpi-lab-1.jpg", caption: 'The lab at Worcester Polytechnic Institute' }
     ] },
-    { id: "people", kind: "heroes", title: "People of science", place: "Colleagues, mentors and science heroes met along the way", year: "", photos: [
-      { src: "assets/photos/li/stories-2.jpg", caption: 'A collection of moments with colleagues at conferences' }
+    { id: "colleagues", kind: "trips", title: "Moments with colleagues", place: "Conferences and labs", year: 2025, photos: [
+      { src: "assets/photos/li/stories-2.jpg", caption: "A collection of moments with colleagues at conferences" }
     ] }
   ]
 };

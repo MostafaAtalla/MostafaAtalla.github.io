@@ -192,15 +192,15 @@
 
     /* --- affiliation badges: flip to reveal the role --- */
     const AFF = [
-      ["TU", "TU Delft", "PhD 2020–2026 · Postdoc, BITE group"],
-      ["PR", "Philips Research", "Research intern, Cambridge MA, 2019 and 2020"],
-      ["WPI", "Worcester Polytechnic Institute", "MSc Robotics Engineering, Fulbright Scholar"],
-      ["F", "Fulbright", "Foreign Student Program, 2018"],
-      ["CU", "Cairo University", "BSc Mechanical Design and Production"],
-      ["SH", "University of Sheffield", "Tribology collaboration on catheter friction"],
-      ["MM", "Mijzan Mechanical", "Founder, engineering consultancy, 2025–"]
+      ["tudelft", "TU Delft", "PhD 2020–2026 · Postdoc, BITE group"],
+      ["philips", "Philips Research", "Research intern, Cambridge MA, 2019 and 2020"],
+      ["wpi", "Worcester Polytechnic Institute", "MSc Robotics Engineering, COMET Lab"],
+      ["fulbright", "Fulbright", "Fulbright Scholar, 2018–2020"],
+      ["ubiros", "UbiRos", "Product development intern, 2018–2019"],
+      ["advansys", "Advansys ESC", "Mechanical, then research & innovation engineer, 2016–2018"],
+      ["cairo-university", "Cairo University", "BSc Mechanical Design and Production, 2014"]
     ];
-    $("#badges").innerHTML = AFF.map(([m, n, r], i) => `<button class="badge" type="button" style="--i:${i}" aria-label="${esc(n)}: ${esc(r)}"><span class="b-in"><span class="b-front"><span class="mono-mark">${m}</span><span class="b-name">${esc(n)}</span></span><span class="b-back">${esc(r)}</span></span></button>`).join("");
+    $("#badges").innerHTML = AFF.map(([f, n, r], i) => `<button class="badge" type="button" style="--i:${i}" aria-label="${esc(n)}: ${esc(r)}"><span class="b-in"><span class="b-front"><img src="assets/img/logos/${f}.png" alt="${esc(n)}" loading="lazy"></span><span class="b-back"><b>${esc(n)}</b>${esc(r)}</span></span></button>`).join("");
     $("#badges").addEventListener("click", (e) => { const b = e.target.closest(".badge"); if (b) b.classList.toggle("flipped"); });
   }
 
@@ -221,40 +221,129 @@
     orchestraBlock();
   }
 
+  /* ================= CONTACT ================= */
+  function contact() {
+    const P = S.person;
+    $("#contact-cards").innerHTML = U.socialLinks(true);
+    $("#c-name").textContent = P.name; $("#c-role").textContent = `${P.role}, ${P.affiliation}`;
+    $("#c-loc").innerHTML = `${ICON.pin || ""} ${esc(P.location)}`;
+    $("#c-email").textContent = P.email;
+    $("#c-copy").addEventListener("click", () => copy(P.email, "Email copied"));
+  }
+
   /* ================= MISSION ================= */
   function mission() {
     const M = S.mission;
     vm();
-    $("#manifesto").innerHTML = M.statement;
-    $("#story").textContent = M.story;
-    $("#pillars").innerHTML = M.pillars.map((p) => `<div class="pillar"><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`).join("");
-    $("#initiatives").innerHTML = M.initiatives.map((i) => `<div class="initiative"><span class="y">${esc(i.when)}</span><div><h3>${esc(i.title)} ${sample(i)}</h3><p>${esc(i.text)}</p><div class="tags">${i.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}${i.url ? `<a class="tag-link" href="${esc(i.url)}" ${/^https?:/.test(i.url) ? 'target="_blank" rel="noopener"' : ""}>${/linkedin/.test(i.url) ? "Read the post ↗" : "Read the notes →"}</a>` : ""}</div></div></div>`).join("");
-    // Opportunity compass
-    let stage = "all";
-    const chips = $("#compass-chips");
-    chips.innerHTML = ["all", "MSc", "PhD", "Postdoc"].map((s) => `<button class="chip" data-s="${s}" aria-pressed="${s === "all"}">${s === "all" ? "Every stage" : s}</button>`).join("");
-    const render = () => {
-      $("#compass").innerHTML = M.opportunities.filter((o) => stage === "all" || o.stage.includes(stage)).map((o) => `<div class="opp"><div><h3>${esc(o.name)}</h3><p>${esc(o.text)}</p><div class="tags"><span class="tag brass">${esc(o.kind)}</span>${o.stage.map((s) => `<span class="tag">${s}</span>`).join("")}</div></div><a class="btn ghost" href="${esc(o.url)}" target="_blank" rel="noopener">Official page ↗</a></div>`).join("");
-    };
-    chips.addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (!b) return; stage = b.dataset.s; chips.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", c === b)); render(); });
-    render();
+    $("#juniors").innerHTML = M.juniors.map((j) => `<${j.url ? `a href="${esc(j.url)}" ${/^https?:/.test(j.url) ? 'target="_blank" rel="noopener"' : ""}` : "div"} class="jn">
+      <span class="jn-img">${j.img ? `<img src="${esc(j.img)}" alt="" loading="lazy">` : ""}</span>
+      <span class="jn-txt"><span class="jn-when">${esc(j.when)}</span><span class="jn-t">${esc(j.title)}</span><span class="jn-d">${esc(j.text)}</span>${j.url ? `<span class="jn-go">${/linkedin/.test(j.url) ? "Read the post ↗" : "Read more →"}</span>` : ""}</span></${j.url ? "a" : "div"}>`).join("");
+    $("#community-list").innerHTML = M.community.map((c) => `<${c.url ? `a href="${esc(c.url)}" target="_blank" rel="noopener"` : "div"} class="cm ${c.img ? "" : "no-img"}">
+      ${c.img ? `<span class="cm-img"><img src="${esc(c.img)}" alt="" loading="lazy"></span>` : ""}
+      <span class="cm-txt"><span class="cm-meta"><span class="cm-yr">${esc(c.when)}</span>${esc(c.where)}</span><span class="cm-t">${esc(c.title)}</span><span class="cm-role">${esc(c.role)}</span></span></${c.url ? "a" : "div"}>`).join("");
+    $("#doors-list").innerHTML = M.doors.map((d) => `<article class="dr">
+      <div class="dr-head">${d.logo ? `<span class="dr-logo"><img src="assets/img/logos/${d.logo}.png" alt=""></span>` : `<span class="dr-logo dr-key">🔑</span>`}<div><span class="dr-yr">${d.year}</span><h3>${esc(d.name)}</h3></div></div>
+      <p>${esc(d.enabled)}</p><a class="text-link" href="${esc(d.url)}" target="_blank" rel="noopener">Official page</a></article>`).join("");
   }
 
   /* ================= JOURNEY ================= */
   function journey() {
-    const route = $("#route");
-    route.innerHTML = S.stations.map((s, i) => `${i ? '<span class="leg" aria-hidden="true"></span>' : ""}<button class="station" data-city="${s.id}" aria-pressed="false"><span class="dot"></span><span class="city">${esc(s.city)}</span><span class="yrs">${esc(s.years)}</span></button>`).join("");
-    $("#timeline").innerHTML = S.timeline.map((t) => `<div class="tl-item" data-kind="${t.kind}" data-city="${t.city}"><span class="when">${esc(t.when)}</span><span class="rail"></span><div><h3>${esc(t.title)}</h3><p class="org">${esc(t.org)}</p>${t.text ? `<p>${esc(t.text)}</p>` : ""}</div></div>`).join("");
-    let active = null;
-    route.addEventListener("click", (e) => {
-      const b = e.target.closest(".station"); if (!b) return;
-      active = active === b.dataset.city ? null : b.dataset.city;
-      route.querySelectorAll(".station").forEach((s) => s.setAttribute("aria-pressed", s.dataset.city === active));
-      document.querySelectorAll(".tl-item").forEach((it) => it.classList.toggle("dim", !!active && it.dataset.city !== active));
+    const M = window.JOURNEY_MAP, C = S.chapters, MV = S.moves, reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $("#cv-link").href = S.person.cv;
+    const pin = (k) => M.pts[k];
+    const logo = (f, alt) => `<img src="assets/img/logos/${f}.png" alt="${esc(alt)}" loading="lazy">`;
+    // map
+    $("#jr-map").innerHTML = `<svg viewBox="0 0 ${M.W} ${M.H}" role="img" aria-label="Map: Cairo to Worcester, Massachusetts in 2018, then to Delft in 2020">
+      <defs><radialGradient id="sea" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="var(--map-sea-1)"/><stop offset="1" stop-color="var(--map-sea-2)"/></radialGradient></defs>
+      <rect width="${M.W}" height="${M.H}" fill="url(#sea)"/>
+      <path d="${M.grat}" class="grat"/>
+      <path d="${M.land}" class="land"/>
+      ${MV.map((m, i) => `<path d="${M.arcs[m.arc]}" class="arc-bg"/><path d="${M.arcs[m.arc]}" class="arc" id="arc-${i}"/>`).join("")}
+      ${C.map((c, i) => { const [x, y] = pin(c.pin); return `<g class="city" data-i="${i}" transform="translate(${x} ${y})" tabindex="0" role="button" aria-label="${esc(c.city)}">
+          <circle r="22" class="pulse"/><circle r="7" class="dot"/>
+          <g class="pin-logo" transform="translate(0 -46)"><circle r="24"/><image href="assets/img/logos/${c.logos[0][0]}.png" x="-17" y="-17" width="34" height="34" preserveAspectRatio="xMidYMid meet"/></g>
+          <text y="30" class="city-name">${esc(c.city.split(",")[0])}</text><text y="46" class="city-yrs">${esc(c.years)}</text></g>`; }).join("")}
+      <g id="plane" class="plane" opacity="0"><circle r="16" class="plane-halo"/><path d="M-11 0 L9 -2 L13 0 L9 2 Z M-2 -1 L-6 -9 L-3 -9 L4 -1 Z M-2 1 L-6 9 L-3 9 L4 1 Z M-10 -1 L-13 -5 L-11 -5 L-7 -1 Z M-10 1 L-13 5 L-11 5 L-7 1 Z"/></g>
+    </svg>
+    <div class="jr-move" id="jr-move" hidden></div>`;
+    // step buttons
+    const steps = $("#jr-steps");
+    steps.innerHTML = C.map((c, i) => `${i ? `<button class="jr-hop" data-move="${i - 1}" aria-label="Fly: ${esc(MV[i - 1].label)}"><span class="hop-yr">${MV[i - 1].year}</span><span class="hop-l">${esc(MV[i - 1].label)}</span><span class="hop-ico">✈</span></button>` : ""}
+      <button class="jr-step" role="tab" data-i="${i}" aria-selected="false"><span class="st-logos">${c.logos.slice(0, 3).map(([f, a]) => logo(f, a)).join("")}</span><span class="st-city">${esc(c.city.split(",")[0])}</span><span class="st-yrs">${esc(c.years)}</span></button>`).join("");
+    let cur = -1, timer = null, flying = false;
+    const plane = $("#plane");
+    const fly = (mi, then) => {
+      const path = document.getElementById("arc-" + mi), L = path.getTotalLength(), m = MV[mi], box = $("#jr-move");
+      box.hidden = false; box.innerHTML = `<img src="${esc(m.photo)}" alt=""><div><span class="mv-yr">${m.year} · ${esc(m.label)}</span><p>${esc(m.text)}</p></div>`;
+      box.classList.remove("show"); void box.offsetWidth; box.classList.add("show");
+      path.style.strokeDasharray = L; path.style.strokeDashoffset = L; path.classList.add("on");
+      if (reduce) { path.style.strokeDashoffset = 0; then(); return; }
+      flying = true; plane.setAttribute("opacity", "1");
+      const t0 = performance.now(), dur = 2600;
+      const step = (now) => {
+        const k = Math.min((now - t0) / dur, 1), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        const p = path.getPointAtLength(e * L), q = path.getPointAtLength(Math.min(L, e * L + 1));
+        const ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI, lift = Math.sin(Math.PI * e) * 0.6 + 1;
+        plane.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${ang}) scale(${lift})`);
+        path.style.strokeDashoffset = L * (1 - e);
+        if (k < 1) requestAnimationFrame(step); else { flying = false; plane.setAttribute("opacity", "0"); then(); }
+      };
+      requestAnimationFrame(step);
+    };
+    const show = (i, viaFlight) => {
+      if (flying || i === cur) return;
+      const go = () => {
+        cur = i;
+        steps.querySelectorAll(".jr-step").forEach((b) => b.setAttribute("aria-selected", +b.dataset.i === i));
+        document.querySelectorAll(".city").forEach((g) => g.classList.toggle("active", +g.dataset.i === i));
+        MV.forEach((m, mi) => document.getElementById("arc-" + mi).classList.toggle("on", mi < i));
+        MV.forEach((m, mi) => { if (mi < i) document.getElementById("arc-" + mi).style.strokeDashoffset = 0; });
+        renderChapter(i);
+      };
+      if (viaFlight && i === cur + 1) fly(cur, go); else { $("#jr-move").hidden = true; go(); }
+    };
+    steps.addEventListener("click", (e) => {
+      const h = e.target.closest(".jr-hop"); if (h) { const mi = +h.dataset.move; if (cur !== mi) { show(mi, false); setTimeout(() => show(mi + 1, true), 50); } else show(mi + 1, true); return; }
+      const b = e.target.closest(".jr-step"); if (b) show(+b.dataset.i, +b.dataset.i === cur + 1);
     });
+    $("#jr-map").addEventListener("click", (e) => { const g = e.target.closest(".city"); if (g) show(+g.dataset.i, +g.dataset.i === cur + 1); });
+
+    // chapter panel with a moving photo reel
+    function renderChapter(i) {
+      const c = C[i], roles = S.timeline.filter((t) => t.city === c.id);
+      clearInterval(timer);
+      $("#jr-chapter").innerHTML = `<div class="ch-head"><div><span class="kicker-s">Chapter ${i + 1} of ${C.length} · ${esc(c.years)}</span><h2 class="ch-title">${esc(c.title)}</h2><p class="ch-city">${esc(c.city)}</p></div>
+          <div class="ch-logos">${c.logos.map(([f, a]) => `<span class="ch-logo" title="${esc(a)}">${logo(f, a)}</span>`).join("")}</div></div>
+        <div class="ch-grid">
+          <div class="reel" id="reel">
+            <div class="reel-stage">${c.photos.map((p, k) => `<figure class="reel-slide ${k === 0 ? "on" : ""}"><img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="${k < 2 ? "eager" : "lazy"}"><figcaption>${esc(p.caption)}</figcaption></figure>`).join("")}
+              <button class="reel-nav prev" aria-label="Previous photo">${ICON.left}</button><button class="reel-nav next" aria-label="Next photo">${ICON.right}</button></div>
+            <div class="reel-strip">${c.photos.map((p, k) => `<button class="reel-th ${k === 0 ? "on" : ""}" data-k="${k}" aria-label="Photo ${k + 1}"><img src="${esc(p.src)}" alt="" loading="lazy"></button>`).join("")}</div>
+          </div>
+          <div class="ch-body"><p class="ch-text">${esc(c.text)}</p>
+            <ol class="ch-roles">${roles.map((t) => `<li class="k-${t.kind}"><span class="when">${esc(t.when)}</span><div><h3>${esc(t.title)}</h3><p class="org">${esc(t.org)}</p>${t.text ? `<p>${esc(t.text)}</p>` : ""}</div></li>`).join("")}</ol>
+            ${i < C.length - 1 ? `<button class="btn" id="next-move">Next move: ${esc(MV[i].label)} ✈</button>` : `<a class="btn ghost" href="publications.html">See the work →</a>`}
+          </div></div>`;
+      const slides = [...document.querySelectorAll(".reel-slide")], ths = [...document.querySelectorAll(".reel-th")];
+      let k = 0;
+      const set = (n) => { k = (n + slides.length) % slides.length; slides.forEach((s, j) => s.classList.toggle("on", j === k)); ths.forEach((t, j) => t.classList.toggle("on", j === k)); ths[k].scrollIntoView({ block: "nearest", inline: "nearest" }); };
+      const start = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => set(k + 1), 3800); };
+      $(".reel-strip").addEventListener("click", (e) => { const b = e.target.closest(".reel-th"); if (b) { set(+b.dataset.k); start(); } });
+      $(".reel .prev").addEventListener("click", () => { set(k - 1); start(); }); $(".reel .next").addEventListener("click", () => { set(k + 1); start(); });
+      $(".reel-stage").addEventListener("click", (e) => { if (e.target.closest("button")) return; lightbox({ title: c.title, id: c.id }, c.photos, k); });
+      $("#reel").addEventListener("mouseenter", () => clearInterval(timer)); $("#reel").addEventListener("mouseleave", start);
+      start();
+      $("#next-move")?.addEventListener("click", () => { $("#jr-map").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); setTimeout(() => show(i + 1, true), reduce ? 0 : 450); });
+    }
+    show(0, false);
+    // first visit: play both moves once when the map comes into view
+    if (!reduce && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((en) => { if (!en[0].isIntersecting) return; io.disconnect();
+        setTimeout(() => show(1, true), 700); setTimeout(() => show(2, true), 700 + 2600 + 2200); }, { threshold: 0.6 });
+      io.observe($("#jr-map"));
+    }
     $("#talks").innerHTML = S.talks.map((t) => `<li><span class="y">${t.year}</span><div>${esc(t.title)}<div class="sub">${esc(t.kind)} · ${esc(t.venue)}</div></div></li>`).join("");
     $("#service").innerHTML = S.service.map((t) => `<li><span class="y">—</span><div>${esc(t)}</div></li>`).join("");
-    $("#cv-link").href = S.person.cv;
   }
 
   /* ================= PUBLICATIONS ================= */
@@ -377,7 +466,7 @@
     const groups = [
       { id: "talks", label: "Science talks", sub: "Defense, conferences and papers", icon: "video", n: S.series.filter((s) => s.group === "talks").reduce((a, s) => a + s.videos.length, 0), unit: "videos" },
       { id: "courses", label: "Courses", sub: "Lectures and sessions", icon: "paper", n: S.series.filter((s) => s.group === "courses").reduce((a, s) => a + s.videos.length, 0), unit: "videos" },
-      { id: "gallery", label: "Gallery", sub: "Photos from the road", icon: "award", n: S.albums.reduce((a, x) => a + x.photos.length, 0), unit: "photos" }
+      { id: "gallery", label: "Gallery", sub: "Academic trips and science heroes", icon: "award", n: S.albums.reduce((a, x) => a + x.photos.length, 0), unit: "photos" }
     ];
     const covers = { talks: "https://i.ytimg.com/vi/VXnhmwvI3oM/hqdefault.jpg", courses: "https://i.ytimg.com/vi/yYFy0NK4XKE/hqdefault.jpg", gallery: (S.albums[0]?.photos[0] || {}).src };
     $("#switch-cards").innerHTML = groups.map((g) => `<a class="sw-card" href="#${g.id}" data-g="${g.id}"><span class="sw-img">${covers[g.id] ? `<img src="${esc(covers[g.id])}" alt="" loading="lazy">` : ""}</span><span class="sw-txt"><span class="sw-n">${g.n} ${g.unit}</span><span class="sw-l">${g.label}</span><span class="sw-s">${g.sub}</span></span></a>`).join("");
@@ -386,13 +475,23 @@
     bindYT($("#talks-series")); bindYT($("#courses-series"));
     const yt = S.person.links.youtube; if (yt) { const a = $("#yt-channel"); a.href = yt; a.hidden = false; }
 
-    // gallery
-    let kind = "all";
+    // gallery: two tabs, academic trips and science heroes
+    let tab = "trips", year = "all";
     const chips = $("#gal-chips"), grid = $("#albums"), view = $("#album-view");
     const years = [...new Set(S.albums.map((a) => a.year).filter(Boolean))].sort((a, b) => b - a);
-    chips.innerHTML = [["all", "All albums"], ...years.map((y) => [String(y), String(y)]), ["heroes", "People of science"]].map(([k, l], i) => `<button class="chip" data-k="${k}" aria-pressed="${i === 0}">${l}</button>`).join("");
+    const heroes = S.heroes || [];
+    chips.innerHTML = `<div class="gal-tabs" role="tablist"><button class="gal-tab" data-tab="trips" aria-selected="true">Academic trips <span class="count">${S.albums.length}</span></button><button class="gal-tab" data-tab="heroes" aria-selected="false">Science heroes <span class="count">${heroes.length}</span></button></div>
+      <div class="chips gal-years">${[["all", "All years"], ...years.map((y) => [String(y), String(y)])].map(([k, l], i) => `<button class="chip" data-y="${k}" aria-pressed="${i === 0}">${l}</button>`).join("")}</div>`;
     const renderGrid = () => {
-      grid.innerHTML = S.albums.filter((a) => kind === "all" || (kind === "heroes" ? a.kind === "heroes" : String(a.year) === kind)).map((a) => {
+      chips.querySelector(".gal-years").hidden = tab !== "trips";
+      if (tab === "heroes") {
+        grid.className = "heroes-grid";
+        grid.innerHTML = heroes.length ? heroes.map((h, i) => `<button class="hero-card" data-h="${i}"><span class="hero-img"><img src="${esc(h.src)}" alt="${esc(h.name)}" loading="lazy"></span><span class="hero-txt"><span class="hero-name">${esc(h.name)}</span>${h.note ? `<span class="hero-note">${esc(h.note)}</span>` : ""}</span></button>`).join("")
+          : `<div class="heroes-empty"><span class="he-frames"><span></span><span></span><span></span></span><h3>Photos with science heroes</h3><p>This space is reserved for photos with the scientists who shaped how I think. Add each photo to <span class="mono">assets/photos/heroes/</span> and list it under <span class="mono">heroes</span> in <span class="mono">assets/js/data.js</span> with the scientist's name and where you met.</p></div>`;
+        return;
+      }
+      grid.className = "grid c3 albums";
+      grid.innerHTML = S.albums.filter((a) => year === "all" || String(a.year) === year).map((a) => {
         const first = a.photos.find((p) => p.src);
         const stack = a.photos.slice(1, 3).map((p) => `<img class="stack" src="${esc(p.src)}" alt="" loading="lazy">`).join("");
         return `<a class="card album" href="#${a.id}"><div class="cover">${first ? `<img src="${esc(first.src)}" alt="" loading="lazy">` : coverSVG(a.id, { alt: "" })}${stack}<span class="count">${a.photos.length} photo${a.photos.length === 1 ? "" : "s"}</span></div><div class="body"><div class="meta"><span>${esc([a.place, a.year].filter(Boolean).join(" · "))}</span></div><h3>${esc(a.title)}</h3></div></a>`;
@@ -408,8 +507,12 @@
       $("#gallery").scrollIntoView();
       return true;
     };
-    chips.addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (!b) return; kind = b.dataset.k; chips.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", c === b)); renderGrid(); });
-    const route = () => { const h = location.hash.slice(1); if (!openAlbum(h)) { renderGrid(); if (["talks", "courses", "gallery"].includes(h)) document.getElementById(h)?.scrollIntoView(); } };
+    chips.addEventListener("click", (e) => {
+      const t = e.target.closest(".gal-tab"); if (t) { tab = t.dataset.tab; chips.querySelectorAll(".gal-tab").forEach((x) => x.setAttribute("aria-selected", x === t)); renderGrid(); return; }
+      const b = e.target.closest(".chip"); if (b) { year = b.dataset.y; chips.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", c === b)); renderGrid(); }
+    });
+    grid.addEventListener("click", (e) => { const h = e.target.closest(".hero-card"); if (h) lightbox({ title: "Science heroes", id: "heroes" }, heroes.map((x) => ({ src: x.src, caption: [x.name, x.note].filter(Boolean).join(" · ") })), +h.dataset.h); });
+    const route = () => { const h = location.hash.slice(1); if (h === "heroes") { tab = "heroes"; chips.querySelectorAll(".gal-tab").forEach((x) => x.setAttribute("aria-selected", x.dataset.tab === "heroes")); } if (!openAlbum(h)) { renderGrid(); if (["talks", "courses", "gallery", "heroes"].includes(h)) document.getElementById(h === "heroes" ? "gallery" : h)?.scrollIntoView(); } };
     window.addEventListener("hashchange", route);
     renderGrid(); route();
   }
@@ -474,5 +577,5 @@
       paint();
     }
 
-  ({ home, research, teaching, mission, journey, publications, perspectives, news, awards, post, studio }[page] || (() => {}))();
+  ({ home, research, teaching, mission, contact, journey, publications, perspectives, news, awards, post, studio }[page] || (() => {}))();
 })();

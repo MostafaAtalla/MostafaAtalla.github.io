@@ -65,9 +65,19 @@
     play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>',
     left: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 5-7 7 7 7"/></svg>',
     right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 5 7 7-7 7"/></svg>',
+    /* Brand icons: Font Awesome Free 6.5.2 (CC BY 4.0, fontawesome.com/license/free) */
+    linkedin: '<svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>',
+    youtube: '<svg viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>',
+    gscholar: '<svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M390.9 298.5c0 0 0 .1 .1 .1c9.2 19.4 14.4 41.1 14.4 64C405.3 445.1 338.5 512 256 512s-149.3-66.9-149.3-149.3c0-22.9 5.2-44.6 14.4-64h0c1.7-3.6 3.6-7.2 5.6-10.7c4.4-7.6 9.4-14.7 15-21.3c27.4-32.6 68.5-53.3 114.4-53.3c33.6 0 64.6 11.1 89.6 29.9c9.1 6.9 17.4 14.7 24.8 23.5c5.6 6.6 10.6 13.8 15 21.3c2 3.4 3.8 7 5.5 10.5zm26.4-18.8c-30.1-58.4-91-98.4-161.3-98.4s-131.2 40-161.3 98.4L0 202.7 256 0 512 202.7l-94.7 77.1z"/></svg>',
+    mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>',
+    video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.2v5.6l5-2.8z" fill="currentColor" stroke="none"/></svg>',
+    network: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.2v.1M12 17v-3.6c0-1.7 1.1-2.9 2.6-2.9S17 11.7 17 13.4V17M12 10.5V17"/></svg>',
+    doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+    scholar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg>',
     download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>',
     // Monogram: a baton crossing five staff lines
-    mark: '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor"><g stroke-width="1" opacity=".55"><path d="M4 12h32M4 17h32M4 22h32M4 27h32M4 32h32"/></g><path d="M9 34 31 6" stroke-width="2.2" stroke-linecap="round"/><circle cx="31" cy="6" r="2.4" fill="currentColor" stroke="none"/></svg>'
+    mark: '<svg viewBox="0 0 96 96" fill="none" aria-hidden="true"><ellipse cx="38" cy="56" rx="14" ry="10" transform="rotate(-20 38 56)" fill="currentColor"/><path d="M51 52V14c9 6 19 6 25 14" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 78c6-4.5 12 4.5 18 0s12-4.5 18 0 12 4.5 18 0 12-4.5 18 0" stroke="var(--film, #0F7C78)" stroke-width="5.5" stroke-linecap="round"/></svg>'
   };
 
   const staffSVG = '<svg class="staff" viewBox="0 0 520 120" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 20h520M0 40h520M0 60h520M0 80h520M0 100h520"/><path d="M0 60 C 80 10, 160 110, 240 60 S 400 10, 520 60" stroke-width="1.5" stroke="var(--m-light)" opacity=".7"/></svg>';
@@ -107,6 +117,7 @@
           ${NAV.map((n) => `<a href="${n.href}" ${n.id === page || (page === "post" && n.id === "perspectives") ? 'aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}
         </nav>
         <div class="tools">
+          <a class="contact-btn" href="contact.html" ${page === "contact" ? 'aria-current="page"' : ""}>${ICON.mail}<span>Contact</span></a>
           <button class="icon-btn" id="palette-btn" aria-label="Search the site (Ctrl+K)" title="Search (Ctrl+K)">${ICON.search}</button>
           <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode"></button>
           <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">${ICON.menu}</button>
@@ -127,28 +138,40 @@
     document.getElementById("palette-btn").addEventListener("click", openPalette);
   }
 
+  /* ---------- contact links (footer and contact page) ---------- */
+  function socialLinks(big) {
+    const L = S.person.links, items = [
+      { k: "email", href: "mailto:" + S.person.email, label: "Email", sub: S.person.email, icon: ICON.mail },
+      { k: "linkedin", href: L.linkedin, label: "LinkedIn", sub: "mostafa-atalla193", icon: ICON.linkedin, ext: true },
+      { k: "youtube", href: L.youtube, label: "YouTube", sub: "@mostafaaatalla", icon: ICON.youtube, ext: true },
+      { k: "scholar", href: L.scholar, label: "Google Scholar", sub: "Publications and citations", icon: ICON.gscholar, ext: true },
+      { k: "cv", href: S.person.cv, label: "CV", sub: "Download PDF", icon: ICON.doc, ext: true }
+    ].filter((x) => x.href);
+    return items.map((x) => big
+      ? `<a class="contact-card c-${x.k}" href="${esc(x.href)}" ${x.ext ? 'target="_blank" rel="noopener"' : ""}><span class="cc-ico">${x.icon}</span><span class="cc-txt"><span class="cc-l">${x.label}</span><span class="cc-s">${esc(x.sub)}</span></span><span class="cc-go">${x.ext ? "↗" : "→"}</span></a>`
+      : `<a class="soc c-${x.k}" href="${esc(x.href)}" ${x.ext ? 'target="_blank" rel="noopener"' : ""} aria-label="${x.label}" title="${x.label}">${x.icon}<span>${x.label}</span></a>`).join("");
+  }
+  window.UI.socialLinks = socialLinks;
+
   /* ---------- footer ---------- */
   const footer = document.getElementById("site-footer");
   if (footer) {
-    const L = S.person.links;
-    const linkNames = { linkedin: "LinkedIn", scholar: "Google Scholar", orcid: "ORCID", github: "GitHub", youtube: "YouTube", researchgate: "ResearchGate" };
-    const elsewhere = Object.entries(L).filter(([, v]) => v).map(([k, v]) => `<li><a href="${esc(v)}" target="_blank" rel="noopener">${linkNames[k] || k}</a></li>`).join("");
     footer.className = "site-footer";
     footer.innerHTML = `
       <div class="wrap">
-        <div class="footer-grid">
-          <div>
+        <div class="footer-top">
+          <div class="footer-id">
             <p class="footer-quote">“${esc(S.quote.text)}.”</p>
             <p class="small muted" style="margin-top:12px">${esc(S.person.name)} · ${esc(S.person.role)}, ${esc(S.person.affiliation)}</p>
           </div>
-          <div><h4>Explore</h4><ul>${NAV.map((n) => `<li><a href="${n.href}">${n.label}</a></li>`).join("")}</ul></div>
-          <div><h4>Contact</h4><ul>
-            <li class="copy-line"><span>${esc(S.person.email)}</span><button type="button" data-copy="${esc(S.person.email)}">Copy</button></li>
-            <li>${esc(S.person.location)}</li>
-            <li><a href="${esc(S.person.cv)}" target="_blank" rel="noopener">Download CV (PDF)</a></li>
-            ${elsewhere}
-          </ul></div>
+          <div class="footer-contact">
+            <h4>Get in touch</h4>
+            <div class="social">${socialLinks()}</div>
+            <p class="copy-line"><span>${esc(S.person.email)}</span><button type="button" data-copy="${esc(S.person.email)}">Copy</button></p>
+            <p class="small muted">${ICON.pin.replace("<svg", '<svg class="inl"')} ${esc(S.person.location)}</p>
+          </div>
         </div>
+        <nav class="footer-nav" aria-label="Explore"><h4>Explore</h4><ul>${[{ href: "index.html", label: "Home" }, ...NAV, { href: "contact.html", label: "Contact" }].map((n) => `<li><a href="${n.href}">${esc(n.label)}</a></li>`).join("")}</ul></nav>
         <div class="footer-base"><span>© ${new Date().getFullYear()} ${esc(S.person.name)}</span><span>Press <span class="kbd-hint">Ctrl K</span> to search the site</span></div>
       </div>`;
     footer.querySelector("[data-copy]").addEventListener("click", (e) => copy(e.currentTarget.dataset.copy, "Email copied"));
@@ -163,8 +186,9 @@
     S.albums.forEach((a) => items.push({ t: a.title, k: "album", href: `studio.html#${a.id}`, s: a.place }));
     S.series.forEach((sr) => sr.videos.forEach((v) => items.push({ t: v.title, k: "video", href: sr.group === "courses" ? "studio.html#courses" : "studio.html#talks", s: sr.name })));
     items.push({ t: "Friction lab", k: "interactive", href: "research.html#lab", s: "stick slip ultrasonic lubrication toy" });
-    items.push({ t: "Opportunity compass", k: "interactive", href: "mission.html#compass", s: "fellowships grants junior researchers" });
+    items.push({ t: "Doors that opened for me", k: "grants", href: "mission.html#doors", s: "fulbright grants scholarships junior researchers" });
     items.push({ t: "Download CV", k: "file", href: S.person.cv, s: "pdf resume" });
+    items.push({ t: "Contact", k: "Page", href: "contact.html", s: "email linkedin youtube get in touch" });
     return items;
   }
 

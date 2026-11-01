@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mostafa A. Atalla · The Art of Science</title>
+<meta name="description" content="Mostafa A. Atalla designs medical instruments that use friction to glide, grip and propel through biological lumens. Research, publications, writing, videos and photos.">
+<meta name="author" content="Mostafa A. Atalla">
+<meta property="og:title" content="Mostafa A. Atalla · The Art of Science">
+<meta property="og:description" content="Mostafa A. Atalla designs medical instruments that use friction to glide, grip and propel through biological lumens. Research, publications, writing, videos and photos.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F1F0EB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1016" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-page="home">
+<a class="skip" href="#main">Skip to content</a>
+<header id="site-header"></header>
+<main id="main">
+<section class="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">The Art of Science</span>
+    <p class="hero-quote">Science is the <em>art</em> of discovery <span class="soft">and scientists are the</span> <em>maestros</em> <span class="soft">that orchestrate the art of science.</span></p>
+    <div class="hero-attrib"><span class="line"></span><span>Mostafa A. Atalla · PhD defense, TU Delft</span></div>
+    <div class="hero-cta">
+      <a class="btn" href="#overture">Watch the clip</a>
+      <a class="btn ghost" href="research.html">Explore the research</a>
+      <button class="btn ghost" id="sound-btn" type="button" aria-pressed="false">Sound off</button>
+    </div>
+  </div>
+  <span class="baton-hint">Move across the staff to conduct · click to pluck a line</span>
+</section>
+
+<section class="block" id="overture"><div class="wrap">
+  <div class="overture">
+    <div>
+      <span class="eyebrow">Overture</span>
+      <div class="video-frame" id="defense" style="margin-top:16px"></div>
+      <div class="video-caption" id="defense-cap"></div>
+    </div>
+    <div class="bio">
+      <span class="eyebrow">About</span>
+      <h1 class="display" style="font-size:var(--step-3);margin:14px 0 18px">Friction, engineered to function.</h1>
+      <div id="bio" class="prose"></div>
+      <div class="hero-cta" style="margin-top:22px">
+        <a class="btn ghost" href="assets/docs/Atalla_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn ghost" href="journey.html">The journey</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="block-head"><div><span class="eyebrow">At a glance</span><h2>The score so far</h2></div></div>
+  <div class="glance" id="glance"></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="block-head"><div><span class="eyebrow">Programme</span><h2>Seven movements</h2></div><span class="small muted">Press <span class="kbd-hint">Ctrl K</span> to jump anywhere</span></div>
+  <div class="movements" id="movements"></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="block-head"><div><span class="eyebrow">Writing</span><h2>Latest pieces</h2></div><a class="link-arrow" href="writing.html">All writing</a></div>
+  <div id="home-writing"></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="block-head"><div><span class="eyebrow">Studio</span><h2>Figures that speak science</h2></div><a class="link-arrow" href="studio.html">All videos</a></div>
+  <div class="grid c3" id="home-studio"></div>
+</div></section>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="assets/js/hero.js"></script>
+</body>
+</html>

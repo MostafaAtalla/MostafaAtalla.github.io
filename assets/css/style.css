@@ -1390,3 +1390,49 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 .tm-block .sec-lead { margin-top: 10px; font-size: 1.08rem; }
 .tm-block .practices { margin-top: 18px; }
 .tm-block + .tm-block { padding-top: 36px; border-top: 1px solid var(--rule); }
+
+/* ---------- RESEARCH LINES (two pillars, one cycle) ---------- */
+.rl { display: grid; grid-template-columns: minmax(0,1fr) 170px minmax(0,1fr); gap: 0; align-items: stretch; margin-top: 28px; }
+.pillar { background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 12px; border-top: 3px solid var(--acc-teal); }
+.pillar-fundamental { border-top-color: var(--acc-coral); }
+.pillar-k { font: 600 .74rem/1 var(--mono, monospace); letter-spacing: .14em; text-transform: uppercase; color: var(--acc-teal); }
+.pillar-fundamental .pillar-k { color: var(--acc-coral); }
+.pillar h3 { font: 500 1.45rem/1.15 var(--display); }
+.pillar > p { color: var(--ink-2); font-size: .95rem; }
+.pg { border-top: 1px solid var(--rule); padding-top: 12px; }
+.pg-l { display: block; font: 600 .86rem/1.3 var(--body); margin-bottom: 6px; }
+.pg ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 5px; }
+.pg li { font-size: .9rem; color: var(--ink-2); padding-left: 14px; position: relative; }
+.pg li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 1px; background: currentColor; }
+.rl-cycle { display: flex; flex-direction: column; justify-content: center; gap: 46px; padding: 0 10px; }
+.rl-arrow { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: .8rem; line-height: 1.3; color: var(--ink-2); }
+.rl-arrow svg { width: 100%; height: 16px; }
+.rl-arrow.to-f svg { color: var(--acc-coral); }
+.rl-arrow.to-a svg { color: var(--acc-teal); }
+@media (max-width: 860px) {
+  .rl { grid-template-columns: 1fr; }
+  .rl-cycle { flex-direction: row; justify-content: center; gap: 28px; padding: 18px 0; }
+  .rl-arrow { flex: 0 1 150px; }
+  .rl-arrow svg { width: 40px; height: 40px; }
+  .rl-arrow.to-f svg { transform: rotate(90deg); }
+  .rl-arrow.to-a svg { transform: rotate(90deg); }
+}
+
+/* research statement pull quote */
+.rs-quote { margin: 26px 0 4px; padding: 4px 0 4px 20px; border-left: 3px solid var(--m); max-width: 52ch; }
+.rs-quote p { font: italic 500 clamp(1.2rem, 2vw, 1.5rem)/1.4 var(--display); color: var(--ink); }
+
+/* home: research philosophy block */
+.rs-philo { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--rule); display: grid; gap: 6px; }
+.rs-philo .sec-body { max-width: 78ch; }
+.rs-philo .text-link { justify-self: start; margin-top: 14px; }
+.rl.compact { margin-top: 22px; }
+.rl.compact .pillar { padding: 20px 22px; gap: 8px; }
+.rl.compact .pillar h3 { font-size: 1.25rem; }
+.pg-more { font-size: .84rem; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: 10px; }
+
+/* affiliation badges: even rows (8 = 1×8, 2×4 or 4×2) */
+.badges { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px; }
+.badges .badge { width: 100%; height: auto; aspect-ratio: 1; max-width: 150px; }
+@media (max-width: 1100px) { .badges { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .badges { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

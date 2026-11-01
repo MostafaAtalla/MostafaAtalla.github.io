@@ -1466,3 +1466,15 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 .practice { align-content: start; }
 .practice:nth-child(5) { --c: var(--acc-blue); } .practice:nth-child(6) { --c: var(--acc-teal); }
 .tm-block .sec-lead { max-width: 92ch; }
+
+
+/* YouTube frames: keep the full 16:9 picture on every device (incl. older iPad Safari) */
+.video-frame > .yt { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+.yt img { display: block; }
+.yt-playing { cursor: auto; }
+.yt-playing iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+@supports not (aspect-ratio: 16 / 9) {
+  .video-frame, .yt { height: 0; padding-top: 56.25%; }
+  .video-frame > .yt { padding-top: 0; height: 100%; }
+  .yt img, .yt svg.bg { position: absolute; inset: 0; }
+}

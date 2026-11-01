@@ -17,7 +17,10 @@
     root.querySelectorAll(".yt[data-id]").forEach((b) => b.addEventListener("click", () => {
       const id = b.dataset.id;
       if (!id) { U.toast("Add the YouTube ID for this video in assets/js/data.js"); return; }
-      b.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}?autoplay=1&rel=0" title="${esc(b.dataset.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      // swap the button for a plain frame: an iframe inside a <button> misbehaves on iPad Safari
+      const f = document.createElement("div"); f.className = "yt yt-playing";
+      f.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}?autoplay=1&rel=0&playsinline=1" title="${esc(b.dataset.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      b.replaceWith(f);
     }));
   }
   function videoCard(v) {
@@ -131,7 +134,7 @@
     const d = S.defense;
     const vf = $("#defense");
     if (d.youtubeId && String(d.youtubeId).trim()) {
-      vf.innerHTML = `<button class="yt" data-id="${esc(String(d.youtubeId).trim())}" data-title="PhD defense" aria-label="Play the full defense" style="height:100%">${ytThumb({ id: String(d.youtubeId).trim() })}<span class="play-disc">${ICON.play}</span></button>`;
+      vf.innerHTML = `<button class="yt" data-id="${esc(String(d.youtubeId).trim())}" data-title="PhD defense" aria-label="Play the full defense">${ytThumb({ id: String(d.youtubeId).trim() })}<span class="play-disc">${ICON.play}</span></button>`;
       bindYT(vf);
     }
     $("#defense-cap").innerHTML = `<span>${esc(d.caption)}</span>`;

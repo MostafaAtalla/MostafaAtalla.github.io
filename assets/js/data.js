@@ -34,6 +34,16 @@ window.SITE = {
   // Defense clip. Use EITHER a YouTube video ID (recommended for long clips)
   // OR an mp4 in assets/video/ (keep it under ~50 MB for GitHub).
   defense: {
+    // Background of the home page: a short clip of you saying the quote.
+    // Muted, looping, full width. Option 1 (best): an mp4 in assets/video/.
+    heroVideo: "assets/video/hero-loop.mp4",
+    heroPoster: "",          // optional still image shown while the video loads
+    // Option 2: a YouTube video. Clear heroVideo above, then fill these in.
+    heroYoutubeId: "",
+    heroStart: 0,            // seconds where the quote starts
+    heroEnd: 0,              // seconds where it ends (0 = end of video)
+
+    // The full defense clip in the section below the hero (with sound and controls).
     youtubeId: "",
     mp4: "assets/video/defense-clip.mp4",
     poster: "",

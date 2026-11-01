@@ -35,9 +35,9 @@
   }
 
   const glyph = {
-    Glide: '<svg class="glyph" viewBox="0 0 240 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M10 50h220" stroke-width="1.4"/><path d="M10 44c6-3 12 3 18 0s12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0" stroke="var(--tide)" stroke-width="1.2"/><rect x="70" y="18" width="90" height="22" rx="4" stroke-width="1.4"/><path d="M168 29h40m-8-6 8 6-8 6" stroke="var(--brass)" stroke-width="1.4"/></svg>',
-    Grip: '<svg class="glyph" viewBox="0 0 240 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M10 50h220" stroke-width="1.4"/><rect x="70" y="20" width="90" height="26" rx="4" stroke-width="1.4"/><path d="M76 46v4M86 46v4M96 46v4M106 46v4M116 46v4M126 46v4M136 46v4M146 46v4M156 46v4" stroke="var(--brass)" stroke-width="1.6"/><path d="M40 33h22M178 33h22" stroke-width="1.2" stroke-dasharray="3 3"/></svg>',
-    Propel: '<svg class="glyph" viewBox="0 0 240 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M10 50h220" stroke-width="1.4"/><rect x="30" y="26" width="40" height="20" rx="4" stroke-width="1.2" opacity=".35"/><rect x="90" y="26" width="40" height="20" rx="4" stroke-width="1.2" opacity=".6"/><rect x="150" y="26" width="40" height="20" rx="4" stroke-width="1.6"/><path d="M60 18c20-10 40-10 60 0m0 0c20-10 40-10 60 0" stroke="var(--brass)" stroke-width="1.3"/></svg>'
+    Glide: '<svg class="glyph" viewBox="0 0 240 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M10 50h220" stroke-width="1.4"/><path d="M10 44c6-3 12 3 18 0s12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0" stroke="var(--tide)" stroke-width="1.2"/><rect x="70" y="18" width="90" height="22" rx="4" stroke-width="1.4"/><path d="M168 29h40m-8-6 8 6-8 6" stroke="var(--m)" stroke-width="1.4"/></svg>',
+    Grip: '<svg class="glyph" viewBox="0 0 240 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M10 50h220" stroke-width="1.4"/><rect x="70" y="20" width="90" height="26" rx="4" stroke-width="1.4"/><path d="M76 46v4M86 46v4M96 46v4M106 46v4M116 46v4M126 46v4M136 46v4M146 46v4M156 46v4" stroke="var(--m)" stroke-width="1.6"/><path d="M40 33h22M178 33h22" stroke-width="1.2" stroke-dasharray="3 3"/></svg>',
+    Propel: '<svg class="glyph" viewBox="0 0 240 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M10 50h220" stroke-width="1.4"/><rect x="30" y="26" width="40" height="20" rx="4" stroke-width="1.2" opacity=".35"/><rect x="90" y="26" width="40" height="20" rx="4" stroke-width="1.2" opacity=".6"/><rect x="150" y="26" width="40" height="20" rx="4" stroke-width="1.6"/><path d="M60 18c20-10 40-10 60 0m0 0c20-10 40-10 60 0" stroke="var(--m)" stroke-width="1.3"/></svg>'
   };
 
   /* ================= HOME ================= */
@@ -58,13 +58,13 @@
 
     const sup = S.mission.supervision.length;
     const stats = [
-      { n: S.publications.filter((p) => p.type === "journal" || p.type === "conference").length, l: "journal and conference papers", href: "publications.html" },
-      { n: S.publications.filter((p) => p.type === "patent").length, l: "granted patents", href: "publications.html#patent" },
-      { n: S.awards.filter((a) => /best|maurice/i.test(a.title)).length, l: "paper and presentation awards", href: "journey.html#awards" },
-      { n: sup, l: "MSc theses supervised", href: "mission.html#orchestra" },
-      { n: 6, l: "workshops organised", href: "mission.html#initiatives" }
+      { n: S.publications.filter((p) => p.type === "journal" || p.type === "conference").length, l: "journal and conference papers", href: "publications.html", c: "publications" },
+      { n: S.publications.filter((p) => p.type === "patent").length, l: "granted patents", href: "publications.html#patent", c: "research" },
+      { n: S.awards.filter((a) => /best|maurice/i.test(a.title)).length, l: "paper and presentation awards", href: "journey.html#awards", c: "journey" },
+      { n: sup, l: "MSc theses supervised", href: "mission.html#orchestra", c: "mission" },
+      { n: 6, l: "workshops organised", href: "mission.html#initiatives", c: "studio" }
     ];
-    $("#glance").innerHTML = stats.map((s) => `<a href="${s.href}"><span class="n">${s.n}</span><span class="l">${esc(s.l)}</span></a>`).join("");
+    $("#glance").innerHTML = stats.map((s) => `<a href="${s.href}" style="--mc: var(--c-${s.c})"><span class="n">${s.n}</span><span class="l">${esc(s.l)}</span></a>`).join("");
 
     const blurbs = {
       research: "Friction as a design variable, and a lab where you can feel stick-slip turn into glide.",
@@ -75,7 +75,7 @@
       studio: "YouTube sessions on figures that speak science, talks and robots in motion.",
       gallery: "Academic trips and photos with science heroes."
     };
-    $("#movements").innerHTML = U.NAV.slice(1).map((n, i) => `<a class="movement" href="${n.href}"><span class="roman">${U.ROMAN[i + 1]}.</span><h3>${n.label}</h3><p>${esc(blurbs[n.id])}</p></a>`).join("");
+    $("#movements").innerHTML = U.NAV.slice(1).map((n, i) => `<a class="movement" href="${n.href}" style="--mc: var(--c-${n.id})"><span class="roman">${U.ROMAN[i + 1]}.</span><h3>${n.label}</h3><p>${esc(blurbs[n.id])}</p></a>`).join("");
 
     $("#home-writing").innerHTML = S.posts.slice().sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map(postRow).join("");
     $("#home-studio").innerHTML = S.series[0].videos.slice(0, 3).map(videoCard).join("");
@@ -86,7 +86,7 @@
   function research() {
     $("#themes").innerHTML = S.themes.map((t) => `<div class="theme">
       <span class="verb">${esc(t.verb)}</span>${glyph[t.verb] || ""}<h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>
-      <ul>${t.pubs.map((id) => pubById[id]).filter(Boolean).map((p) => `<li><a href="publications.html#${p.id}"><span class="mono" style="color:var(--brass)">${p.id}</span> ${esc(p.title)}</a></li>`).join("")}</ul></div>`).join("");
+      <ul>${t.pubs.map((id) => pubById[id]).filter(Boolean).map((p) => `<li><a href="publications.html#${p.id}"><span class="mono" style="color:var(--m)">${p.id}</span> ${esc(p.title)}</a></li>`).join("")}</ul></div>`).join("");
   }
 
   /* ================= PUBLICATIONS ================= */

@@ -39,6 +39,24 @@ python3 -m http.server 8000
 
 then open http://localhost:8000.
 
+## The home page video
+
+The quote plays muted and looping behind the hero text. Visitors press **Hear the quote** to restart it with sound.
+
+1. Cut the 10–20 s where you say the quote and compress it. With [ffmpeg](https://ffmpeg.org), replacing the times with yours:
+
+   ```
+   ffmpeg -ss 00:41:05 -to 00:41:20 -i defense.mp4 -vf "scale=1920:-2" -c:v libx264 -preset veryfast -crf 26 -c:a aac -b:a 96k -movflags +faststart hero-loop.mp4
+   ```
+
+   Aim for under 10 MB so the page loads quickly. HandBrake or any video editor works too: export H.264 MP4 at 1080p.
+2. Upload it to `assets/video/` on GitHub as `hero-loop.mp4`.
+3. Optional: export one frame as `assets/video/hero-poster.jpg` and set `defense.heroPoster` in `data.js`, so a still shows while the video loads.
+
+The left side of the frame sits under the text and is darkened. If you can choose the framing, keep yourself on the right half.
+
+Alternatively, use a YouTube video: clear `heroVideo`, then set `heroYoutubeId`, `heroStart` and `heroEnd` in `data.js`.
+
 ## Updating content
 
 Everything is in `assets/js/data.js`. Items with `placeholder: true` show a dashed **Sample** badge until you replace them and delete the flag.

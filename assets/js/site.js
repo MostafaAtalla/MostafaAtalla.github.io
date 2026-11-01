@@ -69,7 +69,7 @@
     mark: '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor"><g stroke-width="1" opacity=".55"><path d="M4 12h32M4 17h32M4 22h32M4 27h32M4 32h32"/></g><path d="M9 34 31 6" stroke-width="2.2" stroke-linecap="round"/><circle cx="31" cy="6" r="2.4" fill="currentColor" stroke="none"/></svg>'
   };
 
-  const staffSVG = '<svg class="staff" viewBox="0 0 520 120" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 20h520M0 40h520M0 60h520M0 80h520M0 100h520"/><path d="M0 60 C 80 10, 160 110, 240 60 S 400 10, 520 60" stroke-width="1.5" stroke="var(--brass)" opacity=".7"/></svg>';
+  const staffSVG = '<svg class="staff" viewBox="0 0 520 120" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 20h520M0 40h520M0 60h520M0 80h520M0 100h520"/><path d="M0 60 C 80 10, 160 110, 240 60 S 400 10, 520 60" stroke-width="1.5" stroke="var(--m-light)" opacity=".7"/></svg>';
 
   function toast(msg) {
     const t = document.createElement("div");

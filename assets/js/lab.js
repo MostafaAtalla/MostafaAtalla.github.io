@@ -16,9 +16,9 @@
   const TRACE_T = 10;
 
   function readColors() {
-    const cs = getComputedStyle(document.documentElement);
+    const cs = getComputedStyle(document.body);
     const v = (n) => cs.getPropertyValue(n).trim();
-    colors = { ink: v("--ink"), ink2: v("--ink-2"), ink3: v("--ink-3"), rule: v("--rule"), brass: v("--brass"), tide: v("--tide"), card: v("--card"), paper2: v("--paper-2") };
+    colors = { ink: v("--ink"), ink2: v("--ink-2"), ink3: v("--ink-3"), rule: v("--rule"), brass: v("--m"), tide: v("--tide"), card: v("--card"), paper2: v("--paper-2") };
   }
   function eff() {
     const a = ultrasonic ? amp : 0;

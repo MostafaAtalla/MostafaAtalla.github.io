@@ -5,7 +5,7 @@
 
   const NAV = [
     { id: "research", href: "research.html", label: "Research", desc: "Statement, themes, friction lab" },
-    { id: "teaching", href: "teaching.html", label: "Teaching & Mentoring", desc: "Philosophy, courses, supervision" },
+    { id: "teaching", href: "teaching.html", label: "Mentoring & Teaching", desc: "Philosophy, supervision, courses" },
     { id: "mission", href: "mission.html", label: "Vision & Mission", desc: "Vision, mission, initiatives for junior researchers" },
     { id: "journey", href: "journey.html", label: "Journey", desc: "Timeline, talks, service, CV" },
     { id: "publications", href: "publications.html", label: "Publications", desc: "Papers, patents, dissertation" },

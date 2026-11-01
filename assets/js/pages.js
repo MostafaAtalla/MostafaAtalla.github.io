@@ -80,8 +80,9 @@
 
   function statement() {
     const R = S.researchStatement;
-    if ($("#rs-title")) { $("#rs-title").textContent = R.title; $("#rs-lead").textContent = R.lead; const body = [].concat(R.body); $("#rs-body").textContent = body[0];
-      $("#rs-body").insertAdjacentHTML("afterend", body.slice(1).map((t) => `<p class="sec-body">${esc(t)}</p>`).join("") + (R.quote ? `<blockquote class="rs-quote"><p>${esc(R.quote)}</p></blockquote>` : "")); }
+    if ($("#rs-title")) { $("#rs-title").textContent = R.title; $("#rs-lead").textContent = R.lead; const body = [].concat(R.body), q = R.quote ? `<blockquote class="rs-quote"><p>${esc(R.quote)}</p></blockquote>` : "";
+      if ($("#rs-more")) $("#rs-more").innerHTML = `<div class="rs-paras">${body.map((t) => `<p class="sec-body">${esc(t)}</p>`).join("")}</div>${q}`;
+      else if ($("#rs-body")) { $("#rs-body").textContent = body[0]; $("#rs-body").insertAdjacentHTML("afterend", body.slice(1).map((t) => `<p class="sec-body">${esc(t)}</p>`).join("") + q); } }
     if ($("#rs-principles")) $("#rs-principles").innerHTML = R.principles.map((p) => `<li><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join("");
   }
   function teachingBits() {

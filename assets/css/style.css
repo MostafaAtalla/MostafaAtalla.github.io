@@ -1436,3 +1436,33 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 .badges .badge { width: 100%; height: auto; aspect-ratio: 1; max-width: 150px; }
 @media (max-width: 1100px) { .badges { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .badges { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- width review: use the full content width on desktop ---------- */
+.sec-lead { max-width: 76ch; }
+/* research statement: two body paragraphs side by side, quote below */
+.rs-more { margin-top: 34px; }
+.rs-paras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px clamp(32px, 5vw, 72px); }
+.rs-paras .sec-body { margin-top: 0; max-width: none; }
+.rs-more .rs-quote { margin: 36px auto 0; max-width: 40ch; text-align: center; border-left: 0; padding: 22px 0 0; border-top: 2px solid var(--m); }
+@media (max-width: 860px) { .rs-paras { grid-template-columns: 1fr; } }
+/* philosophy block (home + research page) */
+.rs-philo .sec-body, #lines .sec-lead { max-width: 80ch; }
+/* home teaching: blocks use the full width, courses panel becomes a band below */
+.home-teaching .teaching-grid { grid-template-columns: 1fr; }
+.home-teaching .tm-block + .tm-block { padding-top: 40px; }
+#ts-practices { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+#tp-practices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1000px) { #ts-practices, #tp-practices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { #ts-practices, #tp-practices { grid-template-columns: 1fr; } }
+.home-teaching .teach-panel { grid-template-columns: minmax(0, 260px) minmax(0, 1fr); column-gap: 48px; align-items: start; }
+.home-teaching .teach-panel .big-stat { grid-row: 1 / span 3; padding-bottom: 0; border-bottom: 0; padding-right: 40px; border-right: 1px solid #23395A; align-self: stretch; }
+.home-teaching .teach-panel ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; }
+.home-teaching .teach-panel .text-link { justify-self: start; }
+@media (max-width: 760px) {
+  .home-teaching .teach-panel { grid-template-columns: 1fr; }
+  .home-teaching .teach-panel .big-stat { grid-row: auto; border-right: 0; padding-right: 0; border-bottom: 1px solid #23395A; padding-bottom: 18px; }
+  .home-teaching .teach-panel ul { grid-template-columns: 1fr; }
+}
+.practice { align-content: start; }
+.practice:nth-child(5) { --c: var(--acc-blue); } .practice:nth-child(6) { --c: var(--acc-teal); }
+.tm-block .sec-lead { max-width: 92ch; }

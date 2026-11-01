@@ -14,6 +14,22 @@
     { id: "awards", href: "awards.html", label: "Awards", desc: "Awards, grants, scholarships" },
     { id: "news", href: "news.html", label: "News", desc: "Papers, talks, workshops, press" }
   ];
+  /* ---------- visitor statistics (GoatCounter, cookieless) ---------- */
+  const GC = S.analytics && S.analytics.goatcounter;
+  if (GC && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+    const gc = document.createElement("script");
+    gc.async = true; gc.src = "https://gc.zgo.at/count.js";
+    gc.dataset.goatcounter = "https://" + GC + ".goatcounter.com/count";
+    document.head.appendChild(gc);
+    // also count CV downloads and clicks to outside sites (LinkedIn, Scholar, papers…)
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href]"); if (!a || !window.goatcounter || !window.goatcounter.count) return;
+      const url = new URL(a.href, location.href), file = /\.(pdf|zip)$/i.test(url.pathname);
+      if (url.host === location.host && !file) return;
+      window.goatcounter.count({ path: file ? "download: " + url.pathname : "out: " + url.host + url.pathname, title: (a.textContent || "").trim().slice(0, 80), event: true });
+    });
+  }
+
   const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
 
   /* ---------- helpers ---------- */

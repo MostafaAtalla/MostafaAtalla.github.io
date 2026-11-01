@@ -5,6 +5,11 @@
    ===================================================================== */
 
 window.SITE = {
+  /* Visitor statistics (GoatCounter: free, no cookies, no consent banner needed).
+     Sign up at https://www.goatcounter.com, then put your site code here,
+     e.g. "mostafaatalla" for mostafaatalla.goatcounter.com. Leave empty to switch off. */
+  analytics: { goatcounter: "mostafaatalla" },
+
 
   person: {
     name: "Mostafa A. Atalla, PhD",

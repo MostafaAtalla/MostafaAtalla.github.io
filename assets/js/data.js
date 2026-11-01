@@ -60,23 +60,48 @@ window.SITE = {
   },
 
   bio: [
-    "I design medical instruments that treat friction as a design variable rather than a loss to be minimised. Endoluminal instruments move through biological lumens by contact, so the friction at that contact decides whether an instrument advances, holds position or injures tissue.",
-    "My PhD at TU Delft showed that ultrasonic vibration can lower the friction of a catheter on demand through a squeeze film, and that coordinating friction across several contacts is enough to make a capsule robot for colonoscopy propel itself. After a postdoc at the University of Twente on mechanically intelligent soft robots for colonoscopy, I am now a postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft, where I continue this work toward endoluminal instruments that are safe by design."
+    "I build physical intelligence into machines that interact with the world through contact, so that their mechanics keep that interaction safe and functional. Friction is my main instrument: modulated, switched and coordinated across contacts, it decides whether a machine advances, holds or harms what it touches. Medical instruments in biological lumens are the most demanding application, and the same principles extend to robotic locomotion and manipulation.",
+    "My PhD at TU Delft showed that ultrasonic vibration can lower the friction of a catheter on demand through a squeeze film, and that coordinating friction across several contacts is enough to make a capsule robot for colonoscopy propel itself. After a postdoc at the University of Twente on mechanically intelligent soft robots for colonoscopy, I am now a postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft, where I continue this work toward physically intelligent machines that are safe by design."
   ],
   now: "Currently: postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft.",
 
   /* ---------------- HOME PAGE STATEMENTS ----------------
      Drafts written from your CV. Rewrite them in your own words.  */
-  researchInterests: ["Medical and surgical robotics", "Soft and continuum robots", "Mechanically intelligent design", "Physical interaction", "Friction modulation and tribology", "Safe, functional devices for minimally invasive interventions"],
+  researchInterests: ["Physical intelligence", "Safe physical interaction", "Friction and contact mechanics", "Medical and surgical robotics", "Robotic locomotion", "Robotic manipulation", "Soft and continuum robots", "Bio-inspired design"],
   researchStatement: {
-    title: "Friction, engineered to function",
-    lead: "Every endoluminal instrument meets the body through contact, and friction governs that contact. Too much, and the instrument buckles, stalls or loads the tissue; too little, and it cannot hold position or transmit force.",
-    body: "My research treats friction as a function to be designed rather than a loss to be minimised: modulated in time by ultrasonic vibration, distributed in space across coordinated contacts, and encoded in the mechanics of the structure itself. The aim is instruments that glide, grip and propel through biological lumens on demand.",
+    title: "Physical intelligence for safe and functional mechanical interaction",
+    lead: "A robot or an instrument acts on its environment through contact, and the mechanics of that contact, friction, the distribution of normal load and local stiffness, decide both whether the interaction does its job and whether it remains safe. The two requirements pull in opposite directions: the friction that lets a device grip or propel is the friction that loads the surface it touches, and the stiffness that transmits force along a body is the stiffness that concentrates it at the contact. Softness alone does not resolve this conflict; it trades function for compliance, without defining what safe means.",
+    body: [
+      "My research addresses this conflict in the mechanics itself, by building physical intelligence into the body of the device: the capacity of its surfaces and structure to respond to interaction through their mechanics, locally and at the instant the load appears. Examples from my work include friction modulated on demand by ultrasonic squeeze films, friction anisotropy encoded by motion to generate locomotion, and electroadhesion that lets one device grip where it must and slide where it should. Medical instruments in biological lumens are the most demanding testbed, because tissue is fragile, variable and viscoelastic, and failure has clinical consequences; the same principles govern robotic locomotion and extend to manipulation.",
+      "I believe the next wave of intelligence in robotics will reduce the load on the brain through embodied physical intelligence. Artificial intelligence gives robots powerful perception, planning and reasoning, but contact loads arise along the entire body, often far from where sensors and actuators sit, and it is the embodied mechanics that ultimately determine how safely and effectively a robot interacts with its environment. A body that is safe by design, and that filters disturbances and interaction uncertainties locally, reduces the sensing and control burden on AI, leaving the brain free for high-level decisions rather than micromanaging the physics."
+    ],
+    quote: "The smartest robot is not the one that thinks the most. It is the one that needs to think the least.",
     principles: [
-      { title: "Physics first", text: "Understand the mechanism before designing the device. Squeeze-film levitation in liquid came before the first lubricated catheter." },
-      { title: "Design is the art", text: "Nature and imagination supply the form: an ovipositor, an inchworm, a vibrating asymmetric body." },
-      { title: "Intelligence in the structure", text: "Where possible, mechanics rather than software decides how an instrument interacts with tissue." },
-      { title: "Validate where it matters", text: "From bench models to ex-vivo tissue, results are reported for the conditions in which they were measured." }
+      { title: "Physics first", text: "Every project starts with the mechanism behind the interaction, understood and modelled before any device is designed. Squeeze-film levitation in liquid came before the first lubricated catheter." },
+      { title: "Design is the art", text: "Nature and imagination supply the form that puts the mechanism to work: an ovipositor, an inchworm, a vibrating asymmetric body." },
+      { title: "Intelligence in the structure", text: "Where possible, the response to interaction is built into materials and structure, so safety does not depend on a sensor or a controller working correctly." },
+      { title: "Validate where it matters", text: "Devices are tested in the conditions of their application, from bench models to ex-vivo tissue, and claims stay within what was measured." }
+    ]
+  },
+  researchLines: {
+    title: "A continuous synergy between fundamental and applied research",
+    lead: "Applications inspire fundamental research questions in physics and mechanics. We tackle those questions with the techniques of physics and mechanics to uncover new physical principles, and once uncovered, those principles inform new designs and technologies that fulfil the needs of the application. The new technologies raise new questions, and the cycle goes back and forth. My research lines therefore rest on two pillars, fundamental and applied, and inside each lie the specific methods and applications I explore.",
+    toFundamental: "Applications inspire questions",
+    toApplied: "Principles inform designs",
+    pillars: [
+      { key: "Applied", title: "Technologies for safe and functional interaction",
+        text: "Designs and devices built on the principles we uncover, tested in the conditions of their application.",
+        groups: [
+          { label: "Medical instruments", items: ["Variable-friction catheters", "Actively lubricated instrument sheaths", "Self-propelling capsule robots for colonoscopy", "Safe-by-design endoluminal instruments"] },
+          { label: "Locomotion", items: ["Vibrating asymmetric soft robots", "Pipeline and sliding robots"] },
+          { label: "Manipulation", items: ["Switchable friction and electroadhesion for grasping"] }
+        ] },
+      { key: "Fundamental", title: "Physics and mechanics of contact",
+        text: "The physical questions that applications raise, studied in their own right.",
+        groups: [
+          { label: "Questions", items: ["Squeeze-film levitation and ultrasonic friction modulation", "Friction anisotropy and stick-slip in locomotion", "Electroadhesion on non-planar structures", "Rolling contact of soft bodies"] },
+          { label: "Techniques", items: ["Analytical and numerical modelling", "Tribological characterisation", "Controlled bench and ex-vivo experiments"] }
+        ] }
     ]
   },
   teachingPhilosophy: {
@@ -102,7 +127,7 @@ window.SITE = {
     ]
   },
   vision: {
-    research: "Medical instruments that are safe by design, whose mechanics decide how they touch the body.",
+    research: "Machines that are safe by design, whose mechanics decide how they touch the world.",
     researchShort: "Safe by design",
     community: "Open doors for junior researchers: make opportunities visible early and give them ownership of real research.",
     communityShort: "Open doors"
@@ -112,20 +137,20 @@ window.SITE = {
   themes: [
     {
       verb: "Glide",
-      title: "Ultrasonic lubrication",
-      text: "Vibrating an instrument surface at ultrasonic frequency squeezes a thin film between instrument and tissue. The film carries part of the load, so friction drops while the vibration is on and returns when it is off.",
+      title: "Friction lowered on demand",
+      text: "Vibrating a surface at ultrasonic frequency squeezes a thin film into the contact. The film carries part of the load, so friction drops while the vibration is on and returns when it is off: catheters that glide through biological lumens, and surfaces whose friction is set in real time.",
       pubs: ["J6", "J3", "J2", "C3", "C5", "P1"]
     },
     {
       verb: "Grip",
-      title: "Friction on demand",
-      text: "Some tasks need the opposite: an instrument that holds its position against the lumen wall. Electroadhesion and switchable lubrication let one device stabilise where it must and slide where it should.",
+      title: "Holding where it must",
+      text: "Some tasks need the opposite: a structure that holds against what it touches. Electroadhesion and switchable lubrication let one device anchor where it must and slide where it should, from instruments stabilised against the lumen wall toward grasping in manipulation.",
       pubs: ["C1", "A1", "C2"]
     },
     {
       verb: "Propel",
       title: "Friction-driven locomotion",
-      text: "Alternating high- and low-friction contacts converts reciprocating motion into net displacement. This is the principle behind OSCAR, an ovipositor-inspired capsule robot for colonoscopy, and our pipeline and sliding robots.",
+      text: "Alternating high- and low-friction contacts converts reciprocating motion into net displacement. The same principle drives OSCAR, an ovipositor-inspired capsule robot for colonoscopy, vibrating asymmetric soft robots, and pipeline and sliding robots.",
       pubs: ["J1", "C2", "C4", "J5"]
     }
   ],
@@ -246,7 +271,7 @@ window.SITE = {
       photos: [{ src: "assets/journey/comet-lab-team.jpg", caption: 'The COMET Lab team, Worcester' }, { src: "assets/journey/wpi-continuum-robot.jpg", caption: 'A low-cost continuum robot platform for the lab' }, { src: "assets/journey/wpi-exoskeleton.jpg", caption: 'Position sensing for a hand exoskeleton' }, { src: "assets/journey/ubiros-gripper.jpg", caption: 'UbiRos soft gripper: quick-release mechanism prototype' }, { src: "assets/journey/ubiros-teleop.jpg", caption: 'Keyboard tele-operation of the gripper through ROS' }, { src: "assets/journey/philips-elastography-team.jpg", caption: 'Philips Research, 2019: portable elastography' }, { src: "assets/journey/elastography-prototype.jpg", caption: 'Mechanical-vibration elastography prototype' }, { src: "assets/journey/philips-robotics-team.jpg", caption: 'Philips Research robotics team, 2020' }, { src: "assets/journey/endovascular-robot.jpg", caption: 'Endovascular robot platform built at Philips' }, { src: "assets/journey/fulbright-dc.jpg", caption: 'Fulbright scholars workshop, Washington DC' }, { src: "assets/photos/li/wpi-lab-1.jpg", caption: 'The robotics lab at WPI' }] },
     { id: "delft", pin: "delft", city: "Delft & Enschede, The Netherlands", years: "2020–", title: "Friction meets function",
       text: "A PhD at TU Delft on engineering friction in medical instruments, in collaboration with the tribology group at the University of Sheffield, a postdoc at the University of Twente on mechanically intelligent soft robots for colonoscopy, and now a postdoc in the Bio-Inspired Technology (BITE) group at TU Delft.",
-      logos: [["tudelft", "TU Delft"], ["bite", "Bio-Inspired Technology group"]],
+      logos: [["tudelft", "TU Delft"], ["utwente", "University of Twente"], ["bite", "Bio-Inspired Technology group"]],
       photos: [{ src: "assets/journey/catheter-module.jpg", caption: 'Ultrasonic friction-control module next to a 2-euro coin' }, { src: "assets/journey/oscar-parts.jpg", caption: 'Parts of the OSCAR capsule robot' }, { src: "assets/journey/pipeline-robot.jpg", caption: 'Wasp-inspired pipeline locomotion' }, { src: "assets/journey/squeeze-film-setup.jpg", caption: 'Squeeze-film levitation setup' }, { src: "assets/journey/tactile-gripper.jpg", caption: 'A tactile robotic gripper for haptics research' }, { src: "assets/journey/sheffield-tribology.jpg", caption: 'With the tribology group, University of Sheffield' }, { src: "assets/photos/li/godet-2.jpg", caption: 'Maurice Godet Award, Lyon, 2024' }, { src: "assets/photos/li/robosoft24-2.jpg", caption: 'RoboSoft 2024, San Diego' }, { src: "assets/journey/phd-committee.jpg", caption: 'The PhD committee' }, { src: "assets/photos/defense-day.jpg", caption: "PhD defense, TU Delft" }] }
   ],
   moves: [

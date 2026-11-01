@@ -80,7 +80,8 @@
 
   function statement() {
     const R = S.researchStatement;
-    if ($("#rs-title")) { $("#rs-title").textContent = R.title; $("#rs-lead").textContent = R.lead; $("#rs-body").textContent = R.body; }
+    if ($("#rs-title")) { $("#rs-title").textContent = R.title; $("#rs-lead").textContent = R.lead; const body = [].concat(R.body); $("#rs-body").textContent = body[0];
+      $("#rs-body").insertAdjacentHTML("afterend", body.slice(1).map((t) => `<p class="sec-body">${esc(t)}</p>`).join("") + (R.quote ? `<blockquote class="rs-quote"><p>${esc(R.quote)}</p></blockquote>` : "")); }
     if ($("#rs-principles")) $("#rs-principles").innerHTML = R.principles.map((p) => `<li><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join("");
   }
   function teachingBits() {
@@ -137,7 +138,7 @@
     $("#thesis-title").innerHTML = t2 ? `<em>${esc(t1)}:</em>${esc(t2)}` : esc(d.thesis);
     $("#promotors").textContent = "Promotors: Dr. ir. M. Wiertlewski, Dr. ir. A. Sakes and Prof. dr. ir. P. Breedveld";
     $("#bio").innerHTML = S.bio.map((p) => `<p>${esc(p)}</p>`).join("");
-    statement(); teachingBits(); vm();
+    statement(); researchLines(); teachingBits(); vm();
     const sup = S.mission.supervision, withPaper = sup.filter((x) => x.paper.length).length;
     $("#ts-stat-n").textContent = `${withPaper} of ${sup.length}`;
     $("#ts-stat-l").textContent = "supervised MSc theses led to co-authored papers, abstracts or patents";
@@ -195,6 +196,7 @@
     /* --- affiliation badges: flip to reveal the role --- */
     const AFF = [
       ["tudelft", "TU Delft", "PhD 2020–2026 · Postdoc, BITE group"],
+      ["utwente", "University of Twente", "Postdoc, RaM group, 2024–2026"],
       ["philips", "Philips Research", "Research intern, Cambridge MA, 2019 and 2020"],
       ["wpi", "Worcester Polytechnic Institute", "MSc Robotics Engineering, COMET Lab"],
       ["fulbright", "Fulbright", "Fulbright Scholar, 2018–2020"],
@@ -207,8 +209,18 @@
   }
 
   /* ================= RESEARCH ================= */
+  function researchLines() {
+    const L = S.researchLines, el = $("#rl"); if (!L || !el) return;
+    $("#rl-title").textContent = L.title; $("#rl-lead").textContent = L.lead;
+    const pillar = (p) => `<div class="pillar pillar-${p.key.toLowerCase()}"><span class="pillar-k">${esc(p.key)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>
+      ${el.classList.contains("compact") ? "" : p.groups.map((g) => `<div class="pg"><span class="pg-l">${esc(g.label)}</span><ul>${g.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}${el.classList.contains("compact") ? `<span class="pg-more">${esc(p.groups.map((g) => g.label).join(" · "))}</span>` : ""}</div>`;
+    const arrow = (dir, txt) => `<div class="rl-arrow ${dir}"><svg viewBox="0 0 120 16" aria-hidden="true"><path d="${dir === "to-f" ? "M2 8H112M104 2l10 6-10 6" : "M118 8H8M16 2L6 8l10 6"}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${esc(txt)}</span></div>`;
+    el.innerHTML = pillar(L.pillars[0]) + `<div class="rl-cycle">${arrow("to-f", L.toFundamental)}${arrow("to-a", L.toApplied)}</div>` + pillar(L.pillars[1]);
+  }
+
   function research() {
     statement();
+    researchLines();
     $("#rs-lead")?.insertAdjacentHTML("beforebegin", `<div class="interests">${(S.researchInterests || []).map((x) => `<span class="int">${esc(x)}</span>`).join("")}</div>`);
     $("#themes").innerHTML = S.themes.map((t) => `<div class="theme">
       <span class="verb">${esc(t.verb)}</span>${glyph[t.verb] || ""}<h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>

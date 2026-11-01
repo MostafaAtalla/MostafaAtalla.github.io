@@ -207,6 +207,7 @@
   /* ================= RESEARCH ================= */
   function research() {
     statement();
+    $("#rs-lead")?.insertAdjacentHTML("beforebegin", `<div class="interests">${(S.researchInterests || []).map((x) => `<span class="int">${esc(x)}</span>`).join("")}</div>`);
     $("#themes").innerHTML = S.themes.map((t) => `<div class="theme">
       <span class="verb">${esc(t.verb)}</span>${glyph[t.verb] || ""}<h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>
       <ul>${t.pubs.map((id) => pubById[id]).filter(Boolean).map((p) => `<li><a href="publications.html#${p.id}">${esc(p.title)}</a></li>`).join("")}</ul></div>`).join("");
@@ -229,6 +230,8 @@
     $("#c-loc").innerHTML = `${ICON.pin || ""} ${esc(P.location)}`;
     $("#c-email").textContent = P.email;
     $("#c-copy").addEventListener("click", () => copy(P.email, "Email copied"));
+    $("#refs").innerHTML = (P.references || []).map((r) => `<article class="ref"><h3>${esc(r.name)}</h3><p>${esc(r.title)}</p><p class="ref-mail"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a><button type="button" data-copy="${esc(r.email)}">Copy</button></p></article>`).join("");
+    $("#refs").addEventListener("click", (e) => { const b = e.target.closest("[data-copy]"); if (b) copy(b.dataset.copy, "Email copied"); });
   }
 
   /* ================= MISSION ================= */
@@ -236,8 +239,9 @@
     const M = S.mission;
     vm();
     $("#juniors").innerHTML = M.juniors.map((j) => `<${j.url ? `a href="${esc(j.url)}" ${/^https?:/.test(j.url) ? 'target="_blank" rel="noopener"' : ""}` : "div"} class="jn">
-      <span class="jn-img">${j.img ? `<img src="${esc(j.img)}" alt="" loading="lazy">` : ""}</span>
+      <span class="jn-img ${j.img ? "" : "jn-noimg"}">${j.img ? `<img src="${esc(j.img)}" alt="" loading="lazy">` : `<span>${esc(j.when)}</span>`}</span>
       <span class="jn-txt"><span class="jn-when">${esc(j.when)}</span><span class="jn-t">${esc(j.title)}</span><span class="jn-d">${esc(j.text)}</span>${j.url ? `<span class="jn-go">${/linkedin/.test(j.url) ? "Read the post ↗" : "Read more →"}</span>` : ""}</span></${j.url ? "a" : "div"}>`).join("");
+    $("#community-list").insertAdjacentHTML("beforebegin", (S.leadership || []).map((l) => `<div class="lead-card"><span class="lead-k">Community leadership</span><h3>${esc(l.role)}</h3><p class="lead-b">${esc(l.body)}</p><p>${esc(l.text)}</p></div>`).join(""));
     $("#community-list").innerHTML = M.community.map((c) => `<${c.url ? `a href="${esc(c.url)}" target="_blank" rel="noopener"` : "div"} class="cm ${c.img ? "" : "no-img"}">
       ${c.img ? `<span class="cm-img"><img src="${esc(c.img)}" alt="" loading="lazy"></span>` : ""}
       <span class="cm-txt"><span class="cm-meta"><span class="cm-yr">${esc(c.when)}</span>${esc(c.where)}</span><span class="cm-t">${esc(c.title)}</span><span class="cm-role">${esc(c.role)}</span></span></${c.url ? "a" : "div"}>`).join("");
@@ -342,8 +346,13 @@
         setTimeout(() => show(1, true), 700); setTimeout(() => show(2, true), 700 + 2600 + 2200); }, { threshold: 0.6 });
       io.observe($("#jr-map"));
     }
-    $("#talks").innerHTML = S.talks.map((t) => `<li><span class="y">${t.year}</span><div>${esc(t.title)}<div class="sub">${esc(t.kind)} · ${esc(t.venue)}</div></div></li>`).join("");
-    $("#service").innerHTML = S.service.map((t) => `<li><span class="y">—</span><div>${esc(t)}</div></li>`).join("");
+    const kinds = ["All", "Invited", "Oral", "Poster"]; let tk = "All";
+    $("#talks").insertAdjacentHTML("beforebegin", `<div class="chips" id="talk-chips" style="margin-bottom:14px">${kinds.map((k) => `<button class="chip" data-k="${k}" aria-pressed="${k === "All"}">${k}<span class="count">${k === "All" ? S.talks.length : S.talks.filter((t) => t.kind === k).length}</span></button>`).join("")}</div>`);
+    const renderTalks = () => { $("#talks").innerHTML = S.talks.filter((t) => tk === "All" || t.kind === tk).map((t) => `<li><span class="y">${t.year}</span><div>${esc(t.title)}<div class="sub"><span class="kpill k-${t.kind.toLowerCase()}">${esc(t.kind)}</span> ${esc(t.venue)}${t.award ? ` · <b class="star">★ ${esc(t.award)}</b>` : ""}</div></div></li>`).join(""); };
+    $("#talk-chips").addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (!b) return; tk = b.dataset.k; $("#talk-chips").querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", c === b)); renderTalks(); });
+    renderTalks();
+    $("#service").insertAdjacentHTML("beforebegin", (S.leadership || []).map((l) => `<div class="lead-card"><span class="lead-k">Community leadership</span><h3>${esc(l.role)}</h3><p class="lead-b">${esc(l.body)}</p><p>${esc(l.text)}</p></div>`).join(""));
+    $("#service").innerHTML = S.service.slice(1).map((t) => `<li><span class="y">—</span><div>${esc(t)}</div></li>`).join("");
   }
 
   /* ================= PUBLICATIONS ================= */
@@ -446,7 +455,7 @@
       const paint = () => { m.innerHTML = `<div class="modal-card aw-modal"><button class="modal-x" aria-label="Close">${ICON.close}</button>
         <div class="aw-photo"><img src="${esc(a.photos[i])}" alt="">${a.photos.length > 1 ? `<div class="aw-dots">${a.photos.map((_, j) => `<button data-j="${j}" aria-label="Photo ${j + 1}" aria-pressed="${j === i}"></button>`).join("")}</div>` : ""}</div>
         <div class="aw-body"><span class="aw-y">${a.year} · ${esc(a.org)}</span><h3>${esc(a.title)}</h3>${a.work ? `<p class="aw-work">${esc(a.work)}</p>` : ""}<p>${esc(a.story || "")}</p>
-        <p class="aw-links">${a.pub ? `<a href="publications.html#${a.pub}">The paper →</a>` : ""}${a.url ? `<a href="${esc(a.url)}" target="_blank" rel="noopener">The LinkedIn post ↗</a>` : ""}</p></div></div>`; };
+        <p class="aw-links">${a.pub ? `<a href="publications.html#${a.pub}">The paper →</a>` : ""}${a.award_url ? `<a href="${esc(a.award_url)}" target="_blank" rel="noopener">TU Delft prize page ↗</a>` : ""}${a.url ? `<a href="${esc(a.url)}" target="_blank" rel="noopener">${/linkedin/.test(a.url) ? "The LinkedIn post ↗" : "Official page ↗"}</a>` : ""}</p></div></div>`; };
       paint(); document.body.appendChild(m); document.body.style.overflow = "hidden";
       const close = () => { m.remove(); document.body.style.overflow = ""; document.removeEventListener("keydown", key); history.replaceState(null, "", location.pathname); };
       const key = (e) => { if (e.key === "Escape") close(); if (e.key === "ArrowRight" && a.photos.length > 1) { i = (i + 1) % a.photos.length; paint(); } };

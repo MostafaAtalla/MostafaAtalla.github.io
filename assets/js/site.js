@@ -117,6 +117,7 @@
           ${NAV.map((n) => `<a href="${n.href}" ${n.id === page || (page === "post" && n.id === "perspectives") ? 'aria-current="page"' : ""}>${esc(n.label)}</a>`).join("")}
         </nav>
         <div class="tools">
+          <a class="contact-btn" href="contact.html" ${page === "contact" ? 'aria-current="page"' : ""}>${ICON.mail}<span>Contact</span></a>
           <button class="icon-btn" id="palette-btn" aria-label="Search the site (Ctrl+K)" title="Search (Ctrl+K)">${ICON.search}</button>
           <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode"></button>
           <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">${ICON.menu}</button>
@@ -135,6 +136,19 @@
       document.body.style.overflow = open ? "hidden" : "";
     });
     document.getElementById("palette-btn").addEventListener("click", openPalette);
+    // Collapse to the menu button whenever the links do not fit next to the name and tools.
+    const brand = header.querySelector(".brand"), tools = header.querySelector(".tools");
+    const fit = () => {
+      if (nav.classList.contains("open")) return;
+      header.classList.remove("collapsed");
+      const b = brand.getBoundingClientRect(), n = nav.getBoundingClientRect(), t = tools.getBoundingClientRect();
+      const overflow = nav.scrollWidth > nav.clientWidth + 1 || n.left < b.right + 16 || n.right > t.left - 8;
+      header.classList.toggle("collapsed", overflow);
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    document.fonts?.ready.then(fit);
+    window.addEventListener("load", fit);
   }
 
   /* ---------- contact links (footer and contact page) ---------- */

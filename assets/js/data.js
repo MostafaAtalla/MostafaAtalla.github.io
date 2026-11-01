@@ -15,6 +15,14 @@ window.SITE = {
     email: "mostafa.a.atalla@gmail.com",
     cv: "assets/docs/Atalla_CV.pdf",
     portrait: "", // e.g. "assets/photos/portrait.jpg"
+    // References: shown on the Contact page with email only
+    references: [
+      { name: "Prof. dr. ir. Paul Breedveld", title: "Full Professor, Faculty of Mechanical Engineering, TU Delft", email: "p.breedveld@tudelft.nl" },
+      { name: "Dr. ir. Aimée Sakes", title: "Associate Professor, Faculty of Mechanical Engineering, TU Delft", email: "a.sakes@tudelft.nl" },
+      { name: "Dr. Michaël Wiertlewski", title: "Associate Professor, Faculty of Mechanical Engineering, TU Delft", email: "m.wiertlewski@tudelft.nl" },
+      { name: "Prof. dr. ir. Gijs Krijnen", title: "Full Professor, Faculty of EEMCS, University of Twente", email: "gijs.krijnen@utwente.nl" },
+      { name: "Prof. Robert J. Webster III", title: "Richard A. Schroeder Professor of Mechanical Engineering, Vanderbilt University", email: "robert.webster@vanderbilt.edu" }
+    ],
     links: {
       // Paste your full profile URLs. Empty links are hidden automatically.
       linkedin: "https://www.linkedin.com/in/mostafa-atalla193/",
@@ -53,12 +61,13 @@ window.SITE = {
 
   bio: [
     "I design medical instruments that treat friction as a design variable rather than a loss to be minimised. Endoluminal instruments move through biological lumens by contact, so the friction at that contact decides whether an instrument advances, holds position or injures tissue.",
-    "My PhD at TU Delft showed that ultrasonic vibration can lower the friction of a catheter on demand through a squeeze film, and that coordinating friction across several contacts is enough to make a capsule robot for colonoscopy propel itself. As a postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft, I continue this work toward endoluminal instruments that are safe by design."
+    "My PhD at TU Delft showed that ultrasonic vibration can lower the friction of a catheter on demand through a squeeze film, and that coordinating friction across several contacts is enough to make a capsule robot for colonoscopy propel itself. After a postdoc at the University of Twente on mechanically intelligent soft robots for colonoscopy, I am now a postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft, where I continue this work toward endoluminal instruments that are safe by design."
   ],
   now: "Currently: postdoctoral researcher in the Bio-Inspired Technology (BITE) group at TU Delft.",
 
   /* ---------------- HOME PAGE STATEMENTS ----------------
      Drafts written from your CV. Rewrite them in your own words.  */
+  researchInterests: ["Medical and surgical robotics", "Soft and continuum robots", "Mechanically intelligent design", "Physical interaction", "Friction modulation and tribology", "Safe, functional devices for minimally invasive interventions"],
   researchStatement: {
     title: "Friction, engineered to function",
     lead: "Every endoluminal instrument meets the body through contact, and friction governs that contact. Too much, and the instrument buckles, stalls or loads the tissue; too little, and it cannot hold position or transmit force.",
@@ -120,24 +129,24 @@ window.SITE = {
       doi: "10.4233/uuid:03d8697a-d8ba-47b4-b779-892ae2e980c4", video: "pBPTiyE4l84", img: "assets/photos/defense-day.jpg",
       hl: "Friction treated as a design variable: modulated by ultrasound to glide, switched on to grip, and coordinated across contacts to propel." },
 
-    { id: "J1", type: "journal", year: 2026, status: "preprint",
+    { id: "J1", type: "journal", year: 2026, status: "under review",
       title: "OSCAR: An Ovipositor-Inspired Self-Propelling Capsule Robot for Colonoscopy",
       authors: "M. A. Atalla, A. S. Sekar, R. van Starkenburg, D. J. Jager, A. Sakes, M. Wiertlewski, and P. Breedveld",
       venue: "arXiv preprint", doi: "10.48550/arXiv.2602.15309", img: "assets/img/pubs/oscar.jpg",
       hl: "Twelve cam-driven sliders reproduce the anchor-and-release motion of a parasitic wasp's ovipositor, letting a capsule propel itself without external actuation of the colon wall.",
       also: [{ t: "Proof of concept at CRAS 2025, Lisbon", award: "Best Paper and Oral Presentation Award" }] },
-    { id: "J2", type: "journal", year: 2025, status: "preprint",
+    { id: "J2", type: "journal", year: 2025, status: "under review",
       title: "Active Lubrication of Transluminal Medical Instruments",
       authors: "M. A. Atalla, J. Nieuwenhuis, A. Martin, X. Wang, A. Canden, M. J. Carré, R. Lewis, A. Sakes, and M. Wiertlewski",
       venue: "arXiv preprint", doi: "10.48550/arXiv.2506.07225", img: "assets/img/pubs/activelub.jpg",
       hl: "Ultrasonic friction-control modules along a sheath lubricate an instrument on demand, with friction and thermal safety characterised on ex-vivo tissue.",
-      also: [{ t: "“Friction modulation of catheters using ultrasonic waves”, 49th Leeds-Lyon Symposium on Tribology, 2024", award: "Maurice Godet Award" }] },
+      also: [{ t: "“Friction modulation of catheters using ultrasonic waves”, 49th Leeds-Lyon Symposium on Tribology, 2024", award: "Maurice Godet Award" }, { t: "Dutch Biomedical Engineering Conference, Egmond aan Zee, 2025 (oral)" }, { t: "Health Tech Open Day, TU Delft, 2024 (oral)" }] },
     { id: "J3", type: "journal", year: 2024,
       title: "Toward Variable-Friction Catheters Using Ultrasonic Lubrication",
       authors: "M. A. Atalla, J. J. Tuijp, M. Wiertlewski, and A. Sakes",
       venue: "IEEE Transactions on Medical Robotics and Bionics, 6(4), 1375–1381", doi: "10.1109/TMRB.2024.3464672", video: "2bmjkfAqmaQ",
       hl: "Micron-level ultrasonic surface vibration switches a catheter between a low-friction state for navigation and a high-friction state for stable task execution.",
-      also: [{ t: "Featured on the TU Delft news front page, November 2024" }] },
+      also: [{ t: "Featured on the TU Delft news front page, November 2024" }, { t: "BioMechanical Engineering Department Conference 2024", award: "Best Poster Award" }] },
     { id: "J4", type: "journal", year: 2024,
       title: "Advancements in aspiration catheter tip design for thrombectomy: a comprehensive patent review",
       authors: "V. G. Kortman, Y. Verberne, M. A. Atalla, and A. Sakes",
@@ -165,17 +174,16 @@ window.SITE = {
       venue: "Proc. IMechE Part H: Journal of Engineering in Medicine, 234(6), 612–625", doi: "10.1177/0954411920911277",
       hl: "Bending-angle control of a soft pneumatic actuator from a data-driven estimation model." },
 
-    { id: "C1", type: "conference", year: 2026,
+    { id: "C1", type: "conference", year: 2026, status: "accepted",
       title: "Toward 3D Printable Non-Planar Electroadhesive Structures for Active Anchoring",
-      authors: "C. Derla, M. A. Atalla, P. Canyelles Pericas, and G. Krijnen",
-      venue: "IEEE SENSORS 2026, Rotterdam", img: "assets/img/pubs/sensors26.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7520824637002256384/",
-      hl: "Multi-material 3D printing builds electrodes into curved shafts in one step, avoiding the delamination of wrapped flat pads, with electrically controlled adhesion shown experimentally." },
-    { id: "C2", type: "conference", year: 2026,
+      authors: "M. A. Atalla, C. R. Derla, P. Canyelles Pericàs, and G. Krijnen",
+      venue: "Proceedings of IEEE SENSORS 2026, Rotterdam", doi: "10.48550/arXiv.2609.18700", img: "assets/img/pubs/sensors26.jpg",
+      hl: "Multi-material 3D printing builds electrodes into curved shafts in one step, avoiding the delamination of wrapped flat pads, with electrically controlled adhesion shown experimentally." },    { id: "C2", type: "conference", year: 2026,
       title: "Grip as Needed, Glide on Demand: Ultrasonic Lubrication for Robotic Locomotion",
-      authors: "M. A. Atalla, D. van Bemmel, J. Cummings, P. Breedveld, M. Wiertlewski, and A. Sakes",
-      venue: "IEEE International Conference on Robotics and Automation (ICRA), Vienna", doi: "10.48550/arXiv.2602.15608", img: "assets/img/pubs/icra26.jpg", video: "kEHPD8XW58o",
+      authors: "M. A. Atalla, J. Cummings, D. van Bemmel, P. Breedveld, M. Wiertlewski, and A. Sakes",
+      venue: "2026 IEEE International Conference on Robotics and Automation (ICRA), Vienna, 23957–23964", doi: "10.1109/ICRA57385.2026.11696075", img: "assets/img/pubs/icra26.jpg", video: "kEHPD8XW58o",
       hl: "Switching ultrasonic vibration on and off toggles each module between grip and glide, so locomotion needs neither normal-force control nor anisotropic surfaces.",
-      also: [{ t: "Oral presentation, Mechanisms Design session, ICRA 2026" }] },
+      also: [{ t: "Oral presentation, Mechanisms Design session, ICRA 2026" }, { t: "“Unconventional robotic locomotion: the ultrasonic lubrication way”, Unconventional Robotics Symposium 2025", award: "Runner-Up Best Poster Award" }] },
     { id: "C3", type: "conference", year: 2024,
       title: "Ultrasonically-lubricated catheters: miniaturization and ex-vivo tissue validation",
       authors: "M. A. Atalla, J. Nieuwenhuis, A. Martin, A. Canden, X. Wang, M. J. Carré, R. Lewis, M. Wiertlewski, and A. Sakes",
@@ -202,7 +210,7 @@ window.SITE = {
     { id: "P1", type: "patent", year: 2025,
       title: "Medical device for intraluminal intervention",
       authors: "M. A. Atalla, J. Nieuwenhuis, M. Wiertlewski, and A. Sakes",
-      venue: "Dutch patent NL2036368B1, granted", url: "https://patents.google.com/patent/NL2036368B1", img: "assets/img/pubs/activelub-proto.jpg",
+      venue: "Dutch patent NL2036368B1, granted, published 4 June 2025", url: "https://patents.google.com/patent/NL2036368B1", img: "assets/img/pubs/activelub-proto.jpg",
       hl: "Covers intraluminal devices with ultrasonic friction control." },
     { id: "P2", type: "patent", year: 2025,
       title: "Mechanical Shear Wave Generation for Ultrasonic Elastography",
@@ -224,8 +232,8 @@ window.SITE = {
       text: "An MSc in Robotics Engineering at WPI as a Fulbright Scholar in the COMET Lab, product development at UbiRos, and two internships at Philips Research North America on ultrasound elastography and image-guided therapy robotics.",
       logos: [["wpi", "Worcester Polytechnic Institute"], ["comet-lab", "COMET Lab, WPI"], ["fulbright", "Fulbright"], ["ubiros", "UbiRos"], ["philips", "Philips Research"]],
       photos: [{ src: "assets/journey/comet-lab-team.jpg", caption: 'The COMET Lab team, Worcester' }, { src: "assets/journey/wpi-continuum-robot.jpg", caption: 'A low-cost continuum robot platform for the lab' }, { src: "assets/journey/wpi-exoskeleton.jpg", caption: 'Position sensing for a hand exoskeleton' }, { src: "assets/journey/ubiros-gripper.jpg", caption: 'UbiRos soft gripper: quick-release mechanism prototype' }, { src: "assets/journey/ubiros-teleop.jpg", caption: 'Keyboard tele-operation of the gripper through ROS' }, { src: "assets/journey/philips-elastography-team.jpg", caption: 'Philips Research, 2019: portable elastography' }, { src: "assets/journey/elastography-prototype.jpg", caption: 'Mechanical-vibration elastography prototype' }, { src: "assets/journey/philips-robotics-team.jpg", caption: 'Philips Research robotics team, 2020' }, { src: "assets/journey/endovascular-robot.jpg", caption: 'Endovascular robot platform built at Philips' }, { src: "assets/journey/fulbright-dc.jpg", caption: 'Fulbright scholars workshop, Washington DC' }, { src: "assets/photos/li/wpi-lab-1.jpg", caption: 'The robotics lab at WPI' }] },
-    { id: "delft", pin: "delft", city: "Delft, The Netherlands", years: "2020–", title: "Friction meets function",
-      text: "A PhD at TU Delft on engineering friction in medical instruments, in collaboration with the tribology group at the University of Sheffield, followed by a postdoc in the Bio-Inspired Technology (BITE) group.",
+    { id: "delft", pin: "delft", city: "Delft & Enschede, The Netherlands", years: "2020–", title: "Friction meets function",
+      text: "A PhD at TU Delft on engineering friction in medical instruments, in collaboration with the tribology group at the University of Sheffield, a postdoc at the University of Twente on mechanically intelligent soft robots for colonoscopy, and now a postdoc in the Bio-Inspired Technology (BITE) group at TU Delft.",
       logos: [["tudelft", "TU Delft"], ["bite", "Bio-Inspired Technology group"]],
       photos: [{ src: "assets/journey/catheter-module.jpg", caption: 'Ultrasonic friction-control module next to a 2-euro coin' }, { src: "assets/journey/oscar-parts.jpg", caption: 'Parts of the OSCAR capsule robot' }, { src: "assets/journey/pipeline-robot.jpg", caption: 'Wasp-inspired pipeline locomotion' }, { src: "assets/journey/squeeze-film-setup.jpg", caption: 'Squeeze-film levitation setup' }, { src: "assets/journey/tactile-gripper.jpg", caption: 'A tactile robotic gripper for haptics research' }, { src: "assets/journey/sheffield-tribology.jpg", caption: 'With the tribology group, University of Sheffield' }, { src: "assets/photos/li/godet-2.jpg", caption: 'Maurice Godet Award, Lyon, 2024' }, { src: "assets/photos/li/robosoft24-2.jpg", caption: 'RoboSoft 2024, San Diego' }, { src: "assets/journey/phd-committee.jpg", caption: 'The PhD committee' }, { src: "assets/photos/defense-day.jpg", caption: "PhD defense, TU Delft" }] }
   ],
@@ -235,59 +243,70 @@ window.SITE = {
   ],
   timeline: [
     { when: "2026–", kind: "academic", city: "delft", title: "Postdoctoral Researcher", org: "Bio-Inspired Technology (BITE) group, TU Delft", text: "Bio-inspired, safe-by-design instruments for interventions in biological lumens." },
+    { when: "2024–2026", kind: "academic", city: "delft", title: "Postdoctoral Researcher", org: "Robotics and Mechatronics (RaM) group, EEMCS, University of Twente", text: "Mechanically intelligent soft robots for safe interactions in colonoscopy, with Prof. dr. ir. Gijs Krijnen." },
     { when: "2020–2026", kind: "academic", city: "delft", title: "PhD Researcher", org: "Faculty of Mechanical Engineering, TU Delft", text: "Thesis: When Friction Meets Function. Promotors: Dr. ir. M. Wiertlewski, Dr. ir. A. Sakes and Prof. dr. ir. P. Breedveld." },
-    { when: "2020", kind: "industry", city: "massachusetts", title: "Intern, Mechanical Design for Robotics and Navigation", org: "Philips Research North America, Cambridge MA", text: "Image Guided Therapy department. Built functional robotic hardware for a surgical application within three months." },
-    { when: "2019", kind: "industry", city: "massachusetts", title: "Research Intern, Mechanical Design", org: "Philips Research North America, Cambridge MA", text: "Ultrasound Imaging and Intervention department." },
+    { when: "2020", kind: "industry", city: "massachusetts", title: "Intern, Mechanical Design for Robotics and Navigation", org: "Philips Research North America, Cambridge MA", text: "Image Guided Therapy department, March–September 2020. Built functional robotic hardware for a surgical application within three months." },
+    { when: "2019", kind: "industry", city: "massachusetts", title: "Research Intern, Mechanical Design", org: "Philips Research North America, Cambridge MA", text: "Ultrasound Imaging and Intervention department, May–September 2019. Mechanical-vibration elastography, leading to a granted U.S. patent." },
     { when: "2018–2020", kind: "education", city: "massachusetts", title: "MSc Robotics Engineering", org: "Worcester Polytechnic Institute", text: "Fulbright Scholar, medical robotics, advised by Dr. Loris Fichera. GPA 4.0/4.0." },
     { when: "2018–2019", kind: "industry", city: "massachusetts", title: "Product Development Engineer Intern", org: "UbiRos, Natick MA", text: "" },
-    { when: "2016–2018", kind: "industry", city: "cairo", title: "Mechanical Engineer → Research & Innovation Engineer", org: "Advansys ESC, Cairo", text: "Mechanical and innovation departments; STDF-funded collaboration with Ain Shams University on robotic assistive rehabilitation." },
-    { when: "2015–2016", kind: "industry", city: "cairo", title: "Mechanical Engineer", org: "Technical Office of Hydraulics, Cairo", text: "Maintenance department." },
-    { when: "2009–2014", kind: "education", city: "cairo", title: "BSc Mechanical Design and Production Engineering", org: "Cairo University", text: "Ranked 3rd of 37. Advised by Prof. Yasser H. Anis and Prof. Sayed M. Metwalli." }
+    { when: "2018", kind: "industry", city: "cairo", title: "Research and Innovation Engineer II & III", org: "Advansys ESC, Cairo", text: "Innovation department, March–August 2018. STDF-funded collaboration with Ain Shams University on robotic assistive rehabilitation." },
+    { when: "2016–2017", kind: "industry", city: "cairo", title: "Mechanical Engineer I & II", org: "Advansys ESC, Cairo", text: "Mechanical department, September 2016–February 2017." },
+    { when: "2015–2016", kind: "industry", city: "cairo", title: "Mechanical Engineer", org: "Technical Office of Hydraulics (TO-Hydraulics), Cairo", text: "Maintenance department." },
+    { when: "2009–2014", kind: "education", city: "cairo", title: "BSc Mechanical Design and Production Engineering", org: "Cairo University", text: "GPA 3.3/4.0, ranked 3rd of 37. Advised by Prof. Yasser H. Anis and Prof. Sayed M. Metwalli." },
   ],
 
   awards: [
     // kind: award | grant · photos and story appear when a visitor opens the award
-    { year: 2025, kind: "award", title: "Best Paper and Oral Presentation Award", org: "14th CRAS Conference, Lisbon", work: "OSCAR: an ovipositor-inspired capsule robot for colonoscopy, a proof of concept", pub: "J1",
+    { year: 2025, kind: "award", title: "Best Paper and Oral Presentation Award", org: "14th CRAS Conference, Lisbon", url: "https://research.tudelft.nl/en/prizes/best-paper-and-oral-presentation-award-in-medical-robotics/", work: "OSCAR: an ovipositor-inspired capsule robot for colonoscopy, a proof of concept", pub: "J1",
       photos: ["assets/img/pubs/oscar.jpg", "assets/img/pubs/oscar-design.jpg"],
       story: "Awarded for the paper and oral presentation introducing OSCAR, a capsule robot whose twelve sliders anchor and release like the valves of a parasitic wasp's ovipositor." },
-    { year: 2025, kind: "award", title: "Runner-Up Best Poster Award", org: "The Unconventional Robotics Symposium, TU Delft" },
-    { year: 2024, kind: "award", title: "Maurice Godet Award", org: "49th Leeds-Lyon Symposium on Tribology, Lyon", work: "Friction modulation of catheters using ultrasonic waves", pub: "J2",
+    { year: 2025, kind: "award", title: "Runner-Up Best Poster Award", org: "The Unconventional Robotics Symposium, TU Delft", work: "Unconventional robotic locomotion: the ultrasonic lubrication way", pub: "C2", photos: ["assets/img/pubs/icra26.jpg"], story: "A poster on robotic locomotion driven by switching ultrasonic lubrication on and off, the work behind the ICRA 2026 paper." },
+    { year: 2024, kind: "award", title: "Maurice Godet Award", org: "49th Leeds-Lyon Symposium on Tribology, Lyon", award_url: "https://research.tudelft.nl/en/prizes/maurice-godet-award-for-best-oral-presentation-and-paper-in-tribo/", work: "Friction modulation of catheters using ultrasonic waves", pub: "J2",
       photos: ["assets/photos/li/godet-2.jpg", "assets/photos/li/godet-1.jpg"], url: "https://www.linkedin.com/feed/update/urn:li:activity:7237575279555084288/",
       story: "The award recognises the best oral presentation and paper in tribology. During the symposium I learned Maurice Godet's line: “If mechanics is the science of motion, tribology is the science that makes it possible.”" },
-    { year: 2024, kind: "award", title: "Best Poster Award", org: "Dutch Soft Robotics Symposium, Eindhoven", work: "Mechanically-inflatable bio-inspired locomotion for robotic pipeline inspection", pub: "C4",
+    { year: 2024, kind: "award", title: "Best Poster Award", org: "Dutch Soft Robotics Symposium, Eindhoven", award_url: "https://research.tudelft.nl/en/prizes/best-poster-award-in-soft-robotics/", work: "Mechanically-inflatable bio-inspired locomotion for robotic pipeline inspection", pub: "C4",
       photos: ["assets/photos/li/dsrs24-1.jpg", "assets/photos/li/dsrs24-2.jpg"], url: "https://www.linkedin.com/feed/update/urn:li:activity:7201984738826272768/",
       story: "Awarded for the wasp-inspired pipeline robot, after a poster session full of discussion with the Dutch soft robotics community." },
-    { year: 2024, kind: "award", title: "Best Poster Award", org: "BioMechanical Engineering Department Conference, TU Delft" },
+    { year: 2024, kind: "award", title: "Best Poster Award", org: "BioMechanical Engineering Department Conference (BMechE), TU Delft", work: "Toward variable-friction catheters using ultrasonic lubrication", pub: "J3", award_url: "https://research.tudelft.nl/en/prizes/best-poster-award-in-biomechanical-engineering/", photos: ["assets/journey/catheter-module.jpg"], story: "Awarded for the poster on catheters whose friction switches between grip and glide under ultrasonic vibration." },
     { year: 2024, kind: "grant", title: "RoboSoft24 Travel Grant for Excellence", org: "IEEE Robotics and Automation Society", work: "Mechanically-inflatable bio-inspired locomotion for robotic pipeline inspection", pub: "C4",
       photos: ["assets/photos/li/robosoft24-2.jpg", "assets/photos/li/robosoft24-1.jpg", "assets/photos/li/robosoft24-3.jpg"], url: "https://www.linkedin.com/feed/update/urn:li:activity:7173393138596712448/",
       story: "Travel support to present the pipeline robot at IEEE RoboSoft 2024 in San Diego, where a wasp-inspired motion sequence induces the friction anisotropy that drives locomotion." },
-    { year: 2018, kind: "grant", title: "Fulbright Foreign Student Program Grant", org: "U.S. Department of State, Fulbright Egypt (top 1% of applicants)",
+    { year: 2018, kind: "grant", title: "Fulbright Foreign Student Program Grant", org: "U.S. Department of State and Fulbright Commission in Egypt; full MSc scholarship, top 1% of applicants in Egypt",
       photos: ["assets/photos/li/fulbright20-1.jpg"], url: "https://www.linkedin.com/feed/update/urn:li:activity:6642170251003908096/",
       story: "The Fulbright grant funded my MSc in Robotics Engineering at Worcester Polytechnic Institute, and opened the path to Philips Research and TU Delft." },
-    { year: 2018, kind: "grant", title: "Graduate scholarship for academic excellence", org: "Worcester Polytechnic Institute" },
+    { year: 2018, kind: "grant", title: "Graduate scholarship for academic excellence, 2018–2020", org: "Worcester Polytechnic Institute" },
     { year: 2018, kind: "award", title: "Certificate of Appreciation for Outstanding Performance", org: "Advansys ESC" },
-    { year: 2016, kind: "grant", title: "Research support grant", org: "Science and Technology Development Fund (STDF), Egypt" },
+    { year: 2016, kind: "grant", title: "Research support grant", org: "Science and Technology Development Fund (STDF), Egypt; Advansys ESC and Ain Shams University, robotic assistive rehabilitation" },
     { year: 2016, kind: "grant", title: "MSc graduate scholarship for academic excellence", org: "Faculty of Engineering, Cairo University" },
-    { year: 2014, kind: "award", title: "Distinguished Undergraduate Student Award", org: "Cairo University" }
+    { year: 2014, kind: "award", title: "Distinguished Undergraduate Student Award", org: "Cairo University and Engineering Company for Industrial Services" }
   ],
 
   talks: [
-    { year: 2026, kind: "Invited", title: "Engineering safe- and functional-by-design robots and devices", venue: "Robotics colloquium, TU Eindhoven" },
-    { year: 2026, kind: "Oral", title: "Grip as Needed, Glide on Demand: Ultrasonic Lubrication for Robotic Locomotion", venue: "ICRA 2026, Vienna" },
-    { year: 2026, kind: "Invited", title: "The Body Thinks Too: Physical Intelligence for Medical Robotics in the Age of AI", venue: "ORSI Innotech Surgical AI & Telesurgery Days, Ghent" },
+    // kind: Invited | Oral | Poster ; award shown with a star
+    { year: 2026, kind: "Invited", title: "The Body Thinks Too: Physical Intelligence for Medical Robotics in the Age of AI", venue: "ORSI Innotech Surgical AI & Telesurgery Days 2026, Ghent" },
+    { year: 2026, kind: "Invited", title: "Safe and Functional by Design: Engineering Robots for Intelligent Physical Interaction", venue: "Robotics (RBT) Colloquium, TU Eindhoven" },
     { year: 2026, kind: "Oral", title: "Designing ‘With’ Friction: A New Paradigm Toward Programmable Physical Interaction", venue: "Embodied Intelligence Conference" },
-    { year: 2025, kind: "Oral", title: "OSCAR: an Ovipositor-Inspired Capsule Robot for Colonoscopy", venue: "CRAS, Lisbon" },
-    { year: 2025, kind: "Oral", title: "Active Lubrication of Endoluminal Instruments Using Ultrasonic Waves", venue: "Dutch Biomedical Engineering Conference" },
-    { year: 2024, kind: "Oral", title: "Friction modulation of catheters using ultrasonic waves", venue: "Leeds-Lyon Symposium on Tribology" },
-    { year: 2024, kind: "Oral", title: "Ultrasonically-lubricated catheters: miniaturization and ex-vivo validation", venue: "Hamlyn Symposium on Medical Robotics" },
-    { year: 2023, kind: "Oral", title: "On the Squeeze Film Levitation Phenomenon in Incompressible Liquids", venue: "APS March Meeting" }
+    { year: 2026, kind: "Oral", title: "Grip as Needed, Glide on Demand: Ultrasonic Lubrication for Robotic Locomotion", venue: "ICRA 2026, Vienna" },
+    { year: 2025, kind: "Oral", title: "OSCAR: an Ovipositor-Inspired Capsule Robot for Colonoscopy: A Proof of Concept", venue: "CRAS, Lisbon", award: "Best Paper and Oral Presentation Award" },
+    { year: 2025, kind: "Oral", title: "Active Lubrication of Endoluminal Instruments Using Ultrasonic Waves", venue: "Dutch Biomedical Engineering Conference, Egmond aan Zee" },
+    { year: 2025, kind: "Poster", title: "Unconventional Robotic Locomotion: The Ultrasonic Lubrication Way", venue: "The Unconventional Robotics Symposium, TU Delft", award: "Runner-Up Best Poster Award" },
+    { year: 2025, kind: "Poster", title: "Electroadhesive Stabilization of Soft Robotic Catheters", venue: "IEEE RoboSoft, Lausanne" },
+    { year: 2024, kind: "Oral", title: "Friction modulation of catheters using ultrasonic waves", venue: "49th Leeds-Lyon Symposium on Tribology", award: "Maurice Godet Award" },
+    { year: 2024, kind: "Oral", title: "Ultrasonically-lubricated catheters: miniaturization and ex-vivo tissue validation", venue: "Hamlyn Symposium on Medical Robotics" },
+    { year: 2024, kind: "Oral", title: "Active Lubrication of Endoluminal Instruments Using Ultrasonic Waves", venue: "Health Tech Open Day, TU Delft" },
+    { year: 2024, kind: "Poster", title: "Toward Variable-Friction Catheters Using Ultrasonic Lubrication", venue: "BioMechanical Engineering Department Conference (BMechE)", award: "Best Poster Award" },
+    { year: 2024, kind: "Poster", title: "Mechanically-Inflatable Bio-Inspired Locomotion for Robotic Pipeline Inspection", venue: "Dutch Soft Robotics Symposium (DSRS)", award: "Best Poster Award" },
+    { year: 2024, kind: "Poster", title: "Mechanically-Inflatable Bio-Inspired Locomotion for Robotic Pipeline Inspection", venue: "IEEE RoboSoft, San Diego" },
+    { year: 2023, kind: "Oral", title: "Ultrasonically-Lubricated Catheters: A Proof-of-Concept", venue: "Hamlyn Symposium on Medical Robotics, London" },
+    { year: 2023, kind: "Oral", title: "On the Squeeze Film Levitation Phenomenon in Incompressible Liquid Environments", venue: "APS March Meeting" },
+    { year: 2022, kind: "Poster", title: "Near-Field Acoustic Levitation in Liquid Environment", venue: "IEEE International Ultrasonics Symposium (IUS), Venice" }
   ],
 
   teaching: [
-    { year: "2025", title: "Lecturer, AI-Image Guided Robotics", sub: "Graduate course, two lectures" },
-    { year: "2023", title: "Teaching assistant, Bio-Inspired Design", sub: "Graduate course, P. Breedveld" },
-    { year: "2023", title: "Grader, Fundamentals of Biomedical Engineering", sub: "A. Sakes" },
-    { year: "2021", title: "Teaching assistant, Control in Human-Robot Interaction", sub: "Graduate course, M. Wiertlewski" }
+    { year: "Spring 2025", title: "Lecturer, AI-Image Guided Robotics", sub: "Graduate course, two lectures" },
+    { year: "Fall 2023", title: "Teaching assistant, Bio-Inspired Design", sub: "Graduate course, instructor P. Breedveld" },
+    { year: "Fall 2023", title: "Grader, Fundamentals of Biomedical Engineering", sub: "Instructor A. Sakes" },
+    { year: "Spring 2021", title: "Teaching assistant, Control in Human-Robot Interaction", sub: "Graduate course, instructor M. Wiertlewski" }
   ],
 
   /* ---------------- MISSION ---------------- */
@@ -312,23 +331,29 @@ window.SITE = {
     ],
     // Acting on the mission: things done specifically for junior researchers
     juniors: [
+      { title: "From Research Idea to Funded Proposal", when: "14 Sep 2026", img: "", url: "",
+        text: "A workshop on grant acquisition for (unconventional) early-career researchers, which I organise at The Unconventional Robotics Symposium, TU Delft." },
       { title: "“Approachable! Ask me anything!” badges", when: "ICRA 2026", img: "assets/photos/li/badges-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7467154829153517568/",
         text: "Large conferences are intimidating for first-time attendees. I 3D-printed badges for senior researchers who are happy to be approached, so newcomers can see whom they can talk to." },
       { title: "Supervising MSc students as researchers", when: "2022–2025", img: "assets/journey/catheter-module.jpg", url: "teaching.html#orchestra",
         text: "Eight MSc students worked on open questions inside active projects; six of their theses became co-authored papers, abstracts or a patent." },
       { title: "Notes on intercultural PhD supervision", when: "2026", img: "assets/photos/li/silence-1.jpg", url: "perspectives.html",
         text: "A series of posts from my reading on how silence, independence and feedback are read differently across academic cultures, written for students and supervisors." },
+      { title: "“Make your own soft robot”", when: "2024", img: "",
+        text: "A hands-on workshop where children and families built their own soft robots at the RoboCup 2024 Science Festival in Eindhoven, where I volunteered." },
       { title: "Fulbright Association, Massachusetts Chapter", when: "2020", img: "assets/journey/fulbright-dc.jpg",
         text: "As a board member I supported incoming international scholars settling into academic life in the United States." }
     ],
     // Building the research community: workshops and events organised (service, not mentoring)
     community: [
       { title: "Soft ≠ Safe? Rethinking Softness in Medical Robotics", when: "2026", where: "ICRA, Vienna", role: "Lead organiser", img: "assets/photos/li/softsafe-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7465102661198069760/" },
-      { title: "Robotic colonoscopy: clinical needs and translation", when: "2025", where: "Hamlyn Symposium, London", role: "Co-organiser", img: "assets/photos/li/hamlyn25-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7344712541798903808/" },
+      { title: "Soft Robotic Systems for Diagnostics and Therapy in Minimally Invasive and Endoluminal Interventions", when: "2026", where: "Hamlyn Symposium, London", role: "Co-organiser" },
+      { title: "Smart by Structure: Designing Surgical Devices for Equity and Sustainability", when: "2026", where: "Hamlyn Symposium, London", role: "Co-organiser" },
+      { title: "From Research to Clinical Practice: Bridging the Gap in Robotic Colonoscopy", when: "2025", where: "Hamlyn Symposium, London", role: "Lead co-organiser", img: "assets/photos/li/hamlyn25-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7344712541798903808/" },
       { title: "Soft Robotics Mimicking the Human Body for Medical Applications", when: "2025", where: "RoboSoft, Lausanne", role: "Lead co-organiser", img: "assets/photos/li/robosoft25-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7307418294355976193/" },
-      { title: "Bio-Inspired Medical Robotics: From Evolution to Revolution", when: "2024", where: "Hamlyn Symposium, London", role: "Lead organiser", img: "assets/photos/li/bioinsp24-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7167859584093650944/" },
-      { title: "“Make your own soft robot” public workshop", when: "2024", where: "RoboCup Science Festival, Eindhoven", role: "Organiser" },
-      { title: "Dutch Soft Robotics Summer School and World Haptics", when: "2022–2023", where: "Delft", role: "Organising committee" }
+      { title: "Bio-Inspired Medical Robotics: From Evolution to Revolution in Healthcare", when: "2024", where: "Hamlyn Symposium, London", role: "Lead organiser", img: "assets/photos/li/bioinsp24-1.jpg", url: "https://www.linkedin.com/feed/update/urn:li:activity:7167859584093650944/" },
+      { title: "World Haptics Symposium", when: "2023", where: "Delft", role: "Organising committee" },
+      { title: "Dutch Soft Robotics Summer School and Symposium", when: "2022", where: "Delft", role: "Organising committee" }
     ],
     // Doors that opened for me: grants I received, what they made possible, and where to apply
     doors: [
@@ -360,10 +385,19 @@ window.SITE = {
     ]
   },
 
+  // Community leadership (shown first on Journey and Vision & Mission)
+  leadership: [
+    { role: "Corresponding Founding Co-Chair", body: "IEEE RAS Working Group on Safety in Surgical Robotics", text: "Hosted by the IEEE RAS Technical Committee on Surgical Robotics: an international forum on safety definitions, evidence and evaluation in surgical robotics. Co-chairs: Di Wu, Julie Legrand, Linda Paternò and Tim Horeman." }
+  ],
   service: [
-    "Associate Editor, IEEE BioRob 2026",
+    "Corresponding Founding Co-Chair, IEEE RAS Working Group on Safety in Surgical Robotics",
+    "Associate Editor, IEEE RAS/EMBS BioRob 2026",
     "Reviewer: IEEE T-RO, T-MRB, RA-L, ICRA, T-MECH, Applied Physics Letters, Physics of Fluids",
+    "Volunteer, “Make your own soft robot” workshop, RoboCup 2024 Science Festival, Eindhoven",
+    "Organising committee, World Haptics Symposium 2023",
     "Session chair, APS March Meeting 2023",
+    "Organising committee, Dutch Soft Robotics Summer School and Symposium 2022",
+    "Board member, Fulbright Association Massachusetts Chapter, 2020",
     "Class representative, Mechanical Engineering, Cairo University, 2014"
   ],
 
@@ -401,9 +435,9 @@ window.SITE = {
     { type: "linkedin", cat: "news", date: "2020-10-01", urn: "6717450065151107072", url: "https://www.linkedin.com/feed/update/urn:li:activity:6717450065151107072/", title: 'Second internship at Philips Research North America', summary: 'Functional robotic hardware for a surgical application, built in three months.', img: "assets/photos/li/philips20-1.jpg", kind: "career" },
     { type: "linkedin", cat: "news", date: "2020-03-07", urn: "6642170251003908096", url: "https://www.linkedin.com/feed/update/urn:li:activity:6642170251003908096/", title: 'Fulbright re-entry workshop in Washington DC', summary: 'Meeting Fulbright fellows from the Middle East and North Africa before returning home.', img: "assets/photos/li/fulbright20-1.jpg", kind: "career" },
     { type: "press", date: "2024-11-14", title: "New catheter technology promises safer and more efficient treatment of blood vessels",
-      summary: "TU Delft news front-page feature on our variable-friction catheters, which switch between grip and glide with ultrasonic vibration.", url: "https://edu.nl/bpyxr", source: "TU Delft", img: "https://i.ytimg.com/vi/2bmjkfAqmaQ/hqdefault.jpg" },
+      summary: "TU Delft news front-page feature on our variable-friction catheters, which switch between grip and glide with ultrasonic vibration.", url: "https://www.tudelft.nl/en/2024/tu-delft/new-catheter-technology-promises-safer-and-more-efficient-treatment-of-blood-vessels", source: "TU Delft", img: "https://i.ytimg.com/vi/2bmjkfAqmaQ/hqdefault.jpg" },
     { type: "press", date: "2022-06-01", title: "Designing better catheters – with both more and less friction",
-      summary: "TU Delft research outreach feature.", url: "", source: "TU Delft" }
+      summary: "TU Delft research outreach feature on catheters that use both more and less friction.", url: "https://www.tudelft.nl/me/onderzoek/cohesieprojecten/designing-better-catheters-with-both-more-and-less-friction", source: "TU Delft" }
   ],
 
   /* ---------------- STUDIO (YouTube) ----------------

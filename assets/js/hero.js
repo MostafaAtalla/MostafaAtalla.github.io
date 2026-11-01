@@ -1,8 +1,8 @@
 /* Hero: the defense clip plays full width behind the quote; six coloured
    strings run across the bottom. Sweeping the pointer across a string plucks
    it: the string vibrates (1-D wave equation), music notes rise from the
-   crossing point, and with sound on it plays a plucked-string tone
-   (Karplus-Strong synthesis). */
+   crossing point, and with sound on it plays a quiet tone
+   (a soft, bowed violin-like voice with reverb). */
 (function () {
   const hero = document.querySelector(".hero");
   const canvas = document.getElementById("hero-canvas");
@@ -15,12 +15,22 @@
   const hearBtn = document.getElementById("hear-btn");
   let video = null;
 
-  function fallback() {
+  function noVideo() {
     media.innerHTML = "";
     media.classList.add("fallback");
     if (hearBtn) hearBtn.hidden = true;
-    hero.insertAdjacentHTML("beforeend", '<span class="sample hero-sample">Add your defense clip: assets/video/hero-loop.mp4</span>');
+    hero.insertAdjacentHTML("beforeend", '<span class="sample hero-sample">Add your defense clip: assets/video/hero-loop.mp4 or a YouTube ID</span>');
   }
+  function youtube() {
+    const id = encodeURIComponent(String(D.heroYoutubeId).trim());
+    const start = D.heroStart ? `&start=${parseInt(D.heroStart, 10)}` : "", end = D.heroEnd ? `&end=${parseInt(D.heroEnd, 10)}` : "";
+    media.classList.remove("fallback");
+    media.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0${start}${end}" title="Defense clip" allow="autoplay; encrypted-media" tabindex="-1" aria-hidden="true"></iframe>`;
+    video = null;
+    if (hearBtn) { hearBtn.hidden = false; hearBtn.textContent = "Watch with sound"; hearBtn.onclick = () => document.getElementById("overture").scrollIntoView(); }
+  }
+  // An mp4 that fails to load falls through to YouTube, then to the colour background.
+  const fail = () => (D.heroYoutubeId ? youtube() : noVideo());
   if (D.heroVideo) {
     video = document.createElement("video");
     video.muted = true; video.loop = true; video.playsInline = true;
@@ -30,21 +40,19 @@
     if (!reduce) video.autoplay = true;
     const src = document.createElement("source");
     src.src = D.heroVideo; src.type = "video/mp4";
-    src.addEventListener("error", fallback);
+    src.addEventListener("error", fail);
     video.appendChild(src);
     media.appendChild(video);
     if (!reduce) video.play().catch(() => {});
   } else if (D.heroYoutubeId) {
-    const id = encodeURIComponent(D.heroYoutubeId);
-    const start = D.heroStart ? `&start=${D.heroStart}` : "", end = D.heroEnd ? `&end=${D.heroEnd}` : "";
-    media.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0${start}${end}" title="Defense clip" allow="autoplay; encrypted-media" tabindex="-1" aria-hidden="true"></iframe>`;
-    if (hearBtn) { hearBtn.textContent = "Watch with sound"; hearBtn.addEventListener("click", () => document.getElementById("overture").scrollIntoView()); }
+    youtube();
   } else {
-    fallback();
+    noVideo();
   }
 
   if (video && hearBtn) {
     hearBtn.addEventListener("click", () => {
+      if (!video) return;
       if (video.muted || video.paused) {
         video.muted = false; video.currentTime = 0; video.play().catch(() => {});
         hearBtn.textContent = "Mute"; hearBtn.setAttribute("aria-pressed", "true");
@@ -58,17 +66,18 @@
   /* ---------------- strings ---------------- */
   const ctx = canvas.getContext("2d");
   // top to bottom: high to low, C major pentatonic so any sweep sounds musical
+  // top to bottom: E5 D5 B4 A4 F#4 D4, D major pentatonic, so any sweep sounds consonant
   const STR = [
-    { f: 1046.5, color: "#6CC3DB", w: 1.0 },
-    { f: 880.0, color: "#A3A8F2", w: 1.2 },
-    { f: 783.99, color: "#E2B45A", w: 1.4 },
-    { f: 659.25, color: "#EE8B97", w: 1.6 },
-    { f: 587.33, color: "#CC9BDB", w: 1.9 },
-    { f: 523.25, color: "#93C79F", w: 2.2 }
+    { f: 659.25, color: "#FFC94D", w: 1.0 },
+    { f: 587.33, color: "#FF8A65", w: 1.2 },
+    { f: 493.88, color: "#F48FA8", w: 1.4 },
+    { f: 440.0, color: "#B79CE0", w: 1.6 },
+    { f: 369.99, color: "#7FB2F0", w: 1.9 },
+    { f: 293.66, color: "#5ED1C8", w: 2.2 }
   ];
   const N = 160, GLYPHS = ["♪", "♫", "♩", "♬", "♪", "♫"];
   let W = 0, H = 0, strings = [], notes = [], pointer = null, last = null, sound = false;
-  let audio = null, buffers = [];
+  let audio = null, bus = null, voices = 0;
 
   function gap() { return W < 700 ? 15 : 20; }
   function baseY(i) { return H - (STR.length - 1) * gap() - (W < 700 ? 34 : 46) + i * gap(); }
@@ -112,7 +121,7 @@
       });
     }
     if (notes.length > 140) notes.splice(0, notes.length - 140);
-    if (sound) play(li, x);
+    if (sound && now - (s.lastTone || 0) > 260) { s.lastTone = now; play(li, x); }
   }
 
   function baton() {
@@ -166,26 +175,51 @@
 
   function loop() { baton(); step(); updateNotes(); draw(); requestAnimationFrame(loop); }
 
-  /* plucked-string sound, Karplus-Strong */
-  function makeBuffers() {
-    const sr = audio.sampleRate;
-    buffers = STR.map(({ f }) => {
-      const len = Math.floor(sr * 1.8), P = Math.round(sr / f), buf = audio.createBuffer(1, len, sr), d = buf.getChannelData(0);
-      for (let i = 0; i < P; i++) d[i] = Math.random() * 2 - 1;
-      for (let i = P; i < len; i++) d[i] = 0.996 * 0.5 * (d[i - P] + d[i - P - 1 < 0 ? 0 : i - P - 1]);
-      return buf;
-    });
+  /* Soft bowed-string voice: two detuned sawtooth oscillators through a gentle
+     low-pass (the "body"), a slow bow attack, delayed vibrato and a long reverb. */
+  function initAudio() {
+    audio = new (window.AudioContext || window.webkitAudioContext)();
+    const sr = audio.sampleRate, len = Math.floor(sr * 3.2), ir = audio.createBuffer(2, len, sr);
+    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    const verb = audio.createConvolver(); verb.buffer = ir;
+    const wet = audio.createGain(); wet.gain.value = 0.55;
+    const dry = audio.createGain(); dry.gain.value = 0.5;
+    const comp = audio.createDynamicsCompressor(); comp.threshold.value = -24; comp.ratio.value = 4;
+    const master = audio.createGain(); master.gain.value = 0.7;
+    bus = audio.createGain();
+    bus.connect(dry); bus.connect(verb); verb.connect(wet);
+    dry.connect(comp); wet.connect(comp); comp.connect(master); master.connect(audio.destination);
   }
   function play(li, x) {
     try {
-      if (!audio) { audio = new (window.AudioContext || window.webkitAudioContext)(); makeBuffers(); }
+      if (!audio) initAudio();
       if (audio.state === "suspended") audio.resume();
-      const src = audio.createBufferSource(), g = audio.createGain();
-      src.buffer = buffers[li]; g.gain.value = 0.22;
-      let node = src.connect(g);
-      if (audio.createStereoPanner) { const p = audio.createStereoPanner(); p.pan.value = (x / W) * 1.6 - 0.8; g.connect(p); node = p; }
-      node.connect(audio.destination);
-      src.start();
+      if (voices >= 5) return;
+      voices++;
+      const f = STR[li].f, t = audio.currentTime, dur = 2.8;
+      const o1 = audio.createOscillator(), o2 = audio.createOscillator(), o3 = audio.createOscillator();
+      o1.type = "sawtooth"; o2.type = "sawtooth"; o3.type = "sine";
+      o1.frequency.value = f; o2.frequency.value = f * 1.0035; o3.frequency.value = f;
+      const vib = audio.createOscillator(), vibAmt = audio.createGain();
+      vib.frequency.value = 5.2; vibAmt.gain.setValueAtTime(0, t); vibAmt.gain.linearRampToValueAtTime(f * 0.005, t + 0.6);
+      vib.connect(vibAmt); vibAmt.connect(o1.frequency); vibAmt.connect(o2.frequency); vibAmt.connect(o3.frequency);
+      const mixSaw = audio.createGain(); mixSaw.gain.value = 0.35;
+      const mixSine = audio.createGain(); mixSine.gain.value = 0.6;
+      const lp = audio.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 0.6;
+      lp.frequency.setValueAtTime(700, t); lp.frequency.linearRampToValueAtTime(1900, t + 0.45); lp.frequency.exponentialRampToValueAtTime(900, t + dur);
+      const body = audio.createBiquadFilter(); body.type = "peaking"; body.frequency.value = 2800; body.Q.value = 1.2; body.gain.value = -6;
+      const env = audio.createGain();
+      env.gain.setValueAtTime(0.0001, t);
+      env.gain.exponentialRampToValueAtTime(0.09, t + 0.35);
+      env.gain.setValueAtTime(0.09, t + 0.7);
+      env.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o1.connect(mixSaw); o2.connect(mixSaw); o3.connect(mixSine);
+      mixSaw.connect(lp); mixSine.connect(lp); lp.connect(body); body.connect(env);
+      let out = env;
+      if (audio.createStereoPanner) { const pan = audio.createStereoPanner(); pan.pan.value = (x / W) * 1.2 - 0.6; env.connect(pan); out = pan; }
+      out.connect(bus);
+      [o1, o2, o3, vib].forEach((o) => { o.start(t); o.stop(t + dur + 0.05); });
+      o1.onended = () => { voices = Math.max(0, voices - 1); };
     } catch {}
   }
 

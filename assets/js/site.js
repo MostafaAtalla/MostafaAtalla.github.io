@@ -47,8 +47,8 @@
       paths += `<path d="${d}" fill="none" stroke="${col}" stroke-opacity="${(0.35 + r() * 0.5).toFixed(2)}" stroke-width="${(0.8 + r() * 1.4).toFixed(2)}"/>`;
     }
     const cx = w * (0.2 + r() * 0.6), cy = h * (0.3 + r() * 0.4);
-    const label = opts.label ? `<text x="24" y="${h - 26}" fill="#ECE8DF" font-family="Bodoni Moda, Georgia, serif" font-size="${opts.labelSize || 30}" font-style="italic">${esc(opts.label)}</text>` : "";
-    const sub = opts.sub ? `<text x="24" y="${h - 26 - (opts.labelSize || 30) - 6}" fill="${a}" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">${esc(String(opts.sub).toUpperCase())}</text>` : "";
+    const label = opts.label ? `<text x="24" y="${h - 26}" fill="#ECE8DF" font-family="Roboto Serif, Georgia, serif" font-size="${opts.labelSize || 30}" font-style="italic">${esc(opts.label)}</text>` : "";
+    const sub = opts.sub ? `<text x="24" y="${h - 26 - (opts.labelSize || 30) - 6}" fill="${a}" font-family="Roboto Mono, monospace" font-size="13" letter-spacing="2">${esc(String(opts.sub).toUpperCase())}</text>` : "";
     return `<svg class="${opts.cls || ""}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(opts.alt || "Decorative waveform")}">
       <rect width="${w}" height="${h}" fill="${bg}"/>
       <circle cx="${cx}" cy="${cy}" r="${h * 0.5}" fill="${a}" fill-opacity="0.06"/>

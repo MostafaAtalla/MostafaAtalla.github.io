@@ -65,7 +65,7 @@
     const step = 22, off = -((cam % step) + step) % step;
     for (let x = off; x < VW + step; x += step) { ctx.beginPath(); ctx.moveTo(x, floorY + 2); ctx.lineTo(x - 12, floorY + 18); ctx.stroke(); }
     // distance ticks every 1 cm
-    ctx.fillStyle = colors.ink3; ctx.font = "11px JetBrains Mono, monospace"; ctx.textAlign = "center";
+    ctx.fillStyle = colors.ink3; ctx.font = "11px Roboto Mono, monospace"; ctx.textAlign = "center";
     const cm = PX / 100, first = Math.floor(cam / cm);
     for (let i = first; i < first + VW / cm + 2; i++) {
       const x = i * cm - cam;
@@ -78,7 +78,7 @@
     const jitter = ultrasonic ? Math.sin(t * 900) * 0.8 : 0;
     ctx.fillStyle = stuck ? colors.ink : colors.brass;
     roundRect(bx - bw, by + jitter, bw, bh, 6); ctx.fill();
-    ctx.fillStyle = colors.card; ctx.font = "600 12px JetBrains Mono, monospace"; ctx.textAlign = "center";
+    ctx.fillStyle = colors.card; ctx.font = "600 12px Roboto Mono, monospace"; ctx.textAlign = "center";
     ctx.fillText(stuck ? "STICK" : "SLIP", bx - bw / 2, by + bh / 2 + 4 + jitter);
 
     // spring
@@ -93,7 +93,7 @@
     ctx.beginPath(); ctx.arc(hx, sy, 13, 0, Math.PI * 2);
     ctx.fillStyle = dragging ? colors.brass : colors.card; ctx.fill();
     ctx.strokeStyle = colors.brass; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = colors.ink3; ctx.font = "11px JetBrains Mono, monospace";
+    ctx.fillStyle = colors.ink3; ctx.font = "11px Roboto Mono, monospace";
     ctx.fillText("drag", hx, sy - 22);
 
     // trace panel
@@ -102,7 +102,7 @@
     ctx.beginPath(); ctx.moveTo(0, SCENE); ctx.lineTo(VW, SCENE); ctx.stroke();
     const Fmax = 0.8;
     const fy = (F) => py1 - (Math.max(-0.1, Math.min(F, Fmax)) / Fmax) * (py1 - py0);
-    ctx.fillStyle = colors.ink3; ctx.textAlign = "right"; ctx.font = "11px JetBrains Mono, monospace";
+    ctx.fillStyle = colors.ink3; ctx.textAlign = "right"; ctx.font = "11px Roboto Mono, monospace";
     [0, 0.2, 0.4, 0.6, 0.8].forEach((F) => { ctx.fillText(F.toFixed(1), px0 - 8, fy(F) + 4); ctx.strokeStyle = colors.rule; ctx.globalAlpha = 0.6; ctx.beginPath(); ctx.moveTo(px0, fy(F)); ctx.lineTo(px1, fy(F)); ctx.stroke(); ctx.globalAlpha = 1; });
     ctx.save(); ctx.translate(14, (py0 + py1) / 2); ctx.rotate(-Math.PI / 2); ctx.textAlign = "center"; ctx.fillText("spring force (N)", 0, 0); ctx.restore();
     // thresholds

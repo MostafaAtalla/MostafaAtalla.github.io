@@ -10,8 +10,8 @@ window.SITE = {
     name: "Mostafa A. Atalla",
     shortName: "Mostafa Atalla",
     role: "Postdoctoral Researcher",
-    affiliation: "Bio-Inspired Technology (BITE) group, TU Delft",
-    location: "Delft, The Netherlands",
+    affiliation: "Robotics and Mechatronics (RaM), University of Twente",
+    location: "The Hague, The Netherlands",
     email: "mostafa.a.atalla@gmail.com",
     cv: "assets/docs/Atalla_CV.pdf",
     portrait: "", // e.g. "assets/photos/portrait.jpg"
@@ -44,7 +44,7 @@ window.SITE = {
     heroEnd: 0,              // seconds where it ends (0 = end of video)
 
     // The full defense clip in the section below the hero (with sound and controls).
-    youtubeId: "pBPTiyE4l84",
+    youtubeId: "",
     mp4: "assets/video/defense-clip.mp4",
     poster: "",
     caption: "Closing words of my PhD defense: science as an art, scientists as its maestros.",
@@ -55,7 +55,35 @@ window.SITE = {
     "I design medical instruments that treat friction as a design variable rather than a loss to be minimised. Endoluminal instruments move through biological lumens by contact, so the friction at that contact decides whether an instrument advances, holds position or injures tissue.",
     "My PhD at TU Delft showed that ultrasonic vibration can lower the friction of a catheter on demand through a squeeze film, and that coordinating friction across several contacts is enough to make a capsule robot for colonoscopy propel itself. At the University of Twente I now work on mechanically intelligent soft robots for safe interaction in colonoscopy."
   ],
-  now: "Currently: postdoc at TU Delft, lead organiser of the ICRA 2026 workshop “Soft ≠ Safe? Rethinking Softness in Medical Robotics”, and founder of Mijzan Mechanical.",
+  now: "Currently: postdoc at the University of Twente, lead organiser of the ICRA 2026 workshop “Soft ≠ Safe? Rethinking Softness in Medical Robotics”, and founder of Mijzan Mechanical.",
+
+  /* ---------------- HOME PAGE STATEMENTS ----------------
+     Drafts written from your CV. Rewrite them in your own words.  */
+  researchStatement: {
+    title: "Friction, engineered to function",
+    lead: "Every endoluminal instrument meets the body through contact, and friction governs that contact. Too much, and the instrument buckles, stalls or loads the tissue; too little, and it cannot hold position or transmit force.",
+    body: "My research treats friction as a function to be designed rather than a loss to be minimised: modulated in time by ultrasonic vibration, distributed in space across coordinated contacts, and encoded in the mechanics of the structure itself. The aim is instruments that glide, grip and propel through biological lumens on demand.",
+    principles: [
+      { title: "Physics first", text: "Understand the mechanism before designing the device. Squeeze-film levitation in liquid came before the first lubricated catheter." },
+      { title: "Design is the art", text: "Nature and imagination supply the form: an ovipositor, an inchworm, a vibrating asymmetric body." },
+      { title: "Intelligence in the structure", text: "Where possible, mechanics rather than software decides how an instrument interacts with tissue." },
+      { title: "Validate where it matters", text: "From bench models to ex-vivo tissue, results are reported for the conditions in which they were measured." }
+    ]
+  },
+  teachingStatement: {
+    title: "Research is learned by doing it",
+    lead: "Students learn research by owning a real question. Each MSc student I supervise works on an open problem inside an active project, designs and builds the experiment, and takes the result to a conference or a paper.",
+    practices: [
+      { title: "Ownership", text: "An open question, not an exercise: the student's result decides the next step of the project." },
+      { title: "Physical intuition", text: "Mechanisms first, explained with prototypes and demonstrations before equations." },
+      { title: "Communication", text: "A result is finished when it is clear: figures, talks and writing are trained as research skills." },
+      { title: "Open doors", text: "Fellowships, travel grants and workshops are shared early, so students can reach them." }
+    ]
+  },
+  vision: {
+    research: "Medical instruments that are safe by construction, whose mechanics decide how they touch the body.",
+    community: "A research community where junior researchers see opportunities early and own the work they do."
+  },
 
   /* ---------------- RESEARCH ---------------- */
   themes: [

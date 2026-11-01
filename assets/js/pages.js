@@ -44,42 +44,67 @@
   function home() {
     const d = S.defense;
     const vf = $("#defense");
-    if (d.youtubeId) {
+    if (d.youtubeId && String(d.youtubeId).trim()) {
+      d.youtubeId = String(d.youtubeId).trim();
       vf.innerHTML = `<button class="yt" data-id="${esc(d.youtubeId)}" data-title="PhD defense" aria-label="Play defense clip" style="height:100%">${ytThumb({ id: d.youtubeId })}<span class="play-disc">${ICON.play}</span></button>`;
       bindYT(vf);
     } else {
       vf.innerHTML = `<video controls preload="metadata" playsinline ${d.poster ? `poster="${esc(d.poster)}"` : ""}><source src="${esc(d.mp4)}" type="video/mp4"></video>`;
       const v = $("video", vf);
-      const fallback = () => { vf.innerHTML = `<div class="placeholder">${coverSVG("defense", { cls: "bg", alt: "" })}<div class="msg"><span class="play-disc">${ICON.play}</span><strong>Defense clip goes here</strong><span class="small" style="opacity:.75">Add a YouTube ID or <span class="mono">assets/video/defense-clip.mp4</span></span></div></div>`; };
+      const fallback = () => { vf.innerHTML = `<div class="placeholder">${coverSVG("defense", { cls: "bg", alt: "" })}<div class="msg"><span class="play-disc">${ICON.play}</span><strong>Full defense clip</strong><span class="small" style="opacity:.75">Add a YouTube ID or <span class="mono">assets/video/defense-clip.mp4</span></span></div></div>`; };
       $("source", v).addEventListener("error", fallback); v.addEventListener("error", fallback);
     }
-    $("#defense-cap").innerHTML = `<span>${esc(d.caption)}</span><span class="mono">${esc(S.quote.context)}</span>`;
-    $("#bio").innerHTML = S.bio.map((p) => `<p>${esc(p)}</p>`).join("") + `<p class="now">${esc(S.now)}</p>`;
+    $("#defense-cap").innerHTML = `<span>${esc(d.caption)}</span>`;
+    const [t1, t2] = String(d.thesis).split(":");
+    $("#thesis-title").innerHTML = t2 ? `<em>${esc(t1)}:</em>${esc(t2)}` : esc(d.thesis);
+    $("#promotors").textContent = "Promotors: Dr. ir. M. Wiertlewski, Dr. ir. A. Sakes and Prof. dr. ir. P. Breedveld";
+    $("#bio").innerHTML = S.bio.map((p) => `<p>${esc(p)}</p>`).join("");
 
-    const sup = S.mission.supervision.length;
+    // 01 research statement
+    const R = S.researchStatement;
+    $("#rs-title").textContent = R.title; $("#rs-lead").textContent = R.lead; $("#rs-body").textContent = R.body;
+    $("#rs-principles").innerHTML = R.principles.map((p) => `<li><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join("");
+
+    // 02 teaching
+    const T = S.teachingStatement, sup = S.mission.supervision, withPaper = sup.filter((x) => x.paper.length).length;
+    $("#ts-title").textContent = T.title; $("#ts-lead").textContent = T.lead;
+    $("#ts-practices").innerHTML = T.practices.map((p) => `<div class="practice"><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`).join("");
+    $("#ts-stat-n").textContent = `${withPaper} of ${sup.length}`;
+    $("#ts-stat-l").textContent = "supervised MSc theses led to co-authored papers, abstracts or patents";
+    $("#ts-courses").innerHTML = S.teaching.map((c) => `<li>${esc(c.title)}<span>${esc(c.year)} · ${esc(c.sub)}</span></li>`).join("");
+
+    // 03 vision
+    $("#vision-research").textContent = S.vision.research;
+    $("#vision-community").textContent = S.vision.community;
+
+    // 04 highlights
     const stats = [
-      { n: S.publications.filter((p) => p.type === "journal" || p.type === "conference").length, l: "journal and conference papers", href: "publications.html", c: "publications" },
-      { n: S.publications.filter((p) => p.type === "patent").length, l: "granted patents", href: "publications.html#patent", c: "research" },
-      { n: S.awards.filter((a) => /best|maurice/i.test(a.title)).length, l: "paper and presentation awards", href: "journey.html#awards", c: "journey" },
-      { n: sup, l: "MSc theses supervised", href: "mission.html#orchestra", c: "mission" },
-      { n: 6, l: "workshops organised", href: "mission.html#initiatives", c: "studio" }
+      { n: S.publications.filter((p) => p.type === "journal" || p.type === "conference").length, l: "journal and conference papers", href: "publications.html", c: "var(--acc-blue)" },
+      { n: S.publications.filter((p) => p.type === "patent").length, l: "granted patents", href: "publications.html#patent", c: "var(--acc-teal)" },
+      { n: S.awards.filter((a) => /best|maurice/i.test(a.title)).length, l: "paper and presentation awards", href: "journey.html#awards-section", c: "var(--acc-coral)" },
+      { n: sup.length, l: "MSc theses supervised", href: "mission.html#orchestra", c: "var(--acc-gold)" },
+      { n: 6, l: "workshops organised", href: "mission.html#initiatives", c: "var(--c-writing)" }
     ];
-    $("#glance").innerHTML = stats.map((s) => `<a href="${s.href}" style="--mc: var(--c-${s.c})"><span class="n">${s.n}</span><span class="l">${esc(s.l)}</span></a>`).join("");
+    $("#counters").innerHTML = stats.map((x) => `<a class="counter" href="${x.href}" style="--c:${x.c}"><span class="n" data-to="${x.n}">${x.n}</span><span class="l">${esc(x.l)}</span></a>`).join("");
+    const award = S.awards[0], paper = S.publications.find((p) => p.status === "accepted") || S.publications[0], talk = S.talks[0];
+    const snips = [
+      { k: "Latest recognition", t: award.title, p: `${award.org}, ${award.year}`, href: "journey.html#awards-section", c: "var(--acc-coral)" },
+      { k: `New paper · ${paper.year}`, t: paper.title, p: paper.venue, href: `publications.html#${paper.id}`, c: "var(--acc-blue)" },
+      { k: `${talk.kind} talk · ${talk.year}`, t: talk.title, p: talk.venue, href: "journey.html", c: "var(--acc-teal)" }
+    ];
+    $("#snippets").innerHTML = snips.map((x) => `<a class="snippet" href="${x.href}" style="--c:${x.c}"><span class="k">${esc(x.k)}</span><h3>${esc(x.t)}</h3><p>${esc(x.p)}</p></a>`).join("");
+    $("#explore").innerHTML = U.NAV.slice(1).map((n) => `<a href="${n.href}" style="--c: var(--c-${n.id})">${n.label}</a>`).join("");
 
-    const blurbs = {
-      research: "Friction as a design variable, and a lab where you can feel stick-slip turn into glide.",
-      publications: "Every paper, abstract and patent, searchable, with one-click citations.",
-      journey: "From Cairo to Massachusetts to Delft and Twente, with the awards along the way.",
-      mission: "Opening doors for junior researchers, and the initiatives behind it.",
-      writing: "Essays, LinkedIn pieces and press about the work.",
-      studio: "YouTube sessions on figures that speak science, talks and robots in motion.",
-      gallery: "Academic trips and photos with science heroes."
-    };
-    $("#movements").innerHTML = U.NAV.slice(1).map((n, i) => `<a class="movement" href="${n.href}" style="--mc: var(--c-${n.id})"><span class="roman">${U.ROMAN[i + 1]}.</span><h3>${n.label}</h3><p>${esc(blurbs[n.id])}</p></a>`).join("");
-
-    $("#home-writing").innerHTML = S.posts.slice().sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map(postRow).join("");
-    $("#home-studio").innerHTML = S.series[0].videos.slice(0, 3).map(videoCard).join("");
-    bindYT($("#home-studio"));
+    // count up once the counters scroll into view (final values are already in the page)
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+        if (!en.isIntersecting) return; io.unobserve(en.target);
+        const el = en.target, to = +el.dataset.to, t0 = performance.now(), dur = 1100;
+        const tick = (now) => { const k = Math.min((now - t0) / dur, 1); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); };
+        requestAnimationFrame(tick);
+      }), { threshold: 0.6 });
+      document.querySelectorAll(".counter .n").forEach((n) => io.observe(n));
+    }
   }
 
   /* ================= RESEARCH ================= */
@@ -154,8 +179,8 @@
     $("#orchestra-svg").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="group" aria-label="Supervised students">
       <path d="M ${cx - 250} ${cy} A 250 250 0 0 1 ${cx + 250} ${cy}" fill="none" stroke="var(--rule)"/>
       <path d="M ${cx - 150} ${cy} A 150 150 0 0 1 ${cx + 150} ${cy}" fill="none" stroke="var(--rule)"/>
-      <g transform="translate(${cx} ${cy - 22})"><rect x="-26" y="-6" width="52" height="28" rx="3" fill="var(--paper-2)" stroke="var(--ink-3)"/><text y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="var(--ink-2)">PODIUM</text></g>
-      ${seats.map((p, i) => `<g class="seat" data-i="${i}" tabindex="0" role="button" aria-label="${esc(p.s.name)}"><circle cx="${p.x}" cy="${p.y}" r="${p.s.paper.length ? 15 : 11}" fill="${p.s.paper.length ? "var(--tide)" : "var(--paper-2)"}" stroke="var(--ink-3)"/><text x="${p.x}" y="${p.y + 32}" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="12" fill="var(--ink-2)">${esc(p.s.name.split(" ")[0])}</text></g>`).join("")}
+      <g transform="translate(${cx} ${cy - 22})"><rect x="-26" y="-6" width="52" height="28" rx="3" fill="var(--paper-2)" stroke="var(--ink-3)"/><text y="44" text-anchor="middle" font-family="Roboto Mono, monospace" font-size="11" fill="var(--ink-2)">PODIUM</text></g>
+      ${seats.map((p, i) => `<g class="seat" data-i="${i}" tabindex="0" role="button" aria-label="${esc(p.s.name)}"><circle cx="${p.x}" cy="${p.y}" r="${p.s.paper.length ? 15 : 11}" fill="${p.s.paper.length ? "var(--tide)" : "var(--paper-2)"}" stroke="var(--ink-3)"/><text x="${p.x}" y="${p.y + 32}" text-anchor="middle" font-family="Roboto, sans-serif" font-size="12" fill="var(--ink-2)">${esc(p.s.name.split(" ")[0])}</text></g>`).join("")}
     </svg>`;
     const detail = $("#orchestra-detail");
     const show = (i) => {

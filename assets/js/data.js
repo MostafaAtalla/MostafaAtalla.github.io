@@ -79,14 +79,26 @@ window.SITE = {
       { title: "Validate where it matters", text: "From bench models to ex-vivo tissue, results are reported for the conditions in which they were measured." }
     ]
   },
-  teachingStatement: {
-    title: "Research is learned by doing it",
-    lead: "Students learn research by owning a real question. Each MSc student I supervise works on an open problem inside an active project, designs and builds the experiment, and takes the result to a conference or a paper.",
+  teachingPhilosophy: {
+    title: "Stimulating minds to think",
+    lead: "I believe teaching is about stimulating minds to think. That means engaging students actively in a dialogue where they can express their perspective freely, with the focus on deep understanding of the subject and, very importantly, its connection to the greater landscape of science and history. With the rise of AI, we need more than ever to cultivate critical thinking: the ability to ask the questions that matter.",
     practices: [
-      { title: "Ownership", text: "An open question, not an exercise: the student's result decides the next step of the project." },
-      { title: "Physical intuition", text: "Mechanisms first, explained with prototypes and demonstrations before equations." },
-      { title: "Communication", text: "A result is finished when it is clear: figures, talks and writing are trained as research skills." },
-      { title: "Open doors", text: "Fellowships, travel grants and workshops are shared early, so students can reach them." }
+      { title: "Questions before answers", text: "A session opens with a question rather than a definition. Students reason toward the concept in open dialogue and defend their own perspective, so understanding is built rather than received." },
+      { title: "Ideas with their history", text: "Every concept is taught in its place in the landscape of science: the problem that demanded it, the people who found it, and what it made possible next." },
+      { title: "Integrated science", text: "No subject is taught as a standalone island. Each course is presented as part of a whole, connected to the other disciplines it draws on and feeds into, so students see how the pieces of science fit together." },
+      { title: "A culture of learning from mistakes", text: "Mistakes are expected and openly discussed in class. A wrong answer examined together teaches more than a right answer memorised, so students learn to take risks in their thinking." },
+      { title: "Build it, then defend it", text: "Hands-on, project-based work tests ideas against reality; debate sessions and regular oral presentations make students argue for their reasoning in front of their peers." },
+      { title: "AI as an assistant, thinking as the core", text: "Students are encouraged to use AI engines as assistants that raise their productivity, while the course trains what AI cannot replace: asking the question that matters and judging whether an answer holds." }
+    ]
+  },
+  teachingStatement: {
+    title: "Patience, trust and room to grow",
+    lead: "Mentoring is about helping people grow and reach their full potential. It takes patience, patience and patience. As a mentor I am like a farmer who cultivates seeds: I give water and nutrients when they are needed, in the right amount, not too much and not too little, and then I leave the seeds the room and the time to grow.",
+    practices: [
+      { title: "Patience", text: "Growth cannot be rushed. Real progress takes time, and a mentor's first job is to wait for it." },
+      { title: "Trust and a safe space", text: "I trust my mentees and give them a safe space to make mistakes, because that is how they find their own way." },
+      { title: "The right dose", text: "Support when it is needed, room when it is not. Too much guidance stifles growth; too little leaves it starved." },
+      { title: "No one size fits all", text: "Every mentee, like every seed, has specific needs, so I tailor the style and frequency of mentorship to each person." }
     ]
   },
   vision: {

@@ -84,6 +84,8 @@
     if ($("#rs-principles")) $("#rs-principles").innerHTML = R.principles.map((p) => `<li><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join("");
   }
   function teachingBits() {
+    const TP = S.teachingPhilosophy;
+    if (TP && $("#tp-title")) { $("#tp-title").textContent = TP.title; $("#tp-lead").textContent = TP.lead; $("#tp-practices").innerHTML = TP.practices.map((p) => `<div class="practice"><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`).join(""); }
     const T = S.teachingStatement;
     if ($("#ts-title")) $("#ts-title").textContent = T.title;
     if ($("#ts-lead")) $("#ts-lead").textContent = T.lead;

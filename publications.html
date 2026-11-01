@@ -24,11 +24,20 @@
 <a class="skip" href="#main">Skip to content</a>
 <header id="site-header"></header>
 <main id="main">
-<section class="page-head"><div class="wrap">
-  <span class="eyebrow">Movement III · Publications</span>
-  <h1 class="display">Papers, abstracts and patents.</h1>
-  <p class="lede">Search by title, author or venue, filter by type, and copy a citation with one click.</p>
-</div></section>
+
+<section class="hero hero-sub" data-nav="Top">
+  <div class="hero-media" id="hero-media" aria-hidden="true"></div>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Publications</span>
+    <h1 class="hero-title">Papers, abstracts and patents.</h1>
+    <p class="hero-lede">Search by title, author or venue, filter by type, and copy a citation with one click.</p>
+    <div class="hero-cta">
+      <button class="btn ghost try-me" id="sound-btn" type="button" aria-pressed="false">♪ Try me: play the strings</button>
+    </div>
+  </div>
+  <span class="baton-hint">Sweep your cursor across the strings below, or tap one</span>
+</section>
 
 <section class="block"><div class="wrap">
   <div class="pub-tools">
@@ -42,5 +51,6 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pages.js"></script>
+<script src="assets/js/hero.js"></script>
 </body>
 </html>

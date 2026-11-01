@@ -9,6 +9,7 @@
   if (!hero || !canvas) return;
   const D = (window.SITE && window.SITE.defense) || {};
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isHome = document.body.dataset.page === "home";
 
   /* ---------------- background video ---------------- */
   const media = document.getElementById("hero-media");
@@ -77,7 +78,8 @@
       document.querySelector(".sound-nudge")?.remove();
       if (!heardOnce && video.muted) withSound(true).catch(() => {});
     };
-    if (!reduce) {
+    if (!reduce && !isHome) { video.muted = true; video.play().catch(() => {}); }
+    else if (!reduce) {
       withSound(false).catch(() => {
         if (!video || !video.isConnected) return; // clip failed to load
         video.muted = true; video.play().catch(() => {}); label();

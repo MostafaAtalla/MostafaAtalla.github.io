@@ -24,18 +24,27 @@
 <a class="skip" href="#main">Skip to content</a>
 <header id="site-header"></header>
 <main id="main">
-<section class="page-head"><div class="wrap">
-  <span class="eyebrow">Movement II · Research</span>
-  <h1 class="display">Glide, grip, propel.</h1>
-  <p class="lede">Instruments move through biological lumens by contact. I engineer the friction at that contact so an instrument slides when it should, holds when it must, and propels itself when it can.</p>
-</div></section>
 
-<section class="block"><div class="wrap">
+<section class="hero hero-sub" data-nav="Top">
+  <div class="hero-media" id="hero-media" aria-hidden="true"></div>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Research</span>
+    <h1 class="hero-title">Glide, grip, propel.</h1>
+    <p class="hero-lede">Instruments move through biological lumens by contact. I engineer the friction at that contact so an instrument slides when it should, holds when it must, and propels itself when it can.</p>
+    <div class="hero-cta">
+      <button class="btn ghost try-me" id="sound-btn" type="button" aria-pressed="false">♪ Try me: play the strings</button>
+    </div>
+  </div>
+  <span class="baton-hint">Sweep your cursor across the strings below, or tap one</span>
+</section>
+
+<section class="block" data-nav="Research themes"><div class="wrap">
   <div class="block-head"><div><span class="eyebrow">Three themes</span><h2>One variable, three functions</h2></div><a class="link-arrow" href="publications.html">All publications</a></div>
   <div class="themes" id="themes"></div>
 </div></section>
 
-<section class="block tint" id="lab"><div class="wrap">
+<section class="block tint" id="lab" data-nav="Friction lab"><div class="wrap">
   <div class="block-head"><div><span class="eyebrow">Interactive</span><h2>The friction lab</h2></div></div>
   <div class="lab">
     <div class="lab-stage">
@@ -71,6 +80,7 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pages.js"></script>
+<script src="assets/js/hero.js"></script>
 <script src="assets/js/lab.js"></script>
 </body>
 </html>

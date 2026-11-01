@@ -28,11 +28,24 @@
   function postHref(p) { return p.type === "essay" ? `post.html?p=${encodeURIComponent(p.slug)}` : (p.url || ""); }
   function postRow(p) {
     const href = postHref(p), ext = p.type !== "essay";
-    const kind = { essay: "Essay", linkedin: "LinkedIn", press: p.source || "Press" }[p.type];
-    const tagCls = p.type === "essay" ? "brass" : p.type === "linkedin" ? "tide" : "";
+    const kind = p.type === "essay" ? "Essay" : p.type === "press" ? (p.source || "Press") : p.cat === "perspective" ? "Perspective" : "News";
+    const tagCls = p.type === "essay" ? "brass" : p.cat === "perspective" ? "brass" : p.type === "linkedin" ? "tide" : "";
+    if (p.type === "linkedin") {
+      return `<div class="post-row li-row"><span class="d">${fmtDate(p.date)}</span><div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>
+        <div class="li-actions"><button type="button" class="li-read" data-urn="${esc(p.urn)}" aria-expanded="false">Read here</button><a href="${esc(p.url)}" target="_blank" rel="noopener">On LinkedIn ↗</a></div>
+        <div class="li-embed" hidden></div></div><span class="side"><span class="tag ${tagCls}">${kind}</span></span></div>`;
+    }
     const inner = `<span class="d">${fmtDate(p.date)}</span><div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p></div><span class="side">${sample(p)}<span class="tag ${tagCls}">${esc(kind)}${ext && href ? " ↗" : ""}</span></span>`;
     return href ? `<a class="post-row" href="${esc(href)}" ${ext ? 'target="_blank" rel="noopener"' : ""}>${inner}</a>` : `<div class="post-row">${inner}</div>`;
   }
+  // LinkedIn posts open inline as the official LinkedIn embed
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest(".li-read"); if (!b) return;
+    const box = b.closest(".li-row").querySelector(".li-embed");
+    const open = box.hidden;
+    if (open && !box.firstChild) box.innerHTML = `<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:${encodeURIComponent(b.dataset.urn)}" title="LinkedIn post" loading="lazy" allowfullscreen></iframe>`;
+    box.hidden = !open; b.setAttribute("aria-expanded", String(open)); b.textContent = open ? "Close" : "Read here";
+  });
 
   const glyph = {
     Glide: '<svg class="glyph" viewBox="0 0 240 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M10 50h220" stroke-width="1.4"/><path d="M10 44c6-3 12 3 18 0s12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0 12-3 18 0 12 3 18 0" stroke="var(--tide)" stroke-width="1.2"/><rect x="70" y="18" width="90" height="22" rx="4" stroke-width="1.4"/><path d="M168 29h40m-8-6 8 6-8 6" stroke="var(--m)" stroke-width="1.4"/></svg>',
@@ -90,7 +103,7 @@
     const snips = [
       { k: "Latest recognition", t: award.title, p: `${award.org}, ${award.year}`, href: "journey.html#awards-section", c: "var(--acc-coral)" },
       { k: `New paper · ${paper.year}`, t: paper.title, p: paper.venue, href: `publications.html#${paper.id}`, c: "var(--acc-blue)" },
-      { k: `${talk.kind} talk · ${talk.year}`, t: talk.title, p: talk.venue, href: "journey.html", c: "var(--acc-teal)" },
+      (() => { const v = S.posts.filter((x) => x.cat === "perspective").sort((a, b) => b.date.localeCompare(a.date))[0]; return v ? { k: "Latest perspective", t: v.title, p: v.summary, href: "writing.html#perspective", c: "var(--acc-teal)" } : { k: `${talk.kind} talk · ${talk.year}`, t: talk.title, p: talk.venue, href: "journey.html", c: "var(--acc-teal)" }; })(),
       { k: "Watch", t: "The Maestro: a short film about my PhD defense day", p: "10 min · Studio", href: "studio.html", c: "var(--c-studio)" }
     ];
     $("#snippets").innerHTML = snips.map((x) => `<a class="snippet" href="${x.href}" style="--c:${x.c}"><span class="k">${esc(x.k)}</span><h3>${esc(x.t)}</h3><p>${esc(x.p)}</p></a>`).join("");
@@ -129,7 +142,7 @@
     function render() {
       const list = S.publications.filter((p) => (state.type === "all" || p.type === state.type) && (!state.q || (p.title + p.authors + p.venue + p.year).toLowerCase().includes(state.q)));
       const years = [...new Set(list.map((p) => p.year))].sort((a, b) => b - a);
-      $("#pubs").innerHTML = list.length ? years.map((y) => `<div class="pub-year"><h3>${y}</h3><div class="pub-list">${list.filter((p) => p.year === y).map((p) => `
+      $("#pubs").innerHTML = list.length ? years.map((y) => `<div class="pub-year" data-nav="${y}"><h3>${y}</h3><div class="pub-list">${list.filter((p) => p.year === y).map((p) => `
         <article class="pub" id="${p.id}"><span class="code">${p.id}</span><div>
           <h4 class="title">${esc(p.title)}</h4>
           <p class="authors">${meName(p.authors)}</p>
@@ -170,7 +183,7 @@
     $("#manifesto").innerHTML = M.statement;
     $("#story").textContent = M.story;
     $("#pillars").innerHTML = M.pillars.map((p) => `<div class="pillar"><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`).join("");
-    $("#initiatives").innerHTML = M.initiatives.map((i) => `<div class="initiative"><span class="y">${esc(i.when)}</span><div><h3>${esc(i.title)} ${sample(i)}</h3><p>${esc(i.text)}</p><div class="tags">${i.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div></div></div>`).join("");
+    $("#initiatives").innerHTML = M.initiatives.map((i) => `<div class="initiative"><span class="y">${esc(i.when)}</span><div><h3>${esc(i.title)} ${sample(i)}</h3><p>${esc(i.text)}</p><div class="tags">${i.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}${i.url ? `<a class="tag-link" href="${esc(i.url)}" ${/^https?:/.test(i.url) ? 'target="_blank" rel="noopener"' : ""}>${/linkedin/.test(i.url) ? "Read the post ↗" : "Read the notes →"}</a>` : ""}</div></div></div>`).join("");
 
     // Orchestra: supervised students as seats in a semicircle
     const st = M.supervision, withPaper = st.filter((s) => s.paper.length).length;
@@ -207,14 +220,18 @@
   /* ================= WRITING ================= */
   function writing() {
     const tabs = $("#tabs"), list = $("#posts");
-    const kinds = [["all", "All"], ["essay", "Essays"], ["linkedin", "LinkedIn"], ["press", "In the press"]];
-    tabs.innerHTML = kinds.map(([k, l], i) => `<button class="tab" role="tab" data-k="${k}" aria-selected="${i === 0}">${l}</button>`).join("");
+    const kinds = [["all", "All"], ["perspective", "Perspectives"], ["news", "News"], ["essay", "Essays"], ["press", "In the press"]];
+    const match = (p, k) => k === "all" || p.type === k || p.cat === k;
+    const count = (k) => S.posts.filter((p) => match(p, k)).length;
+    tabs.innerHTML = kinds.map(([k, l]) => `<button class="tab" role="tab" data-k="${k}" aria-selected="false">${l} <span class="count">${count(k)}</span></button>`).join("");
     const render = (k) => {
-      const ps = S.posts.filter((p) => k === "all" || p.type === k).sort((a, b) => b.date.localeCompare(a.date));
+      tabs.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", t.dataset.k === k));
+      const ps = S.posts.filter((p) => match(p, k)).sort((a, b) => b.date.localeCompare(a.date));
       list.innerHTML = ps.length ? ps.map(postRow).join("") : `<p class="muted" style="padding:24px 0">Nothing here yet.</p>`;
     };
-    tabs.addEventListener("click", (e) => { const b = e.target.closest(".tab"); if (!b) return; tabs.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", t === b)); render(b.dataset.k); });
-    render("all");
+    tabs.addEventListener("click", (e) => { const b = e.target.closest(".tab"); if (!b) return; history.replaceState(null, "", "#" + b.dataset.k); render(b.dataset.k); });
+    const h = location.hash.slice(1);
+    render(kinds.some(([k]) => k === h) ? h : "all");
   }
 
   /* Minimal markdown: headings, paragraphs, lists, quotes, code, images, links, emphasis. */
@@ -260,7 +277,7 @@
 
   /* ================= STUDIO ================= */
   function studio() {
-    $("#series").innerHTML = S.series.map((s) => `<div class="series"><div><h3>${esc(s.name)}</h3><p>${esc(s.text)}</p></div><div class="grid c2" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))">${s.videos.map(videoCard).join("")}</div></div>`).join("");
+    $("#series").innerHTML = S.series.map((s) => `<div class="series" data-nav="${esc(s.name)}"><div><h3>${esc(s.name)}</h3><p>${esc(s.text)}</p></div><div class="grid c2" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))">${s.videos.map(videoCard).join("")}</div></div>`).join("");
     bindYT($("#series"));
     const yt = S.person.links.youtube;
     if (yt) { const a = $("#yt-channel"); a.href = yt; a.hidden = false; }

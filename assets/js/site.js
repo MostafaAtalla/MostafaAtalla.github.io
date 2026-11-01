@@ -225,4 +225,35 @@
 
   /* page-head staff ornament */
   document.querySelectorAll(".page-head").forEach((h) => h.insertAdjacentHTML("beforeend", staffSVG));
+
+  /* ---------- section navigator: every page lists its own sections ---------- */
+  function buildSectionNav() {
+    // sections, plus any inner block that names itself with data-nav (publication years, video series)
+    const sections = [...document.querySelectorAll("main > section, main [data-nav]")].filter((sec) => sec.offsetHeight > 0)
+      .filter((sec) => sec.dataset.nav || sec.querySelector(".sec-name, .block-head h2") || !sec.querySelector("[data-nav]"));
+    if (sections.length < 3) return;
+    const items = sections.map((sec, i) => {
+      const label = sec.dataset.nav || sec.querySelector(".sec-name, .block-head h2, h2, h1")?.textContent.trim() || `Section ${i + 1}`;
+      if (!sec.id) sec.id = "s-" + label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+      return { id: sec.id, label: label.length > 34 ? label.slice(0, 32) + "…" : label, sec };
+    });
+    const nav = document.createElement("nav");
+    nav.className = "sidenav"; nav.setAttribute("aria-label", "Sections on this page");
+    nav.innerHTML = `<button class="sidenav-toggle" type="button" aria-expanded="false" aria-controls="sidenav-list"><span aria-hidden="true">§</span> Sections</button>
+      <p class="sidenav-title">On this page</p>
+      <ol id="sidenav-list">${items.map((it) => `<li><a href="#${it.id}" data-id="${it.id}"><span class="dot" aria-hidden="true"></span><span class="lbl">${esc(it.label)}</span></a></li>`).join("")}</ol>`;
+    document.body.appendChild(nav);
+    const toggle = nav.querySelector(".sidenav-toggle");
+    toggle.addEventListener("click", () => { const open = nav.classList.toggle("open"); toggle.setAttribute("aria-expanded", open); });
+    nav.addEventListener("click", (e) => { if (e.target.closest("a")) { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); } });
+    const links = Object.fromEntries([...nav.querySelectorAll("a")].map((a) => [a.dataset.id, a]));
+    const setActive = (id) => Object.entries(links).forEach(([k, a]) => a.toggleAttribute("aria-current", k === id));
+    setActive(items[0].id);
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => entries.forEach((en) => { if (en.isIntersecting) setActive(en.target.id); }), { rootMargin: "-40% 0px -55% 0px" });
+      items.forEach((it) => io.observe(it.sec));
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(buildSectionNav, 0));
+  else setTimeout(buildSectionNav, 0);
 })();

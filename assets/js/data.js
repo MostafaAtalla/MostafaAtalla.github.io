@@ -97,7 +97,7 @@ window.SITE = {
       verb: "Grip",
       title: "Friction on demand",
       text: "Some tasks need the opposite: an instrument that holds its position against the lumen wall. Electroadhesion and switchable lubrication let one device stabilise where it must and slide where it should.",
-      pubs: ["A2", "C1"]
+      pubs: ["C0", "A2", "C1"]
     },
     {
       verb: "Propel",
@@ -111,6 +111,10 @@ window.SITE = {
      type: journal | conference | abstract | patent
      status: "" | "under review" | "accepted"            */
   publications: [
+    { id: "C0", type: "conference", year: 2026, status: "accepted",
+      title: "Toward 3D Printable Non-Planar Electroadhesive Structures for Active Anchoring",
+      authors: "M. A. Atalla et al.",
+      venue: "IEEE SENSORS 2026", url: "https://www.linkedin.com/feed/update/urn:li:activity:7520824637002256384/" },
     { id: "J1", type: "journal", year: 2026, status: "under review",
       title: "OSCAR: An Ovipositor-Inspired Self-Propelling Capsule Robot for Colonoscopy",
       authors: "M. A. Atalla, A. S. Sekar, R. van Starkenburg, D. J. Jager, A. Sakes, M. Wiertlewski, and P. Breedveld",
@@ -209,7 +213,7 @@ window.SITE = {
     { when: "2025–", kind: "industry", city: "hague", title: "Founder", org: "Mijzan Mechanical, The Hague", text: "Engineering consultancy and product design for mechatronic solutions." },
     { when: "2024–", kind: "academic", city: "twente", title: "Postdoctoral Researcher", org: "Robotics and Mechatronics, University of Twente", text: "Mechanically intelligent soft robots for safe interaction in colonoscopy, with Prof. dr. ir. Gijs Krijnen." },
     { when: "2020–2026", kind: "academic", city: "delft", title: "PhD Researcher", org: "Faculty of Mechanical Engineering, TU Delft", text: "Thesis: When Friction Meets Function. Promotors: Dr. ir. M. Wiertlewski, Dr. ir. A. Sakes and Prof. dr. ir. P. Breedveld." },
-    { when: "2020", kind: "industry", city: "boston", title: "Intern, Mechanical Design for Robotics and Navigation", org: "Philips Research North America, Cambridge MA", text: "Image Guided Therapy department." },
+    { when: "2020", kind: "industry", city: "boston", title: "Intern, Mechanical Design for Robotics and Navigation", org: "Philips Research North America, Cambridge MA", text: "Image Guided Therapy department. Built functional robotic hardware for a surgical application within three months." },
     { when: "2019", kind: "industry", city: "boston", title: "Research Intern, Mechanical Design", org: "Philips Research North America, Cambridge MA", text: "Ultrasound Imaging and Intervention department." },
     { when: "2018–2020", kind: "education", city: "boston", title: "MSc Robotics Engineering", org: "Worcester Polytechnic Institute", text: "Fulbright Scholar, medical robotics, advised by Dr. Loris Fichera. GPA 4.0/4.0." },
     { when: "2018–2019", kind: "industry", city: "boston", title: "Product Development Engineer Intern", org: "UbiRos, Natick MA", text: "" },
@@ -234,6 +238,8 @@ window.SITE = {
   ],
 
   talks: [
+    { year: 2026, kind: "Invited", title: "Engineering safe- and functional-by-design robots and devices", venue: "Robotics colloquium, TU Eindhoven" },
+    { year: 2026, kind: "Oral", title: "Grip as Needed, Glide on Demand: Ultrasonic Lubrication for Robotic Locomotion", venue: "ICRA 2026, Vienna" },
     { year: 2026, kind: "Invited", title: "The Body Thinks Too: Physical Intelligence for Medical Robotics in the Age of AI", venue: "ORSI Innotech Surgical AI & Telesurgery Days, Ghent" },
     { year: 2026, kind: "Oral", title: "Designing ‘With’ Friction: A New Paradigm Toward Programmable Physical Interaction", venue: "Embodied Intelligence Conference" },
     { year: 2025, kind: "Oral", title: "OSCAR: an Ovipositor-Inspired Capsule Robot for Colonoscopy", venue: "CRAS, Lisbon" },
@@ -260,13 +266,15 @@ window.SITE = {
       { title: "Build platforms", text: "Workshops at ICRA, RoboSoft and the Hamlyn Symposium put early-career researchers on the same stage as established groups." }
     ],
     initiatives: [
-      { when: "2026", title: "Soft ≠ Safe? Rethinking Softness in Medical Robotics", text: "Lead organiser of an ICRA 2026 workshop in Vienna, with S. Sharma, T. Morimoto, T. Nanayakkara, R. J. Webster III and A. Menciassi.", tags: ["Workshop", "ICRA"] },
+      { when: "2026", title: "“Approachable! Ask me anything!” badges", text: "At ICRA 2026 in Vienna I made badges for senior researchers who are open to being approached, so first-time attendees and junior researchers know whom they can talk to.", tags: ["Junior researchers", "ICRA"], url: "https://www.linkedin.com/feed/update/urn:li:activity:7467154829153517568/" },
+      { when: "2026", title: "Soft ≠ Safe? Rethinking Softness in Medical Robotics", text: "Lead organiser of an ICRA 2026 workshop in Vienna (5 June), with S. Sharma, T. Morimoto, T. Nanayakkara, R. J. Webster III and A. Menciassi: invited clinical, technical and industry talks, and pitches from three medical-robotics startups.", tags: ["Workshop", "ICRA"], url: "https://www.linkedin.com/feed/update/urn:li:activity:7465102661198069760/" },
+      { when: "2026", title: "Notes on intercultural PhD supervision", text: "A series of posts from my reading on intercultural supervision: how silence, independence and feedback are read differently across academic cultures.", tags: ["Mentoring", "Writing"], url: "writing.html#perspective" },
       { when: "2024–2026", title: "Hamlyn Symposium workshops", text: "Lead or co-organiser of four workshops on robotic colonoscopy, bio-inspired medical robotics, soft endoluminal systems and equitable surgical device design.", tags: ["Workshop", "HSMR"] },
       { when: "2025", title: "Soft Robotics Mimicking Human Body for Medical Applications", text: "Lead co-organiser of a RoboSoft 2025 workshop in Lausanne.", tags: ["Workshop", "RoboSoft"] },
       { when: "2024", title: "“Make your own soft robot”", text: "Hands-on soft robotics workshop for the public at the RoboCup 2024 Science Festival, Eindhoven.", tags: ["Outreach"] },
       { when: "2022–2023", title: "Dutch Soft Robotics Summer School and World Haptics", text: "Organising committee member for the 2022 summer school and symposium and the 2023 World Haptics conference.", tags: ["Community"] },
       { when: "2020", title: "Fulbright Association, Massachusetts Chapter", text: "Board member supporting incoming international scholars.", tags: ["Mentoring"] },
-      { when: "", title: "Your initiative for junior researchers", text: "Describe a mentoring programme, opportunity newsletter, application clinic or similar initiative you started, and what it changed for participants.", tags: ["Add yours"], placeholder: true }
+      { when: "", title: "Your next initiative for junior researchers", text: "Describe another mentoring programme, opportunity newsletter, application clinic or similar initiative, and what it changed for participants.", tags: ["Add yours"], placeholder: true }
     ],
     // Supervised students. "paper" lists the publication ids they co-authored.
     supervision: [
@@ -305,10 +313,35 @@ window.SITE = {
   posts: [
     { slug: "the-art-of-science", type: "essay", date: "2026-11-01", title: "The art of science",
       summary: "Why I closed my PhD defense by calling scientists the maestros of discovery.", placeholder: true },
-    { type: "linkedin", date: "2026-10-01", title: "Your LinkedIn article title", url: "",
-      summary: "Paste the link to a LinkedIn article or post and a one-line summary here.", placeholder: true },
-    { type: "press", date: "2024-11-01", title: "New catheter technology promises safer and more efficient treatment of blood vessels",
-      summary: "TU Delft news feature on ultrasonically lubricated catheters.", url: "", source: "TU Delft" },
+    { type: "linkedin", cat: "perspective", date: "2026-10-08", urn: "7514060889940094978", url: "https://www.linkedin.com/feed/update/urn:li:activity:7514060889940094978/", title: 'What is the point of “top 2%” lists?', summary: 'Why reducing scientific impact to a ranking misses what makes science valuable.' },
+    { type: "linkedin", cat: "perspective", date: "2026-05-03", urn: "7456493650366119936", url: "https://www.linkedin.com/feed/update/urn:li:activity:7456493650366119936/", title: 'Silence is not always disengagement', summary: 'Notes on intercultural PhD supervision: reading a quiet student as a cultural norm rather than a lack of interest.' },
+    { type: "linkedin", cat: "perspective", date: "2026-04-25", urn: "7453610049844699136", url: "https://www.linkedin.com/feed/update/urn:li:activity:7453610049844699136/", title: 'What a “good student” looks like is not shared', summary: 'Notes on intercultural PhD supervision: how expectations of independence differ between students and advisors.' },
+    { type: "linkedin", cat: "perspective", date: "2026-01-12", urn: "7416506938068340736", url: "https://www.linkedin.com/feed/update/urn:li:activity:7416506938068340736/", title: 'Are soft robots inherently safe?', summary: 'Softness brings real trade-offs; the question is when to use it, when not to, and when hybrid or rigid systems serve patients better.' },
+    { type: "linkedin", cat: "perspective", date: "2025-12-20", urn: "7408178259902742528", url: "https://www.linkedin.com/feed/update/urn:li:activity:7408178259902742528/", title: 'LLMs are 3D printers for words', summary: 'A language model fabricates whatever design it is given; the design, and the innovation, still have to come from us.' },
+    { type: "linkedin", cat: "perspective", date: "2025-11-17", urn: "7396200152119529473", url: "https://www.linkedin.com/feed/update/urn:li:activity:7396200152119529473/", title: 'Criticising ideas is not attacking people', summary: 'Academic institutions exist to test ideas, and that requires room for honest disagreement.' },
+    { type: "linkedin", cat: "perspective", date: "2025-11-06", urn: "7392337632854253568", url: "https://www.linkedin.com/feed/update/urn:li:activity:7392337632854253568/", title: 'Ideas should rise by their depth, not their postcode', summary: 'On academic elitism and why it makes science narrower.' },
+    { type: "linkedin", cat: "perspective", date: "2025-10-21", urn: "7386534434289922048", url: "https://www.linkedin.com/feed/update/urn:li:activity:7386534434289922048/", title: 'Figures first', summary: 'If you cannot explain it in a figure, you may not understand it well enough.' },
+    { type: "linkedin", cat: "perspective", date: "2025-07-02", urn: "7346295605230551041", url: "https://www.linkedin.com/feed/update/urn:li:activity:7346295605230551041/", title: 'Stories behind every picture', summary: "Why I photograph conferences and colleagues: the stories in people's faces." },
+    { type: "linkedin", cat: "perspective", date: "2024-06-08", urn: "7205150855438712832", url: "https://www.linkedin.com/feed/update/urn:li:activity:7205150855438712832/", title: 'Why is everyone on LinkedIn “thrilled”?', summary: 'A light question about the vocabulary of professional announcements.' },
+    { type: "linkedin", cat: "perspective", date: "2023-10-03", urn: "7115013270477926400", url: "https://www.linkedin.com/feed/update/urn:li:activity:7115013270477926400/", title: 'What two Nobel laureates said about funding and curiosity', summary: 'Reflections on long-term, curiosity-driven research and how it is funded.' },
+    { type: "linkedin", cat: "news", date: "2026-10-27", urn: "7520824637002256384", url: "https://www.linkedin.com/feed/update/urn:li:activity:7520824637002256384/", title: '3D-printed electroadhesive shafts for active anchoring', summary: 'Paper accepted at IEEE SENSORS 2026: non-planar structures with embedded electroadhesion, printed in one step.' },
+    { type: "linkedin", cat: "news", date: "2026-10-06", urn: "7513136497014009856", url: "https://www.linkedin.com/feed/update/urn:li:activity:7513136497014009856/", title: 'Colloquium talk at TU Eindhoven', summary: 'Invited talk at the TU/e Robotics colloquium on safe- and functional-by-design robots and devices.' },
+    { type: "linkedin", cat: "news", date: "2026-06-01", urn: "7467154829153517568", url: "https://www.linkedin.com/feed/update/urn:li:activity:7467154829153517568/", title: '“Approachable! Ask me anything!” badges at ICRA', summary: 'Badges for senior researchers who welcome questions from first-time attendees and junior researchers.' },
+    { type: "linkedin", cat: "news", date: "2026-05-29", urn: "7466097103459700737", url: "https://www.linkedin.com/feed/update/urn:li:activity:7466097103459700737/", title: 'At ICRA 2026 in Vienna', summary: 'Oral presentation on ultrasonic friction control for locomotion, a workshop poster and the Soft ≠ Safe workshop.' },
+    { type: "linkedin", cat: "news", date: "2026-05-26", urn: "7465102661198069760", url: "https://www.linkedin.com/feed/update/urn:li:activity:7465102661198069760/", title: 'Soft ≠ Safe? workshop programme', summary: 'The ICRA 2026 workshop programme: invited clinical, technical and industry talks, plus three startup pitches.' },
+    { type: "linkedin", cat: "news", date: "2025-06-28", urn: "7344712541798903808", url: "https://www.linkedin.com/feed/update/urn:li:activity:7344712541798903808/", title: 'Robotic colonoscopy workshop at the Hamlyn Symposium', summary: 'A full-day workshop on unmet clinical needs in colonoscopy and the translation of robotic solutions.' },
+    { type: "linkedin", cat: "news", date: "2025-03-17", urn: "7307418294355976193", url: "https://www.linkedin.com/feed/update/urn:li:activity:7307418294355976193/", title: 'RoboSoft 2025 workshop in Lausanne', summary: 'Call for contributions to “Soft Robotics Mimicking the Human Body for Advanced Medical Applications”.' },
+    { type: "linkedin", cat: "news", date: "2024-11-14", urn: "7262872744508145664", url: "https://www.linkedin.com/feed/update/urn:li:activity:7262872744508145664/", title: 'Variable-friction catheters on the TU Delft front page', summary: 'TU Delft news featured our ultrasonically lubricated catheters.' },
+    { type: "linkedin", cat: "news", date: "2024-09-26", urn: "7245069667755524096", url: "https://www.linkedin.com/feed/update/urn:li:activity:7245069667755524096/", title: 'Variable-friction catheters accepted in IEEE T-MRB', summary: 'Micron-level ultrasonic vibration switches a catheter between low and high friction on demand.' },
+    { type: "linkedin", cat: "news", date: "2024-09-05", urn: "7237575279555084288", url: "https://www.linkedin.com/feed/update/urn:li:activity:7237575279555084288/", title: 'Maurice Godet Award', summary: 'Best oral presentation and paper at the 49th Leeds-Lyon Symposium on Tribology, Lyon.' },
+    { type: "linkedin", cat: "news", date: "2024-05-30", urn: "7201984738826272768", url: "https://www.linkedin.com/feed/update/urn:li:activity:7201984738826272768/", title: 'Best Poster Award at the Dutch Soft Robotics Symposium', summary: 'For the wasp-inspired, mechanically inflatable pipeline locomotion system.' },
+    { type: "linkedin", cat: "news", date: "2024-04-21", urn: "7187809284330520576", url: "https://www.linkedin.com/feed/update/urn:li:activity:7187809284330520576/", title: 'RoboSoft 2024 in San Diego', summary: 'Presenting soft robotic in-pipe locomotion to the soft robotics community.' },
+    { type: "linkedin", cat: "news", date: "2024-03-12", urn: "7173393138596712448", url: "https://www.linkedin.com/feed/update/urn:li:activity:7173393138596712448/", title: 'RoboSoft travel award for excellence', summary: 'Travel support to present wasp-inspired pipeline locomotion at RoboSoft 2024.' },
+    { type: "linkedin", cat: "news", date: "2024-02-26", urn: "7167859584093650944", url: "https://www.linkedin.com/feed/update/urn:li:activity:7167859584093650944/", title: 'Bio-inspired medical robotics workshop', summary: 'Half-day workshop at the Hamlyn Symposium 2024, from evolution to revolution in healthcare.' },
+    { type: "linkedin", cat: "news", date: "2020-10-01", urn: "6717450065151107072", url: "https://www.linkedin.com/feed/update/urn:li:activity:6717450065151107072/", title: 'Second internship at Philips Research North America', summary: 'Functional robotic hardware for a surgical application, built in three months.' },
+    { type: "linkedin", cat: "news", date: "2020-03-07", urn: "6642170251003908096", url: "https://www.linkedin.com/feed/update/urn:li:activity:6642170251003908096/", title: 'Fulbright re-entry workshop in Washington DC', summary: 'Meeting Fulbright fellows from the Middle East and North Africa before returning home.' },
+    { type: "press", date: "2024-11-14", title: "New catheter technology promises safer and more efficient treatment of blood vessels",
+      summary: "TU Delft news feature on ultrasonically lubricated catheters.", url: "https://edu.nl/bpyxr", source: "TU Delft" },
     { type: "press", date: "2022-06-01", title: "Designing better catheters – with both more and less friction",
       summary: "TU Delft research outreach feature.", url: "", source: "TU Delft" }
   ],
@@ -353,8 +386,10 @@ window.SITE = {
     { id: "cras-2025", kind: "trips", title: "CRAS 2025", place: "Lisbon", year: 2025, photos: [] },
     { id: "robosoft-2025", kind: "trips", title: "RoboSoft 2025", place: "Lausanne", year: 2025, photos: [] },
     { id: "robosoft-2024", kind: "trips", title: "RoboSoft 2024", place: "San Diego", year: 2024, photos: [] },
+    { id: "hsmr-2025", kind: "trips", title: "Hamlyn Symposium 2025", place: "London", year: 2025, photos: [] },
     { id: "hsmr-2024", kind: "trips", title: "Hamlyn Symposium 2024", place: "London", year: 2024, photos: [] },
-    { id: "leeds-lyon-2024", kind: "trips", title: "Leeds-Lyon Symposium", place: "", year: 2024, photos: [] },
+    { id: "tue-2026", kind: "trips", title: "Robotics colloquium, TU/e", place: "Eindhoven", year: 2026, photos: [] },
+    { id: "leeds-lyon-2024", kind: "trips", title: "Leeds-Lyon Symposium", place: "Lyon", year: 2024, photos: [] },
     { id: "ius-2022", kind: "trips", title: "IEEE Ultrasonics Symposium", place: "Venice", year: 2022, photos: [] },
     { id: "heroes", kind: "heroes", title: "Science heroes", place: "Photos with the scientists who shaped how I think", year: "", photos: [
       { src: "", caption: "Name of the scientist, where you met", placeholder: true },

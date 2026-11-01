@@ -740,3 +740,86 @@ section.block.tint::before, section.block.band-dark::before {
 .sound-nudge { margin-top: 14px; font: 500 .8rem var(--mono); letter-spacing: .04em; color: rgba(238,242,247,.75); }
 .sound-nudge::before { content: "🔊 "; }
 .baton-hint { color: rgba(255, 201, 77, .8); font-size: .76rem; }
+
+/* =====================================================================
+   ONE THEME FOR THE WHOLE SITE (overrides the per-page colours above)
+   Coral is the single accent for links, controls and labels; grounds
+   alternate between white, cool grey and navy only.
+   ===================================================================== */
+body, body[data-page] { --m: var(--c-home); --m-light: var(--cl-home); --m-deep: var(--cd-home); }
+.tint { --ground: var(--paper-2); background: var(--paper-2); }
+.alt-rows > :nth-child(even) { --row: var(--paper-2); }
+section.block.tint::before, section.block.band-dark::before { display: none; }
+.site-footer::before { background: var(--m); height: 3px; }
+main > section, main [data-nav] { scroll-margin-top: 76px; }
+
+/* ---------- inner-page hero: same video and strings, shorter ---------- */
+.hero.hero-sub { min-height: clamp(420px, 56vh, 560px); }
+.hero-sub .hero-inner { padding-block: clamp(56px, 7vw, 96px) clamp(150px, 13vw, 176px); }
+.hero-title { font: 400 clamp(2.4rem, 5.4vw, 4.2rem)/1.06 var(--display); letter-spacing: -.02em; color: #EEF2F7; margin-top: 14px; max-width: 20ch; text-shadow: 0 2px 30px rgba(0,0,0,.35); }
+.hero-lede { margin-top: 16px; max-width: 60ch; font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: rgba(238,242,247,.8); }
+.hero-sub .hero-cta { margin-top: 26px; }
+
+/* ---------- section headings: the section name leads ---------- */
+.sec-name {
+  font: 400 clamp(2.3rem, 5vw, 3.8rem)/1.05 var(--display); letter-spacing: -.02em;
+  display: grid; gap: 18px; margin-bottom: 26px;
+}
+.sec-name::before { content: ""; width: 56px; height: 5px; border-radius: 3px; background: var(--sec-acc, var(--m)); }
+.sec-title { font: italic 400 clamp(1.35rem, 2.4vw, 1.9rem)/1.25 var(--display); color: var(--sec-acc, var(--m)); max-width: 30ch; letter-spacing: 0; }
+.home-defense .sec-name { margin: 10px 0 14px; font-size: clamp(2.1rem, 4vw, 3.2rem); }
+.home-defense { --sec-acc: var(--acc-coral); }
+.home-research { --sec-acc: #5ED1C8; }
+.home-research .sec-name { color: #EEF2F7; }
+.home-teaching { --sec-acc: var(--acc-blue); }
+.home-vision .sec-name { color: #0B1D33; }
+.home-vision .sec-name::before { background: #0B1D33; }
+.home-highlights { --sec-acc: var(--acc-coral); }
+.block-head h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.015em; }
+.block-head .eyebrow { font-size: .8rem; }
+
+/* ---------- section navigator ---------- */
+.sidenav {
+  position: fixed; z-index: 45; right: max(14px, env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%);
+  background: color-mix(in srgb, var(--card) 92%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--rule); border-radius: 14px; padding: 12px 10px; box-shadow: var(--shadow);
+  max-height: 70vh; overflow-y: auto; transition: padding .2s;
+}
+.sidenav-toggle { display: none; }
+.sidenav-title { display: none; font: 500 .7rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 2px 6px 8px; }
+.sidenav ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; position: relative; }
+.sidenav ol::before { content: ""; position: absolute; left: 11px; top: 10px; bottom: 10px; width: 1px; background: var(--rule); }
+.sidenav a { display: flex; align-items: center; gap: 10px; padding: 6px 6px; border-radius: 8px; text-decoration: none; color: var(--ink-2); font-size: .86rem; white-space: nowrap; position: relative; }
+.sidenav .dot { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--ink-3); background: var(--card); flex: none; transition: transform .2s, background .2s, border-color .2s; }
+.sidenav .lbl { max-width: 0; overflow: hidden; opacity: 0; transition: max-width .25s ease, opacity .2s; }
+.sidenav a:hover { color: var(--ink); background: var(--paper-2); }
+.sidenav a:hover .dot { border-color: var(--m); }
+.sidenav a[aria-current] { color: var(--ink); font-weight: 500; }
+.sidenav a[aria-current] .dot { background: var(--m); border-color: var(--m); transform: scale(1.25); }
+.sidenav:hover, .sidenav:focus-within { padding: 12px 14px 12px 10px; }
+.sidenav:hover .lbl, .sidenav:focus-within .lbl { max-width: 240px; opacity: 1; }
+.sidenav:hover .sidenav-title, .sidenav:focus-within .sidenav-title { display: block; }
+@media (max-width: 1100px) {
+  .sidenav { top: auto; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: none; padding: 0; border-radius: 999px; overflow: visible; max-height: none; }
+  .sidenav:hover, .sidenav:focus-within { padding: 0; }
+  .sidenav-toggle { display: inline-flex; gap: 8px; align-items: center; border: 0; background: transparent; padding: 11px 16px; font: 500 .86rem var(--body); color: var(--ink); }
+  .sidenav ol, .sidenav-title, .sidenav:hover .sidenav-title { display: none; }
+  .sidenav.open { border-radius: 14px; padding: 10px; }
+  .sidenav.open .sidenav-toggle { display: none; }
+  .sidenav.open .sidenav-title, .sidenav.open ol { display: grid; }
+  .sidenav.open .sidenav-title { display: block; }
+  .sidenav.open .lbl { max-width: 260px; opacity: 1; }
+  .sidenav.open { max-height: 70vh; overflow-y: auto; }
+}
+@media print { .sidenav { display: none; } }
+
+/* LinkedIn posts on the Writing page */
+.li-actions { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+.li-actions button, .li-actions a { font: 500 .78rem var(--mono); padding: 5px 10px; border: 1px solid var(--rule); border-radius: 4px; background: var(--card); color: var(--ink-2); text-decoration: none; }
+.li-actions button:hover, .li-actions a:hover { border-color: var(--m); color: var(--m); }
+.li-actions button[aria-expanded="true"] { background: var(--m); border-color: var(--m); color: #fff; }
+.li-embed { margin-top: 14px; max-width: 560px; border-radius: 8px; overflow: hidden; border: 1px solid var(--rule); background: var(--card); }
+.li-embed iframe { width: 100%; height: 620px; border: 0; display: block; }
+.tab .count { font: 500 .72rem var(--mono); opacity: .6; }
+.tag-link { font: 500 .72rem var(--mono); color: var(--m); text-decoration: none; padding: 5px 2px; }
+.tag-link:hover { text-decoration: underline; }

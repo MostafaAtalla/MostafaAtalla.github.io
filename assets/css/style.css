@@ -1525,3 +1525,6 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 .rs-cite { display: grid; gap: 4px; margin-top: 16px; font-style: normal; }
 .rs-by { font: 600 .95rem var(--body); color: var(--m); letter-spacing: .01em; }
 .rs-src { font: 400 .8rem/1.45 var(--body); color: var(--ink-3); max-width: 52ch; margin: 0 auto; }
+.rs-more .rs-quote { max-width: 34em; }
+.rs-quote p { text-wrap: balance; }
+.rs-src { text-wrap: balance; max-width: 60ch; }

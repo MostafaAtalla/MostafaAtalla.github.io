@@ -214,7 +214,7 @@
           </div>
         </div>
         <nav class="footer-nav" aria-label="Explore"><h4>Explore</h4><ul>${[{ href: "index.html", label: "Home" }, ...NAV, { href: "contact.html", label: "Contact" }].map((n) => `<li><a href="${n.href}">${esc(n.label)}</a></li>`).join("")}</ul></nav>
-        <div class="footer-base"><span>© ${new Date().getFullYear()} ${esc(S.person.name)}</span><span>Press <span class="kbd-hint">Ctrl K</span> to search the site</span></div>
+        <div class="footer-base"><span>© ${new Date().getFullYear()} ${esc(S.person.name)}. All rights reserved. Text, photos, videos and figures may not be reused without permission. <a href="LICENSE.md">Terms</a></span><span>Press <span class="kbd-hint">Ctrl K</span> to search the site</span></div>
       </div>`;
     footer.querySelector("[data-copy]").addEventListener("click", (e) => copy(e.currentTarget.dataset.copy, "Email copied"));
   }

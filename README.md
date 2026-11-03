@@ -9,7 +9,7 @@ All content lives in **one file: `assets/js/data.js`**.
 |---|---|---|
 | Home | `index.html` | Defense quote over the video with playable strings, PhD defense, research statement with a live friction lab, teaching philosophy, vision & mission, highlights (dials, latest papers/awards/perspectives/news, affiliations) |
 | Research | `research.html` | Statement, Glide/Grip/Propel themes, full friction lab |
-| Teaching & Mentoring | `teaching.html` | Philosophy, courses and course videos, supervised students ("the orchestra") |
+| Mentoring & Teaching | `teaching.html` | Philosophy, courses and course videos, supervised students ("the orchestra") |
 | Vision & Mission | `mission.html` | Vision and mission, what I do for junior researchers, workshops organised, grants that opened doors |
 | Journey | `journey.html` | Animated map of the two big moves (Cairo → Massachusetts → Delft), chapters with logos and a rotating photo reel, talks, service |
 | Publications | `publications.html` | Each entry with a figure or video, a one-line highlight, related presentations and awards |

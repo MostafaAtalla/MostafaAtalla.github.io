@@ -38,15 +38,25 @@
 <section class="block jr-map-sec" data-nav="The route"><div class="wrap">
 <header class="sec-head"><span class="kicker">Three countries, two big moves</span><h2 class="sec-name">The <em>route</em></h2><a class="btn ghost" id="cv-link" href="#" target="_blank" rel="noopener">Download full CV (PDF)</a></header>
 <div class="jr">
-  <div class="jr-map" id="jr-map"></div>
-  <div class="jr-steps" id="jr-steps" role="tablist" aria-label="Chapters"></div>
+  <div class="jr-tabs" role="tablist" aria-label="Map view">
+    <button class="jr-tab" role="tab" data-v="route" aria-selected="true">✈ My route</button>
+    <button class="jr-tab" role="tab" data-v="talks" aria-selected="false">★ Where I presented</button>
+  </div>
+  <div class="jr-view" data-v="route">
+    <div class="jr-map" id="jr-map"></div>
+    <div class="jr-steps" id="jr-steps" role="tablist" aria-label="Chapters"></div>
+  </div>
+  <div class="jr-view" data-v="talks" hidden>
+    <div id="vmap-holder"></div>
+    <p class="jr-hint">Hover a city to see the talks given there; click it to filter the <a href="#talks-sec">talk list</a> below.</p>
+  </div>
 </div>
 </div></section>
 <section class="block tint" data-nav="Chapter"><div class="wrap">
 <div class="jr-chapter" id="jr-chapter" aria-live="polite"></div>
 </div></section>
 <section class="block tint" data-nav="Talks"><div class="wrap">
-<header class="sec-head"><span class="kicker">On stage</span><h2 class="sec-name"><em>Talks</em></h2></header><ul class="list-plain" id="talks"></ul>
+<header class="sec-head" id="talks-sec"><span class="kicker">On stage</span><h2 class="sec-name"><em>Talks</em></h2></header><ul class="list-plain" id="talks"></ul>
 </div></section>
 <section class="block " data-nav="Service"><div class="wrap">
 <header class="sec-head"><span class="kicker">For the community</span><h2 class="sec-name"><em>Service</em></h2></header><ul class="list-plain" id="service"></ul>
@@ -55,6 +65,7 @@
 <footer id="site-footer"></footer>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/journey-map.js"></script>
+<script src="assets/js/venues-map.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pages.js"></script>
 <script src="assets/js/hero.js"></script>

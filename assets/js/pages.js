@@ -278,7 +278,10 @@
       return `<g class="pin-fan">${logos.map(([f, a], j) => { const ang = (-90 + (j - (n - 1) / 2) * step) * Math.PI / 180, x = (R * Math.cos(ang)).toFixed(1), y = (R * Math.sin(ang)).toFixed(1);
         return `<line x2="${x}" y2="${y}" style="--d:${j * 90}ms"/><g transform="translate(${x} ${y})"><g class="fan-in" style="--d:${j * 90}ms"><title>${esc(a)}</title><circle r="26"/><image href="assets/img/logos/${f}.png" x="-19" y="-19" width="38" height="38" preserveAspectRatio="xMidYMid meet"/></g></g>`; }).join("")}</g>`; };
     const logo = (f, alt) => `<img src="assets/img/logos/${f}.png" alt="${esc(alt)}" loading="lazy">`;
-    // map
+    // on arrival, every place of that chapter fans out around the pin
+    const fanAt = (logos, x) => { const n = logos.length, R = 84, step = n > 1 ? Math.min(42, 150 / (n - 1)) : 0, base = x > M.W - 110 ? -128 : x < 110 ? -52 : -90;
+      return `<g class="pin-fan">${logos.map(([f, a], j) => { const ang = (base + (j - (n - 1) / 2) * step) * Math.PI / 180, fx = (R * Math.cos(ang)).toFixed(1), fy = (R * Math.sin(ang)).toFixed(1);
+        return `<line x2="${fx}" y2="${fy}" style="--d:${j * 90}ms"/><g transform="translate(${fx} ${fy})"><g class="fan-in" style="--d:${j * 90}ms"><title>${esc(a)}</title><circle r="26"/><image href="assets/img/logos/${f}.png" x="-19" y="-19" width="38" height="38" preserveAspectRatio="xMidYMid meet"/></g></g>`; }).join("")}</g>`; };
     $("#jr-map").innerHTML = `<svg viewBox="0 0 ${M.W} ${M.H}" role="img" aria-label="Map: Cairo to Worcester, Massachusetts in 2018, then to Delft in 2020">
       <defs><radialGradient id="sea" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="var(--map-sea-1)"/><stop offset="1" stop-color="var(--map-sea-2)"/></radialGradient></defs>
       <rect width="${M.W}" height="${M.H}" fill="url(#sea)"/>
@@ -288,7 +291,7 @@
       ${C.map((c, i) => { const [x, y] = pin(c.pin); return `<g class="city" data-i="${i}" transform="translate(${x} ${y})" tabindex="0" role="button" aria-label="${esc(c.city)}">
           <circle r="22" class="pulse"/><circle r="7" class="dot"/>
           <g class="pin-logo" transform="translate(0 -46)"><circle r="24"/><image href="assets/img/logos/${c.logos[0][0]}.png" x="-17" y="-17" width="34" height="34" preserveAspectRatio="xMidYMid meet"/></g>
-          ${fan(c.logos)}
+          ${fanAt(c.logos, x)}
           <text y="30" class="city-name">${esc(c.city.split(",")[0])}</text><text y="46" class="city-yrs">${esc(c.years)}</text></g>`; }).join("")}
       <g id="plane" class="plane" opacity="0"><circle r="16" class="plane-halo"/><path d="M-11 0 L9 -2 L13 0 L9 2 Z M-2 -1 L-6 -9 L-3 -9 L4 -1 Z M-2 1 L-6 9 L-3 9 L4 1 Z M-10 -1 L-13 -5 L-11 -5 L-7 -1 Z M-10 1 L-13 5 L-11 5 L-7 1 Z"/></g>
     </svg>
@@ -305,7 +308,7 @@
       box.classList.remove("show"); void box.offsetWidth; box.classList.add("show");
       path.style.strokeDasharray = L; path.style.strokeDashoffset = L; path.classList.add("on");
       if (reduce) { path.style.strokeDashoffset = 0; then(); return; }
-      flying = true; plane.setAttribute("opacity", "1");
+      flying = true; plane.setAttribute("opacity", "1"); path.classList.add("flying");
       const t0 = performance.now(), dur = 2600;
       const step = (now) => {
         const k = Math.min((now - t0) / dur, 1), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
@@ -313,7 +316,7 @@
         const ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI, lift = Math.sin(Math.PI * e) * 0.6 + 1;
         plane.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${ang}) scale(${lift})`);
         path.style.strokeDashoffset = L * (1 - e);
-        if (k < 1) requestAnimationFrame(step); else { flying = false; plane.setAttribute("opacity", "0"); then(); }
+        if (k < 1) requestAnimationFrame(step); else { flying = false; plane.setAttribute("opacity", "0"); setTimeout(() => path.classList.remove("flying"), 900); then(); }
       };
       requestAnimationFrame(step);
     };
@@ -327,7 +330,8 @@
         MV.forEach((m, mi) => { if (mi < i) document.getElementById("arc-" + mi).style.strokeDashoffset = 0; });
         renderChapter(i);
       };
-      if (viaFlight && i === cur + 1) fly(cur, go); else { $("#jr-move").hidden = true; go(); }
+      // the flight caption fades out after landing so it never covers the map
+      if (viaFlight && i === cur + 1) fly(cur, () => { go(); clearTimeout(show.t); show.t = setTimeout(() => { if (!flying) $("#jr-move").hidden = true; }, 3200); }); else { $("#jr-move").hidden = true; go(); }
     };
     steps.addEventListener("click", (e) => {
       const h = e.target.closest(".jr-hop"); if (h) { const mi = +h.dataset.move; if (cur !== mi) { show(mi, false); setTimeout(() => show(mi + 1, true), 50); } else show(mi + 1, true); return; }
@@ -371,10 +375,65 @@
         setTimeout(() => show(1, true), 700); setTimeout(() => show(2, true), 700 + 2600 + 2200); }, { threshold: 0.6 });
       io.observe($("#jr-map"));
     }
-    const kinds = ["All", "Invited", "Oral", "Poster"]; let tk = "All";
-    $("#talks").insertAdjacentHTML("beforebegin", `<div class="chips" id="talk-chips" style="margin-bottom:14px">${kinds.map((k) => `<button class="chip" data-k="${k}" aria-pressed="${k === "All"}">${k}<span class="count">${k === "All" ? S.talks.length : S.talks.filter((t) => t.kind === k).length}</span></button>`).join("")}</div>`);
-    const renderTalks = () => { $("#talks").innerHTML = S.talks.filter((t) => tk === "All" || t.kind === tk).map((t) => `<li><span class="y">${t.year}</span><div>${esc(t.title)}<div class="sub"><span class="kpill k-${t.kind.toLowerCase()}">${esc(t.kind)}</span> ${esc(t.venue)}${t.award ? ` · <b class="star">★ ${esc(t.award)}</b>` : ""}</div></div></li>`).join(""); };
-    $("#talk-chips").addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (!b) return; tk = b.dataset.k; $("#talk-chips").querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", c === b)); renderTalks(); });
+    // ---------- talks: a map of every venue, linked to the list below ----------
+    const VM = window.VENUES_MAP, venues = (S.places || []).filter((p) => p.type === "venue");
+    const placeOf = (t) => venues.find((p) => p.match.some((m) => t.venue.includes(m)));
+    const kinds = ["All", "Invited", "Oral", "Poster"]; let tk = "All", city = null;
+    if (VM && $("#talks")) {
+      const V = venues.map((p) => { const items = S.talks.filter((t) => placeOf(t) === p); return { ...p, items, award: items.some((t) => t.award), pt: VM.pts[p.id] }; }).filter((p) => p.pt && p.items.length);
+      const starPts = (r) => Array.from({ length: 10 }, (_, k) => { const a = -Math.PI / 2 + k * Math.PI / 5, rr = k % 2 ? r * 0.45 : r; return `${(rr * Math.cos(a)).toFixed(1)},${(rr * Math.sin(a)).toFixed(1)}`; }).join(" ");
+      const LB = { delft: [-14, -8, "end"], egmond: [12, -6], ghent: [-12, 14, "end"], eindhoven: [14, 10], london: [-14, 5, "end"], lyon: [-16, 6, "end"], lausanne: [14, 5], venice: [14, 5], vienna: [14, 5], lisbon: [16, 5], sandiego: [12, 14], lasvegas: [12, -6] };
+      const online = S.talks.filter((t) => /online/i.test(t.venue)), awards = S.talks.filter((t) => t.award).length;
+      const I = VM.inset;
+      ($("#vmap-holder") || $("#talks")).insertAdjacentHTML($("#vmap-holder") ? "afterbegin" : "beforebegin", `<div class="vmap" id="vmap">
+        <svg viewBox="0 0 ${VM.W} ${VM.H}" role="img" aria-label="Map of the cities where I presented, awards marked with a star">
+          <defs><radialGradient id="vsea" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="var(--map-sea-1)"/><stop offset="1" stop-color="var(--map-sea-2)"/></radialGradient><filter id="vglow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5"/></filter><marker id="vhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9" class="vm-head"/></marker><marker id="vhead-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9" class="vm-head gold"/></marker></defs>
+          <rect width="${VM.W}" height="${VM.H}" fill="url(#vsea)"/><path d="${VM.grat}" class="grat"/><path d="${VM.land}" class="land"/>
+          <rect class="vmap-inset" x="${I.x}" y="${I.y}" width="${I.w}" height="${I.h}" rx="10"/><path d="${I.land}" class="land"/><text class="vmap-inset-k" x="${I.x + 12}" y="${I.y + I.h - 10}">${esc(I.label.toUpperCase())}</text>
+          <g class="vm-routes">${(() => { const h = VM.pts.delft; return V.filter((p) => p.id !== "delft" && Math.hypot(p.pt[0] - h[0], p.pt[1] - h[1]) > 45).map((p) => {
+            const [x, y] = p.pt, dx = x - h[0], dy = y - h[1], d = Math.hypot(dx, dy), ux = dx / d, uy = dy / d, end = [x - ux * 14, y - uy * 14], st = [h[0] + ux * 10, h[1] + uy * 10];
+            const mx = (st[0] + end[0]) / 2 - dy * .14, my = (st[1] + end[1]) / 2 + dx * .14;
+            return `<path class="vm-route${p.award ? " gold" : ""}" data-id="${p.id}" d="M${st[0].toFixed(1)},${st[1].toFixed(1)}Q${mx.toFixed(1)},${my.toFixed(1)} ${end[0].toFixed(1)},${end[1].toFixed(1)}" marker-end="url(#${p.award ? "vhead-g" : "vhead"})"/>`; }).join(""); })()}</g>
+          ${V.map((p) => { const [x, y] = p.pt, lb = LB[p.id] || [12, 5], n = p.items.length;
+            return `<g class="vp${p.award ? " award" : ""}" data-id="${p.id}" transform="translate(${x} ${y})" tabindex="0" role="button" aria-label="${esc(p.city)}: ${n} talk${n > 1 ? "s" : ""}${p.award ? ", award" : ""}">
+              ${p.award ? `<circle class="glow" r="18"/><polygon class="star" points="${starPts(12)}"/>` : `<circle class="dot" r="${6 + (n - 1) * 2}"/>`}
+              <text x="${lb[0]}" y="${lb[1]}" text-anchor="${lb[2] || "start"}">${esc(p.city)}${n > 1 ? ` <tspan class="n">×${n}</tspan>` : ""}</text></g>`; }).join("")}
+        </svg>
+        <div class="vmap-stats"><b>${V.length}</b> cities <span>·</span> <b>${S.talks.length}</b> talks <span>·</span> <b class="gold">★ ${awards}</b> awards${online.length ? ` <span>·</span> ${online.length} online` : ""}</div>
+        <div class="vmap-tip" id="vmap-tip" hidden></div>
+      </div>`);
+      const vm = $("#vmap"), tip = $("#vmap-tip");
+      const showTip = (g) => { const p = V.find((q) => q.id === g.dataset.id);
+        tip.innerHTML = `<span class="k">${esc(p.city)}</span><ul>${p.items.map((t) => `<li><span class="y">${t.year}</span><span><b>${esc(t.title)}</b>${esc(t.kind)} · ${esc(t.venue)}${t.award ? `<em>★ ${esc(t.award)}</em>` : ""}</span></li>`).join("")}</ul>`;
+        tip.hidden = false; const r = g.getBoundingClientRect(), mr = vm.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
+        let x = r.left - mr.left + r.width / 2 - tw / 2, y = r.top - mr.top - th - 10; if (y < 8) y = r.bottom - mr.top + 10;
+        tip.style.left = Math.max(8, Math.min(x, mr.width - tw - 8)) + "px"; tip.style.top = Math.max(8, Math.min(y, mr.height - th - 8)) + "px"; };
+      const hotRoute = (id) => vm.querySelectorAll(".vm-route").forEach((r) => r.classList.toggle("hot", r.dataset.id === id));
+      vm.addEventListener("mouseover", (e) => { const g = e.target.closest(".vp"); if (g) { showTip(g); hotRoute(g.dataset.id); } });
+      vm.addEventListener("mouseleave", () => hotRoute(city));
+      vm.addEventListener("mouseout", (e) => { const g = e.target.closest(".vp"); if (g && !g.contains(e.relatedTarget)) tip.hidden = true; });
+      vm.addEventListener("click", (e) => { const g = e.target.closest(".vp"); if (!g) return; city = city === g.dataset.id ? null : g.dataset.id; renderTalks(); showTip(g); });
+      vm.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.closest(".vp")) e.target.closest(".vp").click(); });
+      // one frame, two views
+      document.querySelectorAll(".jr-tab").forEach((t) => t.addEventListener("click", () => {
+        document.querySelectorAll(".jr-tab").forEach((x) => x.setAttribute("aria-selected", x === t));
+        document.querySelectorAll(".jr-view").forEach((v) => { v.hidden = v.dataset.v !== t.dataset.v; });
+        tip.hidden = true;
+      }));
+      // hovering a talk in the list lights its city
+      $("#talks").addEventListener("mouseover", (e) => { const li = e.target.closest("li[data-p]"); vm.querySelectorAll(".vp").forEach((g) => g.classList.toggle("hot", !!li && g.dataset.id === li.dataset.p)); });
+      $("#talks").addEventListener("mouseleave", () => vm.querySelectorAll(".vp.hot").forEach((g) => g.classList.remove("hot")));
+    }
+    $("#talks").insertAdjacentHTML("beforebegin", `<div class="chips" id="talk-chips" style="margin-bottom:14px">${kinds.map((k) => `<button class="chip" data-k="${k}" aria-pressed="${k === "All"}">${k}<span class="count">${k === "All" ? S.talks.length : S.talks.filter((t) => t.kind === k).length}</span></button>`).join("")}<button class="chip city-chip" id="city-chip" hidden></button></div>`);
+    const renderTalks = () => {
+      const list = S.talks.filter((t) => (tk === "All" || t.kind === tk) && (!city || (placeOf(t) || {}).id === city));
+      $("#talks").innerHTML = list.map((t) => { const p = placeOf(t); return `<li${p ? ` data-p="${p.id}"` : ""}><span class="y">${t.year}</span><div>${esc(t.title)}<div class="sub"><span class="kpill k-${t.kind.toLowerCase()}">${esc(t.kind)}</span> ${esc(t.venue)}${t.award ? ` · <b class="star">★ ${esc(t.award)}</b>` : ""}</div></div></li>`; }).join("") || `<li><span class="y">—</span><div class="muted">No talks match this filter.</div></li>`;
+      const cc = $("#city-chip"), cp = venues.find((p) => p.id === city); cc.hidden = !cp; if (cp) cc.innerHTML = `${esc(cp.city)} <span aria-hidden="true">✕</span>`;
+      document.querySelectorAll("#vmap .vp").forEach((g) => g.classList.toggle("sel", g.dataset.id === city));
+      document.querySelectorAll("#vmap .vm-route").forEach((r) => r.classList.toggle("hot", r.dataset.id === city));
+      document.getElementById("vmap")?.classList.toggle("has-sel", !!city);
+    };
+    $("#talk-chips").addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (!b) return; if (b.id === "city-chip") { city = null; renderTalks(); return; } tk = b.dataset.k; $("#talk-chips").querySelectorAll(".chip:not(.city-chip)").forEach((c) => c.setAttribute("aria-pressed", c === b)); renderTalks(); });
     renderTalks();
     $("#service").insertAdjacentHTML("beforebegin", (S.leadership || []).map((l) => `<div class="lead-card"><span class="lead-k">Community leadership</span><h3>${esc(l.role)}</h3><p class="lead-b">${esc(l.body)}</p><p>${esc(l.text)}</p></div>`).join(""));
     $("#service").innerHTML = S.service.slice(1).map((t) => `<li><span class="y">—</span><div>${esc(t)}</div></li>`).join("");

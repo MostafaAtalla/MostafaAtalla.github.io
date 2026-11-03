@@ -267,6 +267,26 @@ window.SITE = {
      kind: academic | industry | education ; city must match a station id */
   // Journey: chapters on the map, and the big moves between them.
   // logos are files in assets/img/logos/ ; photos rotate in each chapter.
+  /* Journey atlas: places shown on the map besides the three homes.
+     type "work": places worked or collaborated; type "venue": talks are matched to it
+     from talks[] by the strings in match (the talk year decides which chapter lights it up). */
+  places: [
+    { id: "enschede", type: "work", city: "Enschede", name: "University of Twente", chapter: "delft", logo: "utwente", text: "Postdoctoral researcher, RaM group, 2024–2026" },
+    { id: "sheffield", type: "work", city: "Sheffield", name: "University of Sheffield", chapter: "delft", text: "Tribology collaboration during the PhD" },
+    { id: "ghent", type: "venue", city: "Ghent", match: ["Ghent"] },
+    { id: "eindhoven", type: "venue", city: "Eindhoven", match: ["TU Eindhoven", "DSRS"] },
+    { id: "egmond", type: "venue", city: "Egmond aan Zee", match: ["Egmond"] },
+    { id: "london", type: "venue", city: "London", match: ["Hamlyn"] },
+    { id: "lyon", type: "venue", city: "Lyon", match: ["Leeds-Lyon"] },
+    { id: "lausanne", type: "venue", city: "Lausanne", match: ["Lausanne"] },
+    { id: "venice", type: "venue", city: "Venice", match: ["Venice"] },
+    { id: "vienna", type: "venue", city: "Vienna", match: ["Vienna"] },
+    { id: "lisbon", type: "venue", city: "Lisbon", match: ["Lisbon"] },
+    { id: "sandiego", type: "venue", city: "San Diego", match: ["San Diego"] },
+    { id: "lasvegas", type: "venue", city: "Las Vegas", match: ["APS March"] },
+    { id: "delft", type: "venue", city: "Delft", home: true, match: ["TU Delft", "BMechE"] }
+  ],
+
   chapters: [
     { id: "cairo", pin: "cairo", city: "Cairo, Egypt", years: "2009–2018", title: "Engineering foundations",
       text: "Mechanical design and production engineering at Cairo University, then industry: hydraulics maintenance, and research and innovation at Advansys, where I led a soft robotic hand exoskeleton project with Ain Shams University.",
@@ -328,7 +348,7 @@ window.SITE = {
     // kind: Invited | Oral | Poster ; award shown with a star
     { year: 2026, kind: "Invited", title: "The Body Thinks Too: Physical Intelligence for Medical Robotics in the Age of AI", venue: "ORSI Innotech Surgical AI & Telesurgery Days 2026, Ghent" },
     { year: 2026, kind: "Invited", title: "Safe and Functional by Design: Engineering Robots for Intelligent Physical Interaction", venue: "Robotics (RBT) Colloquium, TU Eindhoven" },
-    { year: 2026, kind: "Oral", title: "Designing ‘With’ Friction: A New Paradigm Toward Programmable Physical Interaction", venue: "Embodied Intelligence Conference" },
+    { year: 2026, kind: "Oral", title: "Designing ‘With’ Friction: A New Paradigm Toward Programmable Physical Interaction", venue: "Embodied Intelligence Conference (online)" },
     { year: 2026, kind: "Oral", title: "Grip as Needed, Glide on Demand: Ultrasonic Lubrication for Robotic Locomotion", venue: "ICRA 2026, Vienna" },
     { year: 2025, kind: "Oral", title: "OSCAR: an Ovipositor-Inspired Capsule Robot for Colonoscopy: A Proof of Concept", venue: "CRAS, Lisbon", award: "Best Paper and Oral Presentation Award" },
     { year: 2025, kind: "Oral", title: "Active Lubrication of Endoluminal Instruments Using Ultrasonic Waves", venue: "Dutch Biomedical Engineering Conference, Egmond aan Zee" },

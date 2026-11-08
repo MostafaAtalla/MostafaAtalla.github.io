@@ -1105,8 +1105,10 @@ main > section, main [data-nav] { scroll-margin-top: 76px; }
 .gal-tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--m); }
 .gal-years { margin-bottom: 22px; }
 .heroes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 18px; }
-.hero-card { border: 0; padding: 0; background: var(--card); border-radius: 14px; overflow: hidden; text-align: left; color: var(--ink); box-shadow: var(--shadow); }
+.hero-card { position: relative; display: block; cursor: pointer; border: 0; padding: 0; background: var(--card); border-radius: 14px; overflow: hidden; text-align: left; color: var(--ink); box-shadow: var(--shadow); }
 .hero-img { display: block; aspect-ratio: 4 / 5; overflow: hidden; }
+.hero-card .hero-txt { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 12px; background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,0)); color: #fff; }
+.hero-card .hero-txt .hero-name { color: #fff; font-size: 1rem; }
 .hero-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
 .hero-card:hover .hero-img img { transform: scale(1.04); }
 .hero-txt { display: grid; gap: 4px; padding: 14px 16px 16px; }

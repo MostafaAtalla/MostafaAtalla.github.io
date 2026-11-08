@@ -608,7 +608,7 @@
       chips.querySelector(".gal-years").hidden = tab !== "trips";
       if (tab === "heroes") {
         grid.className = "heroes-grid";
-        grid.innerHTML = heroes.length ? heroes.map((h, i) => `<button class="hero-card" data-h="${i}"><span class="hero-img"><img src="${esc(h.src)}" alt="${esc(h.name)}" loading="lazy"></span><span class="hero-txt"><span class="hero-name">${esc(h.name)}</span>${h.note ? `<span class="hero-note">${esc(h.note)}</span>` : ""}</span></button>`).join("")
+        grid.innerHTML = heroes.length ? heroes.map((h, i) => `<button class="hero-card" data-h="${i}"><span class="hero-img"><img src="${esc(h.src)}" alt="${esc(h.name || "With a science hero")}" loading="lazy"></span>${h.name || h.note ? `<span class="hero-txt">${h.name ? `<span class="hero-name">${esc(h.name)}</span>` : ""}${h.note ? `<span class="hero-note">${esc(h.note)}</span>` : ""}</span>` : ""}</button>`).join("")
           : `<div class="heroes-empty"><span class="he-frames"><span></span><span></span><span></span></span><h3>Photos with science heroes</h3><p>This space is reserved for photos with the scientists who shaped how I think. Add each photo to <span class="mono">assets/photos/heroes/</span> and list it under <span class="mono">heroes</span> in <span class="mono">assets/js/data.js</span> with the scientist's name and where you met.</p></div>`;
         return;
       }

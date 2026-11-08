@@ -598,7 +598,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-23.jpg", name: "Prof. Paul Breedveld, Prof. Robert J. Webster III, Prof. Michaël Wiertlewski and Jess", note: "After the PhD defense, Delft" },
     { src: "assets/photos/heroes/hero-24.jpg", name: "Prof. Jenny Dankelman and Prof. Emmanuel Vander Poorten (KU Leuven)", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-25.jpg", name: "Prof. Amir Hooshiar (McGill University)", note: "Hamlyn Symposium, London" },
-    { src: "assets/photos/heroes/hero-26.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-26.jpg", name: "Prof. Robert J. Webster III", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-27.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-28.jpg", name: "Dinner at the Hamlyn Symposium, London", note: "" },
     { src: "assets/photos/heroes/hero-29.jpg", name: "Hamlyn Symposium, London", note: "" },

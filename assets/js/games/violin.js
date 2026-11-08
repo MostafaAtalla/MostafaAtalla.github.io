@@ -84,6 +84,7 @@
       c.fillStyle = C.dark ? "#2A3A55" : "#EBD9C3"; c.fillRect(0, H - 34, 450, 34);
     };
     const drawViolinist = (mood) => {
+      const ink = C.dark ? "#3A4E72" : "#24324A";
       const X = 225, feet = H - 36, hip = feet - 150, sh = hip - 120, head = sh - 42; // ~1:7 proportions
       // legs and shoes
       c.strokeStyle = ink; c.lineWidth = 15; c.lineCap = "round"; c.beginPath(); c.moveTo(X - 12, hip); c.lineTo(X - 20, feet - 6); c.moveTo(X + 12, hip); c.lineTo(X + 18, feet - 6); c.stroke();
@@ -116,13 +117,20 @@
       const hand = limb(X - 30, sh + 8, frog.x, frog.y, 82, 82, 1, ink, 13);
       c.fillStyle = "#fff"; c.strokeStyle = ink; c.lineWidth = 1.5; c.beginPath(); c.arc(hand[0], hand[1], 6.5, 0, TAU); c.fill(); c.stroke();
       c.beginPath(); c.arc(scroll.x - vdx * 16, scroll.y - vdy * 16 + 6, 6.5, 0, TAU); c.fill(); c.stroke();
-      // head tilted onto the chin rest
+      // head tilted onto the chin rest: a friendly face, eyes closed in the music, open and a little worried otherwise
       c.save(); c.translate(X + 6, head); c.rotate(0.18);
-      c.fillStyle = "#fff"; c.strokeStyle = ink; c.lineWidth = 2.2; c.beginPath(); c.ellipse(0, 0, 25, 28, 0, 0, TAU); c.fill(); c.stroke();
-      c.fillStyle = ink; c.beginPath(); c.moveTo(-26, -6); c.quadraticCurveTo(-24, -34, 0, -32); c.quadraticCurveTo(26, -36, 25, -4); c.quadraticCurveTo(14, -22, 6, -20); c.quadraticCurveTo(-8, -24, -26, -6); c.fill();
-      k.rr(c, -19, -6, 15, 9, 3); c.fill(); k.rr(c, 3, -6, 15, 9, 3); c.fill(); c.fillRect(-4, -3, 7, 2.5);
-      if (mood > 0.5) { k.sparkle(c, -11, -2, 4, "#FFB300"); k.sparkle(c, 11, -2, 4, "#FFB300"); }
-      c.strokeStyle = ink; c.lineWidth = 2; c.beginPath(); if (mood > 0.2) c.arc(0, 8, 8, 0.15 * Math.PI, 0.85 * Math.PI); else if (mood < -0.2) c.arc(0, 18, 8, 1.2 * Math.PI, 1.8 * Math.PI); else { c.moveTo(-6, 13); c.lineTo(6, 13); } c.stroke();
+      const skin = "#F3CDA8", hairC = "#5A3A22", feat = "#3A2A20";
+      c.fillStyle = skin; c.strokeStyle = "#B98A66"; c.lineWidth = 1.8; c.beginPath(); c.ellipse(0, 0, 24, 27, 0, 0, TAU); c.fill(); c.stroke();
+      c.beginPath(); c.ellipse(-24, 2, 4, 6, 0, 0, TAU); c.fill(); c.stroke(); // ear
+      c.fillStyle = hairC; c.beginPath(); c.moveTo(-25, -2); c.quadraticCurveTo(-27, -30, -2, -31); c.quadraticCurveTo(24, -32, 25, -6); c.quadraticCurveTo(18, -20, 4, -19); c.quadraticCurveTo(-10, -22, -16, -12); c.quadraticCurveTo(-20, -8, -25, -2); c.fill();
+      c.fillStyle = "rgba(235,120,110,.35)"; c.beginPath(); c.ellipse(-13, 9, 5, 3.2, 0, 0, TAU); c.ellipse(13, 9, 5, 3.2, 0, 0, TAU); c.fill(); // cheeks
+      c.strokeStyle = feat; c.fillStyle = feat; c.lineWidth = 2;
+      if (st.reg === "music") { c.beginPath(); c.arc(-9, 0, 4, 1.1 * Math.PI, 1.9 * Math.PI); c.stroke(); c.beginPath(); c.arc(9, 0, 4, 1.1 * Math.PI, 1.9 * Math.PI); c.stroke(); } // eyes closed, enjoying
+      else { c.beginPath(); c.arc(-9, -1, 2.6, 0, TAU); c.arc(9, -1, 2.6, 0, TAU); c.fill(); c.fillStyle = "#fff"; c.beginPath(); c.arc(-8.2, -2, 0.9, 0, TAU); c.arc(9.8, -2, 0.9, 0, TAU); c.fill();
+        if (mood < -0.2) { c.lineWidth = 1.6; c.beginPath(); c.moveTo(-13, -9); c.lineTo(-5, -8); c.moveTo(13, -9); c.lineTo(5, -8); c.stroke(); } }
+      c.strokeStyle = feat; c.lineWidth = 2; c.beginPath();
+      if (mood > 0.2) c.arc(0, 9, 6, 0.15 * Math.PI, 0.85 * Math.PI); else if (mood < -0.2) { c.ellipse(0, 14, 3, 2.4, 0, 0, TAU); } else c.arc(0, 11, 5, 0.25 * Math.PI, 0.75 * Math.PI);
+      c.stroke();
       c.restore();
       // effects
       if (st.reg === "music") { for (let i = 0; i < 4; i++) { const a = (t * 0.6 + i / 4) % 1; k.note(c, X + 120 + i * 24 + Math.sin(t * 2 + i) * 6, sh - 40 - a * 110, 1.3, `rgba(242,140,40,${1 - a})`); } k.sparkle(c, X - 120, sh - 60, 8, "#FFB300"); }

@@ -583,7 +583,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-5.jpg", name: "Prof. Arianna Menciassi", note: "RoboSoft 2025, Lausanne" },
     { src: "assets/photos/heroes/hero-6.jpg", name: "Prof. Leonardo Mattos", note: "CRAS 2025" },
     { src: "assets/photos/heroes/hero-7.jpg", name: "Prof. Oussama Khatib", note: "ICRA 2026, Vienna" },
-    { src: "assets/photos/heroes/hero-9.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-9.jpg", name: "Prof. Gijs Krijnen", note: "University of Twente" },
     { src: "assets/photos/heroes/hero-10.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-11.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-12.jpg", name: "", note: "" },

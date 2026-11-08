@@ -587,7 +587,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-11.jpg", name: "URS 2026", note: "" },
     { src: "assets/photos/heroes/hero-12.jpg", name: "Prof. Michaël Wiertlewski", note: "" },
     { src: "assets/photos/heroes/hero-13.jpg", name: "Prof. Robert J. Webster III", note: "PhD defense, Delft" },
-    { src: "assets/photos/heroes/hero-14.jpg", name: "PhD defense, Delft", note: "" },
+    { src: "assets/photos/heroes/hero-14.jpg", name: "Prof. Michaël Wiertlewski and Prof. Robert J. Webster III", note: "PhD defense, Delft" },
     { src: "assets/photos/heroes/hero-15.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-16.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-17.jpg", name: "Hamlyn Symposium, London", note: "" },

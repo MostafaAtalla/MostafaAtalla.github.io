@@ -601,7 +601,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-26.jpg", name: "Prof. Robert J. Webster III", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-27.jpg", name: "Prof. Allison Okamura", note: "RoboSoft 2025, Lausanne" },
     { src: "assets/photos/heroes/hero-28.jpg", name: "Prof. Robert J. Webster III and Prof. Howie Choset", note: "Dinner at the Hamlyn Symposium, London" },
-    { src: "assets/photos/heroes/hero-29.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-29.jpg", name: "Prof. Robert J. Webster III, Prof. Luigi Manfredi, Prof. Alberto Arezzo and Dr. Marta Scali", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-30.jpg", name: "Hamlyn Symposium, London", note: "" },
     { src: "assets/photos/heroes/hero-31.jpg", name: "Hamlyn Symposium, London", note: "" },
     { src: "assets/photos/heroes/hero-32.jpg", name: "Hamlyn Symposium, London", note: "" },

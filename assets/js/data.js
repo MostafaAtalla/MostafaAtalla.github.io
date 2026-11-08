@@ -580,7 +580,7 @@ window.SITE = {
   heroes: [
     { src: "assets/photos/heroes/hero-36.jpg", name: "Prof. Jenny Dankelman, Prof. Just Herder, Prof. Robert J. Webster, Prof. Michaël Wiertlewski and Prof. Paul Breedveld", note: "PhD defense, Delft" },
     { src: "assets/photos/heroes/hero-4.jpg", name: "Prof. Arianna Menciassi", note: "My IEEE RAS mentor · ICRA 2026, Vienna" },
-    { src: "assets/photos/heroes/hero-5.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-5.jpg", name: "Prof. Arianna Menciassi", note: "RoboSoft 2025, Lausanne" },
     { src: "assets/photos/heroes/hero-6.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-7.jpg", name: "ICRA 2026, Vienna", note: "" },
     { src: "assets/photos/heroes/hero-9.jpg", name: "", note: "" },

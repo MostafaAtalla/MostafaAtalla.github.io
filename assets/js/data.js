@@ -604,7 +604,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-29.jpg", name: "Prof. Robert J. Webster III, Prof. Paul Breedveld, Prof. Luigi Manfredi, Prof. Alberto Arezzo and Dr. Marta Scali", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-30.jpg", name: "Prof. Howie Choset and Prof. Robert J. Webster III", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-31.jpg", name: "Prof. Arianna Menciassi", note: "Hamlyn Symposium, London" },
-    { src: "assets/photos/heroes/hero-32.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-32.jpg", name: "Prof. Paul Breedveld", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-33.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-34.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-35.jpg", name: "", note: "" },

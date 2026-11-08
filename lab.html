@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lab · Mostafa A. Atalla, PhD</title>
+<meta name="description" content="Play the research: four interactive games built on the models of my papers on ultrasonic lubrication, variable-friction catheters, self-propelling capsules and grip-glide locomotion.">
+<meta name="author" content="Mostafa A. Atalla, PhD">
+<meta property="og:title" content="Lab · Mostafa A. Atalla">
+<meta property="og:description" content="Play the research: four interactive games built on the models of my papers on ultrasonic lubrication, variable-friction catheters, self-propelling capsules and grip-glide locomotion.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A1424" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,300..700;1,8..144,300..700&family=Roboto:ital,wght@0,300..700;1,300..700&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body data-page="lab">
+<a class="skip" href="#main">Skip to content</a>
+<header id="site-header"></header>
+<main id="main">
+<section class="hero hero-sub lab-hero" data-nav="Top">
+  <div class="hero-media" id="hero-media" aria-hidden="true"></div>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">The Lab</span>
+    <h1 class="hero-title">Play the research.</h1>
+    <p class="hero-lede">Four games, one per contribution. Each runs on a reduced version of the model in its paper, so what you feel while playing is the physics we measured: friction that switches on and off, a film that lifts a disc, sliders that pull a capsule forward.</p>
+    <div class="hero-cta"><a class="btn" href="#glide">▶ Start with Game 1</a><a class="btn ghost" href="research.html">← The research behind the games</a></div>
+  </div>
+</section>
+<section class="block" data-nav="Choose a game"><div class="wrap">
+  <header class="sec-head"><span class="kicker">Choose a game</span><h2 class="sec-name">Four games, four <em>discoveries</em></h2></header>
+  <div class="lg-grid" id="lab-games"></div>
+</div></section>
+<section class="block tint lab-stage-sec" data-nav="Play"><div class="wrap">
+  <div class="lab-stage-box" id="lab-stage"></div>
+  <p class="lab-privacy">Finished runs are counted anonymously (game, score and settings; no name, account or identifier) to see how the games are played and improve them.</p>
+</div></section>
+<section class="block band-dark" data-nav="The research"><div class="wrap">
+  <a class="lab-back" href="research.html">
+    <span class="lp-k">The research behind the games</span>
+    <span class="lab-back-t">Physical intelligence for safe and functional mechanical interaction</span>
+    <span class="lab-back-d">Read the research statement, the philosophy that links fundamental and applied work, and the Glide, Grip and Propel themes these games are built on.</span>
+    <span class="lab-back-go">Go to Research →</span>
+  </a>
+</div></section>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="assets/js/hero.js"></script>
+<script src="assets/js/games/glide.js"></script>
+<script src="assets/js/lab-core.js"></script>
+<script src="assets/js/lab-previews.js"></script>
+</body>
+</html>

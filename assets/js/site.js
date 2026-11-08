@@ -4,7 +4,8 @@
   const page = document.body.dataset.page || "home";
 
   const NAV = [
-    { id: "research", href: "research.html", label: "Research", desc: "Statement, themes, friction lab" },
+    { id: "research", href: "research.html", label: "Research", desc: "Statement, philosophy, themes" },
+    { id: "lab", href: "lab.html", label: "Lab", desc: "Play the research: four interactive games" },
     { id: "teaching", href: "teaching.html", label: "Mentoring & Teaching", desc: "Philosophy, supervision, courses" },
     { id: "mission", href: "mission.html", label: "Vision & Mission", desc: "Vision, mission, initiatives for junior researchers" },
     { id: "journey", href: "journey.html", label: "Journey", desc: "Timeline, talks, service, CV" },

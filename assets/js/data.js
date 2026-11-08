@@ -267,6 +267,35 @@ window.SITE = {
      kind: academic | industry | education ; city must match a station id */
   // Journey: chapters on the map, and the big moves between them.
   // logos are files in assets/img/logos/ ; photos rotate in each chapter.
+  /* The Lab: one playable demo per research contribution.
+     papers = indices into publications[]; fig = a figure from the paper shown in the game. */
+  lab: {
+    title: "Play the research",
+    lede: "Four games, each driven by the model from the paper behind it. Feel why friction decides whether a catheter is safe, levitate a disc on a liquid film, steer a capsule to the cecum, and ski on ground with no ice.",
+    games: [
+      { id: "glide", n: 1, verb: "Glide", title: "The squeeze-film lab", hook: "Carry a full cup across a rough floor, levitate a disc on a liquid film, and stop a catheter on the mark.",
+        learn: "A surface vibrating a few micrometres turns stick-slip into glide, and the film carries load even in a liquid.",
+        papers: [6, 3], fig: "assets/img/pubs/squeezefilm.jpg", status: "live", time: "3 min",
+        model: ["Stick-slip: Coulomb friction (static and kinetic) on a spring-pulled sled, solved in time", "Friction reduction by surface, as measured: ~80% rigid dry, ~60% rigid wet, ~38% ex-vivo aorta", "Levitation height scales as amplitude/√mass (APL Eq. 14)"],
+        illus: ["Levitation prefactor set to the measured range (tens of µm); Eq. 14's constant is too sensitive to C_e to use directly", "Pressure trace shows the form of the inertia term, not a film-equation solution", "Water spill, heartbeat push, spring stiffness and masses"] },
+      { id: "catheter", n: 2, verb: "Glide + grip", title: "Catheter run", hook: "Be the cardiologist: navigate the vessels, then deploy a stent, a valve or remove a clot while the heart beats.",
+        learn: "Low friction makes navigation safe; high friction is what holds the tip still when it matters.",
+        papers: [3, 2, 11], fig: "assets/img/pubs/activelub.jpg", status: "soon", time: "5 min",
+        model: ["Wall friction switched between off and on, with the measured reduction (mean 38% on ex-vivo aorta)", "Friction building up along bends (capstan effect) in the full game"],
+        illus: ["Insertion force, buckling and wall damage: the papers report buckling only qualitatively", "Heartbeat motion, vessel geometry and deployment tolerance", "The preview is an animation, not the model"] },
+      { id: "oscar", n: 3, verb: "Propel", title: "OSCAR: race to the cecum", hook: "Design the cam that times twelve sliders, then drive your capsule through the colon against the clock.",
+        learn: "Thrust follows the retract–advance asymmetry of the cam; balancing the sliders smooths the ripple.",
+        papers: [1], fig: "assets/img/pubs/oscar-design.jpg", status: "soon", time: "5 min",
+        model: ["Mean thrust ∝ d_ret − d_adv (Eq. 18), using the measured asymmetry 0.82 / 0.64 / 0.48 for 1 / 2 / 3-jump cams", "12 sliders on 2π/n phases, moved by the cam: slow retraction, fast advance", "Ripple from slider switching, and from the rocking of an unbalanced advancing slider, which balanced groups (2 and 3 jumps) cancel"],
+        illus: ["Ripple amplitudes; the rocking term follows the paper's explanation, not a fitted model", "Colon shape, wall bulge and capsule speed in the preview"] },
+      { id: "ski", n: 4, verb: "Grip + glide", title: "Skiing without ice", hook: "Time each stride with the ultrasound under your skis and race on sand, grass and asphalt.",
+        learn: "Lubricate the ski that moves, let the other grip, and swap: locomotion with no lifting and no ice.",
+        papers: [10], fig: "assets/img/pubs/icra26.jpg", status: "soon", time: "3 min",
+        model: ["Grip or glide per ski from the ultrasound state, with Coulomb friction and a force balance (full game)", "Friction reduction by ground, as measured: 71–77% dry, 56–71% wet, 28–49% soil and sandpaper"],
+        illus: ["Effect of mistimed switching: a model prediction, not measured in the paper", "Skier, stride and race times; the preview is scripted"] }
+    ]
+  },
+
   /* Journey atlas: places shown on the map besides the three homes.
      type "work": places worked or collaborated; type "venue": talks are matched to it
      from talks[] by the strings in match (the talk year decides which chapter lights it up). */

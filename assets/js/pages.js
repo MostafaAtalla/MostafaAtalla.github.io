@@ -142,7 +142,7 @@
     $("#thesis-title").innerHTML = t2 ? `<em>${esc(t1)}:</em>${esc(t2)}` : esc(d.thesis);
     $("#promotors").textContent = "Promotors: Dr. ir. M. Wiertlewski, Dr. ir. A. Sakes and Prof. dr. ir. P. Breedveld";
     $("#bio").innerHTML = S.bio.map((p) => `<p>${esc(p)}</p>`).join("");
-    statement(); researchLines(); teachingBits(); vm();
+    statement(); researchLines(); teachingBits(); vm(); labPromo();
     const sup = S.mission.supervision, withPaper = sup.filter((x) => x.paper.length).length;
     $("#ts-stat-n").textContent = `${withPaper} of ${sup.length}`;
     $("#ts-stat-l").textContent = "supervised MSc theses led to co-authored papers, abstracts or patents";
@@ -222,8 +222,20 @@
     el.innerHTML = pillar(L.pillars[0]) + `<div class="rl-cycle">${arrow("to-f", L.toFundamental)}${arrow("to-a", L.toApplied)}</div>` + pillar(L.pillars[1]);
   }
 
+  // ---------- the Lab promo band (home + research): live mini versions of every game ----------
+  function labPromo() {
+    const el = $("#lab-promo"), L = S.lab; if (!el || !L) return;
+    const cite = (i) => { const p = S.publications[i]; return p ? `${(p.venue || "").split(",")[0].replace(/^Proceedings of /, "").replace(/^\d{4} /, "")} ${p.year}` : ""; };
+    el.innerHTML = `<div class="lp-grid">${L.games.map((g) => `<article class="lp-card">
+        <div class="lp-stage"><canvas class="lp-canvas" data-game="${g.id}" aria-label="Live preview: ${esc(g.title)}"></canvas><span class="lp-state"></span><button class="lp-toggle" type="button" data-for="${g.id}">⇄ Switch</button></div>
+        <div class="lp-body"><span class="lp-k">Game ${g.n} · ${esc(g.verb)}</span><h3>${esc(g.title)}</h3><p>${esc(g.hook)}</p>
+          <span class="lp-paper">Built on: ${g.papers.slice(0, 2).map(cite).join(" · ")}</span>
+          <details class="lp-fn"><summary>What's modelled, what's illustrative</summary><p><b>Modelled:</b> ${esc((g.model || []).join("; "))}.</p><p><b>Illustrative:</b> ${esc((g.illus || []).join("; "))}.</p></details>
+          <a class="lp-play" href="lab.html#${g.id}">${g.status === "live" ? "Play ▶" : "Preview ▶"}</a></div></article>`).join("")}</div>`;
+  }
+
   function research() {
-    statement();
+    statement(); labPromo();
     researchLines();
     $("#rs-lead")?.insertAdjacentHTML("beforebegin", `<div class="interests">${(S.researchInterests || []).map((x) => `<span class="int">${esc(x)}</span>`).join("")}</div>`);
     $("#themes").innerHTML = S.themes.map((t) => `<div class="theme">
@@ -414,12 +426,29 @@
       vm.addEventListener("mouseout", (e) => { const g = e.target.closest(".vp"); if (g && !g.contains(e.relatedTarget)) tip.hidden = true; });
       vm.addEventListener("click", (e) => { const g = e.target.closest(".vp"); if (!g) return; city = city === g.dataset.id ? null : g.dataset.id; renderTalks(); showTip(g); });
       vm.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.closest(".vp")) e.target.closest(".vp").click(); });
-      // one frame, two views
+      // default layout: one frame, two views (tabs)
       document.querySelectorAll(".jr-tab").forEach((t) => t.addEventListener("click", () => {
         document.querySelectorAll(".jr-tab").forEach((x) => x.setAttribute("aria-selected", x === t));
         document.querySelectorAll(".jr-view").forEach((v) => { v.hidden = v.dataset.v !== t.dataset.v; });
         tip.hidden = true;
       }));
+      // alternative layout (journey-split.html): two maps side by side, divided by a draggable boundary
+      const split = $("#jr-split"), dv = $("#jr-div");
+      if (split && dv) {
+        const DEF = 50;
+        const setX = (x, anim) => { x = Math.max(0, Math.min(100, x)); split.classList.toggle("anim", !!anim); split.style.setProperty("--x", x + "%"); dv.setAttribute("aria-valuenow", Math.round(x)); tip.hidden = true;
+          split.classList.toggle("full-l", x > 96); split.classList.toggle("full-r", x < 4); split.classList.toggle("narrow-r", x > 56); };
+        const fromEvent = (e) => { const r = split.getBoundingClientRect(); return ((e.clientX - r.left) / r.width) * 100; };
+        let drag = false;
+        dv.addEventListener("pointerdown", (e) => { drag = true; dv.setPointerCapture(e.pointerId); split.classList.add("dragging"); e.preventDefault(); });
+        dv.addEventListener("pointermove", (e) => { if (drag) setX(fromEvent(e)); });
+        const end = () => { drag = false; split.classList.remove("dragging"); };
+        dv.addEventListener("pointerup", end); dv.addEventListener("pointercancel", end);
+        dv.addEventListener("keydown", (e) => { const x = +dv.getAttribute("aria-valuenow"), st = e.shiftKey ? 20 : 5;
+          if (e.key === "ArrowLeft") setX(x - st, true); else if (e.key === "ArrowRight") setX(x + st, true); else if (e.key === "Home") setX(0, true); else if (e.key === "End") setX(100, true); else return; e.preventDefault(); });
+        dv.addEventListener("dblclick", () => setX(DEF, true));
+        split.querySelectorAll(".jr-tag").forEach((t) => t.addEventListener("click", () => { const now = +dv.getAttribute("aria-valuenow"), to = t.dataset.side === "l" ? 100 : 0; setX(Math.abs(now - to) < 4 ? DEF : to, true); }));
+      }
       // hovering a talk in the list lights its city
       $("#talks").addEventListener("mouseover", (e) => { const li = e.target.closest("li[data-p]"); vm.querySelectorAll(".vp").forEach((g) => g.classList.toggle("hot", !!li && g.dataset.id === li.dataset.p)); });
       $("#talks").addEventListener("mouseleave", () => vm.querySelectorAll(".vp.hot").forEach((g) => g.classList.remove("hot")));

@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Research · Mostafa A. Atalla, PhD</title>
-<meta name="description" content="Physical intelligence for safe and functional mechanical interaction across medical instruments, locomotion and manipulation, with an interactive friction lab.">
+<meta name="description" content="Physical intelligence for safe and functional mechanical interaction across medical instruments, locomotion and manipulation, with four interactive research games in the Lab.">
 <meta name="author" content="Mostafa A. Atalla, PhD">
 <meta property="og:title" content="Research · Mostafa A. Atalla">
-<meta property="og:description" content="Physical intelligence for safe and functional mechanical interaction across medical instruments, locomotion and manipulation, with an interactive friction lab.">
+<meta property="og:description" content="Physical intelligence for safe and functional mechanical interaction across medical instruments, locomotion and manipulation, with four interactive research games in the Lab.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/img/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -38,41 +38,17 @@
 <section class="block " data-nav="Statement"><div class="wrap">
 <header class="sec-head"><span class="kicker">What I study, and how</span><h2 class="sec-name">Research <em>statement</em></h2></header><p class="sec-title" id="rs-title"></p><p class="sec-lead" id="rs-lead"></p><div class="rs-more" id="rs-more"></div><ol class="principles light" id="rs-principles"></ol>
 </div></section>
+<section class="block band-dark lab-band" id="lab" data-nav="The Lab"><div class="wrap">
+  <header class="sec-head"><span class="kicker">Interactive · play the research</span><h2 class="sec-name">The <em>Lab</em></h2><a class="btn lab-enter" href="lab.html">Enter the Lab ▶</a></header>
+  <p class="sec-lead lab-lede">Don't just read about friction: feel it. Four games, each driven by the model from the paper behind it. Steer a catheter through beating vessels, levitate a disc on a liquid film, design a capsule that crawls to the cecum, and ski on ground with no ice.</p>
+  <div id="lab-promo"></div>
+  <p class="lab-band-foot">Each preview is live: press <b>⇄ Switch</b> to flip the key variable. <a href="lab.html">Play the full games in the Lab →</a></p>
+</div></section>
 <section class="block tint" id="lines" data-nav="Research philosophy"><div class="wrap">
 <header class="sec-head"><span class="kicker">Two pillars, one cycle</span><h2 class="sec-name">Research <em>philosophy</em></h2></header><p class="sec-title" id="rl-title"></p><p class="sec-lead" id="rl-lead"></p><div class="rl" id="rl"></div>
 </div></section>
 <section class="block" data-nav="Research themes"><div class="wrap">
 <header class="sec-head"><span class="kicker">One variable, three functions</span><h2 class="sec-name">Research <em>themes</em></h2><a class="link-arrow" href="publications.html">All publications</a></header><div class="themes" id="themes"></div>
-</div></section>
-<section class="block " id="lab" data-nav="Friction lab"><div class="wrap">
-<header class="sec-head"><span class="kicker">Interactive</span><h2 class="sec-name">The friction <em>lab</em></h2></header><div class="lab">
-    <div class="lab-stage">
-      <canvas id="lab-canvas" width="880" height="440" aria-label="Simulation of a block pulled by a spring over a surface, with a live force trace"></canvas>
-      <div class="lab-controls">
-        <div class="lab-row">
-          <button class="switch" id="us-switch" role="switch" aria-checked="false"><span class="knob"></span><span id="us-label">Ultrasonic lubrication off</span></button>
-          <button class="btn ghost small-btn" id="pull-btn" type="button">Pause pull</button>
-          <button class="btn ghost small-btn" id="reset-btn" type="button">Reset</button>
-        </div>
-        <div class="lab-row"><label for="amp">Vibration amplitude</label><input type="range" id="amp" min="0" max="100" value="70"><output id="amp-out" for="amp">70%</output></div>
-        <div class="lab-row"><label for="mus">Static friction μs</label><input type="range" id="mus" min="20" max="90" value="60"><output id="mus-out" for="mus">0.60</output></div>
-      </div>
-    </div>
-    <div>
-      <div class="lab-readout" aria-live="polite">
-        <div><span class="k">Spring force</span><div class="v" id="ro-force">0.00 N</div></div>
-        <div><span class="k">Contact</span><div class="v" id="ro-state">Sticking</div></div>
-        <div><span class="k">Friction <span style="text-transform:none">μk / μs</span></span><div class="v" id="ro-mu">–</div></div>
-        <div><span class="k">Distance</span><div class="v" id="ro-dist">0.0 cm</div></div>
-      </div>
-      <div class="lab-notes">
-        <p><strong>What you see.</strong> The hand pulls the block through a spring at constant speed. Because static friction exceeds kinetic friction, force builds until the block breaks free, overshoots and sticks again. The force trace becomes a sawtooth: stick-slip.</p>
-        <p><strong>Switch on the vibration.</strong> A squeeze film forms under the contact and carries part of the load. Effective friction drops and the gap between static and kinetic friction narrows, so the sawtooth collapses into a smooth glide at lower force.</p>
-        <p><strong>Try it.</strong> Drag the handle yourself, raise μs to exaggerate the jumps, or lower the amplitude to find where gliding begins.</p>
-        <p class="small muted">Illustrative model with Coulomb friction and assumed friction reductions; not fitted to experimental data.</p>
-      </div>
-    </div>
-  </div>
 </div></section>
 </main>
 <footer id="site-footer"></footer>
@@ -80,6 +56,6 @@
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pages.js"></script>
 <script src="assets/js/hero.js"></script>
-<script src="assets/js/lab.js"></script>
+<script src="assets/js/lab-previews.js"></script>
 </body>
 </html>

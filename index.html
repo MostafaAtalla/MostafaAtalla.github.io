@@ -33,6 +33,7 @@
     <div class="hero-attrib"><span class="line"></span><span>Mostafa A. Atalla · PhD defense, TU Delft</span></div>
     <div class="hero-cta">
       <button class="btn" id="hear-btn" type="button" aria-pressed="false">Mute the quote</button>
+      <a class="btn lab-cta" href="lab.html">▶ Play my research in the Lab</a>
       <a class="btn ghost" href="research.html">Explore the research</a>
       <button class="btn ghost try-me" id="sound-btn" type="button" aria-pressed="false">♪ Try me: play the strings</button>
     </div>
@@ -59,25 +60,11 @@
 
 <section class="home-research" id="statement" data-nav="Research statement &amp; philosophy"><div class="wrap">
   <header class="sec-head"><span class="kicker">What I study, and how</span><h2 class="sec-name">Research <em>statement</em> &amp; philosophy</h2></header>
-  <div class="research-grid">
+  <div class="research-grid solo">
     <div>
       <p class="sec-title" id="rs-title"></p>
       <p class="sec-lead" id="rs-lead"></p>
       <a class="text-link" href="research.html">Research themes</a>
-    </div>
-    <div class="lab-home">
-      <div class="lab-stage">
-        <div class="lab-top"><span class="lab-title">Friction lab</span><span class="lab-tip">Drag the handle · switch on the vibration</span></div>
-        <canvas id="lab-canvas" width="880" height="440" aria-label="Simulation of stick-slip friction with switchable ultrasonic lubrication"></canvas>
-        <div class="lab-controls">
-          <div class="lab-row">
-            <button class="switch" id="us-switch" role="switch" aria-checked="false"><span class="knob"></span><span id="us-label">Ultrasonic lubrication off</span></button>
-            <button class="btn ghost small-btn" id="reset-btn" type="button">Reset</button>
-          </div>
-          <div class="lab-mini" aria-live="polite"><span>Force <b id="ro-force">0.00 N</b></span><span>Contact <b id="ro-state">Sticking</b></span><span>μk / μs <b id="ro-mu">–</b></span><span>Distance <b id="ro-dist">0.0 cm</b></span></div>
-        </div>
-      </div>
-      <p class="lab-cap">Stick-slip turns into glide when the squeeze film forms. Illustrative model. <a href="research.html#lab">Open the full lab</a></p>
     </div>
   </div>
   <div class="rs-more" id="rs-more"></div>
@@ -89,6 +76,13 @@
     <a class="text-link" href="research.html#lines">The two pillars in detail</a>
   </div>
   <ol class="principles" id="rs-principles"></ol>
+</div></section>
+
+<section class="block band-dark lab-band" id="lab" data-nav="The Lab"><div class="wrap">
+  <header class="sec-head"><span class="kicker">Interactive · play the research</span><h2 class="sec-name">The <em>Lab</em></h2><a class="btn lab-enter" href="lab.html">Enter the Lab ▶</a></header>
+  <p class="sec-lead lab-lede">Don't just read about friction: feel it. Four games, each driven by the model from the paper behind it. Steer a catheter through beating vessels, levitate a disc on a liquid film, design a capsule that crawls to the cecum, and ski on ground with no ice.</p>
+  <div id="lab-promo"></div>
+  <p class="lab-band-foot">Each preview is live: press <b>⇄ Switch</b> to flip the key variable. <a href="lab.html">Play the full games in the Lab →</a></p>
 </div></section>
 
 <section class="home-teaching" id="teaching" data-nav="Mentoring &amp; teaching philosophy"><div class="wrap">
@@ -131,6 +125,6 @@
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pages.js"></script>
 <script src="assets/js/hero.js"></script>
-<script src="assets/js/lab.js"></script>
+<script src="assets/js/lab-previews.js"></script>
 </body>
 </html>

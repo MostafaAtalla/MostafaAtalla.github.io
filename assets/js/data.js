@@ -596,7 +596,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-20.jpg", name: "Prof. Oussama Khatib", note: "Lunch with leaders, ICRA 2026, Vienna" },
     { src: "assets/photos/heroes/hero-22.jpg", name: "Prof. Paul Breedveld", note: "" },
     { src: "assets/photos/heroes/hero-23.jpg", name: "Prof. Paul Breedveld, Prof. Robert J. Webster III, Prof. Michaël Wiertlewski and Jess", note: "After the PhD defense, Delft" },
-    { src: "assets/photos/heroes/hero-24.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-24.jpg", name: "Prof. Jenny Dankelman and Prof. Emmanuel Vander Poorten (KU Leuven)", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-25.jpg", name: "Hamlyn Symposium, London", note: "" },
     { src: "assets/photos/heroes/hero-26.jpg", name: "Hamlyn Symposium, London", note: "" },
     { src: "assets/photos/heroes/hero-27.jpg", name: "", note: "" },

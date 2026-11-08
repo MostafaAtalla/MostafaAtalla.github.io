@@ -170,10 +170,13 @@
     const brand = header.querySelector(".brand"), tools = header.querySelector(".tools");
     const fit = () => {
       if (nav.classList.contains("open")) return;
-      header.classList.remove("collapsed");
-      const b = brand.getBoundingClientRect(), n = nav.getBoundingClientRect(), t = tools.getBoundingClientRect();
-      const overflow = nav.scrollWidth > nav.clientWidth + 1 || n.left < b.right + 16 || n.right > t.left - 8;
-      header.classList.toggle("collapsed", overflow);
+      // try the full header first, then tighten one step at a time; fold into the menu button only as a last resort
+      const steps = ["fit-1", "fit-2", "fit-3", "fit-4"];
+      header.classList.remove("collapsed", ...steps);
+      const over = () => { const b = brand.getBoundingClientRect(), n = nav.getBoundingClientRect(), t = tools.getBoundingClientRect();
+        return nav.scrollWidth > nav.clientWidth + 1 || n.left < b.right + 16 || n.right > t.left - 8; };
+      let k = 0; while (over() && k < steps.length) header.classList.add(steps[k++]);
+      if (over()) { header.classList.remove(...steps); header.classList.add("collapsed"); }
     };
     fit();
     window.addEventListener("resize", fit);

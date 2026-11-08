@@ -1313,12 +1313,9 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 .c-loc svg { width: 16px; height: 16px; vertical-align: -3px; }
 .contact-email { padding: 12px 20px 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .c-loc svg, .inl { display: inline-block; }
-@media (max-width: 1500px) {
-  .contact-btn span { display: none; }
-  .contact-btn { padding: 0 11px; }
-  .nav a { padding: 8px 6px; font-size: .82rem; }
-  .site-header .wrap { gap: 12px; }
-}
+/* header compaction steps, added by site.js only when the menu would not fit */
+.site-header.fit-1 .nav a { padding: 8px 6px; font-size: .82rem; }
+.site-header.fit-1 .wrap { gap: 12px; }
 
 /* brand mark: note on a squeeze film */
 .brand-mark { color: var(--ink); --film: var(--acc-teal); width: 36px; height: 36px; }
@@ -1954,16 +1951,16 @@ html.a11y-contrast :focus-visible { outline-width: 3px; }
 html.a11y-links main a:not(.btn):not(.lab-cta), html.a11y-links .site-footer a { text-decoration: underline !important; text-underline-offset: 3px; }
 
 /* header: keep the menu in the bar on laptops; tighten step by step before falling back to the menu button */
-@media (max-width: 1420px) {
-  .site-header .brand-tag { display: none; }
-  .site-header .tools { gap: 4px; }
-  .site-header .icon-btn { width: 34px; height: 34px; }
-  .site-header .contact-btn { height: 34px; padding: 0 10px; }
-  .nav a { padding: 7px 5px; font-size: .8rem; }
-  .site-header .wrap { gap: 10px; }
-}
-@media (max-width: 1200px) {
-  .site-header .brand-name { font-size: .9rem; }
-  .nav { gap: 0; }
+.site-header.fit-2 .contact-btn span { display: none; }
+.site-header.fit-2 .contact-btn { padding: 0 11px; }
+.site-header.fit-3 .brand-tag { display: none; }
+.site-header.fit-3 .tools { gap: 4px; }
+.site-header.fit-3 .icon-btn { width: 34px; height: 34px; }
+.site-header.fit-3 .contact-btn { height: 34px; padding: 0 10px; }
+.site-header.fit-3 .nav a { padding: 7px 5px; font-size: .8rem; }
+.site-header.fit-3 .wrap { gap: 10px; }
+.site-header.fit-4 .brand-name { font-size: .9rem; }
+.site-header.fit-4 .nav { gap: 0; }
+.site-header.fit-4 .nav a { padding: 7px 4px; font-size: .78rem; }
   .nav a { padding: 7px 4px; font-size: .78rem; }
 }

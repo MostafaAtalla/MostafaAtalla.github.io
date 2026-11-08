@@ -12,7 +12,7 @@
 
   /* a person in the slides' style. o: { s scale, shirt, pants, skin, glasses, bow, mood (-1..1), arms: [[ax,ay],[bx,by]] hand targets relative to shoulder, hair } */
   K.person = (c, x, y, o) => {
-    const s = o.s || 1, ink = o.ink || "#1A1A1A", skin = o.skin || "#FFFFFF";
+    const s = o.s || 1, ink = o.ink || "#1A1A1A", skin = o.skin || "#F3CDA8";
     c.save(); c.translate(x, y); c.scale(s, s); c.lineCap = "round"; c.lineJoin = "round";
     // legs
     c.strokeStyle = o.pants || ink; c.lineWidth = 7; c.beginPath(); c.moveTo(-6, 0); c.lineTo(-10 + (o.step || 0), 46); c.moveTo(6, 0); c.lineTo(10 - (o.step || 0), 46); c.stroke();
@@ -30,7 +30,8 @@
     if (o.hair === "bun") { c.fillStyle = ink; c.beginPath(); c.arc(0, -82, 13, Math.PI, 0); c.fill(); c.beginPath(); c.arc(0, -93, 6, 0, TAU); c.fill(); }
     if (o.cap) { c.fillStyle = o.cap; c.beginPath(); c.arc(0, -74, 16, Math.PI, 0); c.fill(); c.strokeStyle = ink; c.lineWidth = 1.4; c.stroke(); }
     const m = o.mood ?? 0.6;
-    if (o.glasses) { c.fillStyle = ink; K.rr(c, -13, -76, 11, 7, 3); c.fill(); K.rr(c, 2, -76, 11, 7, 3); c.fill(); c.fillRect(-2, -74, 4, 2); K.sparkle(c, -7, -73, 3, "#FFB300"); K.sparkle(c, 8, -73, 3, "#FFB300"); }
+    c.fillStyle = "rgba(235,120,110,.3)"; c.beginPath(); c.ellipse(-9, -65, 3.5, 2.2, 0, 0, TAU); c.ellipse(9, -65, 3.5, 2.2, 0, 0, TAU); c.fill(); // cheeks
+    if (o.glasses) { c.fillStyle = ink; c.beginPath(); c.arc(-6, -72, 1.8, 0, TAU); c.arc(6, -72, 1.8, 0, TAU); c.fill(); c.strokeStyle = ink; c.lineWidth = 1.3; c.beginPath(); c.arc(-6, -72, 5, 0, TAU); c.moveTo(11, -72); c.arc(6, -72, 5, 0, TAU); c.moveTo(-1, -72); c.lineTo(1, -72); c.stroke(); } // clear round glasses
     else { c.fillStyle = ink; c.beginPath(); c.arc(-6, -72, 1.8, 0, TAU); c.arc(6, -72, 1.8, 0, TAU); c.fill(); if (m < -0.3) { c.lineWidth = 1.4; c.beginPath(); c.moveTo(-9, -78); c.lineTo(-3, -76); c.moveTo(9, -78); c.lineTo(3, -76); c.stroke(); } }
     c.strokeStyle = ink; c.lineWidth = 1.8; c.beginPath();
     if (m > 0.2) c.arc(0, -66, 6, 0.15 * Math.PI, 0.85 * Math.PI); else if (m < -0.2) c.arc(0, -58, 6, 1.2 * Math.PI, 1.8 * Math.PI); else { c.moveTo(-5, -63); c.lineTo(5, -63); }
@@ -44,7 +45,7 @@
     const bounce = mood > 0.5 ? Math.abs(Math.sin(t * 6 + k)) * 3 : 0;
     c.fillStyle = "#7FB8D4"; K.rr(c, x - 22, y - 10, 44, 34, 8); c.fill();
     c.fillStyle = "#5BA4C6"; c.fillRect(x - 16, y - 2 - bounce, 32, 24);
-    const ink = "#1A1A1A"; c.fillStyle = "#fff"; c.strokeStyle = ink; c.lineWidth = 1.8; c.beginPath(); c.arc(x, y - 22 - bounce, 15, 0, TAU); c.fill(); c.stroke();
+    const ink = "#1A1A1A"; c.fillStyle = ["#F3CDA8", "#E0B48C", "#C98E62", "#F6D9BC"][k % 4]; c.strokeStyle = ink; c.lineWidth = 1.8; c.beginPath(); c.arc(x, y - 22 - bounce, 15, 0, TAU); c.fill(); c.stroke();
     c.fillStyle = ink; c.beginPath(); c.arc(x - 5, y - 24 - bounce, 1.6, 0, TAU); c.arc(x + 5, y - 24 - bounce, 1.6, 0, TAU); c.fill();
     c.beginPath(); c.lineWidth = 1.6; if (mood > 0.2) c.arc(x, y - 21 - bounce, 6, 0.15 * Math.PI, 0.85 * Math.PI); else if (mood < -0.2) { c.arc(x, y - 12 - bounce, 6, 1.2 * Math.PI, 1.8 * Math.PI); c.moveTo(x - 8, y - 30 - bounce); c.lineTo(x - 3, y - 28 - bounce); c.moveTo(x + 8, y - 30 - bounce); c.lineTo(x + 3, y - 28 - bounce); } else { c.moveTo(x - 4, y - 16 - bounce); c.lineTo(x + 4, y - 16 - bounce); }
     c.stroke();

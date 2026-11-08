@@ -58,7 +58,7 @@
     const keys = {};
     on(window, "keydown", (e) => { if (["ArrowUp", "ArrowDown"].includes(e.code) && document.activeElement?.tagName !== "INPUT") e.preventDefault(); keys[e.code] = true; });
     on(window, "keyup", (e) => (keys[e.code] = false));
-    const teal = () => (C.dark ? "#2BB3A9" : "#1E9E95");
+    const teal = () => C.teal;
 
     // ---------- drawing ----------
     const bg = () => { const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, C.dark ? "#16233A" : "#F7FBFD"); g.addColorStop(1, C.dark ? "#0F1A2C" : "#EAF3F8"); c.fillStyle = g; c.fillRect(0, 0, W, H); };
@@ -171,7 +171,7 @@
             frame = (dt) => { stepCap(m, dt); const s = stats(m);
               c.clearRect(0, 0, W, H); bg(); drawCam(m, 16, 14, 470, 178); drawSection(m, 586, 110, 62); statBox(m, s, 700, 14, 244, GOAL);
               drawSide(m, 470, 345, m.R * 14, t * 8);
-              k.text(c, "Teal sliders pull (retracting) · coral sliders push back (advancing)", W / 2, 470, "700 14px Roboto, sans-serif", C.ink2, "center");
+              k.text(c, `Pulling sliders (retracting) in ${document.documentElement.classList.contains("a11y-cb") ? "blue" : "teal"} · pushing sliders (advancing) in ${document.documentElement.classList.contains("a11y-cb") ? "orange" : "coral"}`, W / 2, 470, "700 14px Roboto, sans-serif", C.ink2, "center");
               k.text(c, "* cam speed illustrative: thrust does not depend on it", W - 16, 530, "11px Roboto, sans-serif", C.ink3, "right");
               drawPlot(m, { async: true, rock: true }); };
           });

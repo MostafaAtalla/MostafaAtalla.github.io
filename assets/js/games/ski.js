@@ -54,7 +54,7 @@
     const tap = () => { k.audio.get(); if (tapFn) tapFn(); };
     on(window, "keydown", (e) => { if (e.code === "Space" && document.activeElement?.tagName !== "INPUT") { e.preventDefault(); if (!e.repeat) tap(); } });
     on(api.canvas, "pointerdown", () => tap());
-    const teal = () => (C.dark ? "#2BB3A9" : "#1E9E95");
+    const teal = () => C.teal;
     const SKI = { L: "#3A6FB0", R: "#E07B39" };
 
     // ---------- drawing ----------

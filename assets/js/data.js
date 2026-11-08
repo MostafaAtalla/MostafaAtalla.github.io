@@ -577,7 +577,42 @@ window.SITE = {
      A photo is { src: "assets/photos/hsmr-2024/01.jpg", caption: "..." }   */
   // Science heroes: photos with scientists who shaped how you think.
   // Add one object per photo: { src: "assets/photos/heroes/name.jpg", name: "Prof. Full Name", note: "Where and when you met" }
-  heroes: [],
+  heroes: [
+    { src: "assets/photos/heroes/hero-1.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-2.jpg", name: "ICRA 2026, Vienna", note: "" },
+    { src: "assets/photos/heroes/hero-3.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-4.jpg", name: "ICRA 2026, Vienna", note: "" },
+    { src: "assets/photos/heroes/hero-5.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-6.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-7.jpg", name: "ICRA 2026, Vienna", note: "" },
+    { src: "assets/photos/heroes/hero-9.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-10.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-11.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-12.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-13.jpg", name: "PhD defense, Delft", note: "" },
+    { src: "assets/photos/heroes/hero-14.jpg", name: "PhD defense, Delft", note: "" },
+    { src: "assets/photos/heroes/hero-15.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-16.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-17.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-18.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-19.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-20.jpg", name: "Lunch with leaders, ICRA 2026, Vienna", note: "" },
+    { src: "assets/photos/heroes/hero-22.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-23.jpg", name: "After the PhD defense, Delft", note: "" },
+    { src: "assets/photos/heroes/hero-24.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-25.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-26.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-27.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-28.jpg", name: "Dinner at the Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-29.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-30.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-31.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-32.jpg", name: "Hamlyn Symposium, London", note: "" },
+    { src: "assets/photos/heroes/hero-33.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-34.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-35.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-36.jpg", name: "PhD defense, Delft", note: "" }
+  ],
 
   albums: [
     { id: "sensors-2026", kind: "trips", title: "IEEE SENSORS 2026", place: "Rotterdam", year: 2026, photos: [

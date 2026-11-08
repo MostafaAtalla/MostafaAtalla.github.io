@@ -1823,3 +1823,10 @@ details.lg-fn summary, details.lp-fn summary { font-weight: 600; color: var(--in
 details.lg-fn summary::before, details.lp-fn summary::before { content: "ⓘ "; color: var(--acc-teal); }
 details.lg-fn[open] summary, details.lp-fn[open] summary { margin-bottom: 6px; }
 details.lg-fn p, details.lp-fn p { margin-top: 4px; }
+/* lab: six cards in three columns, tutorials marked */
+.lg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .lg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .lg-grid { grid-template-columns: 1fr; } }
+.lg-card.tut { border-color: color-mix(in srgb, var(--acc-gold) 70%, var(--rule)); background: color-mix(in srgb, var(--acc-gold) 7%, var(--card)); }
+.lg-card.tut .lp-k::before { content: "★ "; color: var(--acc-gold); }
+.lab-mute { margin-left: auto; }

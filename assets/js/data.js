@@ -271,8 +271,13 @@ window.SITE = {
      papers = indices into publications[]; fig = a figure from the paper shown in the game. */
   lab: {
     title: "Play the research",
-    lede: "Four games, each driven by the model from the paper behind it. Feel why friction decides whether a catheter is safe, levitate a disc on a liquid film, steer a capsule to the cecum, and ski on ground with no ice.",
+    lede: "Two short tutorials and four games, each driven by the model from the paper behind it. Feel why friction decides whether a catheter is safe, levitate a disc on a liquid film, steer a capsule to the cecum, and ski on ground with no ice.",
     games: [
+      { id: "violin", n: "A", tag: "Tutorial A", kind: "tutorial", verb: "Grip + slip", title: "The violinist's secret", hook: "Bow a violin: too light and it whispers, too heavy and it crunches. Then lend the physician your bow.",
+        learn: "A violin sings only when the bow grips and slips in turn, under the player's control. A catheter needs the same control: glide to navigate, grip to work.",
+        papers: [3, 2], fig: "assets/img/lab/violin-catheter.jpg", figcap: "From my PhD defense", status: "live", time: "3 min", next: "glide",
+        model: ["Bowed-string stick-slip: the bow grips the string, the string's tension breaks it free, and it slips back (Helmholtz motion, a saw-tooth)", "Playable window between a minimum and a maximum bow force, F_min ∝ v/β² and F_max ∝ v/β (Schelleng)"],
+        illus: ["Constants of the force window, the slow-motion close-up and the synthesized sound", "The physician's four decisions are teaching cases, not a simulation", "Characters and stage"] },
       { id: "glide", n: 1, verb: "Glide", title: "The squeeze-film lab", hook: "Carry a full cup across a rough floor, levitate a disc on a liquid film, and stop a catheter on the mark.",
         learn: "A surface vibrating a few micrometres turns stick-slip into glide, and the film carries load even in a liquid.",
         papers: [6, 3], fig: "assets/img/pubs/squeezefilm.jpg", status: "live", time: "3 min",
@@ -283,6 +288,11 @@ window.SITE = {
         papers: [3, 2, 11], fig: "assets/img/pubs/activelub.jpg", status: "soon", time: "5 min",
         model: ["Wall friction switched between off and on, with the measured reduction (mean 38% on ex-vivo aorta)", "Friction building up along bends (capstan effect) in the full game"],
         illus: ["Insertion force, buckling and wall damage: the papers report buckling only qualitatively", "Heartbeat motion, vessel geometry and deployment tolerance", "The preview is an animation, not the model"] },
+      { id: "maestro", n: "B", tag: "Tutorial B", kind: "tutorial", verb: "Coordination", title: "The maestro and the cam", hook: "Keep an orchestra on the beat, then conduct twelve capsule sliders by hand, and watch the cam do it for you.",
+        learn: "Many players need a common beat. OSCAR's sliders pull only while more of them retract than advance, so the cam must time every slider, like a maestro.",
+        papers: [1], fig: "assets/img/lab/maestro-capsule.jpg", figcap: "From my PhD defense", status: "live", time: "4 min", next: "oscar",
+        model: ["Net thrust ∝ (sliders retracting − sliders advancing) / n, the OSCAR principle n_ret > n_adv", "A slider that reaches the end of its stroke stops pulling until it is advanced", "Mean thrust with the cam ≈ 1 − 2·(advance time / cycle), i.e. Δd"],
+        illus: ["Music, audience and timing tolerances", "Capsule speed from thrust and the rocking animation", "Slider stroke and cycle times are scaled for play"] },
       { id: "oscar", n: 3, verb: "Propel", title: "OSCAR: race to the cecum", hook: "Design the cam that times twelve sliders, then drive your capsule through the colon against the clock.",
         learn: "Thrust follows the retract–advance asymmetry of the cam; balancing the sliders smooths the ripple.",
         papers: [1], fig: "assets/img/pubs/oscar-design.jpg", status: "soon", time: "5 min",

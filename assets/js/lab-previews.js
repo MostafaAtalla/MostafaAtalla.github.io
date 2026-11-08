@@ -237,7 +237,50 @@
     };
   }
 
-  const MAKERS = { glide, catheter, oscar, ski };
+  /* ---------- tutorial A: violin, grip + slip vs crunch ---------- */
+  function violin() {
+    const s = { on: true, ph: 0, tr: [] };
+    return {
+      label: () => (s.on ? "Grip + slip: the string sings" : "Too much pressure: it only grips"),
+      toggle() { s.on = !s.on; }, get on() { return s.on; },
+      step(dt) { s.ph += dt / (s.on ? 0.55 : 0.9 + Math.random()); const u = s.ph % 1; const y = s.on ? (u < 0.82 ? u / 0.82 : 1 - (u - 0.82) / 0.18) : (u < 0.94 ? u * 1.3 : 1.3 * (1 - (u - 0.94) / 0.06)) + (Math.random() - 0.5) * 0.1; s.y = y; s.stick = u < (s.on ? 0.82 : 0.94); s.tr.push(y); if (s.tr.length > 120) s.tr.shift(); },
+      draw(ctx, t) {
+        const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, C.dark ? "#16233A" : "#FFF9F1"); g.addColorStop(1, C.dark ? "#0F1A2C" : "#FDEBD8"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+        const cy = 112, xc = 250, yc = cy + (s.y - 0.5) * 50;
+        ctx.strokeStyle = C.dark ? "#C9D6E6" : "#555"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(20, cy); ctx.lineTo(xc, yc); ctx.lineTo(W - 20, cy); ctx.stroke();
+        ctx.save(); ctx.translate(xc, yc); ctx.rotate(-0.42); ctx.strokeStyle = "#6B3A1A"; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-120, -8); ctx.lineTo(130, -8); ctx.stroke(); ctx.strokeStyle = "#E8DCC0"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-120, -1); ctx.lineTo(130, -1); ctx.stroke(); ctx.restore();
+        ctx.font = "800 20px Roboto, sans-serif"; ctx.fillStyle = s.stick ? C.coral : C.teal; ctx.textAlign = "center"; ctx.fillText(s.on ? (s.stick ? "GRIP" : "SLIP") : (s.stick ? "GRIP…" : "KRRCH"), xc, 52); ctx.textAlign = "left";
+        if (s.on) for (let i = 0; i < 3; i++) { const a = (t * 0.6 + i / 3) % 1; ctx.fillStyle = `rgba(242,140,40,${1 - a})`; ctx.font = "22px serif"; ctx.fillText("♪", 60 + i * 30, 70 - a * 40); }
+        spark(ctx, s.tr, 20, 176, W - 40, 40, C.coral, -0.1, 1.4);
+      }
+    };
+  }
+  /* ---------- tutorial B: maestro, sliders in turn vs chaos ---------- */
+  function maestro() {
+    const n = 8, s = { on: true, T: 0, sl: Array.from({ length: n }, (_, i) => ({ p: i / n, adv: 0 })), F: [] };
+    return {
+      label: () => (s.on ? "With a maestro: one advances at a time" : "No maestro: advances bunch up"),
+      toggle() { s.on = !s.on; }, get on() { return s.on; },
+      step(dt) { s.T += dt; const B = 0.35;
+        s.sl.forEach((q, i) => { if (q.adv > 0) { q.adv -= dt; q.p = Math.max(0, q.p - dt / 0.3); } else { q.p = Math.min(1, q.p + dt / (n * B * 1.05)); } });
+        const due = s.on ? Math.floor(s.T / B) !== Math.floor((s.T - dt) / B) : Math.random() < dt / 0.35;
+        if (due) { const cand = s.on ? [s.sl.reduce((a, b) => (b.p > a.p && b.adv <= 0 ? b : a), s.sl.find((q) => q.adv <= 0))] : s.sl.filter((q) => q.adv <= 0).sort(() => Math.random() - 0.5).slice(0, 1 + (Math.random() < 0.4)); cand.forEach((q) => q && (q.adv = 0.3)); }
+        const F = s.sl.reduce((a, q) => a + (q.adv > 0 ? -1 : q.p >= 1 ? 0 : 1), 0) / n; s.F.push(F); if (s.F.length > 120) s.F.shift(); },
+      draw(ctx, t) {
+        ctx.fillStyle = C.dark ? "#16233A" : "#F7FBFD"; ctx.fillRect(0, 0, W, H);
+        s.sl.forEach((q, i) => { const x = 70 + i * 40, y = 112 - q.p * 18; ctx.fillStyle = "#F1ECE0"; ctx.strokeStyle = "#5A5A5A"; ctx.lineWidth = 1.2; rr(ctx, x - 13, y - 40, 26, 62, 10); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = q.adv > 0 ? C.coral : q.p >= 1 ? "#9AA5B1" : C.teal; rr(ctx, x - 13, y + 16, 26, 6, 3); ctx.fill();
+          ctx.fillStyle = "#1A1A1A"; ctx.beginPath(); ctx.arc(x - 4, y - 24, 1.8, 0, 7); ctx.arc(x + 4, y - 24, 1.8, 0, 7); ctx.fill(); });
+        // maestro
+        const mx = 30, my = 120, sw = s.on ? Math.sin(t * 9) : 0; ctx.fillStyle = "#1A1A1A"; rr(ctx, mx - 8, my - 30, 16, 34, 6); ctx.fill(); ctx.fillStyle = "#fff"; ctx.strokeStyle = "#1A1A1A"; ctx.beginPath(); ctx.arc(mx, my - 42, 10, 0, 7); ctx.fill(); ctx.stroke();
+        if (s.on) { ctx.fillStyle = "#1A1A1A"; ctx.fillRect(mx - 8, my - 46, 7, 4); ctx.fillRect(mx + 1, my - 46, 7, 4); ctx.strokeStyle = "#1A1A1A"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(mx + 6, my - 24); ctx.lineTo(mx + 22, my - 52 + sw * 8); ctx.stroke(); }
+        spark(ctx, s.F, 20, 176, W - 40, 40, C.coral, -0.4, 1);
+        ctx.fillStyle = C.ink3; ctx.font = "10px Roboto Mono, monospace"; ctx.fillText("thrust", W - 56, 230);
+      }
+    };
+  }
+
+  const MAKERS = { glide, catheter, oscar, ski, violin, maestro };
   canvases.forEach((cv) => {
     const key = cv.dataset.game, sim = MAKERS[key] && MAKERS[key](); if (!sim) return;
     const ctx = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2);

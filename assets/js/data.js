@@ -607,7 +607,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-32.jpg", name: "Prof. Paul Breedveld", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-33.jpg", name: "Prof. Jenny Dankelman", note: "" },
     { src: "assets/photos/heroes/hero-34.jpg", name: "Prof. Anton Zeilinger (Nobel Laureate in Physics 2022)", note: "APS March Meeting 2023, Las Vegas" },
-    { src: "assets/photos/heroes/hero-35.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-35.jpg", name: "Prof. Jérémie Dequidt (Lille)", note: "" },
     { src: "assets/photos/heroes/hero-3.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-2.jpg", name: "ICRA 2026, Vienna", note: "" }
   ],

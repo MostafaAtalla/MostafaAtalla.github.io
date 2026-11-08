@@ -301,5 +301,7 @@
     };
     new IntersectionObserver((en) => { const was = visible; visible = en[0].isIntersecting; if (visible && !was) { last = performance.now(); requestAnimationFrame(frame); } }).observe(cv);
     if (reduce) { for (let i = 0; i < 120; i++) sim.step(1 / 30, i / 30); }
+    else for (let i = 0; i < 30; i++) sim.step(1 / 30, i / 30);
+    try { ctx.clearRect(0, 0, W, H); sim.draw(ctx, 1); } catch (e) {} // a first frame, before the card scrolls into view
   });
 })();

@@ -1794,6 +1794,8 @@ kbd { font: 600 .72rem var(--mono); padding: 2px 6px; border-radius: 4px; border
 .lab-range input { width: 180px; accent-color: var(--acc-coral); }
 .lab-range output { font: 600 .84rem var(--mono); color: var(--ink); min-width: 70px; }
 .lab-select select { font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--rule); background: var(--card); color: var(--ink); }
+.lab-check { display: inline-flex; align-items: center; gap: 6px; font-size: .9rem; color: var(--ink-2); cursor: pointer; }
+.lab-check input { accent-color: var(--acc-coral); }
 .lab-seg { display: inline-flex; gap: 4px; padding: 3px; border-radius: 10px; border: 1px solid var(--rule); background: var(--card); }
 .lab-seg button { border: 0; background: transparent; color: var(--ink-2); padding: 7px 12px; border-radius: 8px; font: 600 .86rem var(--body); cursor: pointer; }
 .lab-seg button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
@@ -1842,6 +1844,11 @@ details.lg-fn p, details.lp-fn p { margin-top: 4px; }
 .lg-th-head h3 { font: 400 clamp(1.3rem, 2.2vw, 1.7rem)/1.2 var(--display); }
 .lg-th-head p { color: var(--ink-2); max-width: 80ch; font-size: .95rem; }
 .lg-row { display: grid; grid-template-columns: minmax(0, 1fr) 28px repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.lg-combo { display: grid; align-content: center; gap: 8px; padding: 16px; border: 1px dashed var(--rule); border-radius: 16px; background: var(--card); }
+.lg-mini { display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-size: .92rem; }
+.lg-mini b { font: 600 .68rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--acc-coral); }
+.lg-mini:hover { border-color: var(--acc-coral); }
+.lg-plus { text-align: center; font: 400 1.4rem var(--display); color: var(--acc-gold); line-height: 1; }
 .lg-arrow { align-self: center; font: 400 2rem var(--display); color: var(--acc-gold); text-align: center; }
 @media (max-width: 1100px) { .lg-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lg-arrow { display: none; } }
 @media (max-width: 560px) { .lg-row { grid-template-columns: 1fr; } }

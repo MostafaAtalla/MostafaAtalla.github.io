@@ -202,7 +202,7 @@
       const levels = [
         { intro: `<span class="lp-k">Level 1 of 3 · Stick-slip</span><h3>Carry the cup</h3><p>Pull the sled to the delivery bay without spilling. Hold <b>Hold to pull</b> (or Space, or press on the scene). The spring stretches until static friction gives way, then the sled jumps.</p><p class="muted">First run: ultrasound locked.</p>`, run: levelCup },
         { intro: `<span class="lp-k">Level 2 of 3 · Squeeze film</span><h3>Levitate the disc</h3><p>A plate vibrating at 40 kHz under a liquid film lifts a free disc. In a liquid, the film's inertia makes the squeeze and release halves of each cycle unequal, and the difference pushes the disc up.</p><p>Set the amplitude (slider or ← →) to keep the disc in the target gap as its mass changes: 64, 122 and 101 g, the masses of the paper.</p>`, run: levelLev },
-        { intro: `<span class="lp-k">Level 3 of 3 · Variable friction</span><h3>Glide, then grip</h3><p>Advance the catheter to the lesion and stop within ±3 mm. Without ultrasound it will not move. With it, it glides, but the beating heart then pushes it off target. Switch the ultrasound off to make it grip, and hold still for 1.5 s.</p><p class="muted">Round 1: calcified wall (−80%). Round 2: soft aortic tissue (−38%).</p>`, run: levelCath }
+        { intro: `<span class="lp-k">Level 3 of 3 · Variable friction</span><h3>Glide, then grip</h3><p>Advance the catheter to the lesion and stop within ±3 mm. Without ultrasound it will not move. With it, it glides, but the beating heart then pushes it off target. Switch the ultrasound off to make it grip, and hold still for 1.5 s.</p><p class="muted">Round 1: a stiff wall in liquid (rigid, wet: −60%). Round 2: soft aortic tissue (−38%).</p>`, run: levelCath }
       ];
       (async () => {
         for (let i = 0; i < levels.length && alive; i++) { await api.card(levels[i].intro, [{ label: "Start" }]); if (!alive) return; results[i] = await levels[i].run(); }
@@ -258,17 +258,17 @@
             text(c, `in target ${Math.round((inBand / DUR) * 100)}%`, W - 30, 40, "700 18px Roboto, sans-serif", ok ? C.teal : C.ink2, "right");
             text(c, `${Math.max(0, Math.ceil(DUR - T))} s`, W - 30, 64, "13px Roboto Mono, monospace", C.ink3, "right");
             if (T >= DUR) { frame = () => {}; const score = Math.round((inBand / DUR) * 100); api.log("game", "L2", { score });
-              api.card(`<h3>${score}% of the time in the gap</h3><p>The height grows with amplitude and falls as 1/√m, the scaling of Eq. (14) of the paper, h̄ = πR²αωU√(ρ/mg). A heavier disc needs a stronger vibration for the same gap.</p>`, [{ label: "Next level" }]).then(() => done(score)); }
+              api.card(`<h3>${score}% of the time in the gap</h3><p>The height grows with amplitude and falls as 1/√m, the scaling of Eq. (14) of the paper, h̄ = πR²αωΦ√(ρ/mg). A heavier disc needs a stronger vibration for the same gap.</p>`, [{ label: "Next level" }]).then(() => done(score)); }
           };
         });
       }
       function levelCath() {
         return new Promise(async (done) => {
           const sc = [];
-          for (const surface of ["dry", "tissue"]) {
+          for (const surface of ["wet", "tissue"]) {
             if (!alive) return; usLocked = false; usOn = false;
-            ctrl(`<button class="lab-hold" id="g-hold" type="button">➜ Hold to push <kbd>Space</kbd></button>${usBtn()}<span class="lab-note">${surface === "dry" ? "Round 1 · calcified wall" : "Round 2 · soft tissue"}</span>`); bindUS(); holdBtn("g-hold");
-            const s = cath(surface === "dry" ? "dry" : "tissue"); let T = 0;
+            ctrl(`<button class="lab-hold" id="g-hold" type="button">➜ Hold to push <kbd>Space</kbd></button>${usBtn()}<span class="lab-note">${surface === "wet" ? "Round 1 · stiff wall in liquid" : "Round 2 · soft tissue"}</span>`); bindUS(); holdBtn("g-hold");
+            const s = cath(surface); let T = 0;
             const score = await new Promise((res) => {
               frame = (dt) => {
                 T += dt; cathStep(s, dt, usOn, pressed());
@@ -282,7 +282,7 @@
             });
             sc.push(score); api.log("game", "L3", { surface, score });
           }
-          await api.card(`<h3>Calcified ${sc[0]} · soft tissue ${sc[1]}</h3><p>Ultrasound lowers friction for navigation; switching it off restores grip so the tip holds against the heartbeat. On soft tissue the reduction is smaller (about 38% on ex-vivo aorta), so the glide is slower.</p><p class="muted">The full journey, from the groin through the bends to the heart, is Game 2: Catheter run.</p>`, [{ label: "See the debrief" }]);
+          await api.card(`<h3>Stiff wall ${sc[0]} · soft tissue ${sc[1]}</h3><p>Ultrasound lowers friction for navigation; switching it off restores grip so the tip holds against the heartbeat. On soft tissue the reduction is smaller (about 38% on ex-vivo aorta), so the glide is slower.</p><p class="muted">The full journey, from the groin through the bends to the heart, is Game 2: Catheter run.</p>`, [{ label: "See the debrief" }]);
           done(Math.round((sc[0] + sc[1]) / 2));
         });
       }
@@ -311,7 +311,7 @@
         } else {
           const ai = document.getElementById("x-a"), ao = document.getElementById("x-a-o"); ai.addEventListener("input", () => { L.a = +ai.value; ao.textContent = L.a.toFixed(2) + " µm"; });
           document.getElementById("x-m").addEventListener("change", (e) => (L.m = +e.target.value));
-          real(`<p>Steady levitation height from Eq. (14) of the APL paper, h̄ = πR²αωU√(ρ/mg), U = √((20 − 2.2C_e)/56), with R = 10 mm, ρ = 1030 kg/m³, C_e ≈ 9, 40 kHz. The pressure trace is a schematic of the mechanism, not a solution of the film equations.</p>`);
+          real(`<p>Steady levitation height from Eq. (14) of the APL paper, h̄ = πR²αωΦ√(ρ/mg), Φ = √((20 − 2.2C_e)/56), with R = 10 mm, ρ = 1030 kg/m³, C_e ≈ 9, 40 kHz. The pressure trace is a schematic of the mechanism, not a solution of the film equations.</p>`);
         }
       };
       build();

@@ -578,7 +578,7 @@ window.SITE = {
   // Science heroes: photos with scientists who shaped how you think.
   // Add one object per photo: { src: "assets/photos/heroes/name.jpg", name: "Prof. Full Name", note: "Where and when you met" }
   heroes: [
-    { src: "assets/photos/heroes/hero-36.jpg", name: "PhD defense, Delft", note: "" },
+    { src: "assets/photos/heroes/hero-36.jpg", name: "Prof. Jenny Dankelman, Prof. Just Herder, Prof. Robert J. Webster, Prof. Michaël Wiertlewski and Prof. Paul Breedveld", note: "PhD defense, Delft" },
     { src: "assets/photos/heroes/hero-4.jpg", name: "ICRA 2026, Vienna", note: "" },
     { src: "assets/photos/heroes/hero-5.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-6.jpg", name: "", note: "" },

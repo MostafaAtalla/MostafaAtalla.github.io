@@ -593,7 +593,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-17.jpg", name: "Prof. Leonardo Mattos and Dr. Julie Legrand", note: "Hamlyn Symposium, London" },
     { src: "assets/photos/heroes/hero-18.jpg", name: "Prof. Robert J. Webster III, Prof. Jenny Dankelman, Prof. Paul Breedveld and Prof. Luigi Manfredi", note: "" },
     { src: "assets/photos/heroes/hero-19.jpg", name: "Prof. Robert J. Webster III", note: "Hamlyn Symposium, London" },
-    { src: "assets/photos/heroes/hero-20.jpg", name: "Lunch with leaders, ICRA 2026, Vienna", note: "" },
+    { src: "assets/photos/heroes/hero-20.jpg", name: "Prof. Oussama Khatib", note: "Lunch with leaders, ICRA 2026, Vienna" },
     { src: "assets/photos/heroes/hero-22.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-23.jpg", name: "After the PhD defense, Delft", note: "" },
     { src: "assets/photos/heroes/hero-24.jpg", name: "Hamlyn Symposium, London", note: "" },

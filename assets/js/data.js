@@ -586,7 +586,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-9.jpg", name: "Prof. Gijs Krijnen", note: "University of Twente" },
     { src: "assets/photos/heroes/hero-11.jpg", name: "URS 2026", note: "" },
     { src: "assets/photos/heroes/hero-12.jpg", name: "Prof. Michaël Wiertlewski", note: "" },
-    { src: "assets/photos/heroes/hero-13.jpg", name: "PhD defense, Delft", note: "" },
+    { src: "assets/photos/heroes/hero-13.jpg", name: "Prof. Robert J. Webster III", note: "PhD defense, Delft" },
     { src: "assets/photos/heroes/hero-14.jpg", name: "PhD defense, Delft", note: "" },
     { src: "assets/photos/heroes/hero-15.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-16.jpg", name: "", note: "" },

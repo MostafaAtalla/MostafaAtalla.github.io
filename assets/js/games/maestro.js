@@ -99,7 +99,7 @@
       const g = c.createLinearGradient(0, y - R, 0, y + R); g.addColorStop(0, "#F6F2E8"); g.addColorStop(0.5, "#D9D2C2"); g.addColorStop(1, "#A9A190"); body(); c.fillStyle = g; c.fill();
       c.save(); body(); c.clip();
       const n = sl.length; for (let i = 0; i < n; i++) { const a = TAU * i / n; if (Math.sin(a) < -0.05) continue; const s = sl[i], yy = y - Math.cos(a) * (R - 4), h = 4 + 6 * Math.sin(a), off = -s.p * 34;
-        c.globalAlpha = 0.55 + 0.45 * Math.sin(a); c.fillStyle = s.st === "adv" ? C.coral : s.st === "stall" ? "#9AA5B1" : "#2BA89E"; c.fillRect(x0 + 8 + off, yy - h / 2, L - 40, h);
+        c.globalAlpha = 0.55 + 0.45 * Math.sin(a); c.fillStyle = s.st === "adv" ? C.coral : s.st === "stall" ? "#9AA5B1" : C.teal; c.fillRect(x0 + 8 + off, yy - h / 2, L - 40, h);
         c.fillStyle = "rgba(0,0,0,.22)"; for (let q = x0 + 12 + off; q < x0 + L - 34 + off; q += 8) c.fillRect(q, yy - h / 2, 2, h); c.globalAlpha = 1; }
       c.restore(); body(); c.strokeStyle = "rgba(60,55,45,.6)"; c.lineWidth = 1.4; c.stroke();
       c.strokeStyle = C.ink3; c.lineWidth = 1.6; c.beginPath(); c.moveTo(x0, y); c.bezierCurveTo(x0 - 60, y + 10, x0 - 120, y - 6, -10, y + 4); c.stroke();

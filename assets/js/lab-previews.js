@@ -169,14 +169,14 @@
         ctx.save(); body(); ctx.clip();
         vis.forEach((q) => { const yy = cy - Math.cos(q.a) * (Rr - 3), h = 4 + 5 * Math.sin(q.a), off = -lift(q.u, dret()) * 30; // retracted = shifted rearward
           const sx = x0 + 4 + off, sw = L - 30;
-          ctx.fillStyle = q.adv ? C.coral : (C.dark ? "#2BB3A9" : "#1E9E95"); ctx.globalAlpha = 0.55 + 0.45 * Math.sin(q.a);
+          ctx.fillStyle = q.adv ? C.coral : C.teal; ctx.globalAlpha = 0.55 + 0.45 * Math.sin(q.a);
           ctx.fillRect(sx, yy - h / 2, sw, h);
           ctx.fillStyle = "rgba(0,0,0,.25)"; for (let k = sx + 4; k < sx + sw; k += 7) ctx.fillRect(k, yy - h / 2, 2, h); // sawtooth ridges
           ctx.globalAlpha = 1; });
         ctx.restore();
         body(); ctx.strokeStyle = "rgba(40,55,75,.55)"; ctx.lineWidth = 1.2; ctx.stroke();
         [0, n / 2].forEach((i) => { const q = st.sl[i], sg = i ? 1 : -1, off = -lift(q.u, dret()) * 30, sx = x0 + 4 + off, sw = L - 46;
-          ctx.fillStyle = q.adv ? C.coral : (C.dark ? "#2BB3A9" : "#1E9E95"); ctx.beginPath(); const yb = cy + sg * (Rr - 2);
+          ctx.fillStyle = q.adv ? C.coral : C.teal; ctx.beginPath(); const yb = cy + sg * (Rr - 2);
           ctx.moveTo(sx, yb); for (let k = sx; k < sx + sw; k += 10) { ctx.lineTo(k + 7, yb + sg * 7); ctx.lineTo(k + 10, yb); } ctx.lineTo(sx, yb); ctx.fill(); });
         // tether
         ctx.strokeStyle = C.ink3; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x0, cy); ctx.bezierCurveTo(x0 - 40, cy + 8, x0 - 80, cy - 6, -10, cy + 4); ctx.stroke();

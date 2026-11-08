@@ -202,7 +202,12 @@
             if (good >= 8 || T >= 40) { frame = () => {}; done(Math.round(Math.min(1, good / 8) * 100 - (good >= 8 ? Math.max(0, T - 16) * 1.5 : 0))); } }; }));
         sound("silent", 0, NOTE.A); api.log("game", "L1", { score: res[0] });
         if (!alive) return;
-        await reflect("assets/img/lab/violin-catheter.jpg", `${Math.max(20, res[0])} / 100 · what just happened?`, `<p>You heard three sounds from the same bow: the <b>whisper</b> when it only slips, the <b>crunch</b> when it only grips, and the <b>note</b> when the two take turns.</p><p>Notice that the right pressure depended on the bow speed. Friction was not too high or too low on its own: it had to fit the moment.</p>`, "Level 2: play a tune");
+        await reflect("assets/img/lab/violin-catheter.jpg", `${Math.max(20, res[0])} / 100 · what just happened?`, `<p>You heard three sounds from the same bow: the <b>whisper</b> when the bow is too light to grip the string, the <b>crunch</b> when it presses so hard that the string cannot slip back cleanly, and the <b>note</b> when grip and slip take turns, once per vibration.</p><p>The right pressure moved with the bow speed and with the distance to the bridge. Friction was not too high or too low on its own: it had to fit the moment.</p>`, "Two cards to think about");
+        if (!alive) return;
+        await api.flash([
+          { q: "What decides how hard the violinist must press?", a: "The bow speed and where the bow meets the string. Faster bowing needs more force, and so does bowing closer to the bridge, where the window between too light and too heavy also narrows (Schelleng's minimum and maximum bow force)." },
+          { q: "Is friction good or bad for the violin?", a: "Neither on its own. The note needs <b>grip</b> to drag the string and <b>slip</b> to release it. Friction has to fit the moment, and the same is true for a catheter." }
+        ], "Level 2: play a tune");
         if (!alive) return;
         // ---- level 2
         ctrl(`<span class="lab-note">Level 2 of 3 · each note has its own bow speed</span>`);
@@ -238,7 +243,7 @@
           const Q = [
             { s: "Navigating a tortuous bend in the iliac artery", a: "glide", why: "Low friction lets the push reach the tip instead of buckling the shaft against the wall.", scene: "bend" },
             { s: "Deploying a stent across the lesion", a: "grip", why: "High friction anchors the catheter so the heartbeat cannot shift it while the stent opens.", scene: "stent" },
-            { s: "Crossing a calcified narrowing", a: "glide", why: "On rigid, calcified walls ultrasound cuts friction the most (up to ~60–80% in the papers).", scene: "calc" },
+            { s: "Crossing a calcified narrowing", a: "glide", why: "In bench tests ultrasound cut friction most on rigid surfaces (about 60% in liquid), so a stiff, calcified wall is where gliding should help most.", scene: "calc" },
             { s: "Holding position for a heart-valve implant", a: "grip", why: "The valve must open exactly in place: the catheter has to stay still while the heart beats.", scene: "valve" }
           ];
           let i = 0, right = 0, picked = null, fb = 0;

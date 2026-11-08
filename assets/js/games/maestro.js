@@ -149,7 +149,12 @@
             k.text(P, "timing of each cue: on the line = on the beat · above = late · below = early", 44, PH - 8, "11px Roboto Mono, monospace", C.ink3); };
         }));
         api.log("game", "L1", { score: res[0] });
-        await api.card(`<span class="lp-k">Pause and reflect</span><img class="ls-card-img" src="assets/img/lab/orchestra-capsule.jpg" alt=""><h3>${res[0]} / 100 · the players were never the problem</h3><p>Without a maestro, each musician played well and the music still fell apart: their notes did not land together. With a common beat, the same notes became music. <b>Timing between the parts</b> is a property of the whole, not of any one player.</p>`, [{ label: "Meet the capsule's orchestra" }]);
+        await api.card(`<span class="lp-k">Pause and reflect</span><img class="ls-card-img" src="assets/img/lab/orchestra-capsule.jpg" alt=""><h3>${res[0]} / 100 · the players were never the problem</h3><p>Without a maestro, each musician played well and the music still fell apart: their notes did not land together. With a common beat, the same notes became music. <b>Timing between the parts</b> is a property of the whole, not of any one player.</p>`, [{ label: "Two cards to think about" }]);
+        if (!alive) return;
+        await api.flash([
+          { q: "Every musician played the right notes. Why did it still sound wrong?", a: "The notes did not land together. Coordination belongs to the group: it is the <b>timing between</b> the players, not the skill of each one." },
+          { q: "A capsule has twelve sliders instead of musicians. What can go wrong without a common beat?", a: "If two sliders advance at once they push back together and cancel the pull; if one waits too long it reaches the end of its stroke and stops pulling. Either way thrust drops." }
+        ], "Meet the capsule's orchestra");
         if (!alive) return;
         await api.card(`<span class="lp-k">Level 2 · the capsule's orchestra</span><h3>Twelve sliders, one beat</h3><p>OSCAR is covered by <b>twelve sliders</b>. A slider that slowly <b style="color:var(--acc-teal)">retracts</b> grips the gut wall and pulls the capsule forward. A slider that quickly <b style="color:var(--acc-coral)">advances</b> pushes it back. The capsule moves only while pulling sliders outnumber pushing ones.</p><p><b>What you do:</b> the ring now sits on the slider that has reached the end of its stroke. Press <b>Space</b> when the ring closes, so that slider advances. One slider per beat: too late and it stops pulling, too early and two push at once.</p>`, [{ label: "Conduct the capsule" }]);
         if (!alive) return;

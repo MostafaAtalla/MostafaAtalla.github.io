@@ -31,10 +31,13 @@
       <div class="lp-stage"><canvas class="lp-canvas" data-game="${g.id}" aria-hidden="true"></canvas><span class="lp-state"></span><button class="lp-toggle" type="button" data-for="${g.id}">⇄ Switch</button></div>
       <div class="lg-body"><span class="lp-k">${esc(g.tag || "Game " + g.n)} · ${esc(g.verb)}</span><h3>${esc(g.title)}</h3><p>${esc(g.hook)}</p>
       ${fnShort(g)}<span class="lg-go">${g.status === "live" ? `▶ Play · ${esc(g.time)}` : "Preview · game in the workshop"}</span></div></a>`;
+  // a theme without its own tutorial builds on the tutorials of the others
+  const combo = (th) => { const bs = (th.builds || []).map((id) => LAB.games.find((g) => g.id === id)).filter(Boolean); if (!bs.length) return "";
+    return `<div class="lg-combo"><span class="lp-k">Builds on</span>${bs.map((g, i) => `${i ? `<span class="lg-plus" aria-hidden="true">+</span>` : ""}<a href="#${g.id}" data-g="${g.id}" class="lg-mini"><b>${esc(g.tag)}</b>${esc(g.title)}</a>`).join("")}</div><span class="lg-arrow" aria-hidden="true">→</span>`; };
   $("#lab-games").innerHTML = Object.entries(LAB.themes || { all: { title: "", text: "" } }).map(([key, th], ti) => {
     const gs = LAB.games.filter((g) => (g.theme || "all") === key), tut = gs.find((g) => g.kind === "tutorial");
     return `<div class="lg-theme"><div class="lg-th-head"><span class="lg-th-n">Theme ${ti + 1}</span><h3>${esc(th.title)}</h3><p>${esc(th.text)}</p></div>
-      <div class="lg-row">${gs.map((g) => cardHTML(g) + (g === tut ? `<span class="lg-arrow" aria-hidden="true">→</span>` : "")).join("")}</div></div>`; }).join("");
+      <div class="lg-row">${tut ? "" : combo(th)}${gs.map((g) => cardHTML(g) + (g === tut ? `<span class="lg-arrow" aria-hidden="true">→</span>` : "")).join("")}</div></div>`; }).join("");
 
   // ---------- the stage ----------
   const stage = $("#lab-stage");
@@ -75,7 +78,7 @@
       // reflection flashcards: a question on the front, the idea on the back; tap to flip, then continue
       flash(cards, done) { return new Promise((res) => { const c = $("#ls-card"); let i = 0;
         const show = () => { const f = cards[i]; c.innerHTML = `<div class="ls-flash-wrap"><span class="lp-k">Pause and reflect · card ${i + 1} of ${cards.length}</span>
-            <button class="ls-flash" type="button" aria-label="Flip the card"><span class="ls-flash-in"><span class="ls-flash-f"><b>${f.q}</b><em>Tap to turn the card</em></span><span class="ls-flash-b">${f.a}</span></span></button>
+            <button class="ls-flash" type="button" aria-label="Flip the card"><span class="ls-flash-in"><span class="ls-flash-f"><b>${f.q}</b><em>Tap to turn the card</em></span><span class="ls-flash-b"><span>${f.a}</span></span></span></button>
             <div class="ls-card-btns"><button class="btn" data-n disabled>${i < cards.length - 1 ? "Next card" : esc(done || "Continue")}</button></div></div>`; c.hidden = false;
           const card = c.querySelector(".ls-flash"), nx = c.querySelector("[data-n]");
           card.addEventListener("click", () => { card.classList.toggle("flipped"); nx.disabled = false; });
@@ -104,6 +107,7 @@
     return () => {};
   };
 
+  document.querySelectorAll(".lg-mini").forEach((c) => c.addEventListener("click", (e) => { e.preventDefault(); history.replaceState(null, "", "#" + c.dataset.g); open(c.dataset.g, true); }));
   document.querySelectorAll(".lg-card").forEach((c) => c.addEventListener("click", (e) => { if (e.target.closest(".lp-toggle")) return; e.preventDefault(); history.replaceState(null, "", "#" + c.dataset.g); open(c.dataset.g, true); }));
   const fromHash = () => { const id = location.hash.slice(1); if (LAB.games.some((g) => g.id === id)) open(id, true); };
   window.addEventListener("hashchange", fromHash);

@@ -272,10 +272,11 @@ window.SITE = {
   lab: {
     themes: {
       grip: { title: "Grip and glide: friction on demand", text: "A violin needs grip and slip; a catheter needs glide or grip, at the right moment. The tutorial builds the intuition, the games put it to work." },
-      sync: { title: "Coordination: many contacts, one motion", text: "An orchestra needs a maestro; a capsule with twelve sliders needs a cam. The tutorial builds the intuition, the game lets you design it." }
+      sync: { title: "Coordination: many contacts, one motion", text: "An orchestra needs a maestro; a capsule with twelve sliders needs a cam. The tutorial builds the intuition, the game lets you design it." },
+      both: { title: "Both at once: friction on demand, timed", text: "A skier needs the two ideas together: friction switched on demand under each ski, and the switching timed to the stride. No new tutorial: this game builds on both of the above.", builds: ["violin", "maestro"] }
     },
     title: "Play the research",
-    lede: "Experience science through gameplay: two tutorials and four games, each driven by the model from the paper behind it. Feel why friction decides whether a catheter is safe, levitate a disc on a liquid film, steer a capsule to the cecum, and ski on ground with no ice.",
+    lede: "Experience science through gameplay: two tutorials and four games in three themes, each driven by the model from the paper behind it. Feel why friction decides whether a catheter is safe, levitate a disc on a liquid film, design the cam that drives a capsule to the cecum, and ski on ground with no ice.",
     games: [
       { id: "violin", theme: "grip", n: "A", tag: "Tutorial A", kind: "tutorial", verb: "Grip + slip", title: "The violinist's secret", hook: "Bow a violin: too light and it whispers, too heavy and it crunches. Then lend the physician your bow.",
         learn: "A violin sings only when the bow grips and slips in turn, under the player's control. A catheter needs the same control: glide to navigate, grip to work.",
@@ -291,22 +292,22 @@ window.SITE = {
         learn: "Low friction makes navigation safe; high friction is what holds the tip still when it matters.",
         papers: [3, 2, 11], fig: "assets/img/pubs/activelub.jpg", status: "live", time: "6 min",
         model: ["Force along the catheter decays at every bend as exp(−μθ), θ the angle wrapped (capstan effect), so friction grows with the bends passed", "Wall contact load T·|κ| at each bend, and wear ∝ μ × load × sliding", "Ultrasound lowers μ by the measured mean 38% (ex-vivo aorta)", "The shaft buckles when the hand force exceeds a set buckling load"],
-        illus: ["Absolute forces, the buckling load and the damage scale: the papers report buckling only qualitatively", "Vessel geometry (a simplified femoral-to-coronary route), heartbeat motion and deployment tolerances", "How much of the heartbeat the tip follows is a simple grip model, not measured"] },
-      { id: "ski", theme: "grip", n: 3, verb: "Grip + glide", title: "Skiing without ice", hook: "Time each stride with the ultrasound under your skis and race on sand, grass and asphalt.",
-        learn: "Lubricate the ski that moves, let the other grip, and swap: locomotion with no lifting and no ice.",
-        papers: [10], fig: "assets/img/pubs/icra26.jpg", status: "soon", time: "3 min",
-        model: ["Grip or glide per ski from the ultrasound state, with Coulomb friction and a force balance (full game)", "Friction reduction by ground, as measured: 71–77% dry, 56–71% wet, 28–49% soil and sandpaper"],
-        illus: ["Effect of mistimed switching: a model prediction, not measured in the paper", "Skier, stride and race times; the preview is scripted"] },
+        illus: ["Absolute forces, the buckling load and the damage scale: the papers report buckling only qualitatively", "Vessel geometry (a simplified femoral-to-coronary route), heartbeat motion and deployment tolerances", "How much of the heartbeat the tip follows is a simple grip model, not measured", "Shaft shape: resting on the outer wall of each bend, bowing inside the lumen under compression, and the squeeze-film thickness are drawn to scale for visibility, not computed"] },
       { id: "maestro", theme: "sync", n: "B", tag: "Tutorial B", kind: "tutorial", verb: "Coordination", title: "The maestro and the cam", hook: "Keep an orchestra on the beat, then conduct twelve capsule sliders by hand, and watch the cam do it for you.",
         learn: "Many players need a common beat. OSCAR's sliders pull only while more of them retract than advance, so the cam must time every slider, like a maestro.",
         papers: [1], fig: "assets/img/lab/maestro-capsule.jpg", figcap: "From my PhD defense", status: "live", time: "4 min", next: "oscar",
         model: ["Net thrust ∝ (sliders retracting − sliders advancing) / n, the OSCAR principle n_ret > n_adv", "A slider that reaches the end of its stroke stops pulling until it is advanced", "Mean thrust with the cam ≈ 1 − 2·(advance time / cycle), i.e. Δd"],
         illus: ["Music, audience and timing tolerances", "Capsule speed from thrust and the rocking animation", "Slider stroke and cycle times are scaled for play"] },
-      { id: "oscar", theme: "sync", n: 4, verb: "Propel", title: "OSCAR: race to the cecum", hook: "Design the cam that times twelve sliders, then drive your capsule through the colon against the clock.",
+      { id: "oscar", theme: "sync", n: 3, verb: "Propel", title: "OSCAR: race to the cecum", hook: "Design the cam that times twelve sliders, then drive your capsule through the colon against the clock.",
         learn: "Thrust follows the retract–advance asymmetry of the cam; balancing the sliders smooths the ripple.",
-        papers: [1], fig: "assets/img/pubs/oscar-design.jpg", status: "soon", time: "5 min",
-        model: ["Mean thrust ∝ d_ret − d_adv (Eq. 18), using the measured asymmetry 0.82 / 0.64 / 0.48 for 1 / 2 / 3-jump cams", "12 sliders on 2π/n phases, moved by the cam: slow retraction, fast advance", "Ripple from slider switching, and from the rocking of an unbalanced advancing slider, which balanced groups (2 and 3 jumps) cancel"],
-        illus: ["Ripple amplitudes; the rocking term follows the paper's explanation, not a fitted model", "Colon shape, wall bulge and capsule speed in the preview"] }
+        papers: [1], fig: "assets/img/pubs/oscar-design.jpg", status: "live", time: "6 min",
+        model: ["Mean thrust ∝ Δd = d_ret − d_adv (Eq. 18), scaled to the measured 0.85 N of the single-jump cam", "Each advance takes about 32° of cam rotation, which reproduces the paper's Δd of 0.82, 0.64 and 0.48 for 1, 2 and 3 jumps", "12 sliders on evenly spaced phases, friction-limited in both directions: asynchrony ripple from the number advancing at once, as in the paper's model", "Rocking from an unbalanced advance, which opposite sliders cancel with 2 or 3 jumps: the paper's explanation of the measured ripple"],
+        illus: ["Rocking amplitude scaled to the measured ~0.3 N for one jump; its growth with motor speed and with steeper advances is assumed (inertia), not measured", "The game reproduces the drop in ripple from 1 jump to balanced cams, not the further drop from 2 to 3 jumps the paper measured", "Colon lengths and drag per segment, speed scaling with the motor and the comfort score; the measured speed is 3.08 mm/s with the single-jump cam", "The 4-jump cam and slider counts other than 12 are extrapolations"] },
+      { id: "ski", theme: "both", n: 4, verb: "Glide + grip + timing", title: "Skiing without ice", hook: "Switch the ultrasound from ski to ski in time with the stride, and cross dry, wet, sandpaper and soil tracks with no ice and no lifting.",
+        learn: "Lubricate the ski that moves, let the other grip, and swap in time: locomotion on any ground, with no ice and no lifting.",
+        papers: [10], fig: "assets/img/pubs/icra26.jpg", status: "live", time: "4 min",
+        model: ["Each stride slides one ski forward against the other: the ski with less friction moves", "Friction reduction under a vibrating ski, as measured: 71–77% dry, 56–71% wet, 28–49% sandpaper and soil (one shared range), 27–38% ex-vivo intestine", "How much the gripping ski slips back is set so that dry ground gives the ~95% stride efficiency measured with the inchworm robot"],
+        illus: ["Split of the shared 28–49% range between sandpaper and soil, and the slip on wet, sandpaper and soil: model predictions, not measured", "Effect of mistimed switching: a model prediction (the paper leaves activation timing to future work)", "The skier, stride rhythm, track lengths and race times; the robots in the paper are an inchworm and an ovipositor mechanism, not a skier"] }
     ]
   },
 

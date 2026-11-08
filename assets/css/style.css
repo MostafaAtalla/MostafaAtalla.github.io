@@ -1823,3 +1823,39 @@ details.lg-fn summary, details.lp-fn summary { font-weight: 600; color: var(--in
 details.lg-fn summary::before, details.lp-fn summary::before { content: "ⓘ "; color: var(--acc-teal); }
 details.lg-fn[open] summary, details.lp-fn[open] summary { margin-bottom: 6px; }
 details.lg-fn p, details.lp-fn p { margin-top: 4px; }
+/* lab: six cards in three columns, tutorials marked */
+.lg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .lg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .lg-grid { grid-template-columns: 1fr; } }
+.lg-card.tut { border-color: color-mix(in srgb, var(--acc-gold) 70%, var(--rule)); background: color-mix(in srgb, var(--acc-gold) 7%, var(--card)); }
+.lg-card.tut .lp-k::before { content: "★ "; color: var(--acc-gold); }
+.lab-mute { margin-left: auto; }
+.ls-tab { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.ls-tab th, .ls-tab td { padding: 5px 6px; border-bottom: 1px solid var(--rule); text-align: right; }
+.ls-tab th:first-child, .ls-tab td:first-child { text-align: left; color: var(--ink-2); }
+.lab-ex { display: contents; }
+/* lab: theme rows (tutorial → discovery games) */
+#lab-games.lg-grid { display: grid; grid-template-columns: 1fr; gap: 34px; }
+.lg-theme { display: grid; gap: 14px; }
+.lg-th-head { display: grid; gap: 4px; }
+.lg-th-n { font: 600 .7rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--acc-coral); }
+.lg-th-head h3 { font: 400 clamp(1.3rem, 2.2vw, 1.7rem)/1.2 var(--display); }
+.lg-th-head p { color: var(--ink-2); max-width: 80ch; font-size: .95rem; }
+.lg-row { display: grid; grid-template-columns: minmax(0, 1fr) 28px repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.lg-arrow { align-self: center; font: 400 2rem var(--display); color: var(--acc-gold); text-align: center; }
+@media (max-width: 1100px) { .lg-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lg-arrow { display: none; } }
+@media (max-width: 560px) { .lg-row { grid-template-columns: 1fr; } }
+/* lab: reflection flashcards */
+.ls-flash-wrap { display: grid; gap: 12px; justify-items: center; width: min(520px, 100%); }
+.ls-flash { width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; background: none; perspective: 1000px; cursor: pointer; }
+.ls-flash-in { position: relative; display: block; width: 100%; height: 100%; transition: transform .55s cubic-bezier(.3,.8,.3,1); transform-style: preserve-3d; }
+.ls-flash.flipped .ls-flash-in { transform: rotateY(180deg); }
+.ls-flash-f, .ls-flash-b { position: absolute; inset: 0; display: grid; place-content: center; gap: 10px; padding: 22px 26px; border-radius: 16px; backface-visibility: hidden; -webkit-backface-visibility: hidden; text-align: center; box-shadow: 0 20px 50px -24px rgba(0,0,0,.55); }
+.ls-flash-f { background: var(--card); border: 2px solid var(--acc-gold); color: var(--ink); }
+.ls-flash-f b { font: 400 clamp(1.1rem, 2.2vw, 1.45rem)/1.3 var(--display); }
+.ls-flash-f em { font: italic .82rem var(--body); color: var(--ink-3); }
+.ls-flash-b { background: linear-gradient(135deg, #13223A, #0F1B2E); color: #E9EEF5; transform: rotateY(180deg); font-size: .98rem; line-height: 1.5; }
+.ls-flash-b b { color: #FFC94D; }
+@media (max-width: 700px) { .ls-flash { aspect-ratio: auto; min-height: 220px; } }
+.ls-card-img { width: 100%; max-height: 190px; object-fit: contain; border-radius: 10px; border: 1px solid var(--rule); background: #fff; }
+.lab-press input { width: 220px; }

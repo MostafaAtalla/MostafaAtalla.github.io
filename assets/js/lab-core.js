@@ -27,10 +27,14 @@
     return `<li><a href="${esc(href)}" target="_blank" rel="noopener">${esc(p.title)}</a><span>${esc(v)}, ${p.year}</span></li>`; };
 
   // ---------- the game cards at the top of the page ----------
-  $("#lab-games").innerHTML = LAB.games.map((g) => `<a class="lg-card${g.status === "live" ? " live" : ""}" href="#${g.id}" data-g="${g.id}">
+  const cardHTML = (g) => `<a class="lg-card${g.status === "live" ? " live" : ""}${g.kind === "tutorial" ? " tut" : ""}" href="#${g.id}" data-g="${g.id}">
       <div class="lp-stage"><canvas class="lp-canvas" data-game="${g.id}" aria-hidden="true"></canvas><span class="lp-state"></span><button class="lp-toggle" type="button" data-for="${g.id}">⇄ Switch</button></div>
-      <div class="lg-body"><span class="lp-k">Game ${g.n} · ${esc(g.verb)}</span><h3>${esc(g.title)}</h3><p>${esc(g.hook)}</p>
-      ${fnShort(g)}<span class="lg-go">${g.status === "live" ? `▶ Play · ${esc(g.time)}` : "Preview · game in the workshop"}</span></div></a>`).join("");
+      <div class="lg-body"><span class="lp-k">${esc(g.tag || "Game " + g.n)} · ${esc(g.verb)}</span><h3>${esc(g.title)}</h3><p>${esc(g.hook)}</p>
+      ${fnShort(g)}<span class="lg-go">${g.status === "live" ? `▶ Play · ${esc(g.time)}` : "Preview · game in the workshop"}</span></div></a>`;
+  $("#lab-games").innerHTML = Object.entries(LAB.themes || { all: { title: "", text: "" } }).map(([key, th], ti) => {
+    const gs = LAB.games.filter((g) => (g.theme || "all") === key), tut = gs.find((g) => g.kind === "tutorial");
+    return `<div class="lg-theme"><div class="lg-th-head"><span class="lg-th-n">Theme ${ti + 1}</span><h3>${esc(th.title)}</h3><p>${esc(th.text)}</p></div>
+      <div class="lg-row">${gs.map((g) => cardHTML(g) + (g === tut ? `<span class="lg-arrow" aria-hidden="true">→</span>` : "")).join("")}</div></div>`; }).join("");
 
   // ---------- the stage ----------
   const stage = $("#lab-stage");
@@ -43,7 +47,7 @@
     const best = store.get(g.id + ":best");
     stage.innerHTML = `
       <div class="ls-head">
-        <div><span class="lp-k">Game ${g.n} · ${esc(g.verb)}</span><h2 class="ls-title">${esc(g.title)}</h2></div>
+        <div><span class="lp-k">${esc(g.tag || "Game " + g.n)} · ${esc(g.verb)}</span><h2 class="ls-title">${esc(g.title)}</h2></div>
         ${g.status === "live" ? `<div class="ls-modes" role="tablist" aria-label="Mode"><button role="tab" data-m="game" aria-selected="true">🎮 Game</button><button role="tab" data-m="explore" aria-selected="false">🔬 Explore</button></div>` : ""}
       </div>
       <div class="ls-grid">
@@ -54,7 +58,7 @@
         </div>
         <aside class="ls-side">
           <div class="ls-box"><span class="lp-k">What you'll learn</span><p>${esc(g.learn)}</p>${best != null ? `<p class="ls-best">Your best: <b>${esc(best)}</b></p>` : ""}</div>
-          <figure class="ls-fig"><img src="${esc(g.fig)}" alt="Figure from the paper" loading="lazy"><figcaption>From the paper</figcaption></figure>
+          <figure class="ls-fig"><img src="${esc(g.fig)}" alt="Figure from the paper" loading="lazy"><figcaption>${esc(g.figcap || "From the paper")}</figcaption></figure>
           <div class="ls-box"><span class="lp-k">The papers behind it</span><ul class="ls-papers">${g.papers.map(cite).join("")}</ul></div>
           <div class="ls-box ls-real">${fnHTML(g)}</div><div class="ls-box ls-real-extra" id="ls-real" hidden></div>
           <a class="ls-research" href="research.html">← The research behind the games</a>
@@ -68,6 +72,15 @@
       card(html, buttons) { const c = $("#ls-card"); c.innerHTML = `<div class="ls-card-in">${html}<div class="ls-card-btns">${buttons.map((b, i) => `<button class="btn${i ? " ghost" : ""}" data-i="${i}">${esc(b.label)}</button>`).join("")}</div></div>`; c.hidden = false;
         return new Promise((res) => c.querySelectorAll("button").forEach((btn) => btn.addEventListener("click", () => { c.hidden = true; res(+btn.dataset.i); }))); },
       hideCard() { $("#ls-card").hidden = true; },
+      // reflection flashcards: a question on the front, the idea on the back; tap to flip, then continue
+      flash(cards, done) { return new Promise((res) => { const c = $("#ls-card"); let i = 0;
+        const show = () => { const f = cards[i]; c.innerHTML = `<div class="ls-flash-wrap"><span class="lp-k">Pause and reflect · card ${i + 1} of ${cards.length}</span>
+            <button class="ls-flash" type="button" aria-label="Flip the card"><span class="ls-flash-in"><span class="ls-flash-f"><b>${f.q}</b><em>Tap to turn the card</em></span><span class="ls-flash-b">${f.a}</span></span></button>
+            <div class="ls-card-btns"><button class="btn" data-n disabled>${i < cards.length - 1 ? "Next card" : esc(done || "Continue")}</button></div></div>`; c.hidden = false;
+          const card = c.querySelector(".ls-flash"), nx = c.querySelector("[data-n]");
+          card.addEventListener("click", () => { card.classList.toggle("flipped"); nx.disabled = false; });
+          nx.addEventListener("click", () => { i++; if (i < cards.length) show(); else { c.hidden = true; res(); } }); };
+        show(); }); },
       log: (mode, level, data) => log(g.id, mode, level, data),
       best(score, fmt) { const b = store.get(g.id + ":bestn"); if (b == null || score > b) { store.set(g.id + ":bestn", score); store.set(g.id + ":best", fmt || String(score)); return true; } return false; },
       colors() { const cs = getComputedStyle(document.documentElement), v = (n) => cs.getPropertyValue(n).trim(); return { ink: v("--ink"), ink2: v("--ink-2"), ink3: v("--ink-3"), card: v("--card"), paper: v("--paper"), rule: v("--rule"), coral: v("--acc-coral"), teal: v("--acc-teal"), gold: v("--acc-gold"), blue: v("--acc-blue"), dark: document.documentElement.dataset.theme === "dark" || (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches) }; }
@@ -94,5 +107,5 @@
   document.querySelectorAll(".lg-card").forEach((c) => c.addEventListener("click", (e) => { if (e.target.closest(".lp-toggle")) return; e.preventDefault(); history.replaceState(null, "", "#" + c.dataset.g); open(c.dataset.g, true); }));
   const fromHash = () => { const id = location.hash.slice(1); if (LAB.games.some((g) => g.id === id)) open(id, true); };
   window.addEventListener("hashchange", fromHash);
-  open(LAB.games.some((g) => g.id === location.hash.slice(1)) ? location.hash.slice(1) : "glide", !!location.hash);
+  open(LAB.games.some((g) => g.id === location.hash.slice(1)) ? location.hash.slice(1) : LAB.games[0].id, !!location.hash);
 })();

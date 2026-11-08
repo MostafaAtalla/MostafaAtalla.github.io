@@ -120,7 +120,7 @@ window.SITE = {
       { title: "Integrated science", text: "No subject is taught as a standalone island. Each course is presented as part of a whole, connected to the other disciplines it draws on and feeds into, so students see how the pieces of science fit together." },
       { title: "A culture of learning from mistakes", text: "Mistakes are expected and openly discussed in class. A wrong answer examined together teaches more than a right answer memorised, so students learn to take risks in their thinking." },
       { title: "Build it, then defend it", text: "Hands-on, project-based work tests ideas against reality; debate sessions and regular oral presentations make students argue for their reasoning in front of their peers." },
-      { title: "AI as an assistant, thinking as the core", text: "Students are encouraged to use AI engines as assistants that raise their productivity, while the course trains what AI cannot replace: asking the question that matters and judging whether an answer holds." }
+      { title: "AI in the service of learning", text: "With the rise of AI, students use AI engines as assistants that raise their productivity, while the course trains what AI cannot replace: asking the question that matters and judging whether an answer holds. AI also assists us, educators, in our mission: it makes it practical to gamify learning, turning a concept into a game in which students feel the physics before they meet the equations, so that learning becomes more intuitive and more effective. The Lab on this site does this for my own research." }
     ]
   },
   teachingStatement: {
@@ -270,29 +270,43 @@ window.SITE = {
   /* The Lab: one playable demo per research contribution.
      papers = indices into publications[]; fig = a figure from the paper shown in the game. */
   lab: {
+    themes: {
+      grip: { title: "Grip and glide: friction on demand", text: "A violin needs grip and slip; a catheter needs glide or grip, at the right moment. The tutorial builds the intuition, the games put it to work." },
+      sync: { title: "Coordination: many contacts, one motion", text: "An orchestra needs a maestro; a capsule with twelve sliders needs a cam. The tutorial builds the intuition, the game lets you design it." }
+    },
     title: "Play the research",
-    lede: "Four games, each driven by the model from the paper behind it. Feel why friction decides whether a catheter is safe, levitate a disc on a liquid film, steer a capsule to the cecum, and ski on ground with no ice.",
+    lede: "Experience science through gameplay: two tutorials and four games, each driven by the model from the paper behind it. Feel why friction decides whether a catheter is safe, levitate a disc on a liquid film, steer a capsule to the cecum, and ski on ground with no ice.",
     games: [
-      { id: "glide", n: 1, verb: "Glide", title: "The squeeze-film lab", hook: "Carry a full cup across a rough floor, levitate a disc on a liquid film, and stop a catheter on the mark.",
+      { id: "violin", theme: "grip", n: "A", tag: "Tutorial A", kind: "tutorial", verb: "Grip + slip", title: "The violinist's secret", hook: "Bow a violin: too light and it whispers, too heavy and it crunches. Then lend the physician your bow.",
+        learn: "A violin sings only when the bow grips and slips in turn, under the player's control. A catheter needs the same control: glide to navigate, grip to work.",
+        papers: [3, 2], fig: "assets/img/lab/violin-catheter.jpg", figcap: "From my PhD defense", status: "live", time: "3 min", next: "glide",
+        model: ["Bowed-string stick-slip: the bow grips the string, the string's tension breaks it free, and it slips back (Helmholtz motion, a saw-tooth)", "Playable window between a minimum and a maximum bow force, F_min ∝ v/β² and F_max ∝ v/β (Schelleng)"],
+        illus: ["Constants of the force window, the slow-motion close-up and the synthesized sound", "The physician's four decisions are teaching cases, not a simulation", "Characters and stage"] },
+      { id: "glide", theme: "grip", n: 1, verb: "Glide", title: "The squeeze-film lab", hook: "Carry a full cup across a rough floor, levitate a disc on a liquid film, and stop a catheter on the mark.",
         learn: "A surface vibrating a few micrometres turns stick-slip into glide, and the film carries load even in a liquid.",
         papers: [6, 3], fig: "assets/img/pubs/squeezefilm.jpg", status: "live", time: "3 min",
         model: ["Stick-slip: Coulomb friction (static and kinetic) on a spring-pulled sled, solved in time", "Friction reduction by surface, as measured: ~80% rigid dry, ~60% rigid wet, ~38% ex-vivo aorta", "Levitation height scales as amplitude/√mass (APL Eq. 14)"],
-        illus: ["Levitation prefactor set to the measured range (tens of µm); Eq. 14's constant is too sensitive to C_e to use directly", "Pressure trace shows the form of the inertia term, not a film-equation solution", "Water spill, heartbeat push, spring stiffness and masses"] },
-      { id: "catheter", n: 2, verb: "Glide + grip", title: "Catheter run", hook: "Be the cardiologist: navigate the vessels, then deploy a stent, a valve or remove a clot while the heart beats.",
+        illus: ["Levitation prefactor set to the measured range (tens of µm); Eq. 14's constant is too sensitive to C_e to use directly", "Pressure trace shows the form of the inertia term, not a film-equation solution", "Water spill, heartbeat push, spring stiffness and masses", "Contact load, wall indentation and the asperity close-up are drawn to explain the mechanism, not to scale"] },
+      { id: "catheter", theme: "grip", n: 2, verb: "Glide + grip", title: "Catheter run", hook: "Be the cardiologist: navigate the vessels, then deploy a stent, a valve or remove a clot while the heart beats.",
         learn: "Low friction makes navigation safe; high friction is what holds the tip still when it matters.",
-        papers: [3, 2, 11], fig: "assets/img/pubs/activelub.jpg", status: "soon", time: "5 min",
-        model: ["Wall friction switched between off and on, with the measured reduction (mean 38% on ex-vivo aorta)", "Friction building up along bends (capstan effect) in the full game"],
-        illus: ["Insertion force, buckling and wall damage: the papers report buckling only qualitatively", "Heartbeat motion, vessel geometry and deployment tolerance", "The preview is an animation, not the model"] },
-      { id: "oscar", n: 3, verb: "Propel", title: "OSCAR: race to the cecum", hook: "Design the cam that times twelve sliders, then drive your capsule through the colon against the clock.",
-        learn: "Thrust follows the retract–advance asymmetry of the cam; balancing the sliders smooths the ripple.",
-        papers: [1], fig: "assets/img/pubs/oscar-design.jpg", status: "soon", time: "5 min",
-        model: ["Mean thrust ∝ d_ret − d_adv (Eq. 18), using the measured asymmetry 0.82 / 0.64 / 0.48 for 1 / 2 / 3-jump cams", "12 sliders on 2π/n phases, moved by the cam: slow retraction, fast advance", "Ripple from slider switching, and from the rocking of an unbalanced advancing slider, which balanced groups (2 and 3 jumps) cancel"],
-        illus: ["Ripple amplitudes; the rocking term follows the paper's explanation, not a fitted model", "Colon shape, wall bulge and capsule speed in the preview"] },
-      { id: "ski", n: 4, verb: "Grip + glide", title: "Skiing without ice", hook: "Time each stride with the ultrasound under your skis and race on sand, grass and asphalt.",
+        papers: [3, 2, 11], fig: "assets/img/pubs/activelub.jpg", status: "live", time: "6 min",
+        model: ["Force along the catheter decays at every bend as exp(−μθ), θ the angle wrapped (capstan effect), so friction grows with the bends passed", "Wall contact load T·|κ| at each bend, and wear ∝ μ × load × sliding", "Ultrasound lowers μ by the measured mean 38% (ex-vivo aorta)", "The shaft buckles when the hand force exceeds a set buckling load"],
+        illus: ["Absolute forces, the buckling load and the damage scale: the papers report buckling only qualitatively", "Vessel geometry (a simplified femoral-to-coronary route), heartbeat motion and deployment tolerances", "How much of the heartbeat the tip follows is a simple grip model, not measured"] },
+      { id: "ski", theme: "grip", n: 3, verb: "Grip + glide", title: "Skiing without ice", hook: "Time each stride with the ultrasound under your skis and race on sand, grass and asphalt.",
         learn: "Lubricate the ski that moves, let the other grip, and swap: locomotion with no lifting and no ice.",
         papers: [10], fig: "assets/img/pubs/icra26.jpg", status: "soon", time: "3 min",
         model: ["Grip or glide per ski from the ultrasound state, with Coulomb friction and a force balance (full game)", "Friction reduction by ground, as measured: 71–77% dry, 56–71% wet, 28–49% soil and sandpaper"],
-        illus: ["Effect of mistimed switching: a model prediction, not measured in the paper", "Skier, stride and race times; the preview is scripted"] }
+        illus: ["Effect of mistimed switching: a model prediction, not measured in the paper", "Skier, stride and race times; the preview is scripted"] },
+      { id: "maestro", theme: "sync", n: "B", tag: "Tutorial B", kind: "tutorial", verb: "Coordination", title: "The maestro and the cam", hook: "Keep an orchestra on the beat, then conduct twelve capsule sliders by hand, and watch the cam do it for you.",
+        learn: "Many players need a common beat. OSCAR's sliders pull only while more of them retract than advance, so the cam must time every slider, like a maestro.",
+        papers: [1], fig: "assets/img/lab/maestro-capsule.jpg", figcap: "From my PhD defense", status: "live", time: "4 min", next: "oscar",
+        model: ["Net thrust ∝ (sliders retracting − sliders advancing) / n, the OSCAR principle n_ret > n_adv", "A slider that reaches the end of its stroke stops pulling until it is advanced", "Mean thrust with the cam ≈ 1 − 2·(advance time / cycle), i.e. Δd"],
+        illus: ["Music, audience and timing tolerances", "Capsule speed from thrust and the rocking animation", "Slider stroke and cycle times are scaled for play"] },
+      { id: "oscar", theme: "sync", n: 4, verb: "Propel", title: "OSCAR: race to the cecum", hook: "Design the cam that times twelve sliders, then drive your capsule through the colon against the clock.",
+        learn: "Thrust follows the retract–advance asymmetry of the cam; balancing the sliders smooths the ripple.",
+        papers: [1], fig: "assets/img/pubs/oscar-design.jpg", status: "soon", time: "5 min",
+        model: ["Mean thrust ∝ d_ret − d_adv (Eq. 18), using the measured asymmetry 0.82 / 0.64 / 0.48 for 1 / 2 / 3-jump cams", "12 sliders on 2π/n phases, moved by the cam: slow retraction, fast advance", "Ripple from slider switching, and from the rocking of an unbalanced advancing slider, which balanced groups (2 and 3 jumps) cancel"],
+        illus: ["Ripple amplitudes; the rocking term follows the paper's explanation, not a fitted model", "Colon shape, wall bulge and capsule speed in the preview"] }
     ]
   },
 

@@ -226,7 +226,7 @@
   function labPromo() {
     const el = $("#lab-promo"), L = S.lab; if (!el || !L) return;
     const cite = (i) => { const p = S.publications[i]; return p ? `${(p.venue || "").split(",")[0].replace(/^Proceedings of /, "").replace(/^\d{4} /, "")} ${p.year}` : ""; };
-    el.innerHTML = `<div class="lp-grid">${L.games.map((g) => `<article class="lp-card">
+    el.innerHTML = `<div class="lp-grid">${L.games.filter((g) => g.kind !== "tutorial").map((g) => `<article class="lp-card">
         <div class="lp-stage"><canvas class="lp-canvas" data-game="${g.id}" aria-label="Live preview: ${esc(g.title)}"></canvas><span class="lp-state"></span><button class="lp-toggle" type="button" data-for="${g.id}">⇄ Switch</button></div>
         <div class="lp-body"><span class="lp-k">Game ${g.n} · ${esc(g.verb)}</span><h3>${esc(g.title)}</h3><p>${esc(g.hook)}</p>
           <span class="lp-paper">Built on: ${g.papers.slice(0, 2).map(cite).join(" · ")}</span>

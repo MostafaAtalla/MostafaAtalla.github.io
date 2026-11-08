@@ -147,6 +147,7 @@
       }
       s.F.push(s.v * 1000); if (s.F.length > 300) s.F.shift();
     };
+    const k2 = (lines, zx, zy, col) => { const right = zx < W - 260; lines.forEach((l, i) => text(c, l, right ? zx + 74 : zx - 74, zy - 4 + i * 16, "700 13px Roboto, sans-serif", col, right ? "left" : "right")); };
     const drawCath = (s, us) => {
       const cy = 280, x0 = 80, tipX = x0 + 180 + s.x * MM, beat = Math.max(0, Math.sin(t * TAU * 1.2)) ** 3;
       c.fillStyle = C.dark ? "#2A1620" : "#FBE6E3"; c.fillRect(0, 0, W, H);
@@ -159,11 +160,31 @@
       const lx = x0 + 180 + s.target * MM; c.fillStyle = "rgba(242,178,39,.5)"; rr(c, lx - 22, cy - 54, 44, 18, 8); c.fill(); rr(c, lx - 22, cy + 36, 44, 18, 8); c.fill();
       c.strokeStyle = C.gold; c.setLineDash([5, 5]); c.lineWidth = 2; c.beginPath(); c.moveTo(lx - 3 * MM, cy - 64); c.lineTo(lx - 3 * MM, cy + 64); c.moveTo(lx + 3 * MM, cy - 64); c.lineTo(lx + 3 * MM, cy + 64); c.stroke(); c.setLineDash([]);
       text(c, "LESION · stop here ±3 mm", lx, cy - 74, "600 13px Roboto, sans-serif", C.dark ? "#FFC94D" : "#8A5A00", "center");
-      // catheter shaft and module
-      c.strokeStyle = C.dark ? "#CFE0F5" : "#1E3A5F"; c.lineWidth = 12; c.lineCap = "round"; c.beginPath(); c.moveTo(-10, cy); c.lineTo(tipX - 14, cy); c.stroke();
-      c.fillStyle = C.gold; rr(c, tipX - 46, cy - 12, 26, 24, 6); c.fill(); text(c, "US", tipX - 33, cy + 4, "700 10px Roboto Mono, monospace", "#4A3A00", "center");
-      if (us) { c.save(); c.translate(tipX - 33, cy + 10); waves(c, 0, 0, 24, t, C.teal); c.restore(); c.save(); c.translate(tipX - 33, cy - 10); c.scale(1, -1); waves(c, 0, 0, 24, t, C.teal); c.restore(); }
-      c.fillStyle = C.coral; c.beginPath(); c.arc(tipX, cy, 8, 0, TAU); c.fill();
+      // catheter resting on the lower wall: the contact carries the normal load, so friction acts there
+      const wallY = cy + 54, cr = 6, sy = wallY - cr, mX = tipX - 33, gap = us ? 5 : 0, dent = us ? 2 : 6;
+      // wall indentation under the module (tissue compressed by the contact load)
+      c.fillStyle = C.dark ? "#3B1D28" : "#FFF4F2"; c.beginPath(); c.moveTo(mX - 40, wallY); c.quadraticCurveTo(mX, wallY + dent * 2, mX + 40, wallY); c.fill();
+      c.strokeStyle = C.dark ? "#CFE0F5" : "#1E3A5F"; c.lineWidth = 12; c.lineCap = "round"; c.beginPath(); c.moveTo(-10, sy); c.lineTo(tipX - 14, sy - gap); c.stroke();
+      // contact patch: rubbing (red) without ultrasound, a pressurised liquid film (teal) with it
+      if (us) { c.fillStyle = "rgba(94,209,200,.55)"; rr(c, mX - 22, wallY - gap - 1, 44, gap + 3, 2); c.fill(); }
+      else { c.fillStyle = s.v > 0.0005 ? "rgba(220,40,40,.55)" : "rgba(220,40,40,.25)"; rr(c, mX - 22, wallY - 2, 44, 6, 3); c.fill();
+        if (s.v > 0.0005) { c.strokeStyle = "rgba(220,40,40,.6)"; c.lineWidth = 1.5; for (let q = -2; q <= 2; q++) { c.beginPath(); c.moveTo(mX + q * 9, wallY + 6); c.lineTo(mX + q * 9 - 8, wallY + 14); c.stroke(); } } }
+      c.fillStyle = C.gold; rr(c, mX - 13, sy - gap - 12, 26, 24, 6); c.fill(); text(c, "US", mX, sy - gap + 4, "700 10px Roboto Mono, monospace", "#4A3A00", "center");
+      if (us) { c.save(); c.translate(mX, sy - gap + 12); waves(c, 0, 0, 24, t, C.teal); c.restore(); }
+      c.fillStyle = C.coral; c.beginPath(); c.arc(tipX, sy - gap, 8, 0, TAU); c.fill();
+      // normal load arrow and magnifier: asperities interlocked (grip) or lifted on the film (glide)
+      c.strokeStyle = C.ink2; c.lineWidth = 2; c.beginPath(); c.moveTo(mX, sy - 46); c.lineTo(mX, sy - 22); c.stroke(); c.fillStyle = C.ink2; c.beginPath(); c.moveTo(mX - 5, sy - 26); c.lineTo(mX + 5, sy - 26); c.lineTo(mX, sy - 18); c.fill();
+      text(c, "contact load", mX, sy - 52, "11px Roboto Mono, monospace", C.ink3, "center");
+      const zx = Math.min(W - 150, mX + 120), zy = 120; c.strokeStyle = C.ink3; c.setLineDash([3, 4]); c.beginPath(); c.moveTo(mX + 20, wallY - 4); c.lineTo(zx - 58, zy + 40); c.stroke(); c.setLineDash([]);
+      c.save(); c.beginPath(); c.arc(zx, zy, 62, 0, TAU); c.fillStyle = C.dark ? "#13223A" : "#fff"; c.fill(); c.clip();
+      // catheter surface (top, teeth down) and tissue (bottom, teeth up): interlocked without ultrasound, lifted on a film with it
+      const lift = us ? 24 + 2 * Math.sin(t * 40) : 0, top = zy - 2 - lift, bot = zy + 8, P2 = 16;
+      c.fillStyle = "#C9A35A"; c.beginPath(); c.moveTo(zx - 70, zy - 70); c.lineTo(zx + 70, zy - 70); for (let x = zx + 70; x >= zx - 70; x -= P2) { c.lineTo(x, top); c.lineTo(x - P2 / 2, top + 14); } c.lineTo(zx - 70, top); c.closePath(); c.fill();
+      if (us) { c.fillStyle = "rgba(94,209,200,.65)"; c.fillRect(zx - 70, top + 2, 140, bot - top - 2); }
+      c.fillStyle = "#E59A97"; c.beginPath(); c.moveTo(zx - 70, zy + 70); c.lineTo(zx + 70, zy + 70); for (let x = zx + 70 + P2 / 2; x >= zx - 70 - P2; x -= P2) { c.lineTo(x, bot); c.lineTo(x - P2 / 2, bot - 14 - 0); } c.lineTo(zx - 70, bot); c.closePath(); c.fill();
+      text(c, "catheter", zx, zy - 40, "600 11px Roboto Mono, monospace", "#4A3A00", "center"); text(c, "vessel wall", zx, zy + 46, "600 11px Roboto Mono, monospace", "#7A2E2E", "center");
+      c.restore(); c.strokeStyle = C.ink2; c.lineWidth = 2; c.beginPath(); c.arc(zx, zy, 62, 0, TAU); c.stroke();
+      k2(us ? ["film lifts the", "asperities: glide"] : ["asperities", "interlock: grip"], zx, zy, us ? C.teal : C.coral);
       text(c, `♥ ${Math.round(72)} bpm`, W - 120, 40, `${16 + beat * 4}px Roboto, sans-serif`, C.coral);
       text(c, `${SURF[s.surface].name} · friction −${Math.round(SURF[s.surface].red * 100)}% with ultrasound`, 24, 40, "600 14px Roboto, sans-serif", C.ink);
       text(c, `tip error ${((s.x - s.target)).toFixed(1)} mm`, 24, H - 30, "600 14px Roboto Mono, monospace", Math.abs(s.x - s.target) <= 3 ? C.teal : C.ink2);
@@ -261,7 +282,7 @@
             });
             sc.push(score); api.log("game", "L3", { surface, score });
           }
-          await api.card(`<h3>Calcified ${sc[0]} · soft tissue ${sc[1]}</h3><p>Ultrasound lowers friction for navigation; switching it off restores grip so the tip holds against the heartbeat. On soft tissue the reduction is smaller (about 38% on ex-vivo aorta), so the glide is slower.</p>`, [{ label: "See the debrief" }]);
+          await api.card(`<h3>Calcified ${sc[0]} · soft tissue ${sc[1]}</h3><p>Ultrasound lowers friction for navigation; switching it off restores grip so the tip holds against the heartbeat. On soft tissue the reduction is smaller (about 38% on ex-vivo aorta), so the glide is slower.</p><p class="muted">The full journey, from the groin through the bends to the heart, is Game 2: Catheter run.</p>`, [{ label: "See the debrief" }]);
           done(Math.round((sc[0] + sc[1]) / 2));
         });
       }

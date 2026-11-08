@@ -829,7 +829,7 @@ main > section, main [data-nav] { scroll-margin-top: 76px; }
    ===================================================================== */
 /* header nav: nine items */
 .nav a { font-size: .84rem; padding: 8px 8px; white-space: nowrap; }
-@media (max-width: 1240px) {
+@media (max-width: 900px) {
   .nav { display: none; }
   .menu-btn { display: grid; }
   .tools { margin-left: auto; }
@@ -1313,7 +1313,7 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 .c-loc svg { width: 16px; height: 16px; vertical-align: -3px; }
 .contact-email { padding: 12px 20px 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .c-loc svg, .inl { display: inline-block; }
-@media (min-width: 1241px) and (max-width: 1500px) {
+@media (max-width: 1500px) {
   .contact-btn span { display: none; }
   .contact-btn { padding: 0 11px; }
   .nav a { padding: 8px 6px; font-size: .82rem; }
@@ -1351,7 +1351,7 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 .site-header.collapsed .nav.open { display: flex; flex-direction: column; position: fixed; inset: calc(64px + env(safe-area-inset-top, 0px)) 0 0 0; background: var(--paper); padding: 16px var(--gutter-r) 32px var(--gutter); gap: 0; overflow-y: auto; z-index: 49; }
 .site-header.collapsed .nav.open a { font: 400 1.5rem/1.2 var(--display); padding: 14px 0; border-bottom: 1px solid var(--rule); border-radius: 0; }
 .site-header.collapsed .nav.open a[aria-current="page"]::after { display: none; }
-@media (min-width: 1241px) and (max-width: 1500px) { .contact-btn span { display: inline; } .contact-btn { padding: 0 14px; } }
+
 .site-header .wrap { max-width: 1480px; }
 @media (max-width: 1240px) { .site-header .brand { flex: 0 1 auto; min-width: 0; } .brand-name { overflow: hidden; text-overflow: ellipsis; } }
 @media (max-width: 420px) { .brand-name { font-size: .9rem; } .site-header .wrap { gap: 10px; } .icon-btn { width: 34px; height: 34px; } .contact-btn { height: 34px; } }
@@ -1952,3 +1952,18 @@ html.a11y-contrast :focus-visible { outline-width: 3px; }
 
 /* underline links */
 html.a11y-links main a:not(.btn):not(.lab-cta), html.a11y-links .site-footer a { text-decoration: underline !important; text-underline-offset: 3px; }
+
+/* header: keep the menu in the bar on laptops; tighten step by step before falling back to the menu button */
+@media (max-width: 1420px) {
+  .site-header .brand-tag { display: none; }
+  .site-header .tools { gap: 4px; }
+  .site-header .icon-btn { width: 34px; height: 34px; }
+  .site-header .contact-btn { height: 34px; padding: 0 10px; }
+  .nav a { padding: 7px 5px; font-size: .8rem; }
+  .site-header .wrap { gap: 10px; }
+}
+@media (max-width: 1200px) {
+  .site-header .brand-name { font-size: .9rem; }
+  .nav { gap: 0; }
+  .nav a { padding: 7px 4px; font-size: .78rem; }
+}

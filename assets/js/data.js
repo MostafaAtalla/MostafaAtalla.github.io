@@ -360,7 +360,7 @@ window.SITE = {
     { when: "2018", kind: "industry", city: "cairo", title: "Research and Innovation Engineer II & III", org: "Advansys ESC, Cairo", text: "Innovation department, March–August 2018. STDF-funded collaboration with Ain Shams University on robotic assistive rehabilitation." },
     { when: "2016–2017", kind: "industry", city: "cairo", title: "Mechanical Engineer I & II", org: "Advansys ESC, Cairo", text: "Mechanical department, September 2016–February 2017." },
     { when: "2015–2016", kind: "industry", city: "cairo", title: "Mechanical Engineer", org: "Technical Office of Hydraulics (TO-Hydraulics), Cairo", text: "Maintenance department." },
-    { when: "2009–2014", kind: "education", city: "cairo", title: "BSc Mechanical Design and Production Engineering", org: "Cairo University", text: "GPA 3.3/4.0, ranked 3rd of 37. Advised by Prof. Yasser H. Anis and Prof. Sayed M. Metwalli." },
+    { when: "2009–2014", kind: "education", city: "cairo", title: "BSc Mechanical Design and Production Engineering", org: "Cairo University", text: "GPA 3.3/4.0, ranked 3rd of 37. Advised by Prof. Yasser H. Anis and Prof. Sayed M. Metwalli." }
   ],
 
   awards: [
@@ -584,7 +584,6 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-6.jpg", name: "Prof. Leonardo Mattos", note: "CRAS 2025" },
     { src: "assets/photos/heroes/hero-7.jpg", name: "Prof. Oussama Khatib", note: "ICRA 2026, Vienna" },
     { src: "assets/photos/heroes/hero-9.jpg", name: "Prof. Gijs Krijnen", note: "University of Twente" },
-    { src: "assets/photos/heroes/hero-10.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-11.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-12.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-13.jpg", name: "PhD defense, Delft", note: "" },

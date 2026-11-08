@@ -589,7 +589,7 @@ window.SITE = {
     { src: "assets/photos/heroes/hero-13.jpg", name: "Prof. Robert J. Webster III", note: "PhD defense, Delft" },
     { src: "assets/photos/heroes/hero-14.jpg", name: "Prof. Michaël Wiertlewski and Prof. Robert J. Webster III", note: "PhD defense, Delft" },
     { src: "assets/photos/heroes/hero-15.jpg", name: "Prof. Jenny Dankelman", note: "" },
-    { src: "assets/photos/heroes/hero-16.jpg", name: "", note: "" },
+    { src: "assets/photos/heroes/hero-16.jpg", name: "Prof. Benjamin Gorissen", note: "KU Leuven" },
     { src: "assets/photos/heroes/hero-17.jpg", name: "Hamlyn Symposium, London", note: "" },
     { src: "assets/photos/heroes/hero-18.jpg", name: "", note: "" },
     { src: "assets/photos/heroes/hero-19.jpg", name: "Hamlyn Symposium, London", note: "" },

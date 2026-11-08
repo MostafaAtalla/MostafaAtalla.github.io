@@ -49,10 +49,8 @@
     noVideo();
   }
 
-  /* Sound on by default. Browsers only allow audio after the visitor interacts
-     with the page, so: try to play with sound; if the browser refuses, play
-     muted and switch the sound on at the visitor's first click, tap or key.
-     The quote is heard once with sound, then keeps looping silently. */
+  /* Muted by default: the clip plays silently and the visitor chooses to hear
+     the quote with the "Hear the quote" button. Once heard, it keeps looping silently. */
   if (video) {
     let heardOnce = false, last = 0;
     const label = () => {
@@ -72,26 +70,9 @@
       if (!video.muted && video.currentTime < last - 1) { heardOnce = true; video.muted = true; label(); }
       last = video.currentTime;
     });
-    const unlock = (e) => {
-      if (e && e.target && e.target.closest && e.target.closest("#hear-btn")) return;
-      if (e && e.type === "touchend" && e.target.closest && e.target.closest("a")) return; // let links navigate
-      ["click", "touchend", "keydown"].forEach((t) => document.removeEventListener(t, unlock, true));
-      document.querySelector(".sound-nudge")?.remove();
-      if (!heardOnce && video.muted) withSound(true).catch(() => {});
-    };
-    if (!reduce && !isHome) { video.muted = true; video.play().catch(() => {}); }
-    else if (!reduce) {
-      withSound(false).catch(() => {
-        if (!video || !video.isConnected) return; // clip failed to load
-        video.muted = true; video.play().catch(() => {}); label();
-        ["click", "touchend", "keydown"].forEach((t) => document.addEventListener(t, unlock, true));
-        hero.querySelector(".hero-cta")?.insertAdjacentHTML("afterend", `<button type="button" class="sound-nudge">${matchMedia("(hover: none)").matches ? "Tap" : "Click"} to hear the quote with sound</button>`);
-        document.querySelector(".sound-nudge")?.addEventListener("click", (ev) => { ev.stopPropagation(); unlock(); });
-      });
-    } else { video.muted = true; label(); }
+    video.muted = true; label();
+    if (!reduce) video.play().catch(() => {});
     if (hearBtn) hearBtn.addEventListener("click", () => {
-      ["click", "touchend", "keydown"].forEach((t) => document.removeEventListener(t, unlock, true));
-      document.querySelector(".sound-nudge")?.remove();
       if (video.muted || video.paused) { heardOnce = false; withSound(true).catch(() => {}); }
       else { video.muted = true; label(); }
     });

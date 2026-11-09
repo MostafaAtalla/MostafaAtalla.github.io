@@ -1373,10 +1373,10 @@ a.cm:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: var(
 /* phones: full name in the header; search and theme move into the menu */
 .nav-tools { display: none; }
 @media (max-width: 600px) {
-  #palette-btn, #theme-btn { display: none; }
+  #palette-btn, #theme-btn, #a11y-btn { display: none; } /* all three are in the menu on phones */
   .site-header .brand { flex: 1 1 auto; min-width: 0; gap: 8px; }
   .brand-mark { width: 30px; height: 30px; flex: none; }
-  .brand-name { white-space: normal; overflow: visible; text-overflow: clip; font-size: clamp(.92rem, 4.4vw, 1.05rem); line-height: 1.15; }
+  .brand-name { white-space: nowrap; overflow: visible; text-overflow: clip; font-size: clamp(.82rem, 4.2vw, 1.05rem); line-height: 1.15; letter-spacing: -.01em; }
   .site-header .wrap { gap: 8px; }
   .nav.open .nav-tools { display: flex; gap: 10px; padding: 18px 0 6px; }
   .nav-tools button { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; border-radius: 12px; border: 1px solid var(--rule); background: var(--card); color: var(--ink); font: 500 .95rem var(--body); }

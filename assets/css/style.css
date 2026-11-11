@@ -1962,5 +1962,8 @@ html.a11y-links main a:not(.btn):not(.lab-cta), html.a11y-links .site-footer a {
 .site-header.fit-4 .brand-name { font-size: .9rem; }
 .site-header.fit-4 .nav { gap: 0; }
 .site-header.fit-4 .nav a { padding: 7px 4px; font-size: .78rem; }
-  .nav a { padding: 7px 4px; font-size: .78rem; }
-}
+
+/* wide comic-strip images: show the whole strip */
+.persp-img.fit-contain { background: #FBF4EA; display: flex !important; align-items: center; justify-content: center; height: 100%; padding: 12px; }
+.persp-img.fit-contain img { object-fit: contain; width: 100%; height: auto; max-height: 100%; }
+.persp:hover .persp-img.fit-contain img { transform: none; }

@@ -35,7 +35,7 @@
     const tagCls = p.type === "essay" ? "brass" : p.cat === "perspective" ? "brass" : p.type === "linkedin" ? "tide" : "";
     if (p.type === "linkedin") {
       return `<div class="post-row li-row"><span class="d">${fmtDate(p.date)}</span><div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>
-        <div class="li-actions"><button type="button" class="li-read" data-urn="${esc(p.urn)}" aria-expanded="false">Read here</button><a href="${esc(p.url)}" target="_blank" rel="noopener">On LinkedIn ↗</a></div>
+        <div class="li-actions"><button type="button" class="li-read" data-urn="${esc(p.urn)}" data-urntype="${esc(p.urnType || "activity")}" aria-expanded="false">Read here</button><a href="${esc(p.url)}" target="_blank" rel="noopener">On LinkedIn ↗</a></div>
         <div class="li-embed" hidden></div></div><span class="side"><span class="tag ${tagCls}">${kind}</span></span></div>`;
     }
     const inner = `<span class="d">${fmtDate(p.date)}</span><div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p></div><span class="side">${sample(p)}<span class="tag ${tagCls}">${esc(kind)}${ext && href ? " ↗" : ""}</span></span>`;
@@ -46,7 +46,7 @@
     const b = e.target.closest(".li-read"); if (!b) return;
     const box = b.closest(".li-row").querySelector(".li-embed");
     const open = box.hidden;
-    if (open && !box.firstChild) box.innerHTML = `<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:${encodeURIComponent(b.dataset.urn)}" title="LinkedIn post" loading="lazy" allowfullscreen></iframe>`;
+    if (open && !box.firstChild) box.innerHTML = `<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:${b.dataset.urntype || "activity"}:${encodeURIComponent(b.dataset.urn)}" title="LinkedIn post" loading="lazy" allowfullscreen></iframe>`;
     box.hidden = !open; b.setAttribute("aria-expanded", String(open)); b.textContent = open ? "Close" : "Read here";
   });
 
@@ -70,7 +70,7 @@
     const m = document.createElement("div");
     m.className = "modal"; m.setAttribute("role", "dialog"); m.setAttribute("aria-modal", "true"); m.setAttribute("aria-label", p.title);
     m.innerHTML = `<div class="modal-card"><button class="modal-x" aria-label="Close">${ICON.close}</button>
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:${encodeURIComponent(p.urn)}" title="LinkedIn post" loading="lazy" allowfullscreen></iframe>
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:${p.urnType || "activity"}:${encodeURIComponent(p.urn)}" title="LinkedIn post" loading="lazy" allowfullscreen></iframe>
       <p class="modal-foot"><a href="${esc(p.url)}" target="_blank" rel="noopener">Open on LinkedIn ↗</a></p></div>`;
     document.body.appendChild(m); document.body.style.overflow = "hidden";
     const close = () => { m.remove(); document.body.style.overflow = ""; document.removeEventListener("keydown", key); };
@@ -520,7 +520,7 @@
       $("#persp").innerHTML = list.map((p, i) => {
         const href = p.type === "essay" ? `post.html?p=${encodeURIComponent(p.slug)}` : p.url;
         return `<a class="persp ${i === 0 && topic === "all" ? "lead" : ""}" href="${esc(href)}" ${p.urn ? `data-li="${p.urn}"` : ""}>
-          <span class="persp-img">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy">` : coverSVG(p.title, { alt: "" })}</span>
+          <span class="persp-img${p.imgFit === "contain" ? " fit-contain" : ""}">${p.img ? `<img src="${esc(p.img)}" alt="" loading="lazy">` : coverSVG(p.title, { alt: "" })}</span>
           <span class="persp-txt"><span class="persp-m">${fmtDate(p.date)} · ${p.type === "essay" ? "Essay" : TOPICS[topicOf(p)]} ${sample(p)}</span><span class="persp-t">${esc(p.title)}</span><span class="persp-d">${esc(p.summary)}</span><span class="persp-go">${p.urn ? "Read the post" : "Read the essay"} →</span></span></a>`;
       }).join("");
     };
